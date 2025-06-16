@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import BrandStory from '../../components/BrandStory/BrandStory';
 import ScrollStory from '../../components/ScrollStory/ScrollStory.jsx';
+import FounderStory from '../../components/FounderStory/FounderStory.jsx';
 
 /* -------------------------------------------------------------------------
    Styled Components
@@ -49,6 +50,9 @@ function About() {
 
       {/* Brand overview static section */}
       <BrandStory />
+
+      {/* Meet the founder */}
+      <FounderStory />
 
       {/* Sacred origin narrative */}
       <Section>
