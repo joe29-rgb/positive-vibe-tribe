@@ -22,7 +22,19 @@ const Heading = styled.h2`
 const Grid = styled.div`
   display: grid;
   gap: 24px;
+  grid-auto-flow: dense;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  /* Enlarge first and every 7th card for visual rhythm */
+  & > :nth-child(7n + 1) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 768px) {
+    & > :nth-child(7n + 1) {
+      grid-column: span 1;
+    }
+  }
 `;
 
 function ProductShowcase({ tag = 'new', limit = 6 }) {
@@ -63,8 +75,8 @@ function ProductShowcase({ tag = 'new', limit = 6 }) {
       <Container>
         <Heading>New Arrivals</Heading>
         <Grid>
-          {products.map((prod) => (
-            <ProductCard key={prod._id} product={prod} />
+          {products.map((prod, idx) => (
+            <ProductCard key={prod._id} product={prod} index={idx} />
           ))}
         </Grid>
       </Container>

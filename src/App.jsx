@@ -5,11 +5,13 @@ import { store } from './store/store';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import MobileNav from './components/MobileNav/MobileNav.jsx';
 import Home from './pages/Home/Home';
-import Products from './pages/Products/Products';
-import ProductDetail from './pages/ProductDetail/ProductDetail';
+import Products from './pages/Products/Products.jsx';
+import ProductDetail from './pages/ProductDetail/ProductDetail.jsx';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
+import About from './pages/About/About';
 import './App.css';
 
 function App() {
@@ -22,9 +24,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
+          <MobileNav />
           <Footer />
         </Router>
       </HelmetProvider>

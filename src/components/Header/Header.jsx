@@ -266,6 +266,7 @@ function Header() {
         <Nav>
           <NavLink href="/">Home</NavLink>
           <NavLink href="/products">Shop</NavLink>
+          <NavLink href="/about">About</NavLink>
           <NavLink href="/cart">Cart</NavLink>
         </Nav>
 
@@ -309,6 +310,7 @@ function Header() {
         />
         <NavLink href="/">Home</NavLink>
         <NavLink href="/products">Shop</NavLink>
+        <NavLink href="/about">About</NavLink>
         <NavLink href="/cart">Cart</NavLink>
         <CTAButton href="/products" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           Shop the Tribe
