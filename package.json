@@ -1,0 +1,68 @@
+{
+    "name": "positive-vibe-tribe",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@reduxjs/toolkit": "^2.8.2",
+        "@stripe/react-stripe-js": "^3.7.0",
+        "@stripe/stripe-js": "^7.3.1",
+        "@testing-library/dom": "^10.4.0",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.3.0",
+        "@testing-library/user-event": "^13.5.0",
+        "axios": "^1.9.0",
+        "framer-motion": "^12.17.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-helmet-async": "^1.3.0",
+        "react-image-gallery": "^1.4.0",
+        "react-redux": "^9.2.0",
+        "react-router-dom": "^6.22.3",
+        "styled-components": "^6.1.18",
+        "swiper": "^11.2.8",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "server": "node backend/server.js",
+        "dev:server": "nodemon backend/server.js",
+        "dev": "concurrently \"npm run dev:server\" \"npm start\""
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.27.2",
+        "@babel/preset-react": "^7.27.1",
+        "concurrently": "^8.2.2",
+        "editorconfig": "^3.0.0",
+        "eslint": "^8.57.1",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-config-react": "^1.1.7",
+        "eslint-plugin-prettier": "^5.4.1",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "nodemon": "^3.1.0",
+        "prettier": "^3.5.3",
+        "react-scripts": "^5.0.1"
+    },
+    "proxy": "http://localhost:5000"
+}

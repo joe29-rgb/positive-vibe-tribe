@@ -1,0 +1,29 @@
+.product-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-grid__filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.product-grid__filters button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.product-grid__filters button.active {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.product-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+}

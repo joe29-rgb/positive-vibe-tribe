@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=UnifrakturCook:wght@700&display=swap');
+:root {
+    --primary-red: #c8102e;
+    --secondary-red: #e91e63;
+    --warm-beige: #f8f4f0;
+    --light-beige: #e8ddd4;
+    --warm-brown: #8b6f47;
+    --dark-brown: #2c1810;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --medium-gray: #888;
+    --dark-gray: #333;
+    --font-primary: 'Playfair Display', serif;
+    --font-secondary: 'Inter', sans-serif;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --border-radius: 8px;
+    --border-radius-large: 16px;
+    --border-radius-pill: 50px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --accent-blue: #bfd8eb;
+    --accent-blue-dark: #7aa6c7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    color: var(--dark-brown);
+    background-color: var(--white);
+    font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    background-image: url('./assets/corner-diamond.svg'), url('./assets/corner-diamond.svg'), url('./assets/corner-diamond.svg'), url('./assets/corner-diamond.svg');
+    background-repeat: no-repeat;
+    background-position: top left, top right, bottom left, bottom right;
+    background-size: 12vw 12vw;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('./assets/diamond-tile.svg');
+    background-size: 180px 180px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: -1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+}
+
+button {
+    font-family: var(--font-secondary);
+}
+
+
+/* Utility containers */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* Global animation */
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+}
+}
+
+.red {
+    filter: invert(18%) sepia(83%) saturate(4320%) hue-rotate(-7deg) brightness(103%) contrast(110%);
+}

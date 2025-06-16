@@ -1,0 +1,35 @@
+/* Global styles placeholder to satisfy CRA import */
+
+
+/* Core design tokens & global reset */
+
+:root {
+    --primary-red: #c8102e;
+    --secondary-red: #ff4d4f;
+    --warm-beige: #f5f1eb;
+    --light-beige: #faf7f3;
+    --dark-brown: #2c1810;
+    --warm-brown: #5f3b23;
+    --medium-gray: #7d7d7d;
+    --border-radius-pill: 40px;
+    --shadow-medium: 0 6px 14px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+    background: var(--warm-beige);
+    color: var(--dark-brown);
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
