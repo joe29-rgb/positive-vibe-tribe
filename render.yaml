@@ -6,7 +6,7 @@ services:
     region: oregon
     # Install front-end and back-end deps, then build CRA assets
     buildCommand: |
-      npm install --force
+      npm install --force --include=dev
       npm run build
     # Serve the Express API (which also serves static build/ files)
     startCommand: node backend/server.js
