@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: positive-vibe-tribe-web
+    env: node
+    plan: starter
+    region: oregon
+    # Install front-end and back-end deps, then build CRA assets
+    buildCommand: |
+      npm install --force
+      npm run build
+    # Serve the Express API (which also serves static build/ files)
+    startCommand: node backend/server.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000            # Render sets PORT automatically; this is just a fallback
+      # --- External Secrets (add values in Render dashboard) ---
+      - key: MONGO_URI
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false 
