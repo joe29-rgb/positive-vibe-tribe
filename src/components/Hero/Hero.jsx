@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import kokopelliVideo from '../../assets/kokopelli.mp4.mp4';
 import kokopelliImg from '../../assets/kokopelli.png';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../store/cartSlice';
+import { getCdnImage } from '../../utils/cloudinary';
 
 const HeroContainer = styled.section`
   min-height: 100vh;
@@ -127,16 +130,66 @@ const kokoDance = {
   },
 };
 
-function Hero() {
-  // Add state to track whether video can play successfully
-  var _ref = React.useState(true);
-  var hasVideo = _ref[0];
-  var setHasVideo = _ref[1];
+/* Spotlight product box */
+const Spotlight = styled.div`
+  margin-top: 56px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
 
-  function handleVideoError() {
-    // If the video fails to load/play, fallback to the static image
-    setHasVideo(false);
+const SpotImg = styled.img`
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+`;
+
+const SpotPrice = styled.p`
+  font-weight: 600;
+  color: var(--primary-red);
+  margin: 8px 0 16px;
+  font-size: 1.125rem;
+`;
+
+const AddBtn = styled.button`
+  background: var(--primary-red);
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
+  &:hover {
+    background: var(--secondary-red);
   }
+`;
+
+function Hero() {
+  const [hasVideo, setHasVideo] = useState(true);
+  const [featured, setFeatured] = useState(null);
+  const dispatch = useDispatch();
+
+  // Fetch featured product once
+  useEffect(() => {
+    fetch('/api/products?tag=featured&limit=1')
+      .then((res) => res.json())
+      .then((data) => setFeatured(data[0]))
+      .catch(() => setFeatured(null));
+  }, []);
+
+  const handleVideoError = () => setHasVideo(false);
+
+  const handleAdd = () => {
+    if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
+  };
 
   return (
     <HeroContainer>
@@ -183,6 +236,23 @@ function Hero() {
           Shop the Tribe
         </CTAButton>
         <Reassure>Free shipping on orders over $50</Reassure>
+
+        {/* Featured product spotlight */}
+        {featured && (
+          <Spotlight>
+            <SpotImg
+              src={getCdnImage(featured.image, 600)}
+              srcSet={getCdnImage(featured.image, 400) + ' 400w, ' + getCdnImage(featured.image, 800) + ' 800w'}
+              sizes="(max-width: 600px) 100vw, 400px"
+              alt={featured.name}
+              loading="lazy"
+              decoding="async"
+            />
+            <h3 style={{ margin: '0 0 4px' }}>{featured.name}</h3>
+            <SpotPrice>${featured.price.toFixed(2)}</SpotPrice>
+            <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
+          </Spotlight>
+        )}
       </HeroContent>
     </HeroContainer>
   );
