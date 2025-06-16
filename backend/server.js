@@ -26,10 +26,22 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/uploads', uploadRoutes);
 
+// Serve React build static files
+var buildPath = path.join(__dirname, '..', 'build');
+if (process.env.NODE_ENV === 'production' && require('fs').existsSync(buildPath)) {
+    app.use(express.static(buildPath));
+
+    // React Router fallback
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(buildPath, 'index.html'));
+    });
+}
+
 // Error handling middleware (simple placeholder)
-app.use(function (err, req, res, next) {
-  console.error(err.stack);
-  res.status(err.status || 500).json({ message: err.message || 'Server Error' });
+// eslint-disable-next-line no-unused-vars
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(err.status || 500).json({ message: err.message || 'Server Error' });
 });
 
 // Mongo Connection & Server Init
@@ -37,16 +49,16 @@ var PORT = process.env.PORT || 5000;
 var MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/positive-vibe-tribe';
 
 mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(function () {
-    console.log('MongoDB connected');
-    app.listen(PORT, function () {
-      console.log('Server running on port ' + PORT);
+    .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(function() {
+        console.log('MongoDB connected');
+        app.listen(PORT, function() {
+            console.log('Server running on port ' + PORT);
+        });
+    })
+    .catch(function(error) {
+        console.error('Mongo connection error:', error);
+        process.exit(1);
     });
-  })
-  .catch(function (error) {
-    console.error('Mongo connection error:', error);
-    process.exit(1);
-  });
 
 module.exports = app;
