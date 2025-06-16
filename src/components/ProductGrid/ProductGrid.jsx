@@ -39,13 +39,20 @@ const CardGrid = styled(motion.div)`
   margin-top: 40px;
 `;
 
-function ProductGrid() {
-  const [products, setProducts] = useState([]);
+function ProductGrid({ products: extProducts }) {
+  const [products, setProducts] = useState(extProducts || []);
   const [filtered, setFiltered] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (extProducts) {
+      // external data supplied
+      setProducts(extProducts);
+      setFiltered(extProducts);
+      setLoading(false);
+      return;
+    }
     fetch('/api/products')
       .then((res) => res.json())
       .then((data) => {
@@ -54,7 +61,7 @@ function ProductGrid() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [extProducts]);
 
   const filterProducts = (category) => {
     setActiveFilter(category);
@@ -67,13 +74,15 @@ function ProductGrid() {
 
   return (
     <GridContainer>
-      <FilterBar>
-        {categories.map((cat) => (
-          <FilterButton key={cat} $active={activeFilter === cat} onClick={() => filterProducts(cat)}>
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </FilterButton>
-        ))}
-      </FilterBar>
+      {!extProducts && (
+        <FilterBar>
+          {categories.map((cat) => (
+            <FilterButton key={cat} $active={activeFilter === cat} onClick={() => filterProducts(cat)}>
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </FilterButton>
+          ))}
+        </FilterBar>
+      )}
 
       <AnimatePresence>
         <CardGrid layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ staggerChildren: 0.2 }}>
