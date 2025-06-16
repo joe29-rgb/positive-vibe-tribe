@@ -294,7 +294,7 @@ function Header() {
 
   return (
     <>
-      <HeaderContainer ref={headerRef}>
+      <HeaderContainer ref={headerRef} role="navigation" aria-label="Primary">
         {/* Logo */}
         <Logo href="/">
           {(() => {
@@ -331,6 +331,7 @@ function Header() {
           >
             <NavLink href="/products">Shop</NavLink>
             <MegaMenu
+              aria-label="Shop categories"
               initial={{ opacity: 0, y: 20, pointerEvents: 'none' }}
               animate={{ opacity: megaOpen ? 1 : 0, y: megaOpen ? 0 : 20, pointerEvents: megaOpen ? 'auto' : 'none' }}
               transition={{ duration: 0.25 }}

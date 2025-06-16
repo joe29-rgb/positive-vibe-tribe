@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { motion } from 'framer-motion';
+import { getVariant } from '../../utils/ab';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -112,6 +113,9 @@ function ProductCard({ product, index = 0 }) {
   const handleAdd = (e) => {
     e.stopPropagation();
     dispatch(addToCart({ product, size: 'default', quantity: 1 }));
+    if (window.gtag) {
+      window.gtag('event', 'quick_add', { product_id: product._id, variant: getVariant() });
+    }
   };
 
   return (

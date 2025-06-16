@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductGrid from '../../components/ProductGrid/ProductGrid.jsx';
 import FacetSidebar from '../../components/ProductFilters/FacetSidebar.jsx';
 import Fuse from 'fuse.js';
+import { Helmet } from 'react-helmet-async';
 
 const Wrapper = styled.div`
   max-width: 1400px;
@@ -82,6 +83,25 @@ function Products() {
     });
   };
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${window.location.origin}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Shop',
+        item: `${window.location.origin}/products`,
+      },
+    ],
+  };
+
   if (loading) return <div style={{ padding: '2rem' }}>Loading products…</div>;
 
   return (
@@ -94,6 +114,9 @@ function Products() {
         onSearchChange={setSearchTerm}
       />
       <Content>
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
+        </Helmet>
         <Breadcrumbs />
         <ProductGrid products={filtered} />
       </Content>

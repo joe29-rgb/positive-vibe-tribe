@@ -1,7 +1,7 @@
 services:
   - type: web
     name: positive-vibe-tribe-web
-    env: node
+    runtime: node
     plan: starter
     region: oregon
     # Install front-end and back-end deps, then build CRA assets

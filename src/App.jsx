@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { HelmetProvider } from 'react-helmet-async';
+import Analytics from './components/Analytics/Analytics.jsx';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MobileNav from './components/MobileNav/MobileNav.jsx';
@@ -18,6 +19,7 @@ function App() {
   return (
     <Provider store={store}>
       <HelmetProvider>
+        <Analytics />
         <Router>
           <Header />
           <Routes>

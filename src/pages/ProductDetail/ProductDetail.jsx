@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { Helmet } from 'react-helmet-async';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -33,8 +34,36 @@ function ProductDetail() {
     return <div style={{ padding: '2rem' }}>Loading product...</div>;
   }
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${window.location.origin}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Shop',
+        item: `${window.location.origin}/products`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.name,
+        item: `${window.location.origin}/product/${product._id}`,
+      },
+    ],
+  };
+
   return (
     <Wrapper>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
+      </Helmet>
       <Breadcrumbs productName={product.name} />
       <h2 style={{ fontFamily: 'UnifrakturCook,cursive', fontSize: '2.5rem' }}>{product.name}</h2>
       <Img src={product.image} alt={product.name} loading="lazy" />
