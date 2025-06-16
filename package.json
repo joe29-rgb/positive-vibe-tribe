@@ -21,7 +21,15 @@
         "styled-components": "^6.1.18",
         "swiper": "^11.2.8",
         "web-vitals": "^2.1.4",
-        "react-scripts": "^5.0.1"
+        "react-scripts": "^5.0.1",
+        "express": "^4.19.2",
+        "mongoose": "^8.4.2",
+        "dotenv": "^16.4.5",
+        "cors": "^2.8.5",
+        "stripe": "^14.23.0",
+        "multer": "^1.4.5",
+        "cloudinary": "^1.40.0",
+        "streamifier": "^0.1.1"
     },
     "scripts": {
         "start": "react-scripts start",
