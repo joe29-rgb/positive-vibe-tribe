@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import kokopelliImg from '../../assets/kokopelli.png';
 import diamondSvg from '../../assets/corner-diamond.svg';
+import { Link } from 'react-router-dom';
 
 /* ------------------------------------
    Styled Components
@@ -75,6 +76,10 @@ const linkBase = css`
     opacity: 0.7;
     transform: translateY(0) scale(1);
   }
+`;
+
+const NavItem = styled.div`
+  position: relative;
 `;
 
 const NavLink = styled.a`
@@ -202,11 +207,56 @@ const CTAButton = styled(motion.a)`
   }
 `;
 
+/* Mega menu */
+const MegaMenu = styled(motion.div)`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  padding: 32px 48px;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  gap: 32px;
+  z-index: 90;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const CatCard = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark-brown);
+  &:hover img {
+    transform: scale(1.05);
+  }
+`;
+
+const CatImg = styled.img`
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+`;
+
+const CatLabel = styled.span`
+  margin-top: 12px;
+  font-weight: 600;
+`;
+
 /* ------------------------------------
    React Component
 +------------------------------------ */
 function Header() {
   const [open, setOpen] = React.useState(false);
+  const [megaOpen, setMegaOpen] = React.useState(false);
 
   // Shrink on scroll
   const headerRef = React.useRef(null);
@@ -231,6 +281,15 @@ function Header() {
     animate: { opacity: 0.12, scale: 1, y: 0, transition: { duration: 0.7, type: 'spring' } },
     pulse: { scale: [1, 1.08, 1], transition: { repeat: Infinity, duration: 2, ease: 'easeInOut' } },
   };
+
+  const categories = [
+    { name: 'Tops', slug: 'tops', image: '/images/cats/tops.jpg' },
+    { name: 'Hoodies', slug: 'hoodies', image: '/images/cats/hoodies.jpg' },
+    { name: 'Accessories', slug: 'accessories', image: '/images/cats/accessories.jpg' },
+    { name: 'Bottoms', slug: 'bottoms', image: '/images/cats/bottoms.jpg' },
+    { name: 'Outerwear', slug: 'outerwear', image: '/images/cats/outerwear.jpg' },
+    { name: 'All Products', slug: 'all', image: '/images/cats/all.jpg' },
+  ];
 
   return (
     <>
@@ -265,7 +324,24 @@ function Header() {
         {/* Desktop Navigation */}
         <Nav>
           <NavLink href="/">Home</NavLink>
-          <NavLink href="/products">Shop</NavLink>
+          <NavItem
+            onMouseEnter={() => setMegaOpen(true)}
+            onMouseLeave={() => setMegaOpen(false)}
+          >
+            <NavLink href="/products">Shop</NavLink>
+            <MegaMenu
+              initial={{ opacity: 0, y: 20, pointerEvents: 'none' }}
+              animate={{ opacity: megaOpen ? 1 : 0, y: megaOpen ? 0 : 20, pointerEvents: megaOpen ? 'auto' : 'none' }}
+              transition={{ duration: 0.25 }}
+            >
+              {categories.map((cat) => (
+                <CatCard key={cat.slug} to={`/products?category=${cat.slug}`}>
+                  <CatImg src={cat.image} alt={cat.name} loading="lazy" />
+                  <CatLabel>{cat.name}</CatLabel>
+                </CatCard>
+              ))}
+            </MegaMenu>
+          </NavItem>
           <NavLink href="/about">About</NavLink>
           <NavLink href="/cart">Cart</NavLink>
         </Nav>
