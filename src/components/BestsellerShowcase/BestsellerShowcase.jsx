@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import ProductCard from '../ProductGrid/ProductCard';
+import { motion } from 'framer-motion';
 
 /* -------------------------------------------------------------------------
    Styled Components
@@ -47,11 +48,31 @@ const FilterButton = styled.button`
   }
 `;
 
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   display: grid;
   gap: 24px;
   grid-auto-flow: dense;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  /* Enlarge first and every 7th card for visual rhythm */
+  & > :nth-child(7n + 1) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 8px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    & > * {
+      flex: 0 0 70%;
+      scroll-snap-align: start;
+    }
+  }
 `;
 
 function BestsellerShowcase({ tag = 'bestseller', limit = 8, categories = [] }) {
@@ -84,7 +105,7 @@ function BestsellerShowcase({ tag = 'bestseller', limit = 8, categories = [] }) 
             </FilterButton>
           ))}
         </FilterRow>
-        <Grid>
+        <Grid drag="x" dragConstraints={{ left: 0, right: 0 }}>
           {displayed.map((prod, idx) => (
             <ProductCard key={prod._id} product={prod} index={idx} />
           ))}

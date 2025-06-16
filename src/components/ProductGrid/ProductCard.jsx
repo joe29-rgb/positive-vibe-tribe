@@ -79,7 +79,7 @@ const Overlay = styled.div`
   }
 `;
 
-const QuickAdd = styled.button`
+const QuickAdd = styled(motion.button)`
   background: var(--primary-red);
   color: #fff;
   border: none;
@@ -128,7 +128,7 @@ function ProductCard({ product, index = 0 }) {
         {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" />}
         <Overlay>
           <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
-          <QuickAdd onClick={handleAdd}>Quick Add</QuickAdd>
+          <QuickAdd onClick={handleAdd} whileTap={{ scale: 0.9 }}>Quick Add</QuickAdd>
         </Overlay>
       </ImgWrapper>
       <Body>

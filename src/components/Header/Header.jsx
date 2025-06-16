@@ -71,6 +71,7 @@ const linkBase = css`
   &:hover {
     color: var(--primary-red);
     text-shadow: 0 2px 8px rgba(200,16,46,0.08);
+    transform: translateY(-2px) scale(1.05);
   }
   &:hover::after {
     opacity: 0.7;
