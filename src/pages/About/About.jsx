@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import BrandStory from '../../components/BrandStory/BrandStory';
+import ScrollStory from '../../components/ScrollStory/ScrollStory.jsx';
 
 /* -------------------------------------------------------------------------
    Styled Components
@@ -43,7 +44,10 @@ function About() {
         />
       </Helmet>
 
-      {/* Brand overview section (re-using existing component) */}
+      {/* Scroll-driven narrative */}
+      <ScrollStory />
+
+      {/* Brand overview static section */}
       <BrandStory />
 
       {/* Sacred origin narrative */}
