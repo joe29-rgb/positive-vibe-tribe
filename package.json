@@ -26,7 +26,7 @@
         "react-image-gallery": "^1.4.0",
         "react-redux": "^9.2.0",
         "react-router-dom": "^6.22.3",
-        "react-scripts": "^0.0.0",
+        "react-scripts": "5.0.1",
         "streamifier": "^0.1.1",
         "stripe": "^14.23.0",
         "styled-components": "^6.1.18",
@@ -49,7 +49,7 @@
         ]
     },
     "engines": {
-        "node": "18.x"
+        "node": "20.x"
     },
     "browserslist": {
         "production": [
