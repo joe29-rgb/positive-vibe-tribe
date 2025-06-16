@@ -31,7 +31,7 @@ const LogoBase = css`
   width: 140px;
   height: 140px;
   margin-bottom: 30px;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+  /* Removed drop-shadow for cleaner look */
 
   @media (max-width: 480px) {
     width: 100px;
@@ -51,7 +51,7 @@ const LogoVideo = styled(motion.video)`
   user-select: none;
   mix-blend-mode: screen;
   background: transparent;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+  /* Removed drop-shadow for cleaner look */
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 `;
