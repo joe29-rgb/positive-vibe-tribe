@@ -16,11 +16,11 @@ const Sidebar = styled.aside`
   }
 `;
 
-const Section = styled.div`
+const Section = styled.fieldset`
   margin-bottom: 32px;
 `;
 
-const Title = styled.h4`
+const Title = styled.legend`
   margin-bottom: 12px;
   font-size: 1rem;
   font-weight: 600;
@@ -49,15 +49,34 @@ const ColorSwatch = styled.span`
   border: 1px solid #ccc;
 `;
 
+// Visually hidden helper
+const SrOnly = styled.span`
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+`;
+
 function MultiFilter({ title, options, selected, toggle }) {
   return (
     <Section>
       <Title>{title}</Title>
       {options.map((opt) => (
         <Checkbox key={opt}>
-          <input type="checkbox" checked={selected.includes(opt)} onChange={() => toggle(opt)} />
+          <input
+            id={`${title}-${opt}`.replace(/\s+/g, '-')}
+            type="checkbox"
+            aria-label={`${title} ${opt}`}
+            checked={selected.includes(opt)}
+            onChange={() => toggle(opt)}
+          />
           {title.toLowerCase() === 'colors' ? (
-            <ColorSwatch color={opt} />
+            <>
+              <ColorSwatch color={opt} aria-hidden="true" />
+              <SrOnly>{opt}</SrOnly>
+            </>
           ) : (
             opt
           )}

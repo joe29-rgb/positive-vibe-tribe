@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var cors = require('cors');
 var path = require('path');
+var compression = require('compression');
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -13,6 +14,7 @@ var app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(compression());
 
 // Import Routes
 var productRoutes = require('./routes/products');

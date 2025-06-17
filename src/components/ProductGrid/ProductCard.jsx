@@ -5,6 +5,7 @@ import { addToCart } from '../../store/cartSlice';
 import { motion } from 'framer-motion';
 import { getVariant } from '../../utils/ab';
 import { flyToCart } from '../../utils/flyToCart';
+import { Link } from 'react-router-dom';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -18,6 +19,11 @@ const Card = styled(motion.div)`
   &:hover {
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
   }
+`;
+
+const CardLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const ImgWrapper = styled.div`
@@ -146,33 +152,34 @@ function ProductCard({ product, index = 0 }) {
   };
 
   return (
-    <Card
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      whileHover={cardHover}
-      viewport={{ once: true, amount: 0.3 }}
-      custom={index}
-      onClick={() => (window.location.href = `/product/${product._id}`)}
-    >
-      <ImgWrapper ref={imgRef}>
-        <ImgPrimary src={product.image} alt={product.name} loading="lazy" />
-        {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" />}
-        <Overlay
-          variants={overlayVariants}
-          initial="hidden"
-          whileHover="visible"
-          transition={{ duration: 0.25 }}
-        >
-          <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
-          <QuickAdd onClick={handleAdd} whileTap={quickAddTap}>Quick Add</QuickAdd>
-        </Overlay>
-      </ImgWrapper>
-      <Body>
-        <Title>{product.name}</Title>
-        <Price>${product.price.toFixed(2)}</Price>
-      </Body>
-    </Card>
+    <CardLink to={`/product/${product._id}`}>
+      <Card
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover={cardHover}
+        viewport={{ once: true, amount: 0.3 }}
+        custom={index}
+      >
+        <ImgWrapper ref={imgRef}>
+          <ImgPrimary src={product.image} alt={product.name} loading="lazy" />
+          {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" />}
+          <Overlay
+            variants={overlayVariants}
+            initial="hidden"
+            whileHover="visible"
+            transition={{ duration: 0.25 }}
+          >
+            <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
+            <QuickAdd onClick={handleAdd} whileTap={quickAddTap}>Quick Add</QuickAdd>
+          </Overlay>
+        </ImgWrapper>
+        <Body>
+          <Title>{product.name}</Title>
+          <Price>${product.price.toFixed(2)}</Price>
+        </Body>
+      </Card>
+    </CardLink>
   );
 }
 
