@@ -10,12 +10,13 @@ import bearImg from '../../assets/teachings/bear.png';
 import ravenImg from '../../assets/teachings/raven.png';
 import wolfImg from '../../assets/teachings/wolf.png';
 import turtleImg from '../../assets/teachings/turtle.png';
+import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
   background: #fff;
   color: var(--dark-brown);
-  --section-padding: 80px 20px;
+  --section-padding: 110px 20px;
 `;
 
 const Container = styled.div`
@@ -24,15 +25,15 @@ const Container = styled.div`
   padding: 0 20px;
 `;
 
-const H2 = styled.h2`
+const H2 = styled(motion.h2)`
   font-family: 'UnifrakturCook', cursive;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 1.5rem;
   text-align: center;
   color: var(--dark-brown);
 `;
 
-const Section = styled.section`
+const Section = styled(motion.section)`
   padding: var(--section-padding);
 `;
 
@@ -71,26 +72,30 @@ const CTAGroup = styled.div`
   }
 `;
 const CtaPrimary = styled.a`
-  background-color: var(--primary-color, #2d4a3e);
+  background: rgba(255, 255, 255, 0.15);
   color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  padding: 0.9rem 2rem;
+  border-radius: var(--border-radius-pill);
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.25s ease;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: var(--transition);
   &:hover {
-    background-color: transparent;
-    color: var(--primary-color, #2d4a3e);
-    border: 2px solid var(--primary-color, #2d4a3e);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 `;
 const CtaSecondary = styled(CtaPrimary)`
   background: transparent;
   color: var(--primary-color, #2d4a3e);
+  backdrop-filter: none;
   border: 2px solid var(--primary-color, #2d4a3e);
   &:hover {
     background: var(--primary-color, #2d4a3e);
     color: #fff;
+    transform: translateY(-2px);
   }
 `;
 const HeroImg = styled(motion.img)`
@@ -349,6 +354,16 @@ function About() {
           <VideoWrapper>
             <iframe src="https://www.youtube.com/embed/sASjfNI_lD0" title="Seven Teachings video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </VideoWrapper>
+        </Container>
+      </Section>
+
+      {/* Lookbook / Lifestyle Strip */}
+      <Section id="lookbook" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
+        <Container>
+          <H2 initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} transition={{duration:0.6}} viewport={{once:true}}>
+            Life in the Tribe
+          </H2>
+          <LookbookStrip />
         </Container>
       </Section>
 

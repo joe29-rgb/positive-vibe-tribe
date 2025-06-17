@@ -16,8 +16,8 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 24px;
+  font-size: 3rem;
+  margin-bottom: 32px;
   text-align: center;
   font-family: 'UnifrakturCook', cursive;
 `;
@@ -62,6 +62,26 @@ const ValueIcon = styled.span`
   font-size: 2rem;
 `;
 
+const CTAButton = styled.a`
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 36px;
+  background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+  color: #fff;
+  border-radius: var(--border-radius-pill);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+  }
+`;
+
 function BrandStory() {
   return (
     <Section>
@@ -70,18 +90,19 @@ function BrandStory() {
         <Grid>
           <div>
             <Text>
-              From the heart of Treaty&nbsp;6 territory, Positive Vibe Tribe honors the sacred teachings of
-              Kokopelli — the fertility deity who brings abundance, music, and joy to communities.
+              Every Positive&nbsp;Vibe&nbsp;Tribe piece is crafted in small, intentional batches so you&#39;re wearing
+              energy&mdash;not just fabric. Premium ring-spun cotton, eco-conscious dyes, buttery-soft fleece&mdash;the sort of
+              quality reserved for heritage labels.
             </Text>
             <Text>
-              Our wolf-spirited approach ensures every piece reflects strength, loyalty, and pack unity. We
-              create premium, preshrunk clothing that celebrates positive energy while respecting the
-              Indigenous traditions that inspire our designs.
+              Each garment is blessed with Kokopelli&#39;s spirit of joy and our Wolf&nbsp;Pack code of unity&mdash;so you feel
+              unstoppable the moment it touches your skin.
             </Text>
             <Text>
-              A portion of every purchase supports local Alberta First Nations artisans and cultural
-              preservation initiatives.
+              10% of every order fuels Alberta First Nations youth programs and language revitalization. When you
+              wear the Tribe, you invest in community.
             </Text>
+            <CTAButton href="/products">Feel&nbsp;the&nbsp;Fabric</CTAButton>
 
             <ValuesGrid>
               <ValueItem>

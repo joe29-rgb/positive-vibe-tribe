@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import kokopelliVideo from '../../assets/kokopelli.mp4.mp4';
 import kokopelliImg from '../../assets/kokopelli.png';
@@ -68,6 +68,31 @@ const HeroSubtitle = styled.p`
   text-align: center;
 `;
 
+const pulseRing = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(200, 16, 46, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0);
+  }
+`;
+
+const Glow = styled(motion.div)`
+  position: absolute;
+  width: 1200px;
+  height: 1200px;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(180px);
+  opacity: 0.55;
+  pointer-events: none;
+`;
+
 const CTAButton = styled(motion.button)`
   background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
   color: #fff;
@@ -80,6 +105,7 @@ const CTAButton = styled(motion.button)`
   letter-spacing: 1px;
   font-weight: 600;
   transition: var(--transition);
+  animation: ${pulseRing} 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 
   &:hover {
     transform: translateY(-2px);
@@ -89,7 +115,7 @@ const CTAButton = styled(motion.button)`
 
 const HeadlineBlack = styled.h1`
   font-family: 'UnifrakturCook', cursive;
-  font-size: 5rem;
+  font-size: 6rem;
   line-height: 1;
   margin: 0;
   color: var(--dark-brown);
@@ -100,7 +126,7 @@ const HeadlineBlack = styled.h1`
 `;
 const HeadlineScript = styled.h2`
   font-family: 'Dancing Script', 'Satisfy', 'Allura', cursive;
-  font-size: 3rem;
+  font-size: 4rem;
   margin: 0 0 24px;
   color: var(--dark-brown);
 
@@ -193,6 +219,11 @@ function Hero() {
 
   return (
     <HeroContainer>
+      <Glow
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 0.55 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+      />
       <HeroContent
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
