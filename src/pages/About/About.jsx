@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
-import founderImg from '../../assets/founder.jpg';
+import founderPortrait from '../../assets/founder-portrait.png';
 import beaverImg from '../../assets/teachings/beaver.png';
 import eagleImg from '../../assets/teachings/eagle.png';
 import buffaloImg from '../../assets/teachings/buffalo.png';
@@ -137,6 +137,38 @@ const StatNumber = styled.h3`
   color:var(--primary-color,#2d4a3e);
 `;
 
+const VideoWrapper = styled.div`
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  margin-top: 3rem;
+  iframe {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    border:0;
+  }
+`;
+
+const CtaLight = styled(CtaPrimary)`
+  background: #fff;
+  color: var(--primary-color, #2d4a3e);
+  &:hover {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+`;
+
+const CtaOutlineLight = styled(CtaSecondary)`
+  border-color: #fff;
+  color: #fff;
+  &:hover {
+    background: #fff;
+    color: var(--primary-color, #2d4a3e);
+  }
+`;
+
 function About() {
   return (
     <Wrapper>
@@ -161,7 +193,7 @@ function About() {
             <CtaSecondary href="/products">Shop Our Mission</CtaSecondary>
           </CTAGroup>
         </div>
-        <HeroImg src={founderImg} alt="Founder of Positive Vibe Tribe in a natural setting" loading="lazy" />
+        <HeroImg src={founderPortrait} alt="Founder of Positive Vibe Tribe standing in nature, representing Indigenous-inspired mission" loading="lazy" />
       </HeroGrid>
 
       {/* Mission */}
@@ -238,6 +270,9 @@ function About() {
               </p>
             </Card>
           </TeachGrid>
+          <VideoWrapper>
+            <iframe src="https://www.youtube.com/embed/sASjfNI_lD0" title="Seven Teachings video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+          </VideoWrapper>
         </Container>
       </Section>
 
@@ -325,8 +360,8 @@ function About() {
             at a time.
           </p>
           <CTAGroup style={{ justifyContent: 'center' }}>
-            <CtaPrimary href="/products">Shop the Collection</CtaPrimary>
-            <CtaSecondary href="/newsletter">Get Tribe Updates</CtaSecondary>
+            <CtaLight href="/products">Shop the Collection</CtaLight>
+            <CtaOutlineLight href="/newsletter">Get Tribe Updates</CtaOutlineLight>
           </CTAGroup>
         </Container>
       </Section>
