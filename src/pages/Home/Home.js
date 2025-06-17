@@ -12,9 +12,9 @@ function Home() {
     return React.createElement(React.Fragment, null,
         React.createElement(Hero, null),
         React.createElement(FeaturedCollections, null),
+        React.createElement(BrandStory, null),
         React.createElement(ProductShowcase, null),
         React.createElement(BestsellerShowcase, null),
-        React.createElement(BrandStory, null),
         React.createElement(CommunityStats, null),
         React.createElement(TrustCredentials, null),
         React.createElement(Newsletter, null)
