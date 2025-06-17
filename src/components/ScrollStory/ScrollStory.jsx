@@ -20,6 +20,13 @@ const BgImage = styled(motion.img)`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
   z-index: 0;
 `;
 
@@ -30,6 +37,7 @@ const Content = styled(motion.div)`
   text-align: center;
   color: #fff;
   padding: 0 20px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 `;
 
 const Headline = styled.h2`
@@ -53,6 +61,7 @@ function StorySection({ bg, children }) {
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
       />
+      <Overlay />
       <Content
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
