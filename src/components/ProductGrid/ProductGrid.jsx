@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProductCard from './ProductCard.jsx';
+import { keyframes } from 'styled-components';
 
 const GridContainer = styled.div`
   max-width: 1400px;
@@ -39,6 +40,22 @@ const CardGrid = styled(motion.div)`
   margin-top: 40px;
 `;
 
+// Skeleton shimmer
+const shimmer = keyframes`
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+`;
+
+const SkeletonCard = styled.div`
+  width: 100%;
+  padding-top: 120%;
+  border-radius: 16px;
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 800px 100%;
+  animation: ${shimmer} 1.2s linear infinite;
+`;
+
 function ProductGrid({ products: extProducts }) {
   const [products, setProducts] = useState(extProducts || []);
   const [filtered, setFiltered] = useState([]);
@@ -70,7 +87,18 @@ function ProductGrid({ products: extProducts }) {
 
   const categories = ['all', 'tops', 'bottoms', 'accessories', 'outerwear'];
 
-  if (loading) return <div>Loading products...</div>;
+  if (loading) {
+    const placeholders = new Array(8).fill(0);
+    return (
+      <GridContainer>
+        <CardGrid>
+          {placeholders.map((_, idx) => (
+            <SkeletonCard key={idx} />
+          ))}
+        </CardGrid>
+      </GridContainer>
+    );
+  }
 
   return (
     <GridContainer>

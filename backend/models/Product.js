@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
-var productSchema = new mongoose.Schema(
-  {
+var productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
@@ -11,8 +10,9 @@ var productSchema = new mongoose.Schema(
     colors: [String],
     countInStock: { type: Number, default: 0 },
     isFeatured: { type: Boolean, default: false },
-  },
-  { timestamps: true }
-);
+    material: { type: String },
+    altImage: { type: String },
+    symbolism: [String],
+}, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);

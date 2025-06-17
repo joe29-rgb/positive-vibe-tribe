@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { motion } from 'framer-motion';
 import { getVariant } from '../../utils/ab';
+import { flyToCart } from '../../utils/flyToCart';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -64,7 +65,7 @@ const Price = styled.p`
   color: var(--primary-red);
 `;
 
-const Overlay = styled.div`
+const Overlay = styled(motion.div)`
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
@@ -105,8 +106,30 @@ const cardVariants = {
   }),
 };
 
+// Motion variants
+const overlayVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.25, ease: 'easeOut' },
+  },
+};
+
+const quickAddTap = {
+  scale: 0.95,
+  transition: { type: 'spring', stiffness: 400, damping: 17 },
+};
+
+const cardHover = {
+  scale: 1.03,
+  translateY: -4,
+  boxShadow: '0 12px 24px rgba(0,0,0,0.12)',
+};
+
 function ProductCard({ product, index = 0 }) {
   const dispatch = useDispatch();
+  const imgRef = useRef(null);
 
   if (!product) return null;
 
@@ -116,6 +139,10 @@ function ProductCard({ product, index = 0 }) {
     if (window.gtag) {
       window.gtag('event', 'quick_add', { product_id: product._id, variant: getVariant() });
     }
+    // Trigger fly-to-cart animation
+    if (imgRef.current) {
+      flyToCart(imgRef.current);
+    }
   };
 
   return (
@@ -123,16 +150,22 @@ function ProductCard({ product, index = 0 }) {
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
+      whileHover={cardHover}
       viewport={{ once: true, amount: 0.3 }}
       custom={index}
       onClick={() => (window.location.href = `/product/${product._id}`)}
     >
-      <ImgWrapper>
+      <ImgWrapper ref={imgRef}>
         <ImgPrimary src={product.image} alt={product.name} loading="lazy" />
         {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" />}
-        <Overlay>
+        <Overlay
+          variants={overlayVariants}
+          initial="hidden"
+          whileHover="visible"
+          transition={{ duration: 0.25 }}
+        >
           <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
-          <QuickAdd onClick={handleAdd} whileTap={{ scale: 0.9 }}>Quick Add</QuickAdd>
+          <QuickAdd onClick={handleAdd} whileTap={quickAddTap}>Quick Add</QuickAdd>
         </Overlay>
       </ImgWrapper>
       <Body>

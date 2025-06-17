@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import kokopelliImg from '../../assets/kokopelli.png';
 import diamondSvg from '../../assets/corner-diamond.svg';
 import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 /* ------------------------------------
    Styled Components
@@ -85,6 +87,22 @@ const NavItem = styled.div`
 
 const NavLink = styled.a`
   ${linkBase};
+`;
+
+const CartBadge = styled.span`
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: var(--primary-red);
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 `;
 
 /* ---------- Mobile Hamburger ---------- */
@@ -292,6 +310,9 @@ function Header() {
     { name: 'All Products', slug: 'all', image: '/images/cats/all.jpg' },
   ];
 
+  // Redux cart selector
+  const itemCount = useSelector((state) => state.cart.itemCount);
+
   return (
     <>
       <HeaderContainer ref={headerRef} role="navigation" aria-label="Primary">
@@ -345,7 +366,15 @@ function Header() {
             </MegaMenu>
           </NavItem>
           <NavLink href="/about">About</NavLink>
-          <NavLink href="/cart">Cart</NavLink>
+          <NavItem
+            onMouseEnter={() => setMegaOpen(true)}
+            onMouseLeave={() => setMegaOpen(false)}
+          >
+            <NavLink id="cart-icon" href="/cart" style={{position:'relative'}}>
+              <FaShoppingCart size={20} />
+              {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
+            </NavLink>
+          </NavItem>
         </Nav>
 
         {/* Hamburger */}
@@ -389,7 +418,15 @@ function Header() {
         <NavLink href="/">Home</NavLink>
         <NavLink href="/products">Shop</NavLink>
         <NavLink href="/about">About</NavLink>
-        <NavLink href="/cart">Cart</NavLink>
+        <NavItem
+          onMouseEnter={() => setMegaOpen(true)}
+          onMouseLeave={() => setMegaOpen(false)}
+        >
+          <NavLink id="cart-icon-mobile" href="/cart" style={{position:'relative'}}>
+            <FaShoppingCart size={20} />
+            {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
+          </NavLink>
+        </NavItem>
         <CTAButton href="/products" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           Shop the Tribe
         </CTAButton>

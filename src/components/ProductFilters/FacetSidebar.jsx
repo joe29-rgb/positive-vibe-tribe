@@ -40,6 +40,15 @@ const Checkbox = styled.label`
   }
 `;
 
+const ColorSwatch = styled.span`
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: ${(p) => p.color || '#000'};
+  border: 1px solid #ccc;
+`;
+
 function MultiFilter({ title, options, selected, toggle }) {
   return (
     <Section>
@@ -47,7 +56,11 @@ function MultiFilter({ title, options, selected, toggle }) {
       {options.map((opt) => (
         <Checkbox key={opt}>
           <input type="checkbox" checked={selected.includes(opt)} onChange={() => toggle(opt)} />
-          {opt}
+          {title.toLowerCase() === 'colors' ? (
+            <ColorSwatch color={opt} />
+          ) : (
+            opt
+          )}
         </Checkbox>
       ))}
     </Section>

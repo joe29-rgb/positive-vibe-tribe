@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Helmet } from 'react-helmet-async';
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -59,6 +61,8 @@ function ProductDetail() {
     ],
   };
 
+  const galleryItems = [product.image, product.altImage].filter(Boolean).map((src) => ({ original: src, thumbnail: src }));
+
   return (
     <Wrapper>
       <Helmet>
@@ -66,7 +70,11 @@ function ProductDetail() {
       </Helmet>
       <Breadcrumbs productName={product.name} />
       <h2 style={{ fontFamily: 'UnifrakturCook,cursive', fontSize: '2.5rem' }}>{product.name}</h2>
-      <Img src={product.image} alt={product.name} loading="lazy" />
+      {galleryItems.length ? (
+        <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} />
+      ) : (
+        <Img src={product.image} alt={product.name} loading="lazy" />
+      )}
       <p style={{ marginTop: '24px' }}>{product.description}</p>
       <p style={{ fontWeight: 600, fontSize: '1.25rem', color: 'var(--primary-red)' }}>${product.price}</p>
     </Wrapper>
