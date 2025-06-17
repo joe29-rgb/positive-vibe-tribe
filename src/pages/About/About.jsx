@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion, useViewportScroll, useTransform, AnimatePresence } from 'framer-motion';
 import founderPortrait from '../../assets/founder-portrait.png';
 import beaverImg from '../../assets/teachings/beaver.png';
 import eagleImg from '../../assets/teachings/eagle.png';
@@ -114,6 +114,7 @@ const Card = styled(motion.div)`
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   text-align: center;
   transition: transform 0.25s ease;
+  cursor: pointer;
   &:hover {
     transform: translateY(-4px) rotate(1.5deg);
   }
@@ -186,6 +187,32 @@ const StickyBar = styled(motion.div)`
   box-shadow:0 4px 14px rgba(0,0,0,0.15);
 `;
 
+// -------------------- Modal --------------------//
+const Backdrop = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 140;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ModalBox = styled(motion.div)`
+  background: #fff;
+  color: var(--dark-brown);
+  max-width: 600px;
+  width: 90%;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 150;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+`;
+
 // Impact counter animation span
 const Count = ({end})=>{
   const [val,setVal]=useState(0);
@@ -206,8 +233,18 @@ function About() {
   const {scrollYProgress}=useViewportScroll();
   const imgY=useTransform(scrollYProgress,[0,1], [0,-50]);
   const [showBar,setShowBar]=useState(false);
+  const [selectedTeaching, setSelectedTeaching] = useState(null);
   useEffect(()=>{
     const onScroll=()=>{setShowBar(window.scrollY>400);} ;window.addEventListener('scroll',onScroll);return()=>window.removeEventListener('scroll',onScroll);},[]);
+
+  // Close modal on Esc key
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') setSelectedTeaching(null);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
 
   return (
     <Wrapper>
@@ -255,7 +292,7 @@ function About() {
             blueprint for living in harmony with ourselves, our community, and the earth.
           </p>
           <TeachGrid>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Nibwaakaawin – Wisdom', quote:'Wisdom is gifted by the Creator to be shared with humility. We honour it when we make decisions that will hold true for seven generations.'})}>
               <CardImg src={beaverImg} alt="Beaver symbol" />
               <h3>Nibwaakaawin – Wisdom</h3>
               <p>
@@ -263,7 +300,7 @@ function About() {
                 and colorway is chosen with purposeful care.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Zaagi\'idiwin – Love', quote:'To love is to know peace. When we nurture love within, we carry its medicine to every place our feet touch the earth.'})}>
               <CardImg src={eagleImg} alt="Eagle symbol" />
               <h3>Zaagi&apos;idiwin – Love</h3>
               <p>
@@ -271,7 +308,7 @@ function About() {
                 circle you move through.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Minaadendamowin – Respect', quote:'Respect is the heartbeat of all creation; when we honour the gifts of every being, we walk in balance.'})}>
               <CardImg src={buffaloImg} alt="Buffalo symbol" />
               <h3>Minaadendamowin – Respect</h3>
               <p>
@@ -279,7 +316,7 @@ function About() {
                 non-negotiable.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Aakode\'ewin – Bravery', quote:'Bravery is not the absence of fear, but the will to follow our truth even when the path is hard.'})}>
               <CardImg src={bearImg} alt="Bear symbol" />
               <h3>Aakode&apos;ewin – Bravery</h3>
               <p>
@@ -287,21 +324,21 @@ function About() {
                 designs.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Gwayakwaadiziwin – Honesty', quote:'Honesty is speaking our heart without deception, living in alignment with our words and actions.'})}>
               <CardImg src={ravenImg} alt="Raven symbol" />
               <h3>Gwayakwaadiziwin – Honesty</h3>
               <p>
                 Radical transparency in our pricing, supply chain, and storytelling builds the trust our Tribe deserves.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Dabaadendiziwin – Humility', quote:'Humility is knowing we are but one thread in a vast tapestry. We bow our heads to learn and to serve.'})}>
               <CardImg src={wolfImg} alt="Wolf symbol" />
               <h3>Dabaadendiziwin – Humility</h3>
               <p>
                 We are one thread in a vast tapestry. Every success is shared; every misstep becomes a lesson.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Debwewin – Truth', quote:'Truth combines all teachings. It is living the way Creator intended, with integrity in every breath.'})}>
               <CardImg src={turtleImg} alt="Turtle symbol" />
               <h3>Debwewin – Truth</h3>
               <p>
@@ -411,6 +448,34 @@ function About() {
           <CtaOutlineLight href="/newsletter">Get Tribe Updates</CtaOutlineLight>
         </StickyBar>
       )}
+
+      {/* Quote Modal */}
+      <AnimatePresence>
+        {selectedTeaching && (
+          <Backdrop
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedTeaching(null)}
+          >
+            <ModalBox
+              key="modal"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 style={{ marginBottom: '1rem' }}>{selectedTeaching.title}</h3>
+              <p style={{ marginBottom: '2rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
+              <CtaLight as="button" onClick={() => setSelectedTeaching(null)}>
+                Close
+              </CtaLight>
+            </ModalBox>
+          </Backdrop>
+        )}
+      </AnimatePresence>
     </Wrapper>
   );
 }
