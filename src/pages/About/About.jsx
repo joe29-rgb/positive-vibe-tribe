@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
-import { motion, useViewportScroll, useTransform } from 'framer-async';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import founderPortrait from '../../assets/founder-portrait.png';
 import beaverImg from '../../assets/teachings/beaver.png';
 import eagleImg from '../../assets/teachings/eagle.png';
