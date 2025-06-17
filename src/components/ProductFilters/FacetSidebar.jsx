@@ -86,17 +86,28 @@ function MultiFilter({ title, options, selected, toggle }) {
   );
 }
 
-function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange }) {
+function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, suggestions }) {
   return (
     <Sidebar>
-      <Section>
-        <input
-          type="text"
-          placeholder="Search products…"
-          value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
-          style={{ width: '100%', padding: '8px 12px', borderRadius: 8, border: '1px solid #ddd' }}
-        />
+      <Section style={{position:'relative'}}>
+        <div style={{display:'flex'}}>
+          <input
+            type="text"
+            placeholder="Search products…"
+            value={searchTerm}
+            onChange={(e) => onSearchChange(e.target.value)}
+            onKeyDown={(e)=>{if(e.key==='Enter'){e.preventDefault();onSearchChange(e.target.value)}}}
+            style={{ flex:1, padding:'8px 12px', borderTopLeftRadius:8, borderBottomLeftRadius:8, border:'1px solid #ddd', borderRight:'none'}}
+          />
+          <button onClick={()=>onSearchChange(searchTerm)} style={{padding:'8px 14px', border:'1px solid #ddd', borderLeft:'none', background:'var(--primary-red)', color:'#fff', borderTopRightRadius:8, borderBottomRightRadius:8}}>Search</button>
+        </div>
+        {suggestions?.length>0 && (
+          <ul style={{position:'absolute',top:'100%',left:0,right:0,background:'#fff',border:'1px solid #ddd',zIndex:10,maxHeight:160,overflowY:'auto'}}>
+            {suggestions.map((s)=>(
+              <li key={s} style={{padding:'6px 10px',cursor:'pointer'}} onMouseDown={()=>onSearchChange(s)}>{s}</li>
+            ))}
+          </ul>
+        )}
       </Section>
       {Object.entries(facets).map(([key, list]) => (
         <MultiFilter

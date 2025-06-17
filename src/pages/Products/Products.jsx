@@ -82,6 +82,10 @@ function Products() {
   }, []);
 
   const fuse = useMemo(() => new Fuse(products, { keys: ['name', 'description', 'symbolism'] }), [products]);
+  const suggestions = useMemo(() => {
+    if (!searchTerm.trim()) return [];
+    return fuse.search(searchTerm).slice(0,5).map(r=>r.item.name);
+  }, [searchTerm, fuse]);
 
   useEffect(() => {
     let list = products;
@@ -175,6 +179,7 @@ function Products() {
           onToggle={toggleFilter}
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
+          suggestions={suggestions}
         />
         <Content>
           <Helmet>

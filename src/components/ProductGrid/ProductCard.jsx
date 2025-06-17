@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { getVariant } from '../../utils/ab';
 import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -144,6 +145,7 @@ function ProductCard({ product, index = 0 }) {
   const handleAdd = (e) => {
     e.stopPropagation();
     dispatch(addToCart({ product, size: 'default', quantity: 1 }));
+    toast.success(`${product.name} added to cart`);
     if (window.gtag) {
       window.gtag('event', 'quick_add', { product_id: product._id, variant: getVariant() });
     }

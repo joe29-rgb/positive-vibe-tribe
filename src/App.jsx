@@ -14,6 +14,8 @@ import ProductDetail from './pages/ProductDetail/ProductDetail.jsx';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import About from './pages/About/About';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function AnimatedRoutes() {
@@ -50,6 +52,7 @@ function App() {
           <AnimatedRoutes />
           <MobileNav />
           <Footer />
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar theme="colored" />
         </Router>
       </HelmetProvider>
     </Provider>
