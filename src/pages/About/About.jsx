@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
+import { motion, useViewportScroll, useTransform } from 'framer-async';
 import founderPortrait from '../../assets/founder-portrait.png';
 import beaverImg from '../../assets/teachings/beaver.png';
 import eagleImg from '../../assets/teachings/eagle.png';
@@ -92,7 +93,7 @@ const CtaSecondary = styled(CtaPrimary)`
     color: #fff;
   }
 `;
-const HeroImg = styled.img`
+const HeroImg = styled(motion.img)`
   width: 100%;
   height: auto;
   border-radius: 8px;
@@ -106,7 +107,7 @@ const TeachGrid = styled.div`
   gap: 2rem;
   margin-top: 3rem;
 `;
-const Card = styled.div`
+const Card = styled(motion.div)`
   background: #fff;
   padding: 1.5rem;
   border-radius: 8px;
@@ -114,7 +115,7 @@ const Card = styled.div`
   text-align: center;
   transition: transform 0.25s ease;
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) rotate(1.5deg);
   }
 `;
 const CardImg = styled.img`
@@ -169,7 +170,45 @@ const CtaOutlineLight = styled(CtaSecondary)`
   }
 `;
 
+// Sticky CTA bar
+const StickyBar = styled(motion.div)`
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color,#2d4a3e);
+  color:#fff;
+  padding: 12px 24px;
+  border-radius: 40px;
+  display:flex;
+  gap:16px;
+  z-index:120;
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);
+`;
+
+// Impact counter animation span
+const Count = ({end})=>{
+  const [val,setVal]=useState(0);
+  useEffect(()=>{
+    const dur=1200;
+    const startTime=performance.now();
+    const step=(t)=>{
+      const progress=Math.min((t-startTime)/dur,1);
+      setVal(Math.floor(progress*end));
+      if(progress<1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  },[end]);
+  return <>{val}{typeof end==='number' && end%1!==0?'':''}</>;
+};
+
 function About() {
+  const {scrollYProgress}=useViewportScroll();
+  const imgY=useTransform(scrollYProgress,[0,1], [0,-50]);
+  const [showBar,setShowBar]=useState(false);
+  useEffect(()=>{
+    const onScroll=()=>{setShowBar(window.scrollY>400);} ;window.addEventListener('scroll',onScroll);return()=>window.removeEventListener('scroll',onScroll);},[]);
+
   return (
     <Wrapper>
       <Helmet>
@@ -193,7 +232,7 @@ function About() {
             <CtaSecondary href="/products">Shop Our Mission</CtaSecondary>
           </CTAGroup>
         </div>
-        <HeroImg src={founderPortrait} alt="Founder of Positive Vibe Tribe standing in nature, representing Indigenous-inspired mission" loading="lazy" />
+        <HeroImg style={{y:imgY}} src={founderPortrait} alt="Founder of Positive Vibe Tribe standing in nature, representing Indigenous-inspired mission" loading="lazy" />
       </HeroGrid>
 
       {/* Mission */}
@@ -216,7 +255,7 @@ function About() {
             blueprint for living in harmony with ourselves, our community, and the earth.
           </p>
           <TeachGrid>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={beaverImg} alt="Beaver symbol" />
               <h3>Nibwaakaawin – Wisdom</h3>
               <p>
@@ -224,7 +263,7 @@ function About() {
                 and colorway is chosen with purposeful care.
               </p>
             </Card>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={eagleImg} alt="Eagle symbol" />
               <h3>Zaagi&apos;idiwin – Love</h3>
               <p>
@@ -232,7 +271,7 @@ function About() {
                 circle you move through.
               </p>
             </Card>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={buffaloImg} alt="Buffalo symbol" />
               <h3>Minaadendamowin – Respect</h3>
               <p>
@@ -240,7 +279,7 @@ function About() {
                 non-negotiable.
               </p>
             </Card>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={bearImg} alt="Bear symbol" />
               <h3>Aakode&apos;ewin – Bravery</h3>
               <p>
@@ -248,21 +287,21 @@ function About() {
                 designs.
               </p>
             </Card>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={ravenImg} alt="Raven symbol" />
               <h3>Gwayakwaadiziwin – Honesty</h3>
               <p>
                 Radical transparency in our pricing, supply chain, and storytelling builds the trust our Tribe deserves.
               </p>
             </Card>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={wolfImg} alt="Wolf symbol" />
               <h3>Dabaadendiziwin – Humility</h3>
               <p>
                 We are one thread in a vast tapestry. Every success is shared; every misstep becomes a lesson.
               </p>
             </Card>
-            <Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}}>
               <CardImg src={turtleImg} alt="Turtle symbol" />
               <h3>Debwewin – Truth</h3>
               <p>
@@ -315,15 +354,15 @@ function About() {
           </p>
           <ImpactGrid>
             <Stat>
-              <StatNumber>5%</StatNumber>
+              <StatNumber><Count end={5}/> %</StatNumber>
               <p>Of profits donated to Indigenous youth &amp; language programs in Alberta</p>
             </Stat>
             <Stat>
-              <StatNumber>13</StatNumber>
+              <StatNumber><Count end={13}/></StatNumber>
               <p>Canadian provinces &amp; territories represented in our Tribe</p>
             </Stat>
             <Stat>
-              <StatNumber>100%</StatNumber>
+              <StatNumber><Count end={100}/> %</StatNumber>
               <p>Ethically sourced, traceable cotton</p>
             </Stat>
           </ImpactGrid>
@@ -336,15 +375,15 @@ function About() {
           <H2>Community Impact</H2>
           <ImpactGrid>
             <Stat as="div">
-              <StatNumber>$10k+</StatNumber>
+              <StatNumber>$<Count end={10}/>k+</StatNumber>
               <p>Contributed to Indigenous cultural preservation &amp; land-based healing</p>
             </Stat>
             <Stat as="div">
-              <StatNumber>100%</StatNumber>
+              <StatNumber><Count end={100}/> %</StatNumber>
               <p>Recyclable packaging since launch</p>
             </Stat>
             <Stat as="div">
-              <StatNumber>1000s</StatNumber>
+              <StatNumber><Count end={1000}/>s</StatNumber>
               <p>Of teaching cards shipped, sparking conversations coast-to-coast</p>
             </Stat>
           </ImpactGrid>
@@ -365,6 +404,13 @@ function About() {
           </CTAGroup>
         </Container>
       </Section>
+
+      {showBar && (
+        <StickyBar initial={{opacity:0,scale:0.8}} animate={{opacity:1,scale:1}} exit={{opacity:0}}>
+          <CtaLight href="/products">Shop the Collection</CtaLight>
+          <CtaOutlineLight href="/newsletter">Get Tribe Updates</CtaOutlineLight>
+        </StickyBar>
+      )}
     </Wrapper>
   );
 }
