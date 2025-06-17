@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductGrid from '../../components/ProductGrid/ProductGrid.jsx';
@@ -60,6 +60,23 @@ const Backdrop = styled(motion.div)`
   z-index: 85;
 `;
 
+const LoadMoreBtn = styled.button`
+  display: block;
+  margin: 40px auto 80px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: var(--border-radius-pill);
+  background: var(--primary-red);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
+  &:hover {
+    background: var(--secondary-red);
+  }
+`;
+
 function Products() {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -70,6 +87,9 @@ function Products() {
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [showDrawer, setShowDrawer] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(12);
+
+  const sentinelRef = useRef(null);
 
   useEffect(() => {
     fetch('/api/products')
@@ -167,6 +187,20 @@ function Products() {
     ],
   };
 
+  const displayList = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+
+  // infinite scroll observer
+  useEffect(() => {
+    if (!sentinelRef.current) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setVisibleCount(c => Math.min(c + 12, filtered.length));
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(sentinelRef.current);
+    return () => observer.disconnect();
+  }, [filtered.length]);
+
   if (loading) return <div style={{ padding: '2rem' }}>Loading products…</div>;
 
   return (
@@ -194,7 +228,11 @@ function Products() {
               <option value="az">A–Z</option>
             </select>
           </div>
-          <ProductGrid products={filtered} />
+          <ProductGrid products={displayList} />
+          {visibleCount < filtered.length && (
+            <LoadMoreBtn onClick={() => setVisibleCount(c => c + 12)}>Load More</LoadMoreBtn>
+          )}
+          <div ref={sentinelRef} />
         </Content>
       </Wrapper>
 
@@ -217,6 +255,7 @@ function Products() {
               onToggle={toggleFilter}
               searchTerm={searchTerm}
               onSearchChange={setSearchTerm}
+              autoFocusSearch={true}
             />
             {/* Price range simple inputs */}
             <div style={{ marginTop: 24 }}>

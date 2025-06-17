@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaSearch } from 'react-icons/fa';
 
 const Sidebar = styled.aside`
   width: 260px;
@@ -86,7 +87,7 @@ function MultiFilter({ title, options, selected, toggle }) {
   );
 }
 
-function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, suggestions }) {
+function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, suggestions, autoFocusSearch=false }) {
   return (
     <Sidebar>
       <Section style={{position:'relative'}}>
@@ -96,10 +97,13 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
             placeholder="Search products…"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            onKeyDown={(e)=>{if(e.key==='Enter'){e.preventDefault();onSearchChange(e.target.value)}}}
+            onKeyDown={(e)=>{if(e.key==='Enter'){e.preventDefault();onSearchChange(e.target.value);}}}
             style={{ flex:1, padding:'8px 12px', borderTopLeftRadius:8, borderBottomLeftRadius:8, border:'1px solid #ddd', borderRight:'none'}}
+            autoFocus={autoFocusSearch}
           />
-          <button onClick={()=>onSearchChange(searchTerm)} style={{padding:'8px 14px', border:'1px solid #ddd', borderLeft:'none', background:'var(--primary-red)', color:'#fff', borderTopRightRadius:8, borderBottomRightRadius:8}}>Search</button>
+          <button aria-label="Search" onClick={()=>onSearchChange(searchTerm)} style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'0 16px', border:'1px solid #ddd', borderLeft:'none', background:'var(--primary-red)', color:'#fff', borderTopRightRadius:8, borderBottomRightRadius:8}}>
+            <FaSearch />
+          </button>
         </div>
         {suggestions?.length>0 && (
           <ul style={{position:'absolute',top:'100%',left:0,right:0,background:'#fff',border:'1px solid #ddd',zIndex:10,maxHeight:160,overflowY:'auto'}}>
