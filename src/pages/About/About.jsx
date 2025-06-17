@@ -45,17 +45,17 @@ function About() {
         />
       </Helmet>
 
-      {/* Scroll-driven narrative */}
-      <ScrollStory />
+      {/* Meet the founder */}
+      <FounderStory />
 
       {/* Brand overview static section */}
       <BrandStory />
 
-      {/* Meet the founder */}
-      <FounderStory />
+      {/* Scroll-driven narrative */}
+      <ScrollStory />
 
       {/* Sacred origin narrative */}
-      <Section>
+      <Section className="bg-sand">
         <Heading>The Sacred Origin Story</Heading>
         <p>
           In the heart of Treaty 6 territory, amid the rolling prairies of amiskwaciwâskahikan (Beaver Hills

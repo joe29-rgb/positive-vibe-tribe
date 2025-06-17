@@ -36,8 +36,8 @@ body {
     color: var(--dark-brown);
     background-color: var(--white);
     font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background-image: url('./assets/corner-diamond.svg'), url('./assets/corner-diamond.svg'), url('./assets/corner-diamond.svg'), url('./assets/corner-diamond.svg');
     background-repeat: no-repeat;
     background-position: top left, top right, bottom left, bottom right;
@@ -131,9 +131,13 @@ button {
     to {
         opacity: 1;
         transform: translateY(0);
-}
+    }
 }
 
 .red {
     filter: invert(18%) sepia(83%) saturate(4320%) hue-rotate(-7deg) brightness(103%) contrast(110%);
+}
+
+.bg-sand {
+    background: #fdf8f2;
 }

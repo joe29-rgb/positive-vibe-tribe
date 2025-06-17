@@ -16,6 +16,8 @@ const Card = styled(motion.div)`
   flex-direction: column;
   position: relative;
   cursor: pointer;
+  max-width: 280px;
+  margin: 0 auto;
   &:hover {
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
   }

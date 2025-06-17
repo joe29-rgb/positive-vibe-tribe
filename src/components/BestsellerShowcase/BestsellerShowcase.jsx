@@ -18,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   margin-bottom: 32px;
   font-family: 'UnifrakturCook', cursive;
   color: var(--dark-brown);

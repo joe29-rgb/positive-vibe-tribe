@@ -64,6 +64,7 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState('newest');
 
   const [selected, setSelected] = useState({ sizes: [], materials: [], category: [], symbolism: [], colors: [] });
   const [searchTerm, setSearchTerm] = useState('');
@@ -100,8 +101,15 @@ function Products() {
     if (colors.length) list = list.filter((p) => p.colors && p.colors.some((c) => colors.includes(c)));
     list = list.filter((p) => p.price >= minP && p.price <= maxP);
 
-    setFiltered(list);
-  }, [products, selected, searchTerm, fuse, priceRange]);
+    // sort list
+    let sorted=list;
+    if(sortBy==='price-asc') sorted=[...list].sort((a,b)=>a.price-b.price);
+    else if(sortBy==='price-desc') sorted=[...list].sort((a,b)=>b.price-a.price);
+    else if(sortBy==='az') sorted=[...list].sort((a,b)=>a.name.localeCompare(b.name));
+    else if(sortBy==='newest') sorted=[...list].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+
+    setFiltered(sorted);
+  }, [products, selected, searchTerm, fuse, priceRange, sortBy]);
 
   // derive facet options
   const facets = useMemo(() => {
@@ -172,7 +180,15 @@ function Products() {
           <Helmet>
             <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
           </Helmet>
-          <Breadcrumbs />
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+            <Breadcrumbs />
+            <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} style={{padding:'6px 10px'}}>
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="az">A–Z</option>
+            </select>
+          </div>
           <ProductGrid products={filtered} />
         </Content>
       </Wrapper>
