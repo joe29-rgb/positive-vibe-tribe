@@ -124,7 +124,7 @@ function ParallaxHero() {
         <Subtitle>
           We weave the Seven Grandfather Teachings into every thread—spreading positive energy, cultural respect, and joyful connection across Turtle Island.
         </Subtitle>
-        <CTA href="#mission">Discover Our Story</CTA>
+        <CTA href="#founder-story">Discover Our Story</CTA>
         <Portrait
           src={founderPortrait}
           alt="Founder portrait"
