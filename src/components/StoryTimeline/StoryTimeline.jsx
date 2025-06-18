@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LazyImage from '../LazyImage/LazyImage';
 import look1 from '../../assets/collage/look1.jpg';
 import look2 from '../../assets/collage/look2.jpg';
 import look3 from '../../assets/collage/look3.jpg';
@@ -68,7 +69,7 @@ const Panel = styled.div`
   overflow: hidden;
 `;
 
-const Bg = styled.img`
+const Bg = styled(LazyImage)`
   position: absolute;
   inset: 0;
   width: 100%;

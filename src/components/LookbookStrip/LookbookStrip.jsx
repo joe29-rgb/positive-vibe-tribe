@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import LazyImage from '../LazyImage/LazyImage';
 // Imagery
 import look1 from '../../assets/collage/look1.jpg';
 import look2 from '../../assets/collage/look2.jpg';
@@ -39,11 +40,9 @@ const Slide = styled(motion.div)`
   }
 `;
 
-const Img = styled.img`
-  width: 100%;
+const StyledImg = styled(LazyImage)`
   height: 100%;
   object-fit: cover;
-  display: block;
 `;
 
 const PlayOverlay = styled.button`
@@ -116,7 +115,7 @@ function LookbookStrip() {
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <Img src={src} alt={`Positive Vibe Tribe look ${idx + 1}`} loading="lazy" />
+            <StyledImg src={src} alt={`Positive Vibe Tribe look ${idx + 1}`} />
             {idx === 0 && (
               <PlayOverlay onClick={() => setShowVideo(true)} aria-label="Play behind the scenes video" />
             )}

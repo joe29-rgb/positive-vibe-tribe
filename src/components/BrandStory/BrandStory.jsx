@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LazyImage from '../LazyImage/LazyImage';
 import look5 from '../../assets/collage/look5.jpg';
 
 const Section = styled.section`
@@ -123,10 +124,9 @@ function BrandStory() {
             </ValuesGrid>
           </div>
 
-          <img
+          <LazyImage
             src={look5}
             alt="Edmonton landscape with Indigenous cultural elements"
-            loading="lazy"
             style={{ width: '100%', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.12)' }}
           />
         </Grid>
