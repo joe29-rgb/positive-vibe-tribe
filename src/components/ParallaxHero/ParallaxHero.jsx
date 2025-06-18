@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import motif from '../../assets/diamond-tile.svg';
-import founderPortrait from '../../assets/founder-portrait.png';
+import teachingsPortrait from '../../assets/founder-portrait.png';
 import founder from '../../assets/founder.jpg';
 
 const HeroSection = styled.section`
@@ -127,8 +127,8 @@ function ParallaxHero() {
         <CTA href="#founder-story">Discover Our Story</CTA>
         {/* Remove overlay portrait on large screens, keep on mobile */}
         <Portrait
-          src={founderPortrait}
-          alt="Founder portrait"
+          src={teachingsPortrait}
+          alt="7 Teachings portrait"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}

@@ -5,15 +5,8 @@ import look1 from '../../assets/collage/look1.jpg';
 import look3 from '../../assets/collage/look3.jpg';
 import look4 from '../../assets/collage/look4.jpg';
 import look5 from '../../assets/collage/look5.jpg';
-import founderPortrait from '../../assets/founder-portrait.png';
 
 const events = [
-  {
-    title: 'Airport Epiphany',
-    subtitle: 'Love for No Reason',
-    quote: '“If people can hate for no reason, I can love for no reason.” A spontaneous act of kindness in San Antonio sparked our entire movement.',
-    img: founderPortrait,
-  },
   {
     title: 'Hidden Positivity',
     subtitle: 'A Decal\'s Lesson',
