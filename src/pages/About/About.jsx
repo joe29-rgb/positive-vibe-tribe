@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
-import { motion, useViewportScroll, useTransform, AnimatePresence } from 'framer-motion';
-import founderPortrait from '../../assets/founder-portrait.png';
+import { motion, AnimatePresence } from 'framer-motion';
 import beaverImg from '../../assets/teachings/beaver.png';
 import eagleImg from '../../assets/teachings/eagle.png';
 import buffaloImg from '../../assets/teachings/buffalo.png';
@@ -11,6 +10,8 @@ import ravenImg from '../../assets/teachings/raven.png';
 import wolfImg from '../../assets/teachings/wolf.png';
 import turtleImg from '../../assets/teachings/turtle.png';
 import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
+import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
+import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -38,72 +39,7 @@ const Section = styled(motion.section)`
 `;
 
 //-------------------- Hero --------------------//
-const HeroGrid = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  min-height: 80vh;
-  padding: var(--section-padding);
-  background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-`;
-const HeroTitle = styled.h1`
-  font-family: 'UnifrakturCook', cursive;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  margin-bottom: 1rem;
-  color: var(--primary-color, #2d4a3e);
-`;
-const HeroSubtitle = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.5;
-  color: var(--text-light, #666);
-  margin-bottom: 2rem;
-`;
-const CTAGroup = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
-const CtaPrimary = styled.a`
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  padding: 0.9rem 2rem;
-  border-radius: var(--border-radius-pill);
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: var(--transition);
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  }
-`;
-const CtaSecondary = styled(CtaPrimary)`
-  background: transparent;
-  color: var(--primary-color, #2d4a3e);
-  backdrop-filter: none;
-  border: 2px solid var(--primary-color, #2d4a3e);
-  &:hover {
-    background: var(--primary-color, #2d4a3e);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-`;
-const HeroImg = styled(motion.img)`
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-`;
+/* Removed old hero grid styled components */
 
 //-------------------- Teachings --------------------//
 const TeachGrid = styled.div`
@@ -234,9 +170,45 @@ const Count = ({end})=>{
   return <>{val}{typeof end==='number' && end%1!==0?'':''}</>;
 };
 
+const CTAGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+const CtaPrimary = styled.a`
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 0.9rem 2rem;
+  border-radius: var(--border-radius-pill);
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: var(--transition);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const CtaSecondary = styled(CtaPrimary)`
+  background: transparent;
+  color: var(--primary-color, #2d4a3e);
+  backdrop-filter: none;
+  border: 2px solid var(--primary-color, #2d4a3e);
+  &:hover {
+    background: var(--primary-color, #2d4a3e);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+`;
+
 function About() {
-  const {scrollYProgress}=useViewportScroll();
-  const imgY=useTransform(scrollYProgress,[0,1], [0,-50]);
   const [showBar,setShowBar]=useState(false);
   const [selectedTeaching, setSelectedTeaching] = useState(null);
   useEffect(()=>{
@@ -261,21 +233,8 @@ function About() {
         />
       </Helmet>
 
-      {/* Hero */}
-      <HeroGrid>
-        <div>
-          <HeroTitle>Guided by Ancient Wisdom, Creating Positive Change</HeroTitle>
-          <HeroSubtitle>
-            We weave the Ojibwe Seven Grandfather Teachings into every thread—spreading positive energy, cultural
-            respect, and joyful connection across Canada and beyond.
-          </HeroSubtitle>
-          <CTAGroup>
-            <CtaPrimary href="#our-story">Discover Our Story</CtaPrimary>
-            <CtaSecondary href="/products">Shop Our Mission</CtaSecondary>
-          </CTAGroup>
-        </div>
-        <HeroImg style={{y:imgY}} src={founderPortrait} alt="Founder of Positive Vibe Tribe standing in nature, representing Indigenous-inspired mission" loading="lazy" />
-      </HeroGrid>
+      {/* Immersive Parallax Hero */}
+      <ParallaxHero />
 
       {/* Mission */}
       <Section id="mission" style={{ background: 'var(--primary-color,#2d4a3e)', color: '#fff', textAlign: 'center' }}>
@@ -367,32 +326,9 @@ function About() {
         </Container>
       </Section>
 
-      {/* Founder Story */}
-      <Section id="our-story">
-        <Container>
-          <H2>The Heart Behind Positive Vibe Tribe</H2>
-          <p style={{ marginBottom: '1.5rem' }}>
-            <strong>Airport Encounter — Love for No Reason</strong>
-            <br />San Antonio, Texas. A missed flight. A distressed traveler unleashing a storm of profanity. Our founder
-            offered help anyway.
-            <br />&quot;Why do you care?&quot; she snapped.
-            <br />&quot;Because if people can hate for no reason,&quot; he replied, &quot;I can love for no reason.&quot;
-            <br />He quietly paid for her drink and watched an entire bar erupt in applause as her anger dissolved into
-            gratitude.
-          </p>
-          <p style={{ marginBottom: '1.5rem' }}>
-            <strong>Gas-Station Revelation — Finding Light in Dark Places</strong>
-            <br />Months later in Lethbridge, Alberta, a woman noted the faint <em>Positive Vibez</em> decal on his rear
-            window: &quot;It&apos;s a little hard to see.&quot;
-            <br />&quot;Just like life,&quot; he answered. &quot;Every day might not be great, but there&apos;s always something to be positive about. Sometimes you just have to look a little harder.&quot; She cried, thanked him, and another ripple of
-            kindness spread.
-          </p>
-          <p>
-            From those encounters grew a simple creed: <em>love loudly, shine quietly, and let positivity travel farther
-            than you do.</em> Rooted in the Seven Grandfather Teachings—and the joy-bearing songs of Kokopelli—Positive
-            Vibe Tribe turns everyday moments into opportunities for connection.
-          </p>
-        </Container>
+      {/* Interactive Story Timeline */}
+      <Section id="our-story" style={{ padding: 0 }}>
+        <StoryTimeline />
       </Section>
 
       {/* Honouring Section */}
