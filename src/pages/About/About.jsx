@@ -275,7 +275,7 @@ function About() {
             blueprint for living in harmony with ourselves, our community, and the earth.
           </p>
           <TeachGrid>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Nibwaakaawin – Wisdom', quote:'Wisdom is gifted by the Creator to be shared with humility. We honour it when we make decisions that will hold true for seven generations.'})}>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Nibwaakaawin – Wisdom', quote:'Wisdom is gifted by the Creator to be shared with humility. We honour it when we make decisions that will hold true for seven generations.', video:'S7wbE9YJ5_o'})}>
               <CardImg src={beaverImg} alt="Beaver symbol" />
               <h3>Nibwaakaawin – Wisdom</h3>
               <p>
@@ -476,7 +476,18 @@ function About() {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 style={{ marginBottom: '1rem' }}>{selectedTeaching.title}</h3>
-              <p style={{ marginBottom: '2rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
+              <p style={{ marginBottom: '1.5rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
+              {selectedTeaching.video && (
+                <div style={{position:'relative',paddingBottom:'56.25%',height:0,marginBottom:'1.5rem'}}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedTeaching.video}`}
+                    title={selectedTeaching.title}
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',border:0}}
+                  />
+                </div>
+              )}
               <CtaLight as="button" onClick={() => setSelectedTeaching(null)}>
                 Close
               </CtaLight>
