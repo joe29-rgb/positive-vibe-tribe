@@ -22,6 +22,7 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --accent-blue: #bfd8eb;
     --accent-blue-dark: #7aa6c7;
+    --canvas-beige: #f6f1eb;
 }
 
 * {
