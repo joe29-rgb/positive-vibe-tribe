@@ -82,22 +82,6 @@ const CTA = styled.a`
   }
 `;
 
-const Portrait = styled(motion.img)`
-  width: 340px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  margin-top: 2rem;
-
-  @media (max-width: 768px) {
-    width: 220px;
-  }
-
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;
-
 function ParallaxHero() {
   const { scrollY } = useViewportScroll();
 
@@ -128,14 +112,6 @@ function ParallaxHero() {
           We weave the Seven Grandfather Teachings into every thread—spreading positive energy, cultural respect, and joyful connection across Turtle Island.
         </Subtitle>
         <CTA href="#founder-story">Discover Our Story</CTA>
-        {/* Show portrait only on mobile to avoid picture-in-picture */}
-        <Portrait
-          src={teachingsPortrait}
-          alt="7 Teachings portrait"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        />
       </Content>
     </HeroSection>
   );

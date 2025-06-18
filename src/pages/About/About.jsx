@@ -335,16 +335,6 @@ function About() {
         </Container>
       </Section>
 
-      {/* Lookbook / Lifestyle Strip */}
-      <Section id="lookbook" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
-        <Container>
-          <H2 initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} transition={{duration:0.6}} viewport={{once:true}}>
-            Life in the Tribe
-          </H2>
-          <LookbookStrip />
-        </Container>
-      </Section>
-
       {/* Interactive Story Timeline */}
       <Section id="our-story" style={{ padding: 0 }}>
         <StoryTimeline />
@@ -355,7 +345,7 @@ function About() {
         <Container>
           <H2>The Heart Behind Positive Vibe Tribe: A Founder&apos;s Story of Authentic Connection</H2>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))',gap:'3rem',alignItems:'start'}}>
-            <LazyImage src={founderImage} alt="Founder" style={{borderRadius:'16px',boxShadow:'0 10px 30px rgba(0,0,0,0.12)',filter:'contrast(105%) saturate(80%)'}} />
+            <LazyImage src={founderImage} alt="Founder" style={{borderRadius:'16px',boxShadow:'0 10px 30px rgba(0,0,0,0.12)',filter:'contrast(105%) saturate(80%)',aspectRatio:'4/5',width:'100%',objectFit:'cover'}} />
             <div style={{fontSize:'1.125rem',lineHeight:1.7}}>
               <h3 style={{marginTop:0}}>When Kindness Meets Business Purpose</h3>
               <p>In an era where authentic storytelling drives customer loyalty and trust, the story of Positive Vibe Tribe&apos;s founder exemplifies how personal values translate into business success. Research shows that stories are 22&nbsp;times more memorable than facts alone, and founder stories enhance perceived brand authenticity by creating emotional connections between the founder&apos;s values and customer values.</p>
@@ -495,6 +485,16 @@ function About() {
           </Backdrop>
         )}
       </AnimatePresence>
+
+      {/* Lookbook / Lifestyle Strip */}
+      <Section id="lookbook" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
+        <Container>
+          <H2 initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} transition={{duration:0.6}} viewport={{once:true}}>
+            Life in the Tribe
+          </H2>
+          <LookbookStrip />
+        </Container>
+      </Section>
     </Wrapper>
   );
 }

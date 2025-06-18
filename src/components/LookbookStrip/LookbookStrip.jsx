@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import LazyImage from '../LazyImage/LazyImage';
 // Imagery
 import look1 from '../../assets/collage/look1.jpg';
@@ -45,66 +45,8 @@ const StyledImg = styled(LazyImage)`
   object-fit: cover;
 `;
 
-const PlayOverlay = styled.button`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.55);
-  border: none;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
-  &:hover {
-    background: rgba(0, 0, 0, 0.7);
-  }
-  &::before {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 18px solid #fff;
-    margin-left: 4px;
-  }
-`;
-
-// Modal elements
-const Backdrop = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-`;
-
-const VideoFrame = styled(motion.div)`
-  width: 90%;
-  max-width: 800px;
-  aspect-ratio: 16/9;
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-`;
-
 function LookbookStrip() {
-  const [showVideo, setShowVideo] = useState(false);
+  // Video modal disabled
 
   return (
     <>
@@ -116,39 +58,13 @@ function LookbookStrip() {
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
             <StyledImg src={src} alt={`Positive Vibe Tribe look ${idx + 1}`} />
-            {idx === 0 && (
-              <PlayOverlay onClick={() => setShowVideo(true)} aria-label="Play behind the scenes video" />
-            )}
+            {/* overlay removed */ }
           </Slide>
         ))}
       </Strip>
 
       {/* Video Modal */}
-      <AnimatePresence>
-        {showVideo && (
-          <Backdrop
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowVideo(false)}
-          >
-            <VideoFrame
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <iframe
-                src="https://www.youtube.com/embed/sASjfNI_lD0?autoplay=1&mute=1"
-                title="Positive Vibe Tribe behind the scenes"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </VideoFrame>
-          </Backdrop>
-        )}
-      </AnimatePresence>
+      {/* overlay removed */ }
     </>
   );
 }
