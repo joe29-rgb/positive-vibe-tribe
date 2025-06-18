@@ -55,6 +55,17 @@ body::before {
     z-index: -1;
 }
 
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAI0lEQVQoU2NkYGBg+M+ACDAwMDC+4x8GRiYGJhYGAAYgIAADn8BX/Nbe8bAAAAAElFTkSuQmCC');
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: -1;
+    mix-blend-mode: overlay;
+}
+
 h1,
 h2,
 h3,

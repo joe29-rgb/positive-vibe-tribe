@@ -12,6 +12,7 @@ import turtleImg from '../../assets/teachings/turtle.png';
 import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
+import AngleSection from '../../components/AngleSection/AngleSection';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -237,7 +238,7 @@ function About() {
       <ParallaxHero />
 
       {/* Mission */}
-      <Section id="mission" style={{ background: 'var(--primary-color,#2d4a3e)', color: '#fff', textAlign: 'center' }}>
+      <AngleSection angleTop angleBottom id="mission" style={{ background: 'var(--primary-color,#2d4a3e)', color: '#fff', textAlign: 'center' }}>
         <Container>
           <H2 style={{ color: '#fff' }}>Our Mission</H2>
           <p style={{ fontSize: '1.25rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
@@ -245,7 +246,7 @@ function About() {
             the Indigenous knowledge-keepers who inspire us.
           </p>
         </Container>
-      </Section>
+      </AngleSection>
 
       {/* Teachings */}
       <Section id="teachings" style={{ background: '#fafafa' }}>
@@ -332,7 +333,7 @@ function About() {
       </Section>
 
       {/* Honouring Section */}
-      <Section id="connection" style={{ background: '#fafafa' }}>
+      <AngleSection angleTop id="connection" style={{ background: '#fafafa' }}>
         <Container>
           <H2>Honoring Wiikwemkoong</H2>
           <p style={{ maxWidth: '800px', margin: '0 auto 2rem', textAlign: 'center' }}>
@@ -355,7 +356,7 @@ function About() {
             </Stat>
           </ImpactGrid>
         </Container>
-      </Section>
+      </AngleSection>
 
       {/* Community Impact */}
       <Section id="impact">
