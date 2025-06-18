@@ -13,6 +13,8 @@ import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 import AngleSection from '../../components/AngleSection/AngleSection';
+import founderPortrait from '../../assets/founder-portrait.png';
+import LazyImage from '../../components/LazyImage/LazyImage';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -332,6 +334,44 @@ function About() {
       <Section id="our-story" style={{ padding: 0 }}>
         <StoryTimeline />
       </Section>
+
+      {/* Founder Story Full Narrative */}
+      <AngleSection id="founder-story" angleBottom style={{ background: '#fff' }}>
+        <Container>
+          <H2>The Heart Behind Positive Vibe Tribe: A Founder&apos;s Story of Authentic Connection</H2>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))',gap:'3rem',alignItems:'start'}}>
+            <LazyImage src={founderPortrait} alt="Founder portrait" style={{borderRadius:'16px',boxShadow:'0 10px 30px rgba(0,0,0,0.12)'}} />
+            <div style={{fontSize:'1.125rem',lineHeight:1.7}}>
+              <h3 style={{marginTop:0}}>When Kindness Meets Business Purpose</h3>
+              <p>In an era where authentic storytelling drives customer loyalty and trust, the story of Positive Vibe Tribe&apos;s founder exemplifies how personal values translate into business success. Research shows that stories are 22&nbsp;times more memorable than facts alone, and founder stories enhance perceived brand authenticity by creating emotional connections between the founder&apos;s values and customer values.</p>
+
+              <h3>The Airport Epiphany: Love for No Reason</h3>
+              <p>It was a typical travel day in San&nbsp;Antonio when our founder encountered a moment that would crystallize everything Positive Vibe Tribe stands for. Sitting at the airport bar, he noticed a distressed woman who had just missed her flight. What happened next revealed the core philosophy that drives our brand today.</p>
+              <p>Despite being met with hostility and profanity when he offered help, our founder persisted with genuine kindness. When the woman angrily questioned why he cared, his response was simple yet profound: <em>&ldquo;I just wanted you to have a better day.&rdquo;</em> Even when she rudely declined his offer to buy her a drink, he quietly paid for it anyway before leaving.</p>
+              <p>As she discovered his gesture, her defensive walls began to crumble. His explanation resonated throughout the bar: <strong>&ldquo;If there are people out there who hate for no reason, then I can love for no reason.&rdquo;</strong> The spontaneous applause from fellow travelers confirmed what we know today—authentic kindness creates ripple effects that touch everyone around us.</p>
+
+              <h3>Hidden Positivity: Finding Light in Dark Places</h3>
+              <p>Months later in Lethbridge, Alberta, another encounter reinforced this philosophy. A stranger noticed the subtle <em>Positive&nbsp;Vibez</em> decal on his vehicle&apos;s rear window and commented that it was &ldquo;a little hard to see.&rdquo;</p>
+              <p>The woman began crying, moved by this simple truth. It was then our founder realized he wasn&apos;t just creating a clothing brand—he was building a movement based on the Indigenous teachings that guide us: spreading positive energy like Kokopelli&apos;s ancient songs of joy and abundance.</p>
+
+              <h3>From Personal Values to Brand Mission</h3>
+              <p>These encounters shaped the DNA of Positive Vibe Tribe. Our founder&apos;s commitment to spreading unconditional positivity, even in the face of hostility, reflects the deeper Indigenous wisdom that guides our brand. Drawing from traditional Kokopelli teachings—where the fertility deity carries seeds of abundance and joy to communities—and wolf spirit guidance that emphasizes pack loyalty and strength, our founder built a brand that honors these ancient principles while serving modern needs.</p>
+
+              <h3>The Positive Vibe Philosophy in Action</h3>
+              <ul>
+                <li><strong>Unconditional Kindness:</strong> We design clothing that spreads positive energy without expecting anything in return.</li>
+                <li><strong>Hidden Positivity:</strong> Our garments carry subtle patterns and symbols that reward those who look closer.</li>
+                <li><strong>Community Impact:</strong> A portion of every purchase supports Indigenous communities in Alberta.</li>
+                <li><strong>Quality with Purpose:</strong> Premium materials ensure lasting comfort, just as positive energy creates lasting change.</li>
+              </ul>
+
+              <h3>The Ripple Effect Continues</h3>
+              <p>From that airport bar in San&nbsp;Antonio to gas stations in Alberta, these moments of authentic connection continue to define our brand. Every customer who wears Positive Vibe Tribe becomes part of this story, carrying forward the simple but powerful message: in a world that often chooses negativity, we choose to love for no reason.</p>
+              <p><strong>Join the Tribe. Spread the vibes. Change the world, one positive moment at a time.</strong></p>
+            </div>
+          </div>
+        </Container>
+      </AngleSection>
 
       {/* Honouring Section */}
       <AngleSection angleTop id="connection" style={{ background: '#fafafa' }}>

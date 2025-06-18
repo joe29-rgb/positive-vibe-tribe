@@ -2,24 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import LazyImage from '../LazyImage/LazyImage';
 import look1 from '../../assets/collage/look1.jpg';
-import look2 from '../../assets/collage/look2.jpg';
 import look3 from '../../assets/collage/look3.jpg';
 import look4 from '../../assets/collage/look4.jpg';
 import look5 from '../../assets/collage/look5.jpg';
+import founderPortrait from '../../assets/founder-portrait.png';
 
 const events = [
   {
-    title: 'Airport Encounter',
+    title: 'Airport Epiphany',
     subtitle: 'Love for No Reason',
-    quote:
-      '“If people can hate for no reason, I can love for no reason.”  A simple act of kindness sparked the creed that powers Positive Vibe Tribe.',
-    img: look2,
+    quote: '“If people can hate for no reason, I can love for no reason.” A spontaneous act of kindness in San Antonio sparked our entire movement.',
+    img: founderPortrait,
   },
   {
-    title: 'Gas-Station Revelation',
-    subtitle: 'Finding Light in Dark Places',
-    quote:
-      'Every day might not be great, but there\'s always something to be positive about.  Sometimes you just have to look a little harder.',
+    title: 'Hidden Positivity',
+    subtitle: 'A Decal\'s Lesson',
+    quote: 'Positivity is everywhere—just like a subtle decal, sometimes you have to look a little harder to see it.',
     img: look3,
   },
   {
