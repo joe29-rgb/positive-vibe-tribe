@@ -15,10 +15,13 @@ import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 import AngleSection from '../../components/AngleSection/AngleSection';
 import founderPortrait from '../../assets/founder-portrait.png';
 import LazyImage from '../../components/LazyImage/LazyImage';
+import diamondTile from '../../assets/diamond-tile.svg';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
-  background: #fff;
+  background: #fff url(${diamondTile});
+  background-size: 160px 160px;
+  background-repeat: repeat;
   color: var(--dark-brown);
   --section-padding: 110px 20px;
 `;
