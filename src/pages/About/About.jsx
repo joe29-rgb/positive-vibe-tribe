@@ -94,25 +94,6 @@ const VideoWrapper = styled.div`
   }
 `;
 
-const CtaLight = styled(CtaPrimary)`
-  background: #fff;
-  color: var(--primary-color, #2d4a3e);
-  &:hover {
-    background: transparent;
-    color: #fff;
-    border: 2px solid #fff;
-  }
-`;
-
-const CtaOutlineLight = styled(CtaSecondary)`
-  border-color: #fff;
-  color: #fff;
-  &:hover {
-    background: #fff;
-    color: var(--primary-color, #2d4a3e);
-  }
-`;
-
 // Sticky CTA bar
 const StickyBar = styled(motion.div)`
   position: fixed;
@@ -155,22 +136,7 @@ const ModalBox = styled(motion.div)`
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
 `;
 
-// Impact counter animation span
-const Count = ({end})=>{
-  const [val,setVal]=useState(0);
-  useEffect(()=>{
-    const dur=1200;
-    const startTime=performance.now();
-    const step=(t)=>{
-      const progress=Math.min((t-startTime)/dur,1);
-      setVal(Math.floor(progress*end));
-      if(progress<1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  },[end]);
-  return <>{val}{typeof end==='number' && end%1!==0?'':''}</>;
-};
-
+// CTA shared components (must appear before any usage like CtaLight)
 const CTAGroup = styled.div`
   display: flex;
   gap: 1rem;
@@ -208,6 +174,41 @@ const CtaSecondary = styled(CtaPrimary)`
     transform: translateY(-2px);
   }
 `;
+
+const CtaLight = styled(CtaPrimary)`
+  background: #fff;
+  color: var(--primary-color, #2d4a3e);
+  &:hover {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+`;
+
+const CtaOutlineLight = styled(CtaSecondary)`
+  border-color: #fff;
+  color: #fff;
+  &:hover {
+    background: #fff;
+    color: var(--primary-color, #2d4a3e);
+  }
+`;
+
+// Impact counter animation span
+const Count = ({end})=>{
+  const [val,setVal]=useState(0);
+  useEffect(()=>{
+    const dur=1200;
+    const startTime=performance.now();
+    const step=(t)=>{
+      const progress=Math.min((t-startTime)/dur,1);
+      setVal(Math.floor(progress*end));
+      if(progress<1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  },[end]);
+  return <>{val}{typeof end==='number' && end%1!==0?'':''}</>;
+};
 
 function About() {
   const [showBar,setShowBar]=useState(false);
