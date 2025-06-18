@@ -19,11 +19,22 @@ import diamondTile from '../../assets/diamond-tile.svg';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
-  background: #fff url(${diamondTile});
-  background-size: 160px 160px;
-  background-repeat: repeat;
+  position: relative;
+  background: var(--canvas-beige);
   color: var(--dark-brown);
   --section-padding: 110px 20px;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url(${diamondTile});
+    background-size: 180px 180px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: -2;
+    mix-blend-mode: multiply;
+  }
 `;
 
 const Container = styled.div`
@@ -42,6 +53,7 @@ const H2 = styled(motion.h2)`
 
 const Section = styled(motion.section)`
   padding: var(--section-padding);
+  background: var(--canvas-beige);
 `;
 
 //-------------------- Hero --------------------//
