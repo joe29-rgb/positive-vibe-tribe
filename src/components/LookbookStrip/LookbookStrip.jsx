@@ -30,6 +30,7 @@ const Strip = styled.div`
 const Slide = styled(motion.div)`
   flex: 0 0 80vw;
   max-width: 600px;
+  aspect-ratio: 3 / 4; /* Maintain visible height */
   scroll-snap-align: start;
   position: relative;
   border-radius: 16px;
@@ -37,6 +38,7 @@ const Slide = styled(motion.div)`
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   @media (min-width: 768px) {
     flex: 0 0 45vw;
+    aspect-ratio: 4 / 3;
   }
 `;
 

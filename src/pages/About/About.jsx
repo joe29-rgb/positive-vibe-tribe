@@ -335,13 +335,8 @@ function About() {
         </Container>
       </Section>
 
-      {/* Interactive Story Timeline */}
-      <Section id="our-story" style={{ padding: 0 }}>
-        <StoryTimeline />
-      </Section>
-
       {/* Founder Story Full Narrative */}
-      <AngleSection id="founder-story" angleBottom>
+      <AngleSection id="founder-story" angleBottom initial={false}>
         <Container>
           <H2>The Heart Behind Positive Vibe Tribe: A Founder&apos;s Story of Authentic Connection</H2>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))',gap:'3rem',alignItems:'start'}}>
@@ -377,6 +372,11 @@ function About() {
           </div>
         </Container>
       </AngleSection>
+
+      {/* Interactive Story Timeline */}
+      <Section id="our-story" style={{ padding: 0 }}>
+        <StoryTimeline />
+      </Section>
 
       {/* Honouring Section */}
       <AngleSection angleTop id="connection" style={{ background: '#fafafa' }}>
