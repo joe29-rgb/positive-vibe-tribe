@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import motif from '../../assets/diamond-tile.svg';
 import teachingsPortrait from '../../assets/founder-portrait.png';
-import founder from '../../assets/founder.jpg';
 
 const HeroSection = styled.section`
   position: relative;
@@ -93,6 +92,10 @@ const Portrait = styled(motion.img)`
   @media (max-width: 768px) {
     width: 220px;
   }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 function ParallaxHero() {
@@ -107,7 +110,7 @@ function ParallaxHero() {
     <HeroSection style={{ clipPath: 'polygon(0 0, 100% 0, 100% 95%, 0 100%)' }}>
       {/* Background photograph */}
       <Layer style={{ y: bgY, zIndex: 0 }}>
-        <BGImage src={founder} alt="Positive Vibe Tribe founder" />
+        <BGImage src={teachingsPortrait} alt="7 Teachings portrait" />
       </Layer>
 
       {/* Repeating tribal motif */}
@@ -125,14 +128,13 @@ function ParallaxHero() {
           We weave the Seven Grandfather Teachings into every thread—spreading positive energy, cultural respect, and joyful connection across Turtle Island.
         </Subtitle>
         <CTA href="#founder-story">Discover Our Story</CTA>
-        {/* Remove overlay portrait on large screens, keep on mobile */}
+        {/* Show portrait only on mobile to avoid picture-in-picture */}
         <Portrait
           src={teachingsPortrait}
           alt="7 Teachings portrait"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          style={{ display: 'block' }}
         />
       </Content>
     </HeroSection>

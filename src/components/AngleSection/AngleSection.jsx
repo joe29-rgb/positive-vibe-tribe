@@ -6,6 +6,7 @@ const Base = styled(motion.section)`
   padding: var(--section-padding, 110px 20px);
   position: relative;
   overflow: hidden;
+  background: var(--canvas-beige);
 `;
 
 function buildClip(top, bottom) {

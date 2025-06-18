@@ -351,7 +351,7 @@ function About() {
       </Section>
 
       {/* Founder Story Full Narrative */}
-      <AngleSection id="founder-story" angleBottom style={{ background: '#fff' }}>
+      <AngleSection id="founder-story" angleBottom>
         <Container>
           <H2>The Heart Behind Positive Vibe Tribe: A Founder&apos;s Story of Authentic Connection</H2>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))',gap:'3rem',alignItems:'start'}}>
