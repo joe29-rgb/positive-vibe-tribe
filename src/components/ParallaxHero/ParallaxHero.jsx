@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
-import prairie from '../../assets/collage/look3.jpg';
 import motif from '../../assets/diamond-tile.svg';
 import founderPortrait from '../../assets/founder-portrait.png';
+import founder from '../../assets/founder.jpg';
 
 const HeroSection = styled.section`
   position: relative;
@@ -107,7 +107,7 @@ function ParallaxHero() {
     <HeroSection style={{ clipPath: 'polygon(0 0, 100% 0, 100% 95%, 0 100%)' }}>
       {/* Background photograph */}
       <Layer style={{ y: bgY, zIndex: 0 }}>
-        <BGImage src={prairie} alt="Prairie backdrop" />
+        <BGImage src={founder} alt="Positive Vibe Tribe founder" />
       </Layer>
 
       {/* Repeating tribal motif */}
@@ -125,12 +125,14 @@ function ParallaxHero() {
           We weave the Seven Grandfather Teachings into every thread—spreading positive energy, cultural respect, and joyful connection across Turtle Island.
         </Subtitle>
         <CTA href="#founder-story">Discover Our Story</CTA>
+        {/* Remove overlay portrait on large screens, keep on mobile */}
         <Portrait
           src={founderPortrait}
           alt="Founder portrait"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
+          style={{ display: 'block' }}
         />
       </Content>
     </HeroSection>

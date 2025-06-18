@@ -13,7 +13,7 @@ import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 import AngleSection from '../../components/AngleSection/AngleSection';
-import founderPortrait from '../../assets/founder-portrait.png';
+import founderImage from '../../assets/founder.jpg';
 import LazyImage from '../../components/LazyImage/LazyImage';
 import diamondTile from '../../assets/diamond-tile.svg';
 
@@ -355,7 +355,7 @@ function About() {
         <Container>
           <H2>The Heart Behind Positive Vibe Tribe: A Founder&apos;s Story of Authentic Connection</H2>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))',gap:'3rem',alignItems:'start'}}>
-            <LazyImage src={founderPortrait} alt="Founder portrait" style={{borderRadius:'16px',boxShadow:'0 10px 30px rgba(0,0,0,0.12)'}} />
+            <LazyImage src={founderImage} alt="Founder" style={{borderRadius:'16px',boxShadow:'0 10px 30px rgba(0,0,0,0.12)',filter:'contrast(105%) saturate(80%)'}} />
             <div style={{fontSize:'1.125rem',lineHeight:1.7}}>
               <h3 style={{marginTop:0}}>When Kindness Meets Business Purpose</h3>
               <p>In an era where authentic storytelling drives customer loyalty and trust, the story of Positive Vibe Tribe&apos;s founder exemplifies how personal values translate into business success. Research shows that stories are 22&nbsp;times more memorable than facts alone, and founder stories enhance perceived brand authenticity by creating emotional connections between the founder&apos;s values and customer values.</p>
