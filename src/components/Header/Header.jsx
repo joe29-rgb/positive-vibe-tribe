@@ -60,24 +60,21 @@ const linkBase = css`
   padding-bottom: 6px;
   &::after {
     content: '';
-    display: block;
-    margin: 0 auto;
-    width: 18px;
-    height: 10px;
-    background: url(${diamondSvg}) no-repeat center center;
-    background-size: contain;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    transform: translateY(6px) scale(0.7);
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-red);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
   }
   &:hover {
     color: var(--primary-red);
-    text-shadow: 0 2px 8px rgba(200,16,46,0.08);
-    transform: translateY(-2px) scale(1.05);
   }
   &:hover::after {
-    opacity: 0.7;
-    transform: translateY(0) scale(1);
+    transform: scaleX(1);
   }
 `;
 

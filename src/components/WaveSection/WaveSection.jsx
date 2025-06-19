@@ -16,9 +16,10 @@ const WaveSvg = styled.svg`
   pointer-events: none;
 `;
 
-function WaveSection({ waveTop = false, waveBottom = false, bg = 'var(--canvas-beige)', children, ...rest }) {
+function WaveSection({ waveTop = false, waveBottom = false, bg = 'var(--canvas-beige)', gradient=false, children, ...rest }) {
+  const bgStyle = gradient ? 'linear-gradient(var(--lux-cream) 0%, #fff 60%, var(--warm-beige) 100%)' : bg;
   return (
-    <Base style={{ background: bg }} {...rest}
+    <Base style={{ background: bgStyle }} {...rest}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
