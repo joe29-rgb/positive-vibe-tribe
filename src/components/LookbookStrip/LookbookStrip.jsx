@@ -60,11 +60,7 @@ function LookbookStrip() {
     <>
       <Strip>
         {images.map((src, idx) => (
-          <Slide
-            key={src}
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-          >
+          <Slide key={src} data-hover="card">
             <StyledImg src={src} alt={`Positive Vibe Tribe look ${idx + 1}`} />
             {/* overlay removed */ }
           </Slide>
