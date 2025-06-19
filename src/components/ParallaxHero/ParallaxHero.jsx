@@ -43,8 +43,8 @@ const Title = styled.h1`
   font-family: 'UnifrakturCook', cursive;
   font-size: clamp(2.75rem, 6vw, 5rem);
   margin: 0 0 1rem;
-  color: #fffbe7; /* soft heavenly glow */
-  text-shadow: 0 0 8px rgba(255,245,200,0.8), 0 0 20px rgba(255,245,200,0.6);
+  color: var(--dark-brown);
+  text-shadow: 0 0 6px rgba(255,240,180,0.6);
 `;
 
 const Subtitle = styled.p`

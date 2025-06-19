@@ -333,7 +333,7 @@ function About() {
       </WaveSection>
 
       {/* Teachings */}
-      <WaveSection className="reveal" id="teachings" waveTop gradient initial={{}}>
+      <WaveSection id="teachings" waveTop gradient initial={{}}>
         <Container>
           <H2>The Seven Grandfather Teachings</H2>
           <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
