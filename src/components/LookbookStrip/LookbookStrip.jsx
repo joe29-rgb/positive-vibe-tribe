@@ -45,6 +45,14 @@ const Slide = styled(motion.div)`
 const StyledImg = styled(LazyImage)`
   height: 100%;
   object-fit: cover;
+  transform-origin: center;
+  animation: zoom 12s ease-in-out infinite;
+
+  @keyframes zoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
 `;
 
 function LookbookStrip() {

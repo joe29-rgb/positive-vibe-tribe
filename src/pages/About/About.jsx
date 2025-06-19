@@ -16,6 +16,7 @@ import AngleSection from '../../components/AngleSection/AngleSection';
 import founderImage from '../../assets/founder.jpg';
 import LazyImage from '../../components/LazyImage/LazyImage';
 import diamondTile from '../../assets/diamond-tile.svg';
+import Testimonials from '../../components/Testimonials/Testimonials';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -46,9 +47,25 @@ const Container = styled.div`
 const H2 = styled(motion.h2)`
   font-family: 'UnifrakturCook', cursive;
   font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
   color: var(--dark-brown);
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    width: 0;
+    height: 3px;
+    background: var(--primary-color,#2d4a3e);
+    transform: translateX(-50%);
+    animation: expand 1s forwards ease-out;
+    animation-delay: 0.3s;
+  }
+  @keyframes expand {
+    to { width: 60px; }
+  }
 `;
 
 const Section = styled(motion.section)`
@@ -68,9 +85,10 @@ const TeachGrid = styled.div`
 `;
 const Card = styled(motion.div)`
   background: #fff;
+  background: linear-gradient(#fff, #fdf9f5);
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
   text-align: center;
   transition: transform 0.25s ease;
   cursor: pointer;
@@ -163,38 +181,18 @@ const CTAGroup = styled.div`
   }
 `;
 
-const CtaPrimary = styled.a`
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  padding: 0.9rem 2rem;
-  border-radius: var(--border-radius-pill);
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: var(--transition);
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  }
+const MotionLink = styled(motion.a)`
+  display:inline-block;
 `;
 
-const CtaSecondary = styled(CtaPrimary)`
-  background: transparent;
-  color: var(--primary-color, #2d4a3e);
-  backdrop-filter: none;
-  border: 2px solid var(--primary-color, #2d4a3e);
-  &:hover {
-    background: var(--primary-color, #2d4a3e);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-`;
-
-const CtaLight = styled(CtaPrimary)`
+const CtaLight = styled(MotionLink)`
   background: #fff;
   color: var(--primary-color, #2d4a3e);
+  padding:0.9rem 2rem;
+  border-radius:var(--border-radius-pill);
+  font-weight:600;
+  text-decoration:none;
+  letter-spacing:0.08em;
   &:hover {
     background: transparent;
     color: #fff;
@@ -202,12 +200,18 @@ const CtaLight = styled(CtaPrimary)`
   }
 `;
 
-const CtaOutlineLight = styled(CtaSecondary)`
-  border-color: #fff;
-  color: #fff;
-  &:hover {
-    background: #fff;
-    color: var(--primary-color, #2d4a3e);
+const CtaOutlineLight = styled(MotionLink)`
+  background: transparent;
+  color:#fff;
+  padding:0.9rem 2rem;
+  border-radius:var(--border-radius-pill);
+  font-weight:600;
+  border:2px solid #fff;
+  text-decoration:none;
+  letter-spacing:0.08em;
+  &:hover{
+    background:#fff;
+    color:var(--primary-color,#2d4a3e);
   }
 `;
 
@@ -265,6 +269,14 @@ function About() {
           </p>
         </Container>
       </AngleSection>
+
+      {/* Testimonials */}
+      <Section id="testimonials" style={{background:'#fff'}}>
+        <Container>
+          <H2>What the Tribe Is Saying</H2>
+          <Testimonials />
+        </Container>
+      </Section>
 
       {/* Teachings */}
       <Section id="teachings" style={{ background: '#fafafa' }}>
