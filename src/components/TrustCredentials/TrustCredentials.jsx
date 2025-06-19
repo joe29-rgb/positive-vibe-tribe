@@ -54,7 +54,7 @@ function TrustCredentials() {
         <Heading>Why Choose Positive Vibe Tribe?</Heading>
         <Grid>
           {DATA.map((item) => (
-            <Item key={item.title}>
+            <Item key={item.title} data-hover="card">
               <div style={{ fontSize: '2rem' }} aria-hidden="true">
                 {item.icon}
               </div>

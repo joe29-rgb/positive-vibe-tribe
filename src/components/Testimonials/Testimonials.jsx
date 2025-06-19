@@ -68,11 +68,7 @@ function Testimonials() {
   return (
     <Carousel>
       {testimonials.map((t) => (
-        <Card
-          key={t.name}
-          whileHover={{ scale: 1.03 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-        >
+        <Card key={t.name} data-hover="card">
           {t.quote}
           <Cite>— {t.name}</Cite>
         </Card>

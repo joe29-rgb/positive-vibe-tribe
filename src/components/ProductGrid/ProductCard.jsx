@@ -130,12 +130,6 @@ const quickAddTap = {
   transition: { type: 'spring', stiffness: 400, damping: 17 },
 };
 
-const cardHover = {
-  scale: 1.03,
-  translateY: -4,
-  boxShadow: '0 12px 24px rgba(0,0,0,0.12)',
-};
-
 function ProductCard({ product, index = 0 }) {
   const dispatch = useDispatch();
   const imgRef = useRef(null);
@@ -162,7 +156,7 @@ function ProductCard({ product, index = 0 }) {
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
-        whileHover={cardHover}
+        data-hover="card"
         viewport={{ once: true, amount: 0.3 }}
         custom={index}
       >

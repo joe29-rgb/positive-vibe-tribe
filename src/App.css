@@ -315,3 +315,22 @@ a:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     background: var(--primary-red);
 }
+
+
+/* Reusable card hover depth utility */
+
+[data-hover="card"] {
+    transition: transform 0.25s var(--transition), box-shadow 0.25s var(--transition);
+    will-change: transform, box-shadow;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-hover="card"] {
+        transition: none !important;
+    }
+}
+
+[data-hover="card"]:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
