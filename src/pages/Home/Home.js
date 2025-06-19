@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import Hero from '../../components/Hero/Hero';
 import BrandStory from '../../components/BrandStory/BrandStory';
 import FeaturedCollections from '../../components/FeaturedCollections/FeaturedCollections';
@@ -10,6 +11,18 @@ import BestsellerShowcase from '../../components/BestsellerShowcase/BestsellerSh
 
 function Home() {
     return React.createElement(React.Fragment, null,
+        React.createElement(Helmet, null,
+            React.createElement('title', null, 'Positive Vibe Tribe – Indigenous Streetwear'),
+            React.createElement('meta', { name: 'description', content: 'Spread positivity with Indigenous-inspired streetwear. Discover apparel woven with the Seven Grandfather Teachings.' }),
+            React.createElement('meta', { property: 'og:title', content: 'Positive Vibe Tribe – Indigenous Streetwear' }),
+            React.createElement('meta', { property: 'og:description', content: 'Spread positivity with Indigenous-inspired streetwear crafted with purpose.' }),
+            React.createElement('meta', { property: 'og:image', content: '/assets/og-share-1200x630.png' }),
+            React.createElement('meta', { property: 'og:type', content: 'website' }),
+            React.createElement('meta', { name: 'twitter:card', content: 'summary_large_image' }),
+            React.createElement('meta', { name: 'twitter:title', content: 'Positive Vibe Tribe – Indigenous Streetwear' }),
+            React.createElement('meta', { name: 'twitter:description', content: 'Spread positivity with Indigenous-inspired streetwear crafted with purpose.' }),
+            React.createElement('meta', { name: 'twitter:image', content: '/assets/og-share-1200x630.png' })
+        ),
         React.createElement(Hero, null),
         React.createElement(FeaturedCollections, null),
         React.createElement(BrandStory, null),

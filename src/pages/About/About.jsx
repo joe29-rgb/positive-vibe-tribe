@@ -279,6 +279,14 @@ function About() {
           name="description"
           content="Discover how Positive Vibe Tribe weaves the Ojibwe Seven Grandfather Teachings into modern design, spreading positivity across Canada and beyond."
         />
+        <meta property="og:title" content="About – Positive Vibe Tribe" />
+        <meta property="og:description" content="Discover how Positive Vibe Tribe weaves the Ojibwe Seven Grandfather Teachings into modern design, spreading positivity across Canada and beyond." />
+        <meta property="og:image" content="/assets/og-share-1200x630.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About – Positive Vibe Tribe" />
+        <meta name="twitter:description" content="Discover how Positive Vibe Tribe weaves the Ojibwe Seven Grandfather Teachings into modern design, spreading positivity across Canada and beyond." />
+        <meta name="twitter:image" content="/assets/og-share-1200x630.png" />
       </Helmet>
 
       {/* Immersive Parallax Hero */}

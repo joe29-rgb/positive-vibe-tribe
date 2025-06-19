@@ -111,6 +111,16 @@ function ProductDetail() {
   return (
     <Wrapper>
       <Helmet>
+        <title>{`${product.name} – Positive Vibe Tribe`}</title>
+        <meta name="description" content={product.description} />
+        <meta property="og:title" content={`${product.name} – Positive Vibe Tribe`} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.image} />
+        <meta property="og:type" content="product" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${product.name} – Positive Vibe Tribe`} />
+        <meta name="twitter:description" content={product.description} />
+        <meta name="twitter:image" content={product.image} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       </Helmet>
       <Breadcrumbs productName={product.name} />

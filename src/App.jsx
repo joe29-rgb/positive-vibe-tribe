@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Analytics from './components/Analytics/Analytics.jsx';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -11,8 +11,8 @@ import MobileNav from './components/MobileNav/MobileNav.jsx';
 import Home from './pages/Home/Home';
 import Products from './pages/Products/Products.jsx';
 import ProductDetail from './pages/ProductDetail/ProductDetail.jsx';
-import Cart from './pages/Cart/Cart';
-import Checkout from './pages/Checkout/Checkout';
+import Cart from './pages/Cart/Cart.jsx';
+import Checkout from './pages/Checkout/Checkout.jsx';
 import About from './pages/About/About';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,6 +47,14 @@ function App() {
     <Provider store={store}>
       <HelmetProvider>
         <Analytics />
+        <Helmet>
+          <meta name="description" content="Positive Vibe Tribe – Indigenous-inspired streetwear spreading positivity." />
+          <meta property="og:site_name" content="Positive Vibe Tribe" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="/assets/og-share-1200x630.png" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="/assets/og-share-1200x630.png" />
+        </Helmet>
         <Router>
           <a href="#main" className="skip-link">Skip to main content</a>
           <div id="sr-announcer" aria-live="polite" style={{position:'absolute',left:'-9999px',height:'1px',width:'1px',overflow:'hidden'}} />

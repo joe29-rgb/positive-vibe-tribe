@@ -44,7 +44,8 @@
         "eject": "react-scripts eject",
         "server": "node backend/server.js",
         "dev:server": "nodemon backend/server.js",
-        "dev": "concurrently \"npm run dev:server\" \"npm start\""
+        "dev": "concurrently \"npm run dev:server\" \"npm start\"",
+        "lhci:ci": "lhci autorun"
     },
     "eslintConfig": {
         "extends": [
@@ -78,8 +79,10 @@
         "eslint-plugin-prettier": "^5.4.1",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-jsx-a11y": "^6.7.1",
         "nodemon": "^3.1.0",
-        "prettier": "^3.5.3"
+        "prettier": "^3.5.3",
+        "@lhci/cli": "^0.13.0"
     },
     "proxy": "http://localhost:5000"
 }
