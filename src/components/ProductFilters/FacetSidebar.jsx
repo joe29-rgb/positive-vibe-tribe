@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 
@@ -88,6 +88,14 @@ function MultiFilter({ title, options, selected, toggle }) {
 }
 
 function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, suggestions, autoFocusSearch=false }) {
+  const searchRef = useRef(null);
+
+  useEffect(()=>{
+    if(autoFocusSearch && searchRef.current){
+      searchRef.current.focus();
+    }
+  },[autoFocusSearch]);
+
   return (
     <Sidebar>
       <Section style={{position:'relative'}}>
@@ -99,7 +107,7 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
             onChange={(e) => onSearchChange(e.target.value)}
             onKeyDown={(e)=>{if(e.key==='Enter'){e.preventDefault();onSearchChange(e.target.value);}}}
             style={{ flex:1, padding:'8px 12px', borderTopLeftRadius:8, borderBottomLeftRadius:8, border:'1px solid #ddd', borderRight:'none'}}
-            autoFocus={autoFocusSearch}
+            ref={searchRef}
           />
           <button aria-label="Search" onClick={()=>onSearchChange(searchTerm)} style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'0 16px', border:'1px solid #ddd', borderLeft:'none', background:'var(--primary-red)', color:'#fff', borderTopRightRadius:8, borderBottomRightRadius:8}}>
             <FaSearch />
@@ -108,7 +116,11 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
         {suggestions?.length>0 && (
           <ul style={{position:'absolute',top:'100%',left:0,right:0,background:'#fff',border:'1px solid #ddd',zIndex:10,maxHeight:160,overflowY:'auto'}}>
             {suggestions.map((s)=>(
-              <li key={s} style={{padding:'6px 10px',cursor:'pointer'}} onMouseDown={()=>onSearchChange(s)}>{s}</li>
+              <li key={s}>
+                <button type="button" style={{width:'100%',textAlign:'left',padding:'6px 10px',background:'none',border:'none',cursor:'pointer'}} onMouseDown={()=>onSearchChange(s)}>
+                  {s}
+                </button>
+              </li>
             ))}
           </ul>
         )}
