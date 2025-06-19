@@ -18,6 +18,7 @@ import founderImage from '../../assets/founder.jpg';
 import LazyImage from '../../components/LazyImage/LazyImage';
 import diamondTile from '../../assets/diamond-tile.svg';
 import Testimonials from '../../components/Testimonials/Testimonials';
+import FloatingGlyph from '../../components/FloatingGlyph/FloatingGlyph';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -249,6 +250,7 @@ function About() {
 
   return (
     <Wrapper>
+      <FloatingGlyph />
       <Helmet>
         <title>About – Positive Vibe Tribe</title>
         <meta
