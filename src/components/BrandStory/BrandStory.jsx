@@ -63,26 +63,6 @@ const ValueIcon = styled.span`
   font-size: 2rem;
 `;
 
-const CTAButton = styled.a`
-  display: inline-block;
-  margin-top: 40px;
-  padding: 16px 36px;
-  background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
-  color: #fff;
-  border-radius: var(--border-radius-pill);
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  box-shadow: var(--shadow-light);
-  transition: var(--transition);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-  }
-`;
-
 function BrandStory() {
   return (
     <Section>
@@ -103,7 +83,7 @@ function BrandStory() {
               10% of every order fuels Alberta First Nations youth programs and language revitalization. When you
               wear the Tribe, you invest in community.
             </Text>
-            <CTAButton href="/products">Feel&nbsp;the&nbsp;Fabric</CTAButton>
+            <a href="/products" className="btn btn-gradient">Feel&nbsp;the&nbsp;Fabric</a>
 
             <ValuesGrid>
               <ValueItem>

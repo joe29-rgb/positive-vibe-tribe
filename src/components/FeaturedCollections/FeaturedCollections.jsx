@@ -52,20 +52,6 @@ const Text = styled.p`
   margin-bottom: 24px;
   color: var(--medium-gray);
 `;
-const CTA = styled.a`
-  display: inline-block;
-  background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
-  color: #fff;
-  padding: 12px 28px;
-  border-radius: var(--border-radius-pill);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  text-decoration: none;
-  transition: transform 0.25s ease;
-  &:hover {
-    transform: translateY(-2px);
-  }
-`;
 
 function FeaturedCollections() {
   return (
@@ -81,7 +67,7 @@ function FeaturedCollections() {
                 Traditional fertility symbols meet contemporary comfort. Pieces designed to bring abundance
                 and positive energy to your daily journey.
               </Text>
-              <CTA href="/collections/kokopelli">Explore Abundance</CTA>
+              <a href="/collections/kokopelli" className="btn btn-gradient">Explore Abundance</a>
             </Body>
           </Card>
           <Card>
@@ -92,7 +78,7 @@ function FeaturedCollections() {
                 Leadership-inspired basics that embody strength, loyalty, and intuitive wisdom from ancient
                 wolf teachings.
               </Text>
-              <CTA href="/collections/wolf-pack">Join the Pack</CTA>
+              <a href="/collections/wolf-pack" className="btn btn-gradient">Join the Pack</a>
             </Body>
           </Card>
           <Card>
@@ -103,7 +89,7 @@ function FeaturedCollections() {
                 Indigenous-inspired patterns that honor traditional artistry while delivering luxury comfort
                 for the modern tribe.
               </Text>
-              <CTA href="/collections/sacred-geometry">Discover Patterns</CTA>
+              <a href="/collections/sacred-geometry" className="btn btn-gradient">Discover Patterns</a>
             </Body>
           </Card>
         </Grid>

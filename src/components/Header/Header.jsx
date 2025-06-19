@@ -200,29 +200,6 @@ const SocialIcon = styled.a`
   }
 `;
 
-const CTAButton = styled(motion.a)`
-  display: inline-block;
-  margin-top: 36px;
-  background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
-  color: #fff;
-  border: none;
-  padding: 18px 40px;
-  font-size: 1.1rem;
-  border-radius: var(--border-radius-pill);
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  box-shadow: var(--shadow-medium);
-  text-align: center;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  &:hover {
-    background: var(--primary-red);
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(200,16,46,0.18);
-  }
-`;
-
 /* Mega menu */
 const MegaMenu = styled(motion.div)`
   position: absolute;
@@ -424,9 +401,9 @@ function Header() {
             {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
           </NavLink>
         </NavItem>
-        <CTAButton href="/products" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.a href="/products" className="btn btn-gradient" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           Shop the Tribe
-        </CTAButton>
+        </motion.a>
         <SocialRow>
           <SocialIcon href="https://facebook.com/PositiveVibeTribe" target="_blank" aria-label="Facebook">
             <span style={{fontSize:'1.2rem',fontWeight:700}}>f</span>
