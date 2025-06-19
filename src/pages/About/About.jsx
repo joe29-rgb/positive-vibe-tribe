@@ -373,6 +373,16 @@ function About() {
         </Container>
       </AngleSection>
 
+      {/* Lookbook / Lifestyle Strip */}
+      <Section id="lookbook" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
+        <Container>
+          <H2 initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} transition={{duration:0.6}} viewport={{once:true}}>
+            Life in the Tribe
+          </H2>
+          <LookbookStrip />
+        </Container>
+      </Section>
+
       {/* Interactive Story Timeline */}
       <Section id="our-story" style={{ padding: 0 }}>
         <StoryTimeline />
@@ -485,16 +495,6 @@ function About() {
           </Backdrop>
         )}
       </AnimatePresence>
-
-      {/* Lookbook / Lifestyle Strip */}
-      <Section id="lookbook" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
-        <Container>
-          <H2 initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} transition={{duration:0.6}} viewport={{once:true}}>
-            Life in the Tribe
-          </H2>
-          <LookbookStrip />
-        </Container>
-      </Section>
     </Wrapper>
   );
 }
