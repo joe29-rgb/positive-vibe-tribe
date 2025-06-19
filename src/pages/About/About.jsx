@@ -116,6 +116,13 @@ const StatNumber = styled.h3`
   font-size:2.5rem;
   margin-bottom:0.5rem;
   color:var(--primary-color,#2d4a3e);
+  animation: pulseGlow 3s ease-in-out infinite;
+
+  @keyframes pulseGlow {
+    0% { text-shadow: 0 0 0 rgba(45,74,62,0); }
+    50% { text-shadow: 0 0 12px rgba(45,74,62,0.35); }
+    100% { text-shadow: 0 0 0 rgba(45,74,62,0); }
+  }
 `;
 
 const VideoWrapper = styled.div`
@@ -404,7 +411,7 @@ function About() {
       </Section>
 
       {/* Honouring Section */}
-      <AngleSection angleTop id="connection" style={{ background: '#fafafa' }}>
+      <WaveSection waveBottom id="connection" bg="#fafafa" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.2}}>
         <Container>
           <H2>Honoring Wiikwemkoong</H2>
           <p style={{ maxWidth: '800px', margin: '0 auto 2rem', textAlign: 'center' }}>
@@ -427,7 +434,7 @@ function About() {
             </Stat>
           </ImpactGrid>
         </Container>
-      </AngleSection>
+      </WaveSection>
 
       {/* Community Impact */}
       <Section id="impact">
