@@ -2,56 +2,79 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-const testimonials=[
-  {name:'Ashley M.',quote:'The Positive Vibe Tribe hoodie is my new favourite—super comfy and people keep asking about the design!'},
-  {name:'Jordan T.',quote:'Love the subtle teachings sewn into every piece. It feels good to wear clothing with real meaning.'},
-  {name:'Kaitlyn R.',quote:'Fast shipping, great quality, and I dig the mission behind the brand. Highly recommend.'},
+const testimonials = [
+  {
+    name: 'Emily, Treaty 6',
+    quote:
+      'My Positive Vibe Tribe hoodie sparks conversations everywhere I go. It feels good knowing my purchase supports Indigenous youth.',
+  },
+  {
+    name: 'Jonah, Mi\'kma\'ki',
+    quote:
+      'The quality is unreal and the teachings card reminded me to lead with love. 10/10 brand with purpose.',
+  },
+  {
+    name: 'Sasha, Vancouver',
+    quote:
+      'Finally a company walking the talk. The subtle symbols are gorgeous and I feel part of something bigger.',
+  },
 ];
 
-const Carousel=styled.div`
-  display:flex;
-  gap:24px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:8px;
-  scrollbar-width:none;
-  &::-webkit-scrollbar{display:none;}
+const Carousel = styled.div`
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const Card=styled(motion.div)`
-  flex:0 0 80vw;
-  max-width:500px;
-  background:#fff;
-  background:linear-gradient(#fff,#fdf9f5);
-  border-radius:12px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.07);
-  padding:2rem 1.5rem;
-  scroll-snap-align:start;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+const Card = styled(motion.blockquote)`
+  flex: 0 0 80vw;
+  max-width: 500px;
+  background: linear-gradient(#fff, #fdf9f5);
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  position: relative;
+  &:before {
+    content: '“';
+    font-family: serif;
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-size: 4rem;
+    color: var(--primary-color, #2d4a3e);
+    opacity: 0.15;
+  }
 `;
 
-const Quote=styled.p`
-  font-size:1.125rem;
-  line-height:1.7;
-  margin:0 0 1.25rem;
+const Cite = styled.cite`
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--primary-color, #2d4a3e);
 `;
 
-const Name=styled.span`
-  font-weight:600;
-  font-size:1rem;
-  color:var(--primary-color,#2d4a3e);
-`;
-
-function Testimonials(){
-  return(
+function Testimonials() {
+  return (
     <Carousel>
-      {testimonials.map(t=>(
-        <Card key={t.name} whileHover={{scale:1.04}} transition={{type:'spring',stiffness:200,damping:20}}>
-          <Quote>“{t.quote}”</Quote>
-          <Name>{t.name}</Name>
+      {testimonials.map((t) => (
+        <Card
+          key={t.name}
+          whileHover={{ scale: 1.03 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        >
+          {t.quote}
+          <Cite>— {t.name}</Cite>
         </Card>
       ))}
     </Carousel>

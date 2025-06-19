@@ -271,7 +271,7 @@ function About() {
       </AngleSection>
 
       {/* Testimonials */}
-      <Section id="testimonials" style={{background:'#fff'}}>
+      <Section id="testimonials" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.2}}>
         <Container>
           <H2>What the Tribe Is Saying</H2>
           <Testimonials />
