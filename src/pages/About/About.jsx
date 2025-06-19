@@ -9,7 +9,7 @@ import bearImg from '../../assets/teachings/bear.png';
 import ravenImg from '../../assets/teachings/raven.png';
 import wolfImg from '../../assets/teachings/wolf.png';
 import turtleImg from '../../assets/teachings/turtle.png';
-import kokopelliImg from '../../assets/kokopelli.png';
+import kokopelliImg from '../../assets/kokopelli2.png';
 import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
