@@ -9,6 +9,7 @@ import bearImg from '../../assets/teachings/bear.png';
 import ravenImg from '../../assets/teachings/raven.png';
 import wolfImg from '../../assets/teachings/wolf.png';
 import turtleImg from '../../assets/teachings/turtle.png';
+import kokopelliImg from '../../assets/kokopelli.png';
 import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
@@ -125,19 +126,6 @@ const StatNumber = styled.h3`
     0% { text-shadow: 0 0 0 rgba(45,74,62,0); }
     50% { text-shadow: 0 0 12px rgba(45,74,62,0.35); }
     100% { text-shadow: 0 0 0 rgba(45,74,62,0); }
-  }
-`;
-
-const VideoWrapper = styled.div`
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  margin-top: 3rem;
-  iframe {
-    position: absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    border:0;
   }
 `;
 
@@ -373,10 +361,12 @@ function About() {
                 We speak and act from lived experience, honoring the origins of every word and pattern we share.
               </p>
             </Card>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Kokopelli – Messenger of Joy', quote:'Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.', video:'fdWqJBfjQ7M'})}>
+              <CardImg src={kokopelliImg} alt="Kokopelli silhouette" />
+              <h3>Kokopelli – Joy</h3>
+              <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
+            </Card>
           </TeachGrid>
-          <VideoWrapper>
-            <iframe src="https://www.youtube.com/embed/sASjfNI_lD0" title="Seven Teachings video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-          </VideoWrapper>
         </Container>
       </WaveSection>
 
