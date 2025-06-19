@@ -21,6 +21,7 @@ import Testimonials from '../../components/Testimonials/Testimonials';
 import FloatingGlyph from '../../components/FloatingGlyph/FloatingGlyph';
 import BackToTop from '../../components/BackToTop/BackToTop';
 import AudioToggle from '../../components/AudioToggle/AudioToggle';
+import useFocusTrap from '../../utils/useFocusTrap';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -264,6 +265,8 @@ function About() {
       modalRef.current.focus();
     }
   }, [selectedTeaching]);
+
+  useFocusTrap(!!selectedTeaching, modalRef);
 
   return (
     <Wrapper id="main">

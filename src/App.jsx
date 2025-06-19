@@ -54,7 +54,7 @@ function App() {
           <AnimatedRoutes />
           <MobileNav />
           <Footer />
-          <ToastContainer position="top-right" autoClose={3000} hideProgressBar theme="colored" />
+          <ToastContainer role="status" position="top-right" autoClose={3000} hideProgressBar theme="colored" />
         </Router>
       </HelmetProvider>
     </Provider>
