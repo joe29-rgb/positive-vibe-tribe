@@ -64,24 +64,6 @@ const Subtitle = styled.p`
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 `;
 
-const CTA = styled.a`
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  border-radius: var(--border-radius-pill);
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.35);
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  transition: var(--transition);
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  }
-`;
-
 function ParallaxHero() {
   const { scrollY } = useViewportScroll();
 
@@ -111,7 +93,7 @@ function ParallaxHero() {
         <Subtitle>
           We weave the Seven Grandfather Teachings into every thread—spreading positive energy, cultural respect, and joyful connection across Turtle Island.
         </Subtitle>
-        <CTA href="#founder-story">Discover Our Story</CTA>
+        <a href="#founder-story" className="btn btn-glass">Discover Our Story</a>
       </Content>
     </HeroSection>
   );
