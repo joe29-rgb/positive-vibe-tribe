@@ -316,7 +316,7 @@ function About() {
       </Section>
 
       {/* Kokopelli Section */}
-      <WaveSection className="reveal" id="kokopelli" waveTop bg="#fafafa" initial={{}}>
+      <WaveSection className="reveal" id="kokopelli" waveTop gradient initial={{}}>
         <Container>
           <H2>Kokopelli – Messenger of Joy</H2>
           <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
@@ -333,7 +333,7 @@ function About() {
       </WaveSection>
 
       {/* Teachings */}
-      <WaveSection className="reveal" id="teachings" waveTop bg="#fafafa" initial={{}}>
+      <WaveSection className="reveal" id="teachings" waveTop gradient initial={{}}>
         <Container>
           <H2>The Seven Grandfather Teachings</H2>
           <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
@@ -452,7 +452,7 @@ function About() {
       </Section>
 
       {/* Honouring Section */}
-      <WaveSection waveBottom id="connection" bg="#fafafa" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.2}}>
+      <WaveSection waveBottom id="connection" gradient initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.2}}>
         <Container>
           <H2>Honoring Wiikwemkoong</H2>
           <p style={{ maxWidth: '800px', margin: '0 auto 2rem', textAlign: 'center' }}>
