@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import kokopelliVideo from '../../assets/kokopelli.mp4.mp4';
 import kokopelliImg from '../../assets/kokopelli.png';
@@ -68,18 +68,6 @@ const HeroSubtitle = styled.p`
   text-align: center;
 `;
 
-const pulseRing = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 18px rgba(200, 16, 46, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0);
-  }
-`;
-
 const Glow = styled(motion.div)`
   position: absolute;
   width: 1200px;
@@ -93,25 +81,7 @@ const Glow = styled(motion.div)`
   pointer-events: none;
 `;
 
-const CTAButton = styled(motion.button)`
-  background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
-  color: #fff;
-  border: none;
-  padding: 18px 40px;
-  font-size: 1.1rem;
-  border-radius: var(--border-radius-pill);
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  transition: var(--transition);
-  animation: ${pulseRing} 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-  }
-`;
+// Use global button utility classes instead of custom component
 
 const HeadlineBlack = styled.h1`
   font-family: 'UnifrakturCook', cursive;
@@ -257,15 +227,14 @@ function Hero() {
         <HeroSubtitle>
           If there&apos;s people out there that can hate for no reason, then we can love for no reason
         </HeroSubtitle>
-        <CTAButton
+        <motion.a
+          href="/products"
+          className="btn btn-gradient"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={function() {
-            window.location.href = '/products';
-          }}
         >
           Shop the Tribe
-        </CTAButton>
+        </motion.a>
         <Reassure>Free shipping on orders over $50</Reassure>
 
         {/* Featured product spotlight */}

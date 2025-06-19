@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
-import motif from '../../assets/diamond-tile.svg';
 import teachingsPortrait from '../../assets/founder-portrait.png';
 
 const HeroSection = styled.section`
@@ -27,15 +26,6 @@ const BGImage = styled.img`
   filter: grayscale(20%) contrast(110%);
 `;
 
-const MotifCanvas = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${motif});
-  background-size: 180px 180px;
-  background-repeat: repeat;
-  opacity: 0.07;
-`;
-
 const Content = styled(motion.div)`
   position: relative;
   z-index: 3;
@@ -53,7 +43,8 @@ const Title = styled.h1`
   font-family: 'UnifrakturCook', cursive;
   font-size: clamp(2.75rem, 6vw, 5rem);
   margin: 0 0 1rem;
-  text-shadow: 0 4px 18px rgba(0,0,0,0.4);
+  color: #fffbe7; /* soft heavenly glow */
+  text-shadow: 0 0 8px rgba(255,245,200,0.8), 0 0 20px rgba(255,245,200,0.6);
 `;
 
 const Subtitle = styled.p`
@@ -67,9 +58,8 @@ const Subtitle = styled.p`
 function ParallaxHero() {
   const { scrollY } = useViewportScroll();
 
-  // Parallax factors
+  // Parallax factors (background & content only; motif removed)
   const bgY = useTransform(scrollY, [0, 500], [0, -150]);
-  const motifY = useTransform(scrollY, [0, 500], [0, -70]);
   const contentY = useTransform(scrollY, [0, 300], [0, -40]);
 
   return (
@@ -77,11 +67,6 @@ function ParallaxHero() {
       {/* Background photograph */}
       <Layer style={{ y: bgY, zIndex: 0 }}>
         <BGImage src={teachingsPortrait} alt="7 Teachings portrait" />
-      </Layer>
-
-      {/* Repeating tribal motif */}
-      <Layer style={{ y: motifY, zIndex: 1 }}>
-        <MotifCanvas />
       </Layer>
 
       {/* Dark gradient overlay */}
