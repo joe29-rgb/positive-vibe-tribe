@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import LazyImage from '../LazyImage/LazyImage';
 // Imagery
@@ -42,17 +42,15 @@ const Slide = styled(motion.div)`
   }
 `;
 
+const zoom = keyframes`
+  0% { transform: scale(1) translateZ(0); }
+  100% { transform: scale(1.1) translateZ(0); }
+`;
+
 const StyledImg = styled(LazyImage)`
   height: 100%;
   object-fit: cover;
-  transform-origin: center;
-  animation: zoom 12s ease-in-out infinite;
-
-  @keyframes zoom {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
+  animation: ${zoom} 18s ease-in-out alternate infinite;
 `;
 
 function LookbookStrip() {
