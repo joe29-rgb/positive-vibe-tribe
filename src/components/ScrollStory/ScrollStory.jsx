@@ -96,21 +96,7 @@ function ScrollStory() {
           Step into the story—discover collections that honour Treaty 6 territory and celebrate positive
           energy.
         </Para>
-        <motion.a
-          href="/products"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={{
-            display: 'inline-block',
-            marginTop: 24,
-            background: 'var(--primary-red)',
-            color: '#fff',
-            padding: '14px 32px',
-            borderRadius: '999px',
-            textDecoration: 'none',
-            fontWeight: 600,
-          }}
-        >
+        <motion.a href="/products" className="btn btn-gradient" whileHover={{scale:1.05}} whileTap={{scale:0.95}} style={{marginTop:24}}>
           Shop the Story
         </motion.a>
       </StorySection>

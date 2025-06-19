@@ -323,8 +323,8 @@ function About() {
             Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
           </p>
           <TeachGrid>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'The Song of Kokopelli: A Journey Across the Land', story:kokopelliStory, video:'fdWqJBfjQ7M'})}>
-              <motion.img src={kokopelliImg} alt="Kokopelli silhouette" style={{maxWidth:'420px',width:'100%',height:'auto',margin:'0 auto',cursor:'pointer',borderRadius:'16px',boxShadow:'0 8px 24px rgba(0,0,0,0.1)'}} whileHover={{scale:1.05,rotate:2}} />
+            <Card onClick={() => setSelectedTeaching({title:'The Song of Kokopelli: A Journey Across the Land', story:kokopelliStory, video:'fdWqJBfjQ7M'})}>
+              <motion.img src={kokopelliImg} alt="Kokopelli silhouette" style={{maxWidth:'420px',width:'100%',height:'auto',margin:'0 auto',cursor:'pointer',borderRadius:'16px',boxShadow:'0 8px 24px rgba(0,0,0,0.1)'}} />
               <h3>Kokopelli – Joy</h3>
               <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
             </Card>
@@ -341,7 +341,7 @@ function About() {
             blueprint for living in harmony with ourselves, our community, and the earth.
           </p>
           <TeachGrid>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Nibwaakaawin – Wisdom', quote:'Wisdom is gifted by the Creator to be shared with humility. We honour it when we make decisions that will hold true for seven generations.', video:'S7wbE9YJ5_o'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Nibwaakaawin – Wisdom', quote:'Wisdom is gifted by the Creator to be shared with humility. We honour it when we make decisions that will hold true for seven generations.', video:'S7wbE9YJ5_o'})}>
               <CardImg src={beaverImg} alt="Beaver symbol" />
               <h3>Nibwaakaawin – Wisdom</h3>
               <p>
@@ -349,7 +349,7 @@ function About() {
                 and colorway is chosen with purposeful care.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Zaagi\'idiwin – Love', quote:'To love is to know peace. When we nurture love within, we carry its medicine to every place our feet touch the earth.', video:'pOPpCWAdsiU'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Zaagi\'idiwin – Love', quote:'To love is to know peace. When we nurture love within, we carry its medicine to every place our feet touch the earth.', video:'pOPpCWAdsiU'})}>
               <CardImg src={eagleImg} alt="Eagle symbol" />
               <h3>Zaagi&apos;idiwin – Love</h3>
               <p>
@@ -357,7 +357,7 @@ function About() {
                 circle you move through.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Minaadendamowin – Respect', quote:'Respect is the heartbeat of all creation; when we honour the gifts of every being, we walk in balance.', video:'5ZCE5wUzqZM'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Minaadendamowin – Respect', quote:'Respect is the heartbeat of all creation; when we honour the gifts of every being, we walk in balance.', video:'5ZCE5wUzqZM'})}>
               <CardImg src={buffaloImg} alt="Buffalo symbol" />
               <h3>Minaadendamowin – Respect</h3>
               <p>
@@ -365,7 +365,7 @@ function About() {
                 non-negotiable.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Aakode\'ewin – Bravery', quote:'Bravery is not the absence of fear, but the will to follow our truth even when the path is hard.', video:'duNnuC86pmE'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Aakode\'ewin – Bravery', quote:'Bravery is not the absence of fear, but the will to follow our truth even when the path is hard.', video:'duNnuC86pmE'})}>
               <CardImg src={bearImg} alt="Bear symbol" />
               <h3>Aakode&apos;ewin – Bravery</h3>
               <p>
@@ -373,21 +373,21 @@ function About() {
                 designs.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Gwayakwaadiziwin – Honesty', quote:'Honesty is speaking our heart without deception, living in alignment with our words and actions.', video:'gcyswnThOH8'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Gwayakwaadiziwin – Honesty', quote:'Honesty is speaking our heart without deception, living in alignment with our words and actions.', video:'gcyswnThOH8'})}>
               <CardImg src={ravenImg} alt="Raven symbol" />
               <h3>Gwayakwaadiziwin – Honesty</h3>
               <p>
                 Radical transparency in our pricing, supply chain, and storytelling builds the trust our Tribe deserves.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Dabaadendiziwin – Humility', quote:'Humility is knowing we are but one thread in a vast tapestry. We bow our heads to learn and to serve.', video:'0x32iacMyvk'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Dabaadendiziwin – Humility', quote:'Humility is knowing we are but one thread in a vast tapestry. We bow our heads to learn and to serve.', video:'0x32iacMyvk'})}>
               <CardImg src={wolfImg} alt="Wolf symbol" />
               <h3>Dabaadendiziwin – Humility</h3>
               <p>
                 We are one thread in a vast tapestry. Every success is shared; every misstep becomes a lesson.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Debwewin – Truth', quote:'Truth combines all teachings. It is living the way Creator intended, with integrity in every breath.', video:'1lb8WQX3bCE'})}>
+            <Card onClick={() => setSelectedTeaching({title:'Debwewin – Truth', quote:'Truth combines all teachings. It is living the way Creator intended, with integrity in every breath.', video:'1lb8WQX3bCE'})}>
               <CardImg src={turtleImg} alt="Turtle symbol" />
               <h3>Debwewin – Truth</h3>
               <p>
