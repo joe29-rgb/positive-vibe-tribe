@@ -344,6 +344,23 @@ function About() {
         </Container>
       </Section>
 
+      {/* Kokopelli Section */}
+      <WaveSection className="reveal" id="kokopelli" waveTop bg="#fafafa" initial={{}}>
+        <Container>
+          <H2>Kokopelli – Messenger of Joy</H2>
+          <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+            Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
+          </p>
+          <TeachGrid>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'The Song of Kokopelli: A Journey Across the Land', story:kokopelliStory, video:'fdWqJBfjQ7M'})}>
+              <motion.img src={kokopelliImg} alt="Kokopelli silhouette" style={{maxWidth:'420px',width:'100%',height:'auto',margin:'0 auto',cursor:'pointer',borderRadius:'16px',boxShadow:'0 8px 24px rgba(0,0,0,0.1)'}} whileHover={{scale:1.05,rotate:2}} />
+              <h3>Kokopelli – Joy</h3>
+              <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
+            </Card>
+          </TeachGrid>
+        </Container>
+      </WaveSection>
+
       {/* Teachings */}
       <WaveSection className="reveal" id="teachings" waveTop bg="#fafafa" initial={{}}>
         <Container>
@@ -405,23 +422,6 @@ function About() {
               <p>
                 We speak and act from lived experience, honoring the origins of every word and pattern we share.
               </p>
-            </Card>
-          </TeachGrid>
-        </Container>
-      </WaveSection>
-
-      {/* Kokopelli Section */}
-      <WaveSection className="reveal" id="kokopelli" waveTop bg="#fafafa" initial={{}}>
-        <Container>
-          <H2>Kokopelli – Messenger of Joy</H2>
-          <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-            Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
-          </p>
-          <TeachGrid>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'The Song of Kokopelli: A Journey Across the Land', story:kokopelliStory, video:'fdWqJBfjQ7M'})}>
-              <motion.img src={kokopelliImg} alt="Kokopelli silhouette" style={{maxWidth:'420px',width:'100%',height:'auto',margin:'0 auto',cursor:'pointer',borderRadius:'16px',boxShadow:'0 8px 24px rgba(0,0,0,0.1)'}} whileHover={{scale:1.05,rotate:2}} />
-              <h3>Kokopelli – Joy</h3>
-              <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
             </Card>
           </TeachGrid>
         </Container>
