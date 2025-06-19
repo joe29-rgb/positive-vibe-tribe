@@ -13,6 +13,7 @@ import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 import AngleSection from '../../components/AngleSection/AngleSection';
+import WaveSection from '../../components/WaveSection/WaveSection';
 import founderImage from '../../assets/founder.jpg';
 import LazyImage from '../../components/LazyImage/LazyImage';
 import diamondTile from '../../assets/diamond-tile.svg';
@@ -279,7 +280,7 @@ function About() {
       </Section>
 
       {/* Teachings */}
-      <Section id="teachings" style={{ background: '#fafafa' }}>
+      <WaveSection id="teachings" waveTop bg="#fafafa" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true, amount:0.2}}>
         <Container>
           <H2>The Seven Grandfather Teachings</H2>
           <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
@@ -345,7 +346,7 @@ function About() {
             <iframe src="https://www.youtube.com/embed/sASjfNI_lD0" title="Seven Teachings video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </VideoWrapper>
         </Container>
-      </Section>
+      </WaveSection>
 
       {/* Founder Story Full Narrative */}
       <AngleSection id="founder-story" angleBottom initial={false}>
