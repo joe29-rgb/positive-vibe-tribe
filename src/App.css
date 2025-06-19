@@ -4,8 +4,10 @@
 /* Core design tokens & global reset */
 
 :root {
-    --primary-red: #c8102e;
+    --primary-red: #8B0000;
+    /* removed old value */
     --secondary-red: #ff4d4f;
+    /* removed old value */
     --warm-beige: #f5f1eb;
     --light-beige: #faf7f3;
     --dark-brown: #2c1810;
@@ -37,6 +39,13 @@
     --bp-md: 768px;
     --bp-lg: 1024px;
     --bp-xl: 1280px;
+    /* Luxury palette */
+    --lux-red: #8B0000;
+    --lux-cream: #F5F5DC;
+    --lux-gold: #D4AF37;
+    /* Map legacy vars to luxury */
+    --primary-red: var(--lux-red);
+    --secondary-red: #b31217;
 }
 
 * {
@@ -59,14 +68,14 @@ a {
 
 button:focus-visible,
 a:focus-visible {
-    outline: 2px solid var(--primary-red, #c8102e);
+    outline: 2px solid var(--primary-red, #8B0000);
     outline-offset: 2px;
 }
 
 .cart-btn {
-    border: 1px solid var(--primary-red, #c8102e);
+    border: 1px solid var(--primary-red, #8B0000);
     background: transparent;
-    color: var(--primary-red, #c8102e);
+    color: var(--primary-red, #8B0000);
     padding: 0.25rem 0.75rem;
     border-radius: 4px;
     cursor: pointer;
@@ -74,18 +83,18 @@ a:focus-visible {
 }
 
 .cart-btn:hover {
-    background: var(--primary-red, #c8102e);
+    background: var(--primary-red, #8B0000);
     color: #fff;
 }
 
 .cart-btn:focus-visible {
-    outline: 2px solid var(--primary-red, #c8102e);
+    outline: 2px solid var(--primary-red, #8B0000);
 }
 
 .qty-btn {
-    border: 1px solid var(--primary-red, #c8102e);
+    border: 1px solid var(--primary-red, #8B0000);
     background: transparent;
-    color: var(--primary-red, #c8102e);
+    color: var(--primary-red, #8B0000);
     width: 32px;
     height: 32px;
     display: inline-flex;
@@ -98,7 +107,7 @@ a:focus-visible {
 }
 
 .qty-btn:hover:not(:disabled) {
-    background: var(--primary-red, #c8102e);
+    background: var(--primary-red, #8B0000);
     color: #fff;
 }
 
@@ -126,6 +135,7 @@ h6 {
     line-height: 1.2;
     color: var(--dark-brown);
     margin: var(--space-7) 0 var(--space-4);
+    font-family: 'Playfair Display', serif;
 }
 
 h1 {
