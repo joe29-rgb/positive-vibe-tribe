@@ -212,3 +212,49 @@ a:hover {
     white-space: nowrap !important;
     border: 0 !important;
 }
+
+
+/* Buttons */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-6);
+    border-radius: 40px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.25s var(--transition), box-shadow 0.25s var(--transition);
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--lux-gold);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--primary-red);
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background: var(--secondary-red);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary-red);
+    border: 2px solid var(--primary-red);
+}
+
+.btn-outline:hover {
+    background: var(--primary-red);
+    color: #fff;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
