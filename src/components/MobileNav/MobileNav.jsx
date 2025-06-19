@@ -43,7 +43,7 @@ function MobileNav() {
   return (
     <NavBar as={motion.nav} initial={{ y: 80 }} animate={{ y: 0 }} transition={{ duration: 0.4 }}>
       {items.map((it) => (
-        <NavItem key={it.path} to={it.path} $active={location.pathname === it.path}>
+        <NavItem key={it.path} to={it.path} aria-label={it.label} $active={location.pathname === it.path}>
           {it.label}
         </NavItem>
       ))}

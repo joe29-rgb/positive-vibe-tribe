@@ -48,6 +48,7 @@ function App() {
       <HelmetProvider>
         <Analytics />
         <Router>
+          <a href="#main" className="skip-link">Skip to main content</a>
           <Header />
           <AnimatedRoutes />
           <MobileNav />

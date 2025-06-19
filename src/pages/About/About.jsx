@@ -245,6 +245,8 @@ const Count = ({end})=>{
 function About() {
   const [showBar,setShowBar]=useState(false);
   const [selectedTeaching, setSelectedTeaching] = useState(null);
+  const modalRef = React.useRef(null);
+
   useEffect(()=>{
     const onScroll=()=>{setShowBar(window.scrollY>400);} ;window.addEventListener('scroll',onScroll);return()=>window.removeEventListener('scroll',onScroll);},[]);
 
@@ -257,8 +259,14 @@ function About() {
     return () => window.removeEventListener('keydown', handleEsc);
   }, []);
 
+  useEffect(() => {
+    if (selectedTeaching && modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [selectedTeaching]);
+
   return (
-    <Wrapper>
+    <Wrapper id="main">
       <FloatingGlyph />
       <BackToTop />
       <AudioToggle />
@@ -500,8 +508,13 @@ function About() {
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 260, damping: 20 }}
               onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="teaching-title"
+              ref={modalRef}
+              tabIndex="-1"
             >
-              <h3 style={{ marginBottom: '1rem' }}>{selectedTeaching.title}</h3>
+              <h3 id="teaching-title" style={{ marginBottom: '1rem' }}>{selectedTeaching.title}</h3>
               <p style={{ marginBottom: '1.5rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
               {selectedTeaching.video && (
                 <div style={{position:'relative',paddingBottom:'56.25%',height:0,marginBottom:'1.5rem'}}>
