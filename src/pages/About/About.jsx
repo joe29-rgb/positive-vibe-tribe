@@ -89,7 +89,11 @@ const TeachGrid = styled.div`
   gap: 2rem;
   margin-top: 3rem;
 `;
-const Card = styled(motion.div)`
+const Card = styled(motion.div).attrs(()=>({
+  initial:{opacity:0,y:30,scale:0.95},
+  whileInView:{opacity:1,y:0,scale:1},
+  viewport:{once:true,amount:0.2}
+}))`
   background: #fff;
   background: linear-gradient(#fff, #fdf9f5);
   padding: 1.5rem;
@@ -231,6 +235,46 @@ const Count = ({end})=>{
   },[end]);
   return <>{val}{typeof end==='number' && end%1!==0?'':''}</>;
 };
+
+// define story constant near imports
+const kokopelliStory = `The Song of Kokopelli: A Journey Across the Land
+
+As the sun sets over the ancient hoodoos of Alberta and the golden prairie grasses sway in the evening breeze, a mysterious figure appears atop the rocks—humpbacked, flute in hand, silhouetted against the fiery sky.
+
+Chapter 1: The Arrival
+Long ago, when the world was young and the land was thirsty, the people of the plains and canyons waited for a sign of hope. One evening, as the sky blazed with the colors of dusk, a haunting melody drifted on the wind. It was Kokopelli, the carrier of seeds, the bringer of music and joy.
+
+He traveled with a sack slung over his back—filled with seeds, stories, and the dreams of all living things. As he walked, his flute sang songs that made the sun shine brighter, the snow melt, and the grass grow tall. Where his shadow passed, wildflowers bloomed and rivers sparkled anew.
+
+Chapter 2: The Gifts of Kokopelli
+In every village, Kokopelli's arrival was met with excitement and curiosity. Children would run to greet him, elders would gather to listen, and even the animals would pause to hear his song. He shared not only seeds for planting but also the seeds of wisdom, laughter, and kindness.
+
+Some say his hump was filled with clouds, rainbows, and the promise of rain. Others believe he carried all the songs of the world, trading old melodies for new ones wherever he went. He taught the people to dance and sing, showing them that music could bring rain to parched earth and joy to heavy hearts.
+
+Chapter 3: The Trickster's Lessons
+But Kokopelli was not only a bringer of abundance—he was also a playful trickster. He loved to make mischief, hiding seeds in unexpected places or playing pranks that made even the sternest elders laugh. Through his antics, he reminded everyone to never take life too seriously, and that laughter is a medicine as powerful as any plant.
+
+Chapter 4: The Seven Teachings
+One night, as the people gathered around a great fire beneath the hoodoos, Kokopelli shared the Seven Teachings—gifts from the ancestors to guide all who walk the land:
+
+• Wisdom (Beaver): Use your gifts wisely and build for the future.
+• Love (Eagle): Let your heart soar and care for all creation.
+• Respect (Buffalo): Honor the earth and give selflessly.
+• Bravery (Bear): Face challenges with courage.
+• Honesty (Sabe): Walk tall and speak truth.
+• Humility (Wolf): Know your place in the great circle and value the pack over self.
+• Truth (Turtle): Carry the teachings with you, slow and steady, and live them every day.
+
+Kokopelli's flute echoed each teaching, weaving them into the hearts of all who listened.
+
+Chapter 5: The Legacy
+As dawn approached, Kokopelli prepared to journey on. "Remember," he said, "the seeds I give you are not just for planting in the earth, but for planting in your hearts. Tend them with song, laughter, and kindness—and you will always find abundance, even in the harshest seasons."
+
+With a final, joyful tune, Kokopelli vanished into the sunrise, leaving behind blooming fields, happy children, and a community forever changed by his wisdom.
+
+And so, whenever the wind carries the sound of a distant flute across the Alberta badlands or the desert canyons, people smile and remember: Kokopelli has passed this way, and the world is richer for it.
+
+Click the Kokopelli figure to hear his flute, or hover over each animal in the circle to reveal its teaching. The legend lives on—will you carry it forward?`;
 
 function About() {
   const [showBar,setShowBar]=useState(false);
@@ -374,8 +418,8 @@ function About() {
             Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
           </p>
           <TeachGrid>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Kokopelli – Joy', quote:'Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.', video:'fdWqJBfjQ7M'})}>
-              <CardImg src={kokopelliImg} alt="Kokopelli silhouette" />
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'The Song of Kokopelli: A Journey Across the Land', story:kokopelliStory, video:'fdWqJBfjQ7M'})}>
+              <motion.img src={kokopelliImg} alt="Kokopelli silhouette" style={{maxWidth:'420px',width:'100%',height:'auto',margin:'0 auto',cursor:'pointer',borderRadius:'16px',boxShadow:'0 8px 24px rgba(0,0,0,0.1)'}} whileHover={{scale:1.05,rotate:2}} />
               <h3>Kokopelli – Joy</h3>
               <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
             </Card>
@@ -529,7 +573,11 @@ function About() {
               tabIndex="-1"
             >
               <h3 id="teaching-title" style={{ marginBottom: '1rem' }}>{selectedTeaching.title}</h3>
-              <p style={{ marginBottom: '1.5rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
+              {selectedTeaching.story ? (
+                <div style={{ marginBottom: '1.5rem', lineHeight: 1.6, textAlign:'left',whiteSpace:'pre-line',maxHeight:'50vh',overflowY:'auto' }}>{selectedTeaching.story}</div>
+              ) : (
+                <p style={{ marginBottom: '1.5rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
+              )}
               {selectedTeaching.video && (
                 <div style={{position:'relative',paddingBottom:'56.25%',height:0,marginBottom:'1.5rem'}}>
                   <iframe
