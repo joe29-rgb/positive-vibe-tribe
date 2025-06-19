@@ -17,6 +17,7 @@ import About from './pages/About/About';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import useScrollReveal from './utils/useScrollReveal';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  useScrollReveal();
   return (
     <Provider store={store}>
       <HelmetProvider>

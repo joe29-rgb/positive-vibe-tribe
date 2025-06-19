@@ -101,6 +101,7 @@ const Card = styled(motion.div)`
   &:hover {
     transform: translateY(-4px) rotate(1.5deg);
   }
+  will-change: transform;
 `;
 const CardImg = styled.img`
   width:100%;border-radius:8px;object-fit:cover;height:160px;margin-bottom:1rem;`;
@@ -300,7 +301,7 @@ function About() {
       </Section>
 
       {/* Teachings */}
-      <WaveSection id="teachings" waveTop bg="#fafafa" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true, amount:0.2}}>
+      <WaveSection className="reveal" id="teachings" waveTop bg="#fafafa" initial={{}}>
         <Container>
           <H2>The Seven Grandfather Teachings</H2>
           <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
@@ -361,7 +362,19 @@ function About() {
                 We speak and act from lived experience, honoring the origins of every word and pattern we share.
               </p>
             </Card>
-            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Kokopelli – Messenger of Joy', quote:'Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.', video:'fdWqJBfjQ7M'})}>
+          </TeachGrid>
+        </Container>
+      </WaveSection>
+
+      {/* Kokopelli Section */}
+      <WaveSection className="reveal" id="kokopelli" waveTop bg="#fafafa" initial={{}}>
+        <Container>
+          <H2>Kokopelli – Messenger of Joy</H2>
+          <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+            Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
+          </p>
+          <TeachGrid>
+            <Card whileHover={{rotate:1.5,scale:1.02}} onClick={() => setSelectedTeaching({title:'Kokopelli – Joy', quote:'Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.', video:'fdWqJBfjQ7M'})}>
               <CardImg src={kokopelliImg} alt="Kokopelli silhouette" />
               <h3>Kokopelli – Joy</h3>
               <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
