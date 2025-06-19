@@ -186,38 +186,9 @@ const CTAGroup = styled.div`
   }
 `;
 
+// CTAs now leverage global button utilities
 const MotionLink = styled(motion.a)`
-  display:inline-block;
-`;
-
-const CtaLight = styled(MotionLink)`
-  background: #fff;
-  color: var(--primary-color, #2d4a3e);
-  padding:0.9rem 2rem;
-  border-radius:var(--border-radius-pill);
-  font-weight:600;
-  text-decoration:none;
-  letter-spacing:0.08em;
-  &:hover {
-    background: transparent;
-    color: #fff;
-    border: 2px solid #fff;
-  }
-`;
-
-const CtaOutlineLight = styled(MotionLink)`
-  background: transparent;
-  color:#fff;
-  padding:0.9rem 2rem;
-  border-radius:var(--border-radius-pill);
-  font-weight:600;
-  border:2px solid #fff;
-  text-decoration:none;
-  letter-spacing:0.08em;
-  &:hover{
-    background:#fff;
-    color:var(--primary-color,#2d4a3e);
-  }
+  display: inline-block;
 `;
 
 // Impact counter animation span
@@ -536,16 +507,16 @@ function About() {
             at a time.
           </p>
           <CTAGroup style={{ justifyContent: 'center' }}>
-            <CtaLight href="/products">Shop the Collection</CtaLight>
-            <CtaOutlineLight href="/newsletter">Get Tribe Updates</CtaOutlineLight>
+            <MotionLink href="/products" className="btn btn-light" whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Shop the Collection</MotionLink>
+            <MotionLink href="/newsletter" className="btn btn-outline" whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Get Tribe Updates</MotionLink>
           </CTAGroup>
         </Container>
       </Section>
 
       {showBar && (
         <StickyBar initial={{opacity:0,scale:0.8}} animate={{opacity:1,scale:1}} exit={{opacity:0}}>
-          <CtaLight href="/products">Shop the Collection</CtaLight>
-          <CtaOutlineLight href="/newsletter">Get Tribe Updates</CtaOutlineLight>
+          <MotionLink href="/products" className="btn btn-light" whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Shop the Collection</MotionLink>
+          <MotionLink href="/newsletter" className="btn btn-outline" whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Get Tribe Updates</MotionLink>
         </StickyBar>
       )}
 
@@ -589,9 +560,9 @@ function About() {
                   />
                 </div>
               )}
-              <CtaLight as="button" onClick={() => setSelectedTeaching(null)}>
+              <MotionLink as="button" onClick={() => setSelectedTeaching(null)}>
                 Close
-              </CtaLight>
+              </MotionLink>
             </ModalBox>
           </Backdrop>
         )}
