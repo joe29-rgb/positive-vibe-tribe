@@ -49,6 +49,7 @@ function App() {
         <Analytics />
         <Router>
           <a href="#main" className="skip-link">Skip to main content</a>
+          <div id="sr-announcer" aria-live="polite" style={{position:'absolute',left:'-9999px',height:'1px',width:'1px',overflow:'hidden'}} />
           <Header />
           <AnimatedRoutes />
           <MobileNav />

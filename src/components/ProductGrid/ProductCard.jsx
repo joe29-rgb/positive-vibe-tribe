@@ -7,6 +7,7 @@ import { getVariant } from '../../utils/ab';
 import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { announce } from '../../utils/announce';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -145,7 +146,9 @@ function ProductCard({ product, index = 0 }) {
   const handleAdd = (e) => {
     e.stopPropagation();
     dispatch(addToCart({ product, size: 'default', quantity: 1 }));
-    toast.success(`${product.name} added to cart`);
+    const msg = `${product.name} added to cart`;
+    toast.success(msg);
+    announce(msg);
     if (window.gtag) {
       window.gtag('event', 'quick_add', { product_id: product._id, variant: getVariant() });
     }
@@ -175,7 +178,7 @@ function ProductCard({ product, index = 0 }) {
             transition={{ duration: 0.25 }}
           >
             <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
-            <QuickAdd onClick={handleAdd} whileTap={quickAddTap}>Quick Add</QuickAdd>
+            <QuickAdd aria-label={`Add ${product.name} to cart`} onClick={handleAdd} whileTap={quickAddTap}>Quick Add</QuickAdd>
           </Overlay>
         </ImgWrapper>
         <Body>
