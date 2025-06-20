@@ -7,7 +7,7 @@ const beaver = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/be
 const buffalo = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/buffalo_ervhuw.png';
 const eagle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eagle_wmajiu.png';
 const raven = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/raven_yvebyp.png';
-const turtle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eagle_wmajiu.png';
+const turtle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431663/turtle_zuok1v.png';
 const wolf = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431662/wolf_kerexd.png';
 const kokopelli = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
 
