@@ -265,6 +265,26 @@ function About() {
 
   useFocusTrap(!!selectedTeaching, modalRef);
 
+  const handlePrev = () => {
+    if(selectedTeaching){
+      const prev = (selectedTeaching.idx + teachingsCount -1)%teachingsCount;
+      openByIdx(prev);
+    }
+  };
+  const handleNext = () => {
+    if(selectedTeaching){
+      const next = (selectedTeaching.idx +1)%teachingsCount;
+      openByIdx(next);
+    }
+  };
+
+  const openByIdx = (i) => {
+    const wheelTeachings = document.querySelectorAll('[aria-label$="–"]');
+    if(wheelTeachings[i]) wheelTeachings[i].click();
+  };
+
+  const teachingsCount = 7;
+
   return (
     <Wrapper id="main">
       <FloatingGlyph />
@@ -482,12 +502,11 @@ function About() {
               ref={modalRef}
               tabIndex="-1"
             >
-              <h3 id="teaching-title" style={{ marginBottom: '1rem' }}>{selectedTeaching.title}</h3>
-              {selectedTeaching.story ? (
-                <div style={{ marginBottom: '1.5rem', lineHeight: 1.6, textAlign:'left',whiteSpace:'pre-line',maxHeight:'50vh',overflowY:'auto' }}>{selectedTeaching.story}</div>
-              ) : (
-                <p style={{ marginBottom: '1.5rem', lineHeight: 1.6 }}>{selectedTeaching.quote}</p>
-              )}
+              <h3 id="teaching-title" style={{ marginBottom: '0.75rem', color:selectedTeaching.color }}>
+                {selectedTeaching.name} ({selectedTeaching.ojibwe}) – {selectedTeaching.animal}
+              </h3>
+              <img src={selectedTeaching.img} alt="" style={{width:'120px',height:'120px',borderRadius:'50%',border:`4px solid ${selectedTeaching.color}`,objectFit:'cover',margin:'0 auto 1rem',display:'block'}} />
+              <p style={{ marginBottom: '1.25rem', lineHeight: 1.6 }}>{selectedTeaching.desc}</p>
               {selectedTeaching.video && (
                 <div style={{position:'relative',paddingBottom:'56.25%',height:0,marginBottom:'1.5rem'}}>
                   <iframe
@@ -499,9 +518,11 @@ function About() {
                   />
                 </div>
               )}
-              <MotionLink as="button" onClick={() => setSelectedTeaching(null)}>
-                Close
-              </MotionLink>
+              <div style={{display:'flex',justifyContent:'space-between',marginTop:'1rem'}}>
+                <MotionLink as="button" onClick={handlePrev}>&larr; Prev</MotionLink>
+                <MotionLink as="button" onClick={() => setSelectedTeaching(null)}>Close</MotionLink>
+                <MotionLink as="button" onClick={handleNext}>Next &rarr;</MotionLink>
+              </div>
             </ModalBox>
           </Backdrop>
         )}
