@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const bear = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/bear_fkrsts.png';
 const beaver = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/beaver_w7q6k2.png';
@@ -11,14 +12,20 @@ const wolf = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431662/wolf
 const kokopelli = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
 
 const teachings = [
-  { name: 'Wisdom', animal: 'Beaver', img: beaver, desc: 'Use your gifts wisely and build for the future.', video:'S7wbE9YJ5_o' },
-  { name: 'Love', animal: 'Eagle', img: eagle, desc: 'Let your heart soar and care for all creation.', video:'pOPpCWAdsiU' },
-  { name: 'Respect', animal: 'Buffalo', img: buffalo, desc: 'Honor the earth and give selflessly.', video:'5ZCE5wUzqZM' },
-  { name: 'Bravery', animal: 'Bear', img: bear, desc: 'Face challenges with courage.', video:'duNnuC86pmE' },
-  { name: 'Honesty', animal: 'Sabe', img: raven, desc: 'Walk tall and speak truth.', video:'gcyswnThOH8' },
-  { name: 'Humility', animal: 'Wolf', img: wolf, desc: 'Know your place in the great circle and value the pack over self.', video:'0x32iacMyvk' },
-  { name: 'Truth', animal: 'Turtle', img: turtle, desc: 'Carry the teachings with you every day.', video:'1lb8WQX3bCE' },
+  { name: 'Wisdom', ojibwe:'Nbwaakaawin', animal: 'Beaver', img: beaver, desc: 'Use your gifts wisely and build for the future.', video:'S7wbE9YJ5_o' },
+  { name: 'Love', ojibwe:'Zaagii\'idiwin', animal: 'Eagle', img: eagle, desc: 'Let your heart soar and care for all creation.', video:'pOPpCWAdsiU' },
+  { name: 'Respect', ojibwe:'Mnaadendimowin', animal: 'Buffalo', img: buffalo, desc: 'Honor the earth and give selflessly.', video:'5ZCE5wUzqZM' },
+  { name: 'Bravery', ojibwe:'Aakode\'ewin', animal: 'Bear', img: bear, desc: 'Face challenges with courage.', video:'duNnuC86pmE' },
+  { name: 'Honesty', ojibwe:'Gwekwaadziwin', animal: 'Sabe', img: raven, desc: 'Walk tall and speak truth.', video:'gcyswnThOH8' },
+  { name: 'Humility', ojibwe:'Dbaadendiziwin', animal: 'Wolf', img: wolf, desc: 'Know your place in the great circle and value the pack over self.', video:'0x32iacMyvk' },
+  { name: 'Truth', ojibwe:'Debwewin', animal: 'Turtle', img: turtle, desc: 'Carry the teachings with you every day.', video:'1lb8WQX3bCE' },
 ];
+
+// Animation keyframes for line draw
+const draw = {
+  hidden: { pathLength: 0 },
+  visible: { pathLength: 1, transition: { duration: 1.2, ease: 'easeInOut' } },
+};
 
 // Culturally relevant colours for each teaching (matches order in teachings[])
 const ringColours = ['#5b92e5', '#d4af37', '#8b572a', '#333333', '#6d6d6d', '#c0c0c0', '#2e8b57'];
@@ -30,7 +37,7 @@ const WheelWrapper = styled.div`
   margin-top: 2rem;
 `;
 
-const Wheel = styled.div`
+const Wheel = styled(motion.div)`
   position: relative;
   width: ${(props) => props.$size}px;
   height: ${(props) => props.$size}px;
@@ -38,7 +45,7 @@ const Wheel = styled.div`
   background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.15) 100%);
 `;
 
-const Icon = styled.button`
+const Icon = styled(motion.button)`
   position: absolute;
   width: ${(props) => props.$icon}px;
   height: ${(props) => props.$icon}px;
@@ -137,11 +144,11 @@ export default function TeachingsWheel({ onSelect }) {
 
   return (
     <WheelWrapper>
-      <Wheel role="list" $size={size}>
+      <Wheel role="list" $size={size} initial="hidden" whileInView="visible" viewport={{once:true,amount:0.3}}>
         {/* connecting dashed lines */}
         <LinesSvg viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
           {positions.map((p, idx) => (
-            <line key={idx} x1={center} y1={center} x2={p.cx} y2={p.cy} />
+            <motion.line key={idx} x1={center} y1={center} x2={p.cx} y2={p.cy} variants={draw} />
           ))}
         </LinesSvg>
 
@@ -164,15 +171,20 @@ export default function TeachingsWheel({ onSelect }) {
               onClick={() => onSelect && onSelect({ title: `${t.name} – ${t.animal}`, quote: t.desc, video: t.video })}
               $active={active === i}
               $icon={icon}
+              role="listitem"
               aria-label={`${t.name} – ${t.animal}`}
+              whileHover={{ scale: 1.15 }}
+              variants={{ hidden:{opacity:0,scale:0.6}, visible:{opacity:1,scale:1, transition:{duration:0.4}} }}
             >
               <img src={t.img} alt="" />
             </Icon>
           );
         })}
       </Wheel>
-      <Info aria-live="polite">
-        <InfoTitle>{teachings[active].name} – {teachings[active].animal}</InfoTitle>
+      <Info aria-live="polite" id="teaching-info">
+        <InfoTitle style={{color:ringColours[active]}}>
+          {teachings[active].name} ({teachings[active].ojibwe}) – {teachings[active].animal}
+        </InfoTitle>
         <InfoText>{teachings[active].desc}</InfoText>
       </Info>
     </WheelWrapper>
