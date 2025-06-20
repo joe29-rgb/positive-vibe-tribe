@@ -8,6 +8,7 @@ const eagle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eag
 const raven = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/raven_yvebyp.png';
 const turtle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eagle_wmajiu.png';
 const wolf = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431662/wolf_kerexd.png';
+const kokopelli = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
 
 const teachings = [
   { name: 'Wisdom', animal: 'Beaver', img: beaver, desc: 'Use your gifts wisely and build for the future.', video:'S7wbE9YJ5_o' },
@@ -18,6 +19,9 @@ const teachings = [
   { name: 'Humility', animal: 'Wolf', img: wolf, desc: 'Know your place in the great circle and value the pack over self.', video:'0x32iacMyvk' },
   { name: 'Truth', animal: 'Turtle', img: turtle, desc: 'Carry the teachings with you every day.', video:'1lb8WQX3bCE' },
 ];
+
+// Culturally relevant colours for each teaching (matches order in teachings[])
+const ringColours = ['#5b92e5', '#d4af37', '#8b572a', '#333333', '#6d6d6d', '#c0c0c0', '#2e8b57'];
 
 const WheelWrapper = styled.div`
   display: flex;
@@ -73,6 +77,36 @@ const InfoText = styled.p`
   color: var(--dark-brown);
 `;
 
+const Center = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: ${(props)=>props.$icon*1.2}px;
+  height: ${(props)=>props.$icon*1.2}px;
+  border-radius: 50%;
+  background: var(--primary-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(200,16,46,0.3);
+  border: none;
+  cursor: pointer;
+  img{width:65%;height:65%;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));}
+`;
+
+const LinesSvg = styled.svg`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  stroke: var(--secondary-brown,#8b6f47);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+  opacity: 0.25;
+`;
+
 export default function TeachingsWheel({ onSelect }) {
   const [active, setActive] = useState(0);
   const [size, setSize] = useState(320);
@@ -93,17 +127,38 @@ export default function TeachingsWheel({ onSelect }) {
   const icon = size * 0.26; // slightly larger icons
   const radius = center - icon / 2 - 10;
 
+  // Pre-compute icon centres for lines
+  const positions = teachings.map((_, i) => {
+    const angle = (i / teachings.length) * 2 * Math.PI - Math.PI/2;
+    const cx = center + radius * Math.cos(angle);
+    const cy = center + radius * Math.sin(angle);
+    return { cx, cy };
+  });
+
   return (
     <WheelWrapper>
       <Wheel role="list" $size={size}>
+        {/* connecting dashed lines */}
+        <LinesSvg viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+          {positions.map((p, idx) => (
+            <line key={idx} x1={center} y1={center} x2={p.cx} y2={p.cy} />
+          ))}
+        </LinesSvg>
+
+        {/* central Kokopelli */}
+        <Center $icon={icon} aria-label="Kokopelli – Joy">
+          <img src={kokopelli} alt="" />
+        </Center>
+
+        {/* animal icons */}
         {teachings.map((t, i) => {
-          const angle = (i / teachings.length) * 2 * Math.PI - Math.PI/2;
-          const x = center + radius * Math.cos(angle) - 36; // 36 half icon
-          const y = center + radius * Math.sin(angle) - 36;
+          const { cx, cy } = positions[i];
+          const x = cx - icon / 2;
+          const y = cy - icon / 2;
           return (
             <Icon
               key={t.name}
-              style={{ left: x, top: y }}
+              style={{ left: x, top: y, border: `3px solid ${ringColours[i]}` }}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
               onClick={() => onSelect && onSelect({ title: `${t.name} – ${t.animal}`, quote: t.desc, video: t.video })}
