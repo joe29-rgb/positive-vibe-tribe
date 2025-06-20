@@ -9,13 +9,13 @@ import turtle from '../../assets/teachings/turtle.png';
 import wolf from '../../assets/teachings/wolf.png';
 
 const teachings = [
-  { name: 'Wisdom', animal: 'Beaver', img: beaver, desc: 'Use your gifts wisely and build for the future.' },
-  { name: 'Love', animal: 'Eagle', img: eagle, desc: 'Let your heart soar and care for all creation.' },
-  { name: 'Respect', animal: 'Buffalo', img: buffalo, desc: 'Honor the earth and give selflessly.' },
-  { name: 'Bravery', animal: 'Bear', img: bear, desc: 'Face challenges with courage.' },
-  { name: 'Honesty', animal: 'Sabe', img: raven, desc: 'Walk tall and speak truth.' },
-  { name: 'Humility', animal: 'Wolf', img: wolf, desc: 'Know your place in the great circle and value the pack over self.' },
-  { name: 'Truth', animal: 'Turtle', img: turtle, desc: 'Carry the teachings with you every day.' },
+  { name: 'Wisdom', animal: 'Beaver', img: beaver, desc: 'Use your gifts wisely and build for the future.', video:'S7wbE9YJ5_o' },
+  { name: 'Love', animal: 'Eagle', img: eagle, desc: 'Let your heart soar and care for all creation.', video:'pOPpCWAdsiU' },
+  { name: 'Respect', animal: 'Buffalo', img: buffalo, desc: 'Honor the earth and give selflessly.', video:'5ZCE5wUzqZM' },
+  { name: 'Bravery', animal: 'Bear', img: bear, desc: 'Face challenges with courage.', video:'duNnuC86pmE' },
+  { name: 'Honesty', animal: 'Sabe', img: raven, desc: 'Walk tall and speak truth.', video:'gcyswnThOH8' },
+  { name: 'Humility', animal: 'Wolf', img: wolf, desc: 'Know your place in the great circle and value the pack over self.', video:'0x32iacMyvk' },
+  { name: 'Truth', animal: 'Turtle', img: turtle, desc: 'Carry the teachings with you every day.', video:'1lb8WQX3bCE' },
 ];
 
 const WheelWrapper = styled.div`
@@ -89,7 +89,7 @@ export default function TeachingsWheel({ onSelect }) {
   }, []);
 
   const center = size / 2;
-  const icon = size * 0.22; // proportionally scale icon
+  const icon = size * 0.26; // slightly larger icons
   const radius = center - icon / 2 - 10;
 
   return (
@@ -105,7 +105,7 @@ export default function TeachingsWheel({ onSelect }) {
               style={{ left: x, top: y }}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
-              onClick={() => onSelect && onSelect({ title: `${t.name} – ${t.animal}`, quote: t.desc })}
+              onClick={() => onSelect && onSelect({ title: `${t.name} – ${t.animal}`, quote: t.desc, video: t.video })}
               $active={active === i}
               $icon={icon}
               aria-label={`${t.name} – ${t.animal}`}
