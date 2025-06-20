@@ -43,6 +43,14 @@ const Wheel = styled(motion.div)`
   height: ${(props) => props.$size}px;
   border-radius: 50%;
   background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.15) 100%);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f8f4e9 0%, transparent 70%);
+    z-index: -1;
+  }
 `;
 
 const Icon = styled(motion.button)`
@@ -112,6 +120,20 @@ const LinesSvg = styled.svg`
   stroke-dasharray: 4 4;
   opacity: 0.25;
 `;
+
+// Animated outer ring path length
+const OuterRing = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--secondary-brown,#8b6f47);
+  pointer-events:none;
+`;
+
+const ringDraw = {
+  hidden:{scale:0.8,opacity:0},
+  visible:{scale:1,opacity:0.25,transition:{duration:1,ease:'easeOut'}},
+};
 
 export default function TeachingsWheel({ onSelect }) {
   const [active, setActive] = useState(0);
@@ -236,6 +258,7 @@ export default function TeachingsWheel({ onSelect }) {
   return (
     <WheelWrapper>
       <Wheel role="list" $size={size} initial="hidden" whileInView="visible" viewport={{once:true,amount:0.3}}>
+        <OuterRing variants={ringDraw} initial="hidden" animate="visible" />
         {/* connecting dashed lines */}
         <LinesSvg viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
           {positions.map((p, idx) => (
@@ -259,6 +282,7 @@ export default function TeachingsWheel({ onSelect }) {
               style={{ left: x, top: y, border: `3px solid ${ringColours[i]}` }}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
+              aria-describedby="teaching-info"
               onClick={() => onSelect && onSelect({
                 idx: i,
                 name: t.name,
