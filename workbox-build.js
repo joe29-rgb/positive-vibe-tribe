@@ -28,7 +28,7 @@ workboxBuild.generateSW({
             },
         },
     ],
-    navigateFallback: '/offline.html',
+    navigateFallback: '/index.html',
     navigateFallbackDenylist: [/^\/api\//, /\/static\//],
 }).then(({ count, size }) => {
     console.log(`Generated sw.js, which will precache ${count} files, totaling ${size} bytes.`);
