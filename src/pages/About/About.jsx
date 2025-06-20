@@ -16,6 +16,7 @@ import AudioToggle from '../../components/AudioToggle/AudioToggle';
 import useFocusTrap from '../../utils/useFocusTrap';
 import TeachingsWheel from '../../components/TeachingsWheel/TeachingsWheel';
 import { teachings as teachingsData } from '../../components/TeachingsWheel/teachingsData';
+import KokopelliSection from '../../components/KokopelliSection/KokopelliSection';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -76,30 +77,30 @@ const Section = styled(motion.section)`
 /* Removed old hero grid styled components */
 
 //-------------------- Teachings --------------------//
-const TeachGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-`;
-const Card = styled(motion.div).attrs(()=>({
-  initial:{opacity:0,y:30,scale:0.95},
-  whileInView:{opacity:1,y:0,scale:1},
-  viewport:{once:true,amount:0.2}
-}))`
-  background: #fff;
-  background: linear-gradient(#fff, #fdf9f5);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-  text-align: center;
-  transition: transform 0.25s ease;
-  cursor: pointer;
-  &:hover {
-    transform: translateY(-4px) rotate(1.5deg);
-  }
-  will-change: transform;
-`;
+// const TeachGrid = styled.div`
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+//   gap: 2rem;
+//   margin-top: 3rem;
+// `;
+// const Card = styled(motion.div).attrs(()=>({
+//   initial:{opacity:0,y:30,scale:0.95},
+//   whileInView:{opacity:1,y:0,scale:1},
+//   viewport:{once:true,amount:0.2}
+// }))`
+//   background: #fff;
+//   background: linear-gradient(#fff, #fdf9f5);
+//   padding: 1.5rem;
+//   border-radius: 12px;
+//   box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+//   text-align: center;
+//   transition: transform 0.25s ease;
+//   cursor: pointer;
+//   &:hover {
+//     transform: translateY(-4px) rotate(1.5deg);
+//   }
+//   will-change: transform;
+// `;
 const ImpactGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -238,7 +239,6 @@ And so, whenever the wind carries the sound of a distant flute across the Albert
 
 Click the Kokopelli figure to hear his flute, or hover over each animal in the circle to reveal its teaching. The legend lives on—will you carry it forward?`;
 
-const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431534/kokopelli2_eahvpj.png';
 const founderImage = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431546/founder_yjlzto.jpg';
 
 function About() {
@@ -339,21 +339,7 @@ function About() {
       </Section>
 
       {/* Kokopelli Section */}
-      <WaveSection className="reveal" id="kokopelli" waveTop gradient initial={{}}>
-        <Container>
-          <H2>Kokopelli – Messenger of Joy</H2>
-          <p style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-            Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
-          </p>
-          <TeachGrid>
-            <Card onClick={() => setSelectedTeaching({title:'The Song of Kokopelli: A Journey Across the Land', story:kokopelliStory, video:'fdWqJBfjQ7M'})}>
-              <motion.img src={kokopelliImg} alt="Kokopelli silhouette" style={{maxWidth:'420px',width:'100%',height:'auto',margin:'0 auto',cursor:'pointer',borderRadius:'16px',boxShadow:'0 8px 24px rgba(0,0,0,0.1)'}} />
-              <h3>Kokopelli – Joy</h3>
-              <p>Celebrating abundance, music, and the playful spirit that unites us.</p>
-            </Card>
-          </TeachGrid>
-        </Container>
-      </WaveSection>
+      <KokopelliSection onSelect={setSelectedTeaching} story={kokopelliStory} videoId="fdWqJBfjQ7M" />
 
       {/* Teachings */}
       <WaveSection id="teachings" waveTop gradient initial={{}}>
