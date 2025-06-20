@@ -142,6 +142,81 @@ export default function TeachingsWheel({ onSelect }) {
     return { cx, cy };
   });
 
+  const isCarousel = size >= 340 && size < 480;
+
+  if (isCarousel) {
+    const card = 180;
+    const prevIdx = (active + teachings.length - 1) % teachings.length;
+    const nextIdx = (active + 1) % teachings.length;
+
+    const handleSwipe = (_, info) => {
+      if (info.offset.x < -50) setActive(nextIdx);
+      if (info.offset.x > 50) setActive(prevIdx);
+    };
+
+    const renderCard = (idx, pos) => {
+      const t = teachings[idx];
+      const isCenter = pos === 0;
+      const positions = { '-1': -120, 0: 0, '1': 120 };
+      return (
+        <motion.div
+          key={idx}
+          initial={false}
+          animate={{
+            x: positions[pos],
+            scale: isCenter ? 1 : 0.75,
+            filter: isCenter ? 'blur(0px)' : 'blur(4px)',
+            opacity: isCenter ? 1 : 0.4,
+            zIndex: isCenter ? 2 : 1,
+          }}
+          transition={{ duration: 0.4 }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            width: card,
+            height: card,
+            marginLeft: -card / 2,
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            if (isCenter) {
+              onSelect &&
+                onSelect({ idx, name: t.name, ojibwe: t.ojibwe, animal: t.animal, desc: t.desc, video: t.video, img: t.img, color: ringColours[idx] });
+            } else {
+              setActive(idx);
+            }
+          }}
+        >
+          <img
+            src={t.img}
+            alt=""
+            style={{ width: '100%', height: '100%', borderRadius: '50%', border: `4px solid ${ringColours[idx]}`, objectFit: 'cover' }}
+          />
+        </motion.div>
+      );
+    };
+
+    return (
+      <WheelWrapper style={{ height: 200 }}>
+        <motion.div
+          style={{ position: 'relative', width: '100%', height: 180 }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          onDragEnd={handleSwipe}
+        >
+          {renderCard(prevIdx, -1)}
+          {renderCard(active, 0)}
+          {renderCard(nextIdx, 1)}
+        </motion.div>
+        <Info aria-live="polite" style={{ marginTop: 16 }}>
+          <InfoTitle style={{ color: ringColours[active] }}>{teachings[active].name} ({teachings[active].ojibwe}) – {teachings[active].animal}</InfoTitle>
+          <InfoText>{teachings[active].desc}</InfoText>
+        </Info>
+      </WheelWrapper>
+    );
+  }
+
   if (size < 340) {
     return (
       <WheelWrapper>
@@ -184,7 +259,16 @@ export default function TeachingsWheel({ onSelect }) {
               style={{ left: x, top: y, border: `3px solid ${ringColours[i]}` }}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
-              onClick={() => onSelect && onSelect({ title: `${t.name} – ${t.animal}`, quote: t.desc, video: t.video })}
+              onClick={() => onSelect && onSelect({
+                idx: i,
+                name: t.name,
+                ojibwe: t.ojibwe,
+                animal: t.animal,
+                desc: t.desc,
+                video: t.video,
+                img: t.img,
+                color: ringColours[i]
+              })}
               $active={active === i}
               $icon={icon}
               role="listitem"
