@@ -61,11 +61,10 @@ const Icon = styled(motion.button)`
   ${(props) =>
     props.$active &&
     css`
-      transform: scale(1.15);
       box-shadow: 0 0 0 4px var(--lux-gold, #ffd98b);
     `}
   &:focus-visible { outline: 2px solid var(--lux-gold); outline-offset: 2px; }
-  img { width: 100%; height: 100%; object-fit: contain; }
+  img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 `;
 
 const Info = styled.div`
@@ -131,8 +130,9 @@ export default function TeachingsWheel({ onSelect }) {
   }, []);
 
   const center = size / 2;
-  const icon = size * 0.26; // slightly larger icons
-  const radius = center - icon / 2 - 10;
+  const icon = size * 0.26; // default icon diameter
+  const hoverScale = 1.2; // grows to 120% (≈ Kokopelli size)
+  const radius = center - (icon * hoverScale) / 2 - 10; // ensure even gap even when hovered
 
   // Pre-compute icon centres for lines
   const positions = teachings.map((_, i) => {
@@ -173,7 +173,7 @@ export default function TeachingsWheel({ onSelect }) {
               $icon={icon}
               role="listitem"
               aria-label={`${t.name} – ${t.animal}`}
-              whileHover={{ scale: 1.15 }}
+              whileHover={{ scale: hoverScale, zIndex: 3 }}
               variants={{ hidden:{opacity:0,scale:0.6}, visible:{opacity:1,scale:1, transition:{duration:0.4}} }}
             >
               <img src={t.img} alt="" />
