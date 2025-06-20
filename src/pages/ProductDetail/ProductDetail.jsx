@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { toast } from 'react-toastify';
 import { flyToCart } from '../../utils/flyToCart';
+import { addRecentProduct } from '../../utils/recentlyViewed';
+import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -59,7 +61,10 @@ function ProductDetail() {
   useEffect(() => {
     fetch(`/api/products/${id}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data))
+      .then((data) => {
+        setProduct(data);
+        addRecentProduct(data);
+      })
       .catch((err) => console.error(err));
   }, [id]);
 
@@ -133,6 +138,8 @@ function ProductDetail() {
       <p style={{ marginTop: '24px' }}>{product.description}</p>
       <p style={{ fontWeight: 600, fontSize: '1.25rem', color: 'var(--primary-red)' }}>${product.price}</p>
       <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
+
+      <RecentlyViewed currentId={product._id} />
     </Wrapper>
   );
 }
