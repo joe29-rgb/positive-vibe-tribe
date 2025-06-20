@@ -242,10 +242,6 @@ export default function TeachingsWheel({ onSelect }) {
           {renderCard(active, 0)}
           {renderCard(nextIdx, 1)}
         </motion.div>
-        <Info aria-live="polite" style={{ marginTop: 16 }}>
-          <InfoTitle style={{ color: ringColours[active] }}>{teachings[active].name} ({teachings[active].ojibwe}) – {teachings[active].animal}</InfoTitle>
-          <InfoText>{teachings[active].desc}</InfoText>
-        </Info>
       </WheelWrapper>
     );
   }
