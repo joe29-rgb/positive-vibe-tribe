@@ -216,6 +216,16 @@ export default function TeachingsWheel({ onSelect }) {
             alt=""
             style={{ width: '100%', height: '100%', borderRadius: '50%', border: `4px solid ${ringColours[idx]}`, objectFit: 'cover' }}
           />
+          {isCenter && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', width: '200px', pointerEvents:'none' }}
+            >
+              <strong style={{ color: ringColours[idx], fontSize: '1rem' }}>{t.name} ({t.ojibwe})</strong>
+            </motion.div>
+          )}
         </motion.div>
       );
     };
