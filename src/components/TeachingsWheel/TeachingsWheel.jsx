@@ -48,7 +48,7 @@ const Wheel = styled(motion.div)`
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    background: radial-gradient(circle, #f8f4e9 0%, transparent 70%);
+    background: radial-gradient(circle, #f8f4e9 0%, rgba(248,244,233,0) 85%);
     z-index: -1;
   }
 `;
@@ -164,7 +164,8 @@ export default function TeachingsWheel({ onSelect }) {
     return { cx, cy };
   });
 
-  const isCarousel = size >= 340 && size < 480;
+  const vw = window.innerWidth;
+  const isCarousel = vw >= 340 && vw < 480;
 
   if (isCarousel) {
     const card = 180;
