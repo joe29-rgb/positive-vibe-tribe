@@ -332,7 +332,7 @@ function About() {
             These sacred principles—shared by the Anishinaabe people—guide everything we do. Each teaching is a
             blueprint for living in harmony with ourselves, our community, and the earth.
           </p>
-          <TeachingsWheel />
+          <TeachingsWheel onSelect={setSelectedTeaching} />
         </Container>
       </WaveSection>
 

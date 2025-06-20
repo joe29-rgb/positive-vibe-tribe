@@ -27,16 +27,16 @@ const WheelWrapper = styled.div`
 
 const Wheel = styled.div`
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: ${(props) => props.$size}px;
+  height: ${(props) => props.$size}px;
   border-radius: 50%;
   background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.15) 100%);
 `;
 
 const Icon = styled.button`
   position: absolute;
-  width: 72px;
-  height: 72px;
+  width: ${(props) => props.$icon}px;
+  height: ${(props) => props.$icon}px;
   border: none;
   padding: 0;
   background: transparent;
@@ -72,15 +72,29 @@ const InfoText = styled.p`
   color: var(--dark-brown);
 `;
 
-export default function TeachingsWheel() {
+export default function TeachingsWheel({ onSelect }) {
   const [active, setActive] = useState(0);
+  const [size, setSize] = useState(320);
 
-  const center = 160; // half of 320
-  const radius = 120;
+  React.useEffect(() => {
+    const calc = () => {
+      const vw = window.innerWidth;
+      if (vw < 480) setSize(260);
+      else if (vw < 768) setSize(320);
+      else setSize(480);
+    };
+    calc();
+    window.addEventListener('resize', calc);
+    return () => window.removeEventListener('resize', calc);
+  }, []);
+
+  const center = size / 2;
+  const icon = size * 0.22; // proportionally scale icon
+  const radius = center - icon / 2 - 10;
 
   return (
     <WheelWrapper>
-      <Wheel role="list">
+      <Wheel role="list" $size={size}>
         {teachings.map((t, i) => {
           const angle = (i / teachings.length) * 2 * Math.PI - Math.PI/2;
           const x = center + radius * Math.cos(angle) - 36; // 36 half icon
@@ -91,7 +105,9 @@ export default function TeachingsWheel() {
               style={{ left: x, top: y }}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
+              onClick={() => onSelect && onSelect({ title: `${t.name} – ${t.animal}`, quote: t.desc })}
               $active={active === i}
+              $icon={icon}
               aria-label={`${t.name} – ${t.animal}`}
             >
               <img src={t.img} alt="" />
