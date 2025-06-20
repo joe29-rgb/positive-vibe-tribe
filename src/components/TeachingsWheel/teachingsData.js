@@ -1,0 +1,9 @@
+export const teachings = [
+    { key: 'wisdom', name: 'Wisdom', ojibwe: 'Nbwaakaawin', animal: 'Beaver', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/beaver_w7q6k2.png', desc: 'Use your gifts wisely and build for the future.', video: 'S7wbE9YJ5_o', color: '#5b92e5' },
+    { key: 'love', name: 'Love', ojibwe: 'Zaagii\'idiwin', animal: 'Eagle', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eagle_wmajiu.png', desc: 'Let your heart soar and care for all creation.', video: 'pOPpCWAdsiU', color: '#d4af37' },
+    { key: 'respect', name: 'Respect', ojibwe: 'Mnaadendimowin', animal: 'Buffalo', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/buffalo_ervhuw.png', desc: 'Honor the earth and give selflessly.', video: '5ZCE5wUzqZM', color: '#8b572a' },
+    { key: 'bravery', name: 'Bravery', ojibwe: 'Aakode\'ewin', animal: 'Bear', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/bear_fkrsts.png', desc: 'Face challenges with courage.', video: 'duNnuC86pmE', color: '#333333' },
+    { key: 'honesty', name: 'Honesty', ojibwe: 'Gwekwaadziwin', animal: 'Raven', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/raven_yvebyp.png', desc: 'Walk tall and speak truth.', video: 'gcyswnThOH8', color: '#6d6d6d' },
+    { key: 'humility', name: 'Humility', ojibwe: 'Dbaadendiziwin', animal: 'Wolf', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431662/wolf_kerexd.png', desc: 'Know your place in the great circle and value the pack over self.', video: '0x32iacMyvk', color: '#c0c0c0' },
+    { key: 'truth', name: 'Truth', ojibwe: 'Debwewin', animal: 'Turtle', img: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431663/turtle_zuok1v.png', desc: 'Carry the teachings with you every day.', video: '1lb8WQX3bCE', color: '#2e8b57' },
+];

@@ -15,6 +15,7 @@ import BackToTop from '../../components/BackToTop/BackToTop';
 import AudioToggle from '../../components/AudioToggle/AudioToggle';
 import useFocusTrap from '../../utils/useFocusTrap';
 import TeachingsWheel from '../../components/TeachingsWheel/TeachingsWheel';
+import { teachings as teachingsData } from '../../components/TeachingsWheel/teachingsData';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -278,12 +279,21 @@ function About() {
     }
   };
 
-  const openByIdx = (i) => {
-    const wheelTeachings = document.querySelectorAll('[aria-label$="–"]');
-    if(wheelTeachings[i]) wheelTeachings[i].click();
-  };
+  const teachingsCount = teachingsData.length;
 
-  const teachingsCount = 7;
+  const openByIdx = (i) => {
+    const t = teachingsData[i];
+    setSelectedTeaching({
+      idx: i,
+      name: t.name,
+      ojibwe: t.ojibwe,
+      animal: t.animal,
+      desc: t.desc,
+      video: t.video,
+      img: t.img,
+      color: t.color,
+    });
+  };
 
   return (
     <Wrapper id="main">
