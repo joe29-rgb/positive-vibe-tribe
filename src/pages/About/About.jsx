@@ -267,13 +267,13 @@ function About() {
   useFocusTrap(!!selectedTeaching, modalRef);
 
   const handlePrev = () => {
-    if(selectedTeaching){
+    if(selectedTeaching && typeof selectedTeaching.idx === 'number'){
       const prev = (selectedTeaching.idx + teachingsCount -1)%teachingsCount;
       openByIdx(prev);
     }
   };
   const handleNext = () => {
-    if(selectedTeaching){
+    if(selectedTeaching && typeof selectedTeaching.idx === 'number'){
       const next = (selectedTeaching.idx +1)%teachingsCount;
       openByIdx(next);
     }
@@ -320,7 +320,7 @@ function About() {
       <ParallaxHero />
 
       {/* Mission */}
-      <AngleSection angleTop angleBottom id="mission" style={{ background: 'var(--primary-color,#2d4a3e)', color: '#fff', textAlign: 'center' }}>
+      <AngleSection parallax angleTop angleBottom id="mission" style={{ background: 'var(--primary-color,#2d4a3e)', color: '#fff', textAlign: 'center' }}>
         <Container>
           <H2 style={{ color: '#fff' }}>Our Mission</H2>
           <p style={{ fontSize: '1.25rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
@@ -499,7 +499,9 @@ function About() {
               tabIndex="-1"
             >
               <h3 id="teaching-title" style={{ marginBottom: '0.75rem', color:selectedTeaching.color }}>
-                {selectedTeaching.name} ({selectedTeaching.ojibwe}) – {selectedTeaching.animal}
+                {selectedTeaching.name}
+                {selectedTeaching.ojibwe && ` (${selectedTeaching.ojibwe})`}
+                {selectedTeaching.animal && ` – ${selectedTeaching.animal}`}
               </h3>
               <img src={selectedTeaching.img} alt="" style={{width:'120px',height:'120px',borderRadius:'50%',border:`4px solid ${selectedTeaching.color}`,objectFit:'cover',margin:'0 auto 1rem',display:'block'}} />
               <p style={{ marginBottom: '1.25rem', lineHeight: 1.6 }}>{selectedTeaching.desc}</p>
@@ -514,10 +516,14 @@ function About() {
                   />
                 </div>
               )}
-              <div style={{display:'flex',justifyContent:'space-between',marginTop:'1rem'}}>
-                <MotionLink as="button" onClick={handlePrev}>&larr; Prev</MotionLink>
+              <div style={{display:'flex',justifyContent:'center',gap:'1.5rem',marginTop:'1rem'}}>
+                {typeof selectedTeaching.idx === 'number' && (
+                  <MotionLink as="button" onClick={handlePrev}>&larr; Prev</MotionLink>
+                )}
                 <MotionLink as="button" onClick={() => setSelectedTeaching(null)}>Close</MotionLink>
-                <MotionLink as="button" onClick={handleNext}>Next &rarr;</MotionLink>
+                {typeof selectedTeaching.idx === 'number' && (
+                  <MotionLink as="button" onClick={handleNext}>Next &rarr;</MotionLink>
+                )}
               </div>
             </ModalBox>
           </Backdrop>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 
 const Base = styled(motion.section)`
   padding: var(--section-padding, 110px 20px);
@@ -19,11 +19,25 @@ function buildClip(top, bottom) {
   return 'none';
 }
 
-const AngleSection = ({ angleTop = false, angleBottom = false, children, ...rest }) => {
+const AngleSection = ({ angleTop = false, angleBottom = false, parallax = false, factor = 0.2, children, ...rest }) => {
   const clipPath = buildClip(angleTop, angleBottom);
+
+  // Set up transforms (hooks must run unconditionally)
+  const { scrollY } = useViewportScroll();
+  const yTransform = useTransform(scrollY, [0, 1200], [0, -1200 * factor]);
+
+  // Determine whether to apply parallax (respect prefers-reduced-motion)
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const parallaxStyle = parallax && !reduceMotion ? { y: yTransform } : {};
+
+  const style = {
+    ...(clipPath !== 'none' && { clipPath }),
+    ...parallaxStyle,
+  };
+
   return (
     <Base
-      style={clipPath !== 'none' ? { clipPath } : undefined}
+      style={style}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
