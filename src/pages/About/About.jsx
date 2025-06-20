@@ -2,13 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import beaverImg from '../../assets/teachings/beaver.png';
-import eagleImg from '../../assets/teachings/eagle.png';
-import buffaloImg from '../../assets/teachings/buffalo.png';
-import bearImg from '../../assets/teachings/bear.png';
-import ravenImg from '../../assets/teachings/raven.png';
-import wolfImg from '../../assets/teachings/wolf.png';
-import turtleImg from '../../assets/teachings/turtle.png';
 import kokopelliImg from '../../assets/kokopelli2.png';
 import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
@@ -23,6 +16,7 @@ import FloatingGlyph from '../../components/FloatingGlyph/FloatingGlyph';
 import BackToTop from '../../components/BackToTop/BackToTop';
 import AudioToggle from '../../components/AudioToggle/AudioToggle';
 import useFocusTrap from '../../utils/useFocusTrap';
+import TeachingsWheel from '../../components/TeachingsWheel/TeachingsWheel';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -107,8 +101,6 @@ const Card = styled(motion.div).attrs(()=>({
   }
   will-change: transform;
 `;
-const CardImg = styled.img`
-  width:100%;border-radius:8px;object-fit:cover;height:160px;margin-bottom:1rem;`;
 const ImpactGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -340,61 +332,7 @@ function About() {
             These sacred principles—shared by the Anishinaabe people—guide everything we do. Each teaching is a
             blueprint for living in harmony with ourselves, our community, and the earth.
           </p>
-          <TeachGrid>
-            <Card onClick={() => setSelectedTeaching({title:'Nibwaakaawin – Wisdom', quote:'Wisdom is gifted by the Creator to be shared with humility. We honour it when we make decisions that will hold true for seven generations.', video:'S7wbE9YJ5_o'})}>
-              <CardImg src={beaverImg} alt="Beaver symbol" />
-              <h3>Nibwaakaawin – Wisdom</h3>
-              <p>
-                Cherish knowledge and use it wisely—always considering the next seven generations. Every material, cut,
-                and colorway is chosen with purposeful care.
-              </p>
-            </Card>
-            <Card onClick={() => setSelectedTeaching({title:'Zaagi\'idiwin – Love', quote:'To love is to know peace. When we nurture love within, we carry its medicine to every place our feet touch the earth.', video:'pOPpCWAdsiU'})}>
-              <CardImg src={eagleImg} alt="Eagle symbol" />
-              <h3>Zaagi&apos;idiwin – Love</h3>
-              <p>
-                Love starts within and radiates outward. Our garments nurture self-love, then ripple positivity into every
-                circle you move through.
-              </p>
-            </Card>
-            <Card onClick={() => setSelectedTeaching({title:'Minaadendamowin – Respect', quote:'Respect is the heartbeat of all creation; when we honour the gifts of every being, we walk in balance.', video:'5ZCE5wUzqZM'})}>
-              <CardImg src={buffaloImg} alt="Buffalo symbol" />
-              <h3>Minaadendamowin – Respect</h3>
-              <p>
-                We honor all creation—from the cotton farmer to the courier. Ethical sourcing and fair partnerships are
-                non-negotiable.
-              </p>
-            </Card>
-            <Card onClick={() => setSelectedTeaching({title:'Aakode\'ewin – Bravery', quote:'Bravery is not the absence of fear, but the will to follow our truth even when the path is hard.', video:'duNnuC86pmE'})}>
-              <CardImg src={bearImg} alt="Bear symbol" />
-              <h3>Aakode&apos;ewin – Bravery</h3>
-              <p>
-                Courage means standing for what&apos;s right. We amplify Indigenous voices and embrace bold, joy-filled
-                designs.
-              </p>
-            </Card>
-            <Card onClick={() => setSelectedTeaching({title:'Gwayakwaadiziwin – Honesty', quote:'Honesty is speaking our heart without deception, living in alignment with our words and actions.', video:'gcyswnThOH8'})}>
-              <CardImg src={ravenImg} alt="Raven symbol" />
-              <h3>Gwayakwaadiziwin – Honesty</h3>
-              <p>
-                Radical transparency in our pricing, supply chain, and storytelling builds the trust our Tribe deserves.
-              </p>
-            </Card>
-            <Card onClick={() => setSelectedTeaching({title:'Dabaadendiziwin – Humility', quote:'Humility is knowing we are but one thread in a vast tapestry. We bow our heads to learn and to serve.', video:'0x32iacMyvk'})}>
-              <CardImg src={wolfImg} alt="Wolf symbol" />
-              <h3>Dabaadendiziwin – Humility</h3>
-              <p>
-                We are one thread in a vast tapestry. Every success is shared; every misstep becomes a lesson.
-              </p>
-            </Card>
-            <Card onClick={() => setSelectedTeaching({title:'Debwewin – Truth', quote:'Truth combines all teachings. It is living the way Creator intended, with integrity in every breath.', video:'1lb8WQX3bCE'})}>
-              <CardImg src={turtleImg} alt="Turtle symbol" />
-              <h3>Debwewin – Truth</h3>
-              <p>
-                We speak and act from lived experience, honoring the origins of every word and pattern we share.
-              </p>
-            </Card>
-          </TeachGrid>
+          <TeachingsWheel />
         </Container>
       </WaveSection>
 
