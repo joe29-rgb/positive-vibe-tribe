@@ -142,6 +142,22 @@ export default function TeachingsWheel({ onSelect }) {
     return { cx, cy };
   });
 
+  if (size < 340) {
+    return (
+      <WheelWrapper>
+        {teachings.map((t,i)=>(
+          <div key={t.name} style={{display:'flex',alignItems:'center',gap:16,marginBottom:24}}>
+            <img src={t.img} alt="" width={68} height={68} style={{borderRadius:'50%',border:`3px solid ${ringColours[i]}`,objectFit:'cover'}} />
+            <div>
+              <strong style={{color:ringColours[i]}}>{t.name} ({t.ojibwe})</strong>
+              <p style={{margin:0,fontSize:'0.9rem'}}>{t.desc}</p>
+            </div>
+          </div>
+        ))}
+      </WheelWrapper>
+    );
+  }
+
   return (
     <WheelWrapper>
       <Wheel role="list" $size={size} initial="hidden" whileInView="visible" viewport={{once:true,amount:0.3}}>
