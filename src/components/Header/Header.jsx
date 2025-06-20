@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
-import kokopelliImg from '../../assets/kokopelli.png';
 import diamondSvg from '../../assets/corner-diamond.svg';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -286,6 +285,8 @@ function Header() {
 
   // Redux cart selector
   const itemCount = useSelector((state) => state.cart.itemCount);
+
+  const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
 
   return (
     <>

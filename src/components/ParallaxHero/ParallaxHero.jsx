@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
-import teachingsPortrait from '../../assets/founder-portrait.png';
+
+const teachingsPortrait = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431524/founder-portrait_k3mman.png';
 
 const HeroSection = styled.section`
   position: relative;

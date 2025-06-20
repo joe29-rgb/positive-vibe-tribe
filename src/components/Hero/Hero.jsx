@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
-import kokopelliVideo from '../../assets/kokopelli.mp4.mp4';
-import kokopelliImg from '../../assets/kokopelli.png';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getCdnImage } from '../../utils/cloudinary';
+
+const kokopelliVideo = 'https://res.cloudinary.com/dhm8ttqnk/video/upload/v1750431736/kokopelli.mp4_eepuys.mp4';
+const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
 
 const HeroContainer = styled.section`
   min-height: 100vh;

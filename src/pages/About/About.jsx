@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import kokopelliImg from '../../assets/kokopelli2.png';
 import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 import AngleSection from '../../components/AngleSection/AngleSection';
 import WaveSection from '../../components/WaveSection/WaveSection';
-import founderImage from '../../assets/founder.jpg';
 import LazyImage from '../../components/LazyImage/LazyImage';
 import diamondTile from '../../assets/diamond-tile.svg';
 import Testimonials from '../../components/Testimonials/Testimonials';
@@ -238,6 +236,9 @@ With a final, joyful tune, Kokopelli vanished into the sunrise, leaving behind b
 And so, whenever the wind carries the sound of a distant flute across the Alberta badlands or the desert canyons, people smile and remember: Kokopelli has passed this way, and the world is richer for it.
 
 Click the Kokopelli figure to hear his flute, or hover over each animal in the circle to reveal its teaching. The legend lives on—will you carry it forward?`;
+
+const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431534/kokopelli2_eahvpj.png';
+const founderImage = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431546/founder_yjlzto.jpg';
 
 function About() {
   const [showBar,setShowBar]=useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import founderImg from '../../assets/founder.jpg'; // place the provided photo here
+const founderImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431546/founder_yjlzto.jpg';
 
 const Section = styled.section`
   background: #faf7f3;
@@ -47,14 +47,14 @@ function FounderStory() {
           <Paragraph>
             Our founder believes in loving for no reason. It began at an airport bar in San Antonio when he
             offered kindness to a stranger who had missed her flight. Even after she rejected his help, he
-            quietly paid for her drink. When questioned, he replied, “If there are people who hate for no
-            reason, I can love for no reason.” The entire bar applauded, proving that authentic positivity is
+            quietly paid for her drink. When questioned, he replied, &ldquo;If there are people who hate for no
+            reason, I can love for no reason.&rdquo; The entire bar applauded, proving that authentic positivity is
             contagious.
           </Paragraph>
           <Paragraph>
             Months later, a simple conversation at an Alberta gas station revealed a deeper truth. Pointing to
-            the faint Positive Vibez decal on his window, he said, “Positivity is always there—you just have to
-            look a little harder.” That moment crystallised Positive Vibe Tribe&apos;s mission: carry Indigenous
+            the faint Positive Vibez decal on his window, he said, &ldquo;Positivity is always there—you just have to
+            look a little harder.&rdquo; That moment crystallised Positive Vibe Tribe&apos;s mission: carry Indigenous
             teachings of Kokopelli&apos;s joy and the wolf pack&apos;s loyalty into everyday life.
           </Paragraph>
           <Paragraph>

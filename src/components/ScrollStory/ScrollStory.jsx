@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import kokopelli from '../../assets/kokopelli.png';
 import look3 from '../../assets/collage/look3.jpg';
 import look7 from '../../assets/collage/look7.jpg';
 
@@ -50,6 +49,8 @@ const Para = styled.p`
   font-size: 1.125rem;
   line-height: 1.6;
 `;
+
+const kokopelli = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
 
 function StorySection({ bg, children }) {
   return (

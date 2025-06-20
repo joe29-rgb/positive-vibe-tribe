@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import flute from '../../assets/kokopelli.mp4.mp4';
+
+const flute = 'https://res.cloudinary.com/dhm8ttqnk/video/upload/v1750431736/kokopelli.mp4_eepuys.mp4';
 
 const Button = styled(motion.button)`
   position: fixed;
@@ -35,6 +36,13 @@ function AudioToggle() {
     if (stored === 'on') {
       toggle(true);
     }
+    // Cleanup on unmount
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, []);
 
   const toggle = (forcePlay) => {
@@ -75,4 +83,4 @@ function AudioToggle() {
   );
 }
 
-export default AudioToggle; 
+export default AudioToggle;

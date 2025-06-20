@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, useInView } from 'framer-motion';
-import founderImg from '../../assets/founder.jpg';
 import look3 from '../../assets/collage/look3.jpg';
 import look7 from '../../assets/collage/look7.jpg';
+const founderImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431546/founder_yjlzto.jpg';
 
 const Section = styled.section`
   position: relative;
@@ -59,7 +59,7 @@ const chapters = [
   {
     bg: founderImg,
     title: 'Building a Movement',
-    text: 'From Kokopelli’s joyful seeds to Wolf-pack strength, our founder weaves Indigenous wisdom into garments that spark community connection.',
+    text: 'From Kokopelli\'s joyful seeds to Wolf-pack strength, our founder weaves Indigenous wisdom into garments that spark community connection.',
   },
 ];
 

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import bear from '../../assets/teachings/bear.png';
-import beaver from '../../assets/teachings/beaver.png';
-import buffalo from '../../assets/teachings/buffalo.png';
-import eagle from '../../assets/teachings/eagle.png';
-import raven from '../../assets/teachings/raven.png';
-import turtle from '../../assets/teachings/turtle.png';
-import wolf from '../../assets/teachings/wolf.png';
+
+const bear = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/bear_fkrsts.png';
+const beaver = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/beaver_w7q6k2.png';
+const buffalo = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/buffalo_ervhuw.png';
+const eagle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eagle_wmajiu.png';
+const raven = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/raven_yvebyp.png';
+const turtle = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431660/eagle_wmajiu.png';
+const wolf = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431662/wolf_kerexd.png';
 
 const teachings = [
   { name: 'Wisdom', animal: 'Beaver', img: beaver, desc: 'Use your gifts wisely and build for the future.', video:'S7wbE9YJ5_o' },
