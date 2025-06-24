@@ -397,7 +397,6 @@ function About() {
               <h3>The Positive Vibe Philosophy in Action</h3>
               <ul>
                 <li><strong>Unconditional Kindness:</strong> We design clothing that spreads positive energy without expecting anything in return.</li>
-                <li><strong>Hidden Positivity:</strong> Our garments carry subtle patterns and symbols that reward those who look closer.</li>
                 <li><strong>Community Impact:</strong> A portion of every purchase supports Indigenous communities in Alberta.</li>
                 <li><strong>Quality with Purpose:</strong> Premium materials ensure lasting comfort, just as positive energy creates lasting change.</li>
               </ul>
@@ -410,16 +409,16 @@ function About() {
         </Container>
       </AngleSection>
 
+      {/* Interactive Story Timeline */}
+      <Section id="our-story" style={{ padding: 0 }}>
+        <StoryTimeline />
+      </Section>
+
       {/* LOVE Mosaic from our community */}
       <Section id="love-mosaic" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
         <Container>
           <LoveMosaic />
         </Container>
-      </Section>
-
-      {/* Interactive Story Timeline */}
-      <Section id="our-story" style={{ padding: 0 }}>
-        <StoryTimeline />
       </Section>
 
       {/* Honouring Section */}
