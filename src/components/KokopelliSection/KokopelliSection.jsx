@@ -2,11 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import KokopelliCollage from './KokopelliCollage';
 import kokopelliLocal from '../../assets/kokopelli.png';
-import look1 from '../../assets/kokopelli-collage/kokopelli-1.png';
-import look2 from '../../assets/kokopelli-collage/kokopelli-2.png';
-import look3 from '../../assets/kokopelli-collage/kokopelli-3.png';
-import look4 from '../../assets/kokopelli-collage/kokopelli-4.png';
-import look5 from '../../assets/kokopelli-collage/kokopelli-5.png';
 
 const kokopelliImg = kokopelliLocal;
 
@@ -68,6 +63,14 @@ const Subtitle = styled.p`
   margin-bottom:2rem;
 `;
 
+const urls = {
+  one: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750789108/kokopelli-1_ykngib.png',
+  two: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750789109/kokopelli-2_ww1kop.png',
+  three: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750789110/kokopelli-3_hpwpxa.png',
+  four: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750789112/kokopelli-4_vqwllc.png',
+  five: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750789108/kokopelli-5_zrhhts.png',
+};
+
 export default function KokopelliSection({ onSelect, story, videoId }){
   const handleClick = ()=>{
     onSelect && onSelect({
@@ -100,11 +103,11 @@ export default function KokopelliSection({ onSelect, story, videoId }){
 
       {/* Collage with chapter snippets */}
       <KokopelliCollage chapters={[
-        {img:look1,title:'Chapter 1: The Arrival',text:'A haunting flute melody heralds Kokopelli\'s arrival, bringing hope to a thirsty land.'},
-        {img:look2,title:'Chapter 2: The Gifts',text:'He scatters seeds of wisdom, laughter, and kindness—blooming wherever his shadow falls.'},
-        {img:look3,title:'Chapter 3: Trickster\'s Lessons',text:'Playful mischief teaches that laughter is medicine and life should never be too serious.'},
-        {img:look4,title:'Chapter 4: The Seven Teachings',text:'Around a great fire he weaves the sacred teachings of Wisdom, Love, Respect, Bravery, Honesty, Humility, and Truth.'},
-        {img:look5,title:'Chapter 5: The Legacy',text:'At dawn he departs, reminding us to plant these teachings in our hearts and spread abundance.'},
+        {img:urls.one,title:'Chapter 1: The Arrival',text:'A haunting flute melody heralds Kokopelli\'s arrival, bringing hope to a thirsty land.'},
+        {img:urls.two,title:'Chapter 2: The Gifts',text:'He scatters seeds of wisdom, laughter, and kindness—blooming wherever his shadow falls.'},
+        {img:urls.three,title:'Chapter 3: Trickster\'s Lessons',text:'Playful mischief teaches that laughter is medicine and life should never be too serious.'},
+        {img:urls.four,title:'Chapter 4: The Seven Teachings',text:'Around a great fire he weaves the sacred teachings of Wisdom, Love, Respect, Bravery, Honesty, Humility, and Truth.'},
+        {img:urls.five,title:'Chapter 5: The Legacy',text:'At dawn he departs, reminding us to plant these teachings in our hearts and spread abundance.'},
       ]} />
     </Section>
   );
