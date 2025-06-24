@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import LookbookStrip from '../../components/LookbookStrip/LookbookStrip';
 import ParallaxHero from '../../components/ParallaxHero/ParallaxHero';
 import StoryTimeline from '../../components/StoryTimeline/StoryTimeline';
 import AngleSection from '../../components/AngleSection/AngleSection';
@@ -17,6 +16,7 @@ import useFocusTrap from '../../utils/useFocusTrap';
 import TeachingsWheel from '../../components/TeachingsWheel/TeachingsWheel';
 import { teachings as teachingsData } from '../../components/TeachingsWheel/teachingsData';
 import KokopelliSection from '../../components/KokopelliSection/KokopelliSection';
+import LoveMosaic from '../../components/LoveMosaic/LoveMosaic';
 
 //-------------------- Shared Styled Helpers --------------------//
 const Wrapper = styled.main`
@@ -391,10 +391,6 @@ function About() {
               <p>Despite being met with hostility and profanity when he offered help, our founder persisted with genuine kindness. When the woman angrily questioned why he cared, his response was simple yet profound: <em>&ldquo;I just wanted you to have a better day.&rdquo;</em> Even when she rudely declined his offer to buy her a drink, he quietly paid for it anyway before leaving.</p>
               <p>As she discovered his gesture, her defensive walls began to crumble. His explanation resonated throughout the bar: <strong>&ldquo;If there are people out there who hate for no reason, then I can love for no reason.&rdquo;</strong> The spontaneous applause from fellow travelers confirmed what we know today—authentic kindness creates ripple effects that touch everyone around us.</p>
 
-              <h3>Hidden Positivity: Finding Light in Dark Places</h3>
-              <p>Months later in Lethbridge, Alberta, another encounter reinforced this philosophy. A stranger noticed the subtle <em>Positive&nbsp;Vibez</em> decal on his vehicle&apos;s rear window and commented that it was &ldquo;a little hard to see.&rdquo;</p>
-              <p>The woman began crying, moved by this simple truth. It was then our founder realized he wasn&apos;t just creating a clothing brand—he was building a movement based on the Indigenous teachings that guide us: spreading positive energy like Kokopelli&apos;s ancient songs of joy and abundance.</p>
-
               <h3>From Personal Values to Brand Mission</h3>
               <p>These encounters shaped the DNA of Positive Vibe Tribe. Our founder&apos;s commitment to spreading unconditional positivity, even in the face of hostility, reflects the deeper Indigenous wisdom that guides our brand. Drawing from traditional Kokopelli teachings—where the fertility deity carries seeds of abundance and joy to communities—and wolf spirit guidance that emphasizes pack loyalty and strength, our founder built a brand that honors these ancient principles while serving modern needs.</p>
 
@@ -414,13 +410,10 @@ function About() {
         </Container>
       </AngleSection>
 
-      {/* Lookbook / Lifestyle Strip */}
-      <Section id="lookbook" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
+      {/* LOVE Mosaic from our community */}
+      <Section id="love-mosaic" initial={{opacity:0, y:40}} whileInView={{opacity:1, y:0}} viewport={{once:true, amount:0.2}}>
         <Container>
-          <H2 initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} transition={{duration:0.6}} viewport={{once:true}}>
-            Life in the Tribe
-          </H2>
-          <LookbookStrip />
+          <LoveMosaic />
         </Container>
       </Section>
 
