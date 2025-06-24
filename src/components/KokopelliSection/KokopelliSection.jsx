@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import KokopelliCollage from './KokopelliCollage';
 import kokopelliLocal from '../../assets/kokopelli.png';
-import look1 from '../../assets/collage/look1.jpg';
-import look2 from '../../assets/collage/look2.jpg';
-import look3 from '../../assets/collage/look3.jpg';
-import look4 from '../../assets/collage/look4.jpg';
-import look5 from '../../assets/collage/look5.jpg';
+import look1 from '../../assets/kokopelli-collage/kokopelli-1.png';
+import look2 from '../../assets/kokopelli-collage/kokopelli-2.png';
+import look3 from '../../assets/kokopelli-collage/kokopelli-3.png';
+import look4 from '../../assets/kokopelli-collage/kokopelli-4.png';
+import look5 from '../../assets/kokopelli-collage/kokopelli-5.png';
 
 const kokopelliImg = kokopelliLocal;
 
