@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import LazyImage from '../LazyImage/LazyImage';
 // Imagery
 import look1 from '../../assets/collage/look1.jpg';
@@ -53,23 +53,39 @@ const StyledImg = styled(LazyImage)`
   animation: ${zoom} 18s ease-in-out alternate infinite;
 `;
 
+const Wrapper = styled.section`
+  position: relative;
+  padding: 60px 0;
+  overflow: hidden;
+`;
+
+const PatternLayer = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none' stroke='%23e8ddd4' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.06;
+  pointer-events: none;
+  will-change: transform;
+`;
+
 function LookbookStrip() {
-  // Video modal disabled
+  const { scrollY } = useViewportScroll();
+  const bgY = useTransform(scrollY, [0, 1000], [0, -200]);
 
   return (
-    <>
-      <Strip>
+    <Wrapper>
+      {/* Subtle moving pattern */}
+      <PatternLayer style={{ y: bgY }} />
+
+      <Strip as={motion.div} style={{ y: useTransform(scrollY, [0, 1000], [0, -80]) }}>
         {images.map((src, idx) => (
-          <Slide key={src} data-hover="card">
+          <Slide key={src} data-hover="card" whileHover={{ scale: 1.03 }}>
             <StyledImg src={src} alt={`Positive Vibe Tribe look ${idx + 1}`} />
-            {/* overlay removed */ }
           </Slide>
         ))}
       </Strip>
-
-      {/* Video Modal */}
-      {/* overlay removed */ }
-    </>
+    </Wrapper>
   );
 }
 

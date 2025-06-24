@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import look1 from '../../assets/collage/look1.jpg';
 import look2 from '../../assets/collage/look2.jpg';
 import look3 from '../../assets/collage/look3.jpg';
@@ -7,6 +8,7 @@ import look3 from '../../assets/collage/look3.jpg';
 const Section = styled.section`
   background: #f5f1eb;
   padding: 80px 20px;
+  position: relative;
 `;
 const Container = styled.div`
   max-width: 1200px;
@@ -19,7 +21,7 @@ const Heading = styled.h2`
   font-family: 'UnifrakturCook', cursive;
   color: var(--dark-brown);
 `;
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 32px;
@@ -53,45 +55,39 @@ const Text = styled.p`
   color: var(--medium-gray);
 `;
 
+const PatternLayer = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none' stroke='%23e8ddd4' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.04;
+  pointer-events: none;
+`;
+
 function FeaturedCollections() {
+  const { scrollY } = useViewportScroll();
+  const translateY = useTransform(scrollY, [0, 800], [0, -120]);
+
   return (
-    <Section id="collections">
+    <Section>
+      <PatternLayer style={{ y: useTransform(scrollY, [0, 800], [0, -60]) }} />
+
       <Container>
-        <Heading>Sacred Collections for the Modern Tribe</Heading>
-        <Grid>
-          <Card>
-            <Img src={look1} alt="Kokopelli Collection" loading="lazy" />
-            <Body>
-              <Title>Kokopelli Collection</Title>
-              <Text>
-                Traditional fertility symbols meet contemporary comfort. Pieces designed to bring abundance
-                and positive energy to your daily journey.
-              </Text>
-              <a href="/collections/kokopelli" className="btn btn-gradient">Explore Abundance</a>
-            </Body>
-          </Card>
-          <Card>
-            <Img src={look2} alt="Wolf Pack Essentials" loading="lazy" />
-            <Body>
-              <Title>Wolf Pack Essentials</Title>
-              <Text>
-                Leadership-inspired basics that embody strength, loyalty, and intuitive wisdom from ancient
-                wolf teachings.
-              </Text>
-              <a href="/collections/wolf-pack" className="btn btn-gradient">Join the Pack</a>
-            </Body>
-          </Card>
-          <Card>
-            <Img src={look3} alt="Sacred Geometry" loading="lazy" />
-            <Body>
-              <Title>Sacred Geometry Line</Title>
-              <Text>
-                Indigenous-inspired patterns that honor traditional artistry while delivering luxury comfort
-                for the modern tribe.
-              </Text>
-              <a href="/collections/sacred-geometry" className="btn btn-gradient">Discover Patterns</a>
-            </Body>
-          </Card>
+        <Heading as={motion.h2} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
+          Featured Collections
+        </Heading>
+        <Grid style={{ y: translateY }}>
+          {[{img:look1,title:'The Kokopelli Capsule',text:'Joyful prints that celebrate abundance and music.'},
+            {img:look2,title:'Wolfpack Essentials',text:'Gear up with pieces symbolising strength and unity.'},
+            {img:look3,title:'Sky Dancer Series',text:'Bold turquoise palettes inspired by prairie sunsets.'}].map((c)=>(
+              <Card key={c.title} whileHover={{ y:-6, boxShadow:'0 12px 28px rgba(0,0,0,0.12)' }}>
+                <Img src={c.img} alt={c.title} />
+                <Body>
+                  <Title>{c.title}</Title>
+                  <Text>{c.text}</Text>
+                </Body>
+              </Card>
+          ))}
         </Grid>
       </Container>
     </Section>
