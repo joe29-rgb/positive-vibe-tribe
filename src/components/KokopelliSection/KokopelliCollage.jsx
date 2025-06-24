@@ -13,12 +13,20 @@ const SlideImg = styled.img`
   object-fit: cover;
   border-radius: 50%;
   border: 6px solid var(--primary-red, #c8102e);
+
+  @media (max-width: 600px) {
+    width: 160px;
+    height: 160px;
+  }
 `;
 const Caption = styled.h4`
   margin-top: 0.75rem;
   text-align: center;
   font-family: 'Playfair Display', serif;
   color: #c8102e;
+  max-width: 260px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export default function KokopelliCollage({ chapters = [] }) {
@@ -27,12 +35,13 @@ export default function KokopelliCollage({ chapters = [] }) {
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 2500, disableOnInteraction: false }}
-        spaceBetween={24}
-        slidesPerView={1.25}
+        spaceBetween={16}
+        slidesPerView={1}
         centeredSlides
         grabCursor
         loop
         breakpoints={{
+          480: { slidesPerView: 1.4 },
           768: { slidesPerView: 2.2 },
           1024: { slidesPerView: 3.2 },
         }}

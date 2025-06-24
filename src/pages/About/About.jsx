@@ -322,11 +322,34 @@ function About() {
       {/* Mission */}
       <AngleSection parallax angleTop angleBottom id="mission" style={{ background: 'var(--primary-color,#2d4a3e)', color: '#fff', textAlign: 'center' }}>
         <Container>
-          <H2 style={{ color: '#fff' }}>Our Mission</H2>
-          <p style={{ fontSize: '1.25rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
-            To craft meaningful products that embody the Seven Teachings, foster community connection, and give back to
-            the Indigenous knowledge-keepers who inspire us.
+          <H2 style={{ color: '#fff' }}>Cultivating Positive Vibes from Day One</H2>
+          <p style={{ fontSize: '1.15rem', maxWidth: '820px', margin: '0 auto 1.5rem', lineHeight: 1.7 }}>
+            We&apos;re a start-up with a big heart. Our first goal is simple: craft comfortable, conversation-starting apparel
+            that carries the Seven Grandfather Teachings into everyday life. With every drop we will:
           </p>
+          <ul style={{listStyle:'disc',textAlign:'left',maxWidth:'760px',margin:'0 auto 2rem',lineHeight:1.7,fontSize:'1.05rem'}}>
+            <li>Celebrate Indigenous wisdom through respectful, authentic design.</li>
+            <li>Spark small acts of kindness—wearers become walking reminders of Respect, Love, Courage, Honesty, Wisdom, Humility &amp; Truth.</li>
+            <li>Seed our give-back fund, pledging <strong>1 % of first-year sales</strong> to local youth language programs.</li>
+          </ul>
+
+          {/* Early-stage impact targets */}
+          <ImpactGrid style={{marginBottom:'2rem'}}>
+            <Stat style={{background:'rgba(255,255,255,0.1)'}}>
+              <StatNumber style={{color:'#fff'}}><Count end={100}/>+</StatNumber>
+              <p style={{color:'#fff'}}>Teaching cards shared in our first 3&nbsp;months</p>
+            </Stat>
+            <Stat style={{background:'rgba(255,255,255,0.1)'}}>
+              <StatNumber style={{color:'#fff'}}>$<Count end={1}/>k</StatNumber>
+              <p style={{color:'#fff'}}>Micro-grant to an Indigenous-led project by year-end</p>
+            </Stat>
+            <Stat style={{background:'rgba(255,255,255,0.1)'}}>
+              <StatNumber style={{color:'#fff'}}>100<span style={{fontSize:'1.25rem'}}>%</span></StatNumber>
+              <p style={{color:'#fff'}}>Compostable mailers before our second drop</p>
+            </Stat>
+          </ImpactGrid>
+
+          <MotionLink href="/newsletter" className="btn btn-light" whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Grow With Us</MotionLink>
         </Container>
       </AngleSection>
 
@@ -416,15 +439,15 @@ function About() {
             learning, and meaningful reciprocity.
           </p>
           <ImpactGrid>
-            <Stat>
+            <Stat style={{background:'rgba(255,255,255,0.1)'}}>
               <StatNumber><Count end={5}/> %</StatNumber>
               <p>Of profits donated to Indigenous youth &amp; language programs in Alberta</p>
             </Stat>
-            <Stat>
+            <Stat style={{background:'rgba(255,255,255,0.1)'}}>
               <StatNumber><Count end={13}/></StatNumber>
               <p>Canadian provinces &amp; territories represented in our Tribe</p>
             </Stat>
-            <Stat>
+            <Stat style={{background:'rgba(255,255,255,0.1)'}}>
               <StatNumber><Count end={100}/> %</StatNumber>
               <p>Ethically sourced, traceable cotton</p>
             </Stat>
@@ -437,15 +460,15 @@ function About() {
         <Container>
           <H2>Community Impact</H2>
           <ImpactGrid>
-            <Stat as="div">
+            <Stat style={{background:'rgba(255,255,255,0.1)'}} as="div">
               <StatNumber>$<Count end={10}/>k+</StatNumber>
               <p>Contributed to Indigenous cultural preservation &amp; land-based healing</p>
             </Stat>
-            <Stat as="div">
+            <Stat style={{background:'rgba(255,255,255,0.1)'}} as="div">
               <StatNumber><Count end={100}/> %</StatNumber>
               <p>Recyclable packaging since launch</p>
             </Stat>
-            <Stat as="div">
+            <Stat style={{background:'rgba(255,255,255,0.1)'}} as="div">
               <StatNumber><Count end={1000}/>s</StatNumber>
               <p>Of teaching cards shipped, sparking conversations coast-to-coast</p>
             </Stat>
