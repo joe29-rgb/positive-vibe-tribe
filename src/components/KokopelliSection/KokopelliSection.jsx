@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import KokopelliStoryBeats from './KokopelliStoryBeats';
+import KokopelliCollage from './KokopelliCollage';
+import kokopelliLocal from '../../assets/kokopelli.png';
+import look1 from '../../assets/collage/look1.jpg';
+import look2 from '../../assets/collage/look2.jpg';
+import look3 from '../../assets/collage/look3.jpg';
+import look4 from '../../assets/collage/look4.jpg';
+import look5 from '../../assets/collage/look5.jpg';
 
-const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
+const kokopelliImg = kokopelliLocal;
 
 const Section = styled.section`
   position: relative;
@@ -78,22 +83,29 @@ export default function KokopelliSection({ onSelect, story, videoId }){
   };
 
   return (
-    <Section id="kokopelli">
+    <Section>
       <ContentGrid>
-        <ImageWrap as={motion.div} initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
-          <HeroImg src={kokopelliImg} alt="Kokopelli silhouette" onClick={handleClick} style={{cursor:'pointer'}}/>
+        <ImageWrap>
+          <HeroImg src={kokopelliImg} alt="Kokopelli" />
         </ImageWrap>
         <div>
-          <Heading>Kokopelli – Messenger of Joy</Heading>
+          <Heading>Kokopelli – The Bringer of Joy</Heading>
           <Subtitle>
-            Kokopelli carries music and laughter across the land, reminding us to spread abundance wherever we roam.
+            A timeless symbol of abundance, music, and playful spirit. Journey with Kokopelli across the prairies and
+            hoodoos of Turtle Island.
           </Subtitle>
-          <motion.button whileHover={{scale:1.05}} whileTap={{scale:0.95}} className="btn btn-gradient" onClick={handleClick}>
-            Hear His Story
-          </motion.button>
+          <button className="btn btn-gradient" onClick={handleClick}>Read the Legend</button>
         </div>
       </ContentGrid>
-      <KokopelliStoryBeats />
+
+      {/* Collage with chapter snippets */}
+      <KokopelliCollage chapters={[
+        {img:look1,title:'Chapter 1: The Arrival',text:'A haunting flute melody heralds Kokopelli\'s arrival, bringing hope to a thirsty land.'},
+        {img:look2,title:'Chapter 2: The Gifts',text:'He scatters seeds of wisdom, laughter, and kindness—blooming wherever his shadow falls.'},
+        {img:look3,title:'Chapter 3: Trickster\'s Lessons',text:'Playful mischief teaches that laughter is medicine and life should never be too serious.'},
+        {img:look4,title:'Chapter 4: The Seven Teachings',text:'Around a great fire he weaves the sacred teachings of Wisdom, Love, Respect, Bravery, Honesty, Humility, and Truth.'},
+        {img:look5,title:'Chapter 5: The Legacy',text:'At dawn he departs, reminding us to plant these teachings in our hearts and spread abundance.'},
+      ]} />
     </Section>
   );
 } 
