@@ -27,17 +27,17 @@ const Wrapper = styled.section`
 `;
 
 const Mosaic = styled.div`
-  --tile: 80px;
+  --tile: 70px;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--tile));
   gap: 6px;
   width: 100%;
   max-width: 100%;
-  mask: url('/assets/love-mask.svg') center/contain no-repeat;
-  -webkit-mask: url('/assets/love-mask.svg') center/contain no-repeat;
+  mask: url('/assets/love-mask.svg') center/cover no-repeat;
+  -webkit-mask: url('/assets/love-mask.svg') center/cover no-repeat;
   position: relative;
   @media (max-width: 768px) {
-    --tile: 48px;
+    --tile: 44px;
     gap: 4px;
   }
 `;
@@ -52,20 +52,20 @@ const Tile = styled(motion.div)`
     $active &&
     css`
       position: absolute;
-      width: calc(var(--tile) * 3.5);
-      height: calc(var(--tile) * 3.5);
+      width: calc(var(--tile) * 4.5);
+      height: calc(var(--tile) * 4.5);
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotateX(-12deg) scale(1.05);
+      transform: translate(-50%, -50%) rotateX(-10deg) rotateY(8deg) scale(1.12);
       transform-style: preserve-3d;
       border-radius: 12px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-      z-index: 2;
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
+      z-index: 3;
       transition: transform 0.6s, box-shadow 0.6s;
       @media (max-width: 600px) {
-        width: calc(var(--tile) * 3);
-        height: calc(var(--tile) * 3);
-        transform: translate(-50%, -50%) rotateX(-8deg) scale(1.05);
+        width: calc(var(--tile) * 3.5);
+        height: calc(var(--tile) * 3.5);
+        transform: translate(-50%, -50%) rotateX(-6deg) rotateY(6deg) scale(1.1);
       }
     `}
 `;
