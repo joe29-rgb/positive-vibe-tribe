@@ -23,14 +23,15 @@ const Wrapper = styled.section`
   padding: 60px 20px;
   display: flex;
   justify-content: center;
+  perspective: 1000px;
 `;
 
 const Mosaic = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 50px);
-  gap: 4px;
+  gap: 6px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   mask: url('/assets/love-mask.svg') center/contain no-repeat;
   -webkit-mask: url('/assets/love-mask.svg') center/contain no-repeat;
   position: relative;
@@ -54,13 +55,16 @@ const Tile = styled(motion.div)`
       height: 160px;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) rotateX(-12deg);
+      transform-style: preserve-3d;
       border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
       z-index: 2;
+      transition: transform 0.6s, box-shadow 0.6s;
       @media (max-width: 600px) {
         width: 120px;
         height: 120px;
+        transform: translate(-50%, -50%) rotateX(-8deg);
       }
     `}
 `;
