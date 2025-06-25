@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getCdnImage } from '../../utils/cloudinary';
+import KokopelliCollage from '../KokopelliCollage/KokopelliCollage';
 
-const kokopelliVideo = 'https://res.cloudinary.com/dhm8ttqnk/video/upload/v1750431736/kokopelli.mp4_eepuys.mp4';
-const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
+// Replaced dancing Kokopelli assets with collage logo
 
 const HeroContainer = styled.section`
   min-height: 100vh;
@@ -26,35 +26,6 @@ const HeroContent = styled(motion.div)`
   z-index: 2;
   max-width: 800px;
   padding: 0 20px;
-`;
-
-const LogoBase = css`
-  width: 140px;
-  height: 140px;
-  margin-bottom: 30px;
-  /* Removed drop-shadow for cleaner look */
-
-  @media (max-width: 480px) {
-    width: 100px;
-    height: 100px;
-  }
-`;
-
-const LogoImg = styled(motion.img)`
-  ${LogoBase};
-`;
-
-const LogoVideo = styled(motion.video)`
-  ${LogoBase};
-  object-fit: contain;
-  pointer-events: none;
-  -webkit-user-select: none;
-  user-select: none;
-  mix-blend-mode: screen;
-  background: transparent;
-  /* Removed drop-shadow for cleaner look */
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
 `;
 
 const HeroSubtitle = styled.p`
@@ -113,20 +84,6 @@ const Reassure = styled.span`
   color: var(--medium-gray);
 `;
 
-// Dancing key-frames (left ↔ right, slight hop, gentle rotation)
-const kokoDance = {
-  animate: {
-    x: [-18, 18, -18],
-    y: [0, -10, 0],
-    rotate: [-6, 6, -6],
-    transition: {
-      duration: 4,
-      ease: 'easeInOut',
-      repeat: Infinity,
-    },
-  },
-};
-
 /* Spotlight product box */
 const Spotlight = styled.div`
   margin-top: 56px;
@@ -170,7 +127,6 @@ const AddBtn = styled.button`
 `;
 
 function Hero() {
-  const [hasVideo, setHasVideo] = useState(true);
   const [featured, setFeatured] = useState(null);
   const dispatch = useDispatch();
 
@@ -181,8 +137,6 @@ function Hero() {
       .then((data) => setFeatured(data[0]))
       .catch(() => setFeatured(null));
   }, []);
-
-  const handleVideoError = () => setHasVideo(false);
 
   const handleAdd = () => {
     if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
@@ -200,29 +154,9 @@ function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        {hasVideo ? (
-          <LogoVideo
-            src={kokopelliVideo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            style={{ backgroundColor: 'transparent' }}
-            aria-label="Positive Vibe Tribe Kokopelli video logo"
-            variants={kokoDance}
-            animate="animate"
-            onError={handleVideoError}
-          />
-        ) : (
-          <LogoImg
-            className="red"
-            src={kokopelliImg}
-            alt="Positive Vibe Tribe Kokopelli"
-            variants={kokoDance}
-            animate="animate"
-          />
-        )}
+        <div style={{ marginBottom: 30 }}>
+          <KokopelliCollage />
+        </div>
         <HeadlineBlack>Positive</HeadlineBlack>
         <HeadlineScript>Vibe Tribe</HeadlineScript>
         <HeroSubtitle>

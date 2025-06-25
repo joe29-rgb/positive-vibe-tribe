@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 
 // Temporary photo URLs duplicated as needed
 const photoUrls = [
@@ -51,7 +51,7 @@ const Mosaic = styled.div`
   }
 `;
 
-const Tile = styled.div`
+const Tile = styled(motion.div)`
   width: var(--tile);
   height: var(--tile);
   background-size: cover;
@@ -108,7 +108,7 @@ export default function LoveMosaic() {
   useEffect(() => {
     const pick = () => {
       setActive(Math.floor(Math.random() * tiles.length));
-      timeoutRef.current = setTimeout(pick, 3500);
+      timeoutRef.current = setTimeout(pick, 5000); // 5-second cadence
     };
     pick();
     return () => clearTimeout(timeoutRef.current);
@@ -122,25 +122,32 @@ export default function LoveMosaic() {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       <MedicineWheel />
-      <Mosaic>
-        {tiles.map((src, i) => (
-          <Tile key={i} style={{ backgroundImage: `url(${src})` }} />
-        ))}
-      </Mosaic>
+      <LayoutGroup>
+        <Mosaic>
+          {tiles.map((src, i) => (
+            <Tile
+              key={i}
+              layoutId={`tile-${i}`}
+              style={{ backgroundImage: `url(${src})` }}
+            />
+          ))}
+        </Mosaic>
 
-      {/* Pop-out overlay */}
-      <AnimatePresence>
-        {tiles[active] && (
-          <PopTile
-            key={tiles[active]}
-            style={{ backgroundImage: `url(${tiles[active]})` }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1, y: [ -6, 6, -6 ] }}
-            exit={{ opacity: 0, scale: 0.6 }}
-            transition={{ duration: 0.6, type: 'spring', stiffness: 100, damping: 20, repeat: Infinity, repeatType: 'mirror' }}
-          />
-        )}
-      </AnimatePresence>
+        {/* Pop-out overlay */}
+        <AnimatePresence>
+          {tiles[active] && (
+            <PopTile
+              key="pop"
+              layoutId={`tile-${active}`}
+              style={{ backgroundImage: `url(${tiles[active]})` }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ opacity: { duration: 0.4 } }}
+            />
+          )}
+        </AnimatePresence>
+      </LayoutGroup>
     </Wrapper>
   );
 } 
