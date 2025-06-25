@@ -34,6 +34,14 @@
     --fs-xl: 1.5rem;
     --fs-2xl: 2rem;
     --fs-3xl: 2.5rem;
+    --fs-4xl: 3rem;
+    /* Display SM */
+    --fs-5xl: 4rem;
+    /* Display MD */
+    --fs-6xl: 5rem;
+    /* Display LG */
+    --fs-7xl: 6rem;
+    /* Hero size */
     /* Breakpoints */
     --bp-sm: 480px;
     --bp-md: 768px;

@@ -51,7 +51,7 @@ const linkBase = css`
   text-decoration: none;
   color: var(--dark-brown);
   font-family: 'UnifrakturCook', cursive;
-  font-size: 1.5rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   letter-spacing: 0.02em;
   position: relative;
@@ -94,7 +94,7 @@ const CartBadge = styled.span`
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,7 +190,7 @@ const SocialIcon = styled.a`
   background: url(${diamondSvg}) no-repeat center center, #fff;
   background-size: 80% 80%, cover;
   color: var(--primary-red);
-  font-size: 1.5rem;
+  font-size: var(--fs-xl);
   box-shadow: 0 2px 8px rgba(200,16,46,0.08);
   transition: background 0.2s, color 0.2s;
   &:hover {

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 import diamondSvg from '../../assets/corner-diamond.svg';
+import { motionOK } from '../../utils/motion';
 
 // Local product shots (placed in src/assets)
 import look1 from '../../assets/collage/look1.jpg';
@@ -155,7 +157,7 @@ export default function PhotoCollage({ auto = true }) {
   const [active, setActive] = React.useState(0);
 
   React.useEffect(() => {
-    if (!auto) return;
+    if (!auto || !motionOK()) return;
     const id = setInterval(() => {
       setActive((i) => (i + 1) % images.length);
     }, 3000);
@@ -170,10 +172,16 @@ export default function PhotoCollage({ auto = true }) {
           custom={i}
           initial="rest"
           whileHover="hover"
-          animate={active === i ? 'cycle' : 'rest'}
+          animate={motionOK() && active === i ? 'cycle' : 'rest'}
           variants={popVariant}
         >
-          <Img src={src} alt={`Look ${i + 1}`} />
+          <Img
+            src={src}
+            alt={`Look ${i + 1}`}
+            loading="lazy"
+            srcSet={buildSrcSet(src, 600)}
+            sizes="(max-width: 768px) 50vw, 25vw"
+          />
         </Item>
       ))}
     </Grid>

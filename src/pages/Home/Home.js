@@ -25,7 +25,24 @@ function Home() {
             React.createElement('meta', { name: 'twitter:card', content: 'summary_large_image' }),
             React.createElement('meta', { name: 'twitter:title', content: 'Positive Vibe Tribe – Indigenous Streetwear' }),
             React.createElement('meta', { name: 'twitter:description', content: 'Spread positivity with Indigenous-inspired streetwear crafted with purpose.' }),
-            React.createElement('meta', { name: 'twitter:image', content: '/assets/og-share-1200x630.png' })
+            React.createElement('meta', { name: 'twitter:image', content: '/assets/og-share-1200x630.png' }),
+            React.createElement('script', { type: 'application/ld+json' }, JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'Positive Vibe Tribe',
+                url: typeof window !== 'undefined' ? window.location.origin : '',
+                logo: typeof window !== 'undefined' ? `${window.location.origin}/public/assets/logo-kokopelli.svg` : '/assets/logo-kokopelli.svg',
+                sameAs: [
+                    'https://www.facebook.com/PositiveVibeTribe',
+                    'https://www.instagram.com/positivevibetribe',
+                ],
+                description: 'Indigenous-inspired streetwear brand spreading positivity through apparel',
+                foundingDate: '2018',
+                founder: {
+                    '@type': 'Person',
+                    name: 'Troy Higginbothon'
+                }
+            }))
         ),
         React.createElement(SectionProgress, { sectionIds: ['featured-collections', 'brand-story', 'product-showcase', 'bestsellers', 'stats', 'trust', 'ugc', 'newsletter'] }),
 

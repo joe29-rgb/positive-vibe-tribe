@@ -1,4 +1,5 @@
 import React from 'react';
+import { motionOK } from '../../utils/motion';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,7 +21,7 @@ const Container = styled.div`
   text-align: center;
 `;
 const Heading = styled.h2`
-  font-size: 2.5rem;
+  font-size: var(--fs-3xl);
   margin-bottom: 48px;
   font-family: 'UnifrakturCook', cursive;
   color: var(--dark-brown);
@@ -57,12 +58,12 @@ const Body = styled.div`
   flex: 1;
 `;
 const Title = styled.h3`
-  font-size: 1.5rem;
+  font-size: var(--fs-xl);
   margin-bottom: 12px;
   color: var(--dark-brown);
 `;
 const Text = styled.p`
-  font-size: 1rem;
+  font-size: var(--fs-base);
   line-height: 1.6;
   margin-bottom: 24px;
   color: var(--medium-gray);
@@ -79,11 +80,13 @@ const PatternLayer = styled(motion.div)`
 
 function FeaturedCollections() {
   const { scrollY } = useViewportScroll();
-  const translateY = useTransform(scrollY, [0, 800], [0, -120]);
+  const prefersMotion = motionOK();
+  const translateY = useTransform(scrollY, [0, 800], [0, prefersMotion ? -120 : 0]);
+  const patternY = useTransform(scrollY, [0, 800], [0, prefersMotion ? -60 : 0]);
 
   return (
     <Section>
-      <PatternLayer style={{ y: useTransform(scrollY, [0, 800], [0, -60]) }} />
+      <PatternLayer style={{ y: patternY }} />
 
       <Container>
         <Heading as={motion.h2} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>

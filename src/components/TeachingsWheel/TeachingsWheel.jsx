@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 
 const bear = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/bear_fkrsts.png';
 const beaver = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431659/beaver_w7q6k2.png';
@@ -214,6 +215,9 @@ export default function TeachingsWheel({ onSelect }) {
           <img
             src={t.img}
             alt=""
+            loading="lazy"
+            srcSet={buildSrcSet(t.img, 200)}
+            sizes="(max-width: 480px) 120px, 180px"
             style={{ width: '100%', height: '100%', borderRadius: '50%', border: `4px solid ${ringColours[idx]}`, objectFit: 'cover' }}
           />
           {isCenter && (
@@ -251,7 +255,14 @@ export default function TeachingsWheel({ onSelect }) {
       <WheelWrapper>
         {teachings.map((t,i)=>(
           <div key={t.name} style={{display:'flex',alignItems:'center',gap:16,marginBottom:24}}>
-            <img src={t.img} alt="" width={68} height={68} style={{borderRadius:'50%',border:`3px solid ${ringColours[i]}`,objectFit:'cover'}} />
+            <img
+              src={t.img}
+              alt=""
+              loading="lazy"
+              srcSet={buildSrcSet(t.img, 200)}
+              sizes="(max-width: 480px) 68px, 100px"
+              style={{borderRadius:'50%',border:`3px solid ${ringColours[i]}`,objectFit:'cover'}}
+            />
             <div>
               <strong style={{color:ringColours[i]}}>{t.name} ({t.ojibwe})</strong>
               <p style={{margin:0,fontSize:'0.9rem'}}>{t.desc}</p>
@@ -275,7 +286,13 @@ export default function TeachingsWheel({ onSelect }) {
 
         {/* central Kokopelli */}
         <Center $icon={icon} aria-label="Kokopelli – Joy">
-          <img src={kokopelli} alt="" />
+          <img
+            src={kokopelli}
+            alt=""
+            loading="lazy"
+            srcSet={buildSrcSet(kokopelli, 220)}
+            sizes="(max-width: 480px) 120px, 200px"
+          />
         </Center>
 
         {/* animal icons */}
@@ -307,7 +324,13 @@ export default function TeachingsWheel({ onSelect }) {
               whileHover={{ scale: hoverScale, zIndex: 3 }}
               variants={{ hidden:{opacity:0,scale:0.6}, visible:{opacity:1,scale:1, transition:{duration:0.4}} }}
             >
-              <img src={t.img} alt="" />
+              <img
+                src={t.img}
+                alt=""
+                loading="lazy"
+                srcSet={buildSrcSet(t.img, 200)}
+                sizes="(max-width: 480px) 68px, 100px"
+              />
             </Icon>
           );
         })}

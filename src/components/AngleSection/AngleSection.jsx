@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motionOK } from '../../utils/motion';
 
 const Base = styled(motion.section)`
   padding: var(--section-padding, 110px 20px);
@@ -27,8 +28,7 @@ const AngleSection = ({ angleTop = false, angleBottom = false, parallax = false,
   const yTransform = useTransform(scrollY, [0, 1200], [0, -1200 * factor]);
 
   // Determine whether to apply parallax (respect prefers-reduced-motion)
-  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const parallaxStyle = parallax && !reduceMotion ? { y: yTransform } : {};
+  const parallaxStyle = parallax && motionOK() ? { y: yTransform } : {};
 
   const style = {
     ...(clipPath !== 'none' && { clipPath }),

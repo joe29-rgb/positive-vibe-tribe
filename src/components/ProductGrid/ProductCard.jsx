@@ -47,7 +47,7 @@ const Badge = styled.span`
   background: var(--primary-red);
   color: #fff;
   padding: 4px 8px;
-  font-size: 0.6875rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   border-radius: 6px;
   text-transform: uppercase;
@@ -92,13 +92,13 @@ const Body = styled.div`
 `;
 
 const Title = styled.h3`
-  font-size: 1rem;
+  font-size: var(--fs-base);
   margin: 0 0 8px;
   color: var(--dark-brown);
 `;
 
 const Price = styled.p`
-  font-size: 0.9375rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   margin: 0;
   color: var(--primary-red);
@@ -126,7 +126,7 @@ const QuickAdd = styled(motion.button)`
   border: none;
   padding: 12px 24px;
   border-radius: var(--border-radius-pill);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.25s;

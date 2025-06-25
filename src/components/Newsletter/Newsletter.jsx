@@ -12,13 +12,13 @@ const Container = styled.div`
   text-align: center;
 `;
 const Heading = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 16px;
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-4);
   font-family: 'UnifrakturCook', cursive;
 `;
 const Text = styled.p`
-  font-size: 1rem;
-  margin-bottom: 32px;
+  font-size: var(--fs-base);
+  margin-bottom: var(--space-6);
 `;
 const Form = styled.form`
   display: flex;
@@ -28,7 +28,7 @@ const Form = styled.form`
 const Input = styled.input`
   flex: 1 1 240px;
   padding: 14px 18px;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   border-radius: 8px;
   border: none;
 `;
@@ -38,7 +38,7 @@ const Button = styled.button`
   border: none;
   padding: 14px 28px;
   border-radius: var(--border-radius-pill);
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.25s ease;
@@ -47,8 +47,8 @@ const Button = styled.button`
   }
 `;
 const Note = styled.p`
-  font-size: 0.8125rem;
-  margin-top: 16px;
+  font-size: var(--fs-sm);
+  margin-top: var(--space-4);
   opacity: 0.8;
 `;
 

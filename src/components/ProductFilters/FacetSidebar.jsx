@@ -23,7 +23,7 @@ const Section = styled.fieldset`
 
 const Title = styled.legend`
   margin-bottom: 12px;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   color: var(--dark-brown);
 `;
@@ -32,7 +32,7 @@ const Checkbox = styled.label`
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.875rem;
+  font-size: var(--fs-sm);
   cursor: pointer;
   margin-bottom: 6px;
 

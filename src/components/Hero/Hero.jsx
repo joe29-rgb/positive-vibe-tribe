@@ -30,7 +30,7 @@ const HeroContent = styled(motion.div)`
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: 2.1rem;
+  font-size: var(--fs-2xl);
   color: var(--warm-brown);
   margin-bottom: 40px;
   font-weight: 500;
@@ -58,30 +58,30 @@ const Glow = styled(motion.div)`
 
 const HeadlineBlack = styled.h1`
   font-family: 'UnifrakturCook', cursive;
-  font-size: 6rem;
+  font-size: var(--fs-7xl);
   line-height: 1;
   margin: 0;
   color: var(--dark-brown);
 
   @media (max-width: 768px) {
-    font-size: 3rem;
+    font-size: var(--fs-4xl);
   }
 `;
 const HeadlineScript = styled.h2`
   font-family: 'Dancing Script', 'Satisfy', 'Allura', cursive;
-  font-size: 4rem;
+  font-size: var(--fs-5xl);
   margin: 0 0 24px;
   color: var(--dark-brown);
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: var(--fs-2xl);
   }
 `;
 
 const Reassure = styled.span`
   display: block;
   margin-top: 8px;
-  font-size: 0.875rem;
+  font-size: var(--fs-sm);
   color: var(--medium-gray);
 `;
 
@@ -109,7 +109,7 @@ const SpotPrice = styled.p`
   font-weight: 600;
   color: var(--primary-red);
   margin: 8px 0 16px;
-  font-size: 1.125rem;
+  font-size: var(--fs-lg);
 `;
 
 const AddBtn = styled.button`
@@ -118,7 +118,7 @@ const AddBtn = styled.button`
   border: none;
   padding: 12px 32px;
   border-radius: var(--border-radius-pill);
-  font-size: 0.9375rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.25s;

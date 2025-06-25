@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { flyToCart } from '../../utils/flyToCart';
 import { addRecentProduct } from '../../utils/recentlyViewed';
 import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -33,7 +34,7 @@ const AddBtn = styled.button`
   border: none;
   padding: 14px 32px;
   border-radius: var(--border-radius-pill);
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   cursor: pointer;
   margin-top: 24px;
@@ -127,16 +128,42 @@ function ProductDetail() {
         <meta name="twitter:description" content={product.description} />
         <meta name="twitter:image" content={product.image} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.name,
+          image: [product.image, product.altImage].filter(Boolean),
+          description: product.description,
+          sku: product._id,
+          brand: {
+            '@type': 'Brand',
+            name: 'Positive Vibe Tribe',
+          },
+          offers: {
+            '@type': 'Offer',
+            url: window.location.href,
+            price: product.price,
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+          },
+        })}</script>
       </Helmet>
       <Breadcrumbs productName={product.name} />
-      <h2 style={{ fontFamily: 'UnifrakturCook,cursive', fontSize: '2.5rem' }}>{product.name}</h2>
+      <h2 style={{ fontFamily: 'UnifrakturCook,cursive', fontSize: 'var(--fs-3xl)' }}>{product.name}</h2>
       {galleryItems.length ? (
         <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} />
       ) : (
-        <Img ref={imgRef} src={product.image} alt={product.name} loading="lazy" />
+        <Img
+          ref={imgRef}
+          src={product.image}
+          alt={product.name}
+          loading="lazy"
+          srcSet={buildSrcSet(product.image, 800)}
+          sizes="(max-width: 640px) 100vw, 600px"
+        />
       )}
       <p style={{ marginTop: '24px' }}>{product.description}</p>
-      <p style={{ fontWeight: 600, fontSize: '1.25rem', color: 'var(--primary-red)' }}>${product.price}</p>
+      <p style={{ fontWeight: 600, fontSize: 'var(--fs-lg)', color: 'var(--primary-red)' }}>${product.price}</p>
       <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
 
       <RecentlyViewed currentId={product._id} />

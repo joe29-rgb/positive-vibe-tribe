@@ -12,7 +12,7 @@ const Btn = styled(motion.button)`
   background: var(--primary-color, #2d4a3e);
   border: none;
   color: #fff;
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   display: flex;
   align-items: center;
   justify-content: center;

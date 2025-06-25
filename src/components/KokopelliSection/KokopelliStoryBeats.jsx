@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 import look3 from '../../assets/collage/look3.jpg';
 import look7 from '../../assets/collage/look7.jpg';
 import look5 from '../../assets/collage/look5.jpg';
@@ -66,7 +67,13 @@ export default function KokopelliStoryBeats(){
       <PatternLayer as={motion.div} style={{'--offset':'-80px'}} initial={{y:0}} whileInView={{y:160}} viewport={{once:false}} />
       {beats.map((b,i)=>(
         <Beat key={i} className="scroll-animate" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:0.3}} transition={{duration:0.8}}>
-          <Img src={b.img} alt={b.title} />
+          <Img
+            src={b.img}
+            alt={b.title}
+            loading="lazy"
+            srcSet={buildSrcSet(b.img, 800)}
+            sizes="(max-width: 640px) 100vw, 480px"
+          />
           <H3>{b.title}</H3>
           <P>{b.text}</P>
         </Beat>

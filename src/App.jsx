@@ -56,6 +56,17 @@ function App() {
           <meta property="og:image" content="/assets/og-share-1200x630.png" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:image" content="/assets/og-share-1200x630.png" />
+          <script type="application/ld+json">{JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Positive Vibe Tribe',
+            url: typeof window !== 'undefined' ? window.location.origin : 'https://positivevibetribe.com',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${typeof window!=='undefined'?window.location.origin:'https://positivevibetribe.com'}/products?search={search_term_string}`,
+              'query-input': 'required name=search_term_string',
+            },
+          })}</script>
         </Helmet>
         <Router>
           <a href="#main" className="skip-link">Skip to main content</a>

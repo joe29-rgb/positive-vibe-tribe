@@ -27,7 +27,7 @@ const NavItem = styled(Link)`
   justify-content: center;
   text-decoration: none;
   color: ${(p) => (p.$active ? 'var(--primary-red)' : 'var(--dark-brown)')};
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
 `;
 
 function MobileNav() {

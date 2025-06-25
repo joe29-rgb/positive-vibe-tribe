@@ -10,7 +10,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 const Heading = styled.h2`
-  font-size: 2.5rem;
+  font-size: var(--fs-3xl);
   margin-bottom: 48px;
   font-family: 'UnifrakturCook', cursive;
   color: var(--dark-brown);
@@ -29,12 +29,12 @@ const Item = styled.div`
   text-align: center;
 `;
 const ItemTitle = styled.h3`
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   margin: 12px 0 8px;
   color: var(--dark-brown);
 `;
 const ItemText = styled.p`
-  font-size: 0.9375rem;
+  font-size: var(--fs-sm);
   color: var(--medium-gray);
 `;
 
@@ -55,7 +55,7 @@ function TrustCredentials() {
         <Grid>
           {DATA.map((item) => (
             <Item key={item.title} data-hover="card">
-              <div style={{ fontSize: '2rem' }} aria-hidden="true">
+              <div style={{ fontSize: 'var(--fs-2xl)' }} aria-hidden="true">
                 {item.icon}
               </div>
               <ItemTitle>{item.title}</ItemTitle>

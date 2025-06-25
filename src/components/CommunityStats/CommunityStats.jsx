@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { motionOK } from '../../utils/motion';
 
 const Section = styled.section`
   background: #fff;
@@ -12,7 +13,7 @@ const Container = styled.div`
   text-align: center;
 `;
 const Heading = styled.h2`
-  font-size: 2rem;
+  font-size: var(--fs-2xl);
   margin-bottom: 32px;
   font-family: 'UnifrakturCook', cursive;
   color: var(--dark-brown);
@@ -29,12 +30,12 @@ const Item = styled.div`
   padding: 20px;
 `;
 const NumberWrap = styled(motion.span)`
-  font-size: 2.25rem;
+  font-size: var(--fs-2xl);
   font-weight: 700;
   color: var(--primary-red);
 `;
 const Label = styled.span`
-  font-size: 0.9375rem;
+  font-size: var(--fs-sm);
   color: var(--medium-gray);
 `;
 
@@ -59,6 +60,7 @@ function StatItem({ value, prefix = '', suffix = '', label }) {
   const inView = useInView(ref, { once: true, amount: 0.4 });
 
   React.useEffect(() => {
+    if (!motionOK()) return; // skip animation for reduced motion
     if (inView) {
       controls.start({ val: value, transition: { duration: 1.4, ease: 'easeOut' } });
     }
@@ -66,12 +68,13 @@ function StatItem({ value, prefix = '', suffix = '', label }) {
 
   return (
     <Item ref={ref}>
-      <NumberWrap
-        animate={controls}
-        initial={{ val: 0 }}
-      >
-        {({ val }) => `${prefix}${Math.round(val).toLocaleString()}${suffix}`}
-      </NumberWrap>
+      {motionOK() ? (
+        <NumberWrap animate={controls} initial={{ val: 0 }}>
+          {({ val }) => `${prefix}${Math.round(val).toLocaleString()}${suffix}`}
+        </NumberWrap>
+      ) : (
+        <NumberWrap>{`${prefix}${value.toLocaleString()}${suffix}`}</NumberWrap>
+      )}
       <Label>{label}</Label>
     </Item>
   );

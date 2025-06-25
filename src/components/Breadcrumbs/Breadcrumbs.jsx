@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.nav`
-  font-size: 0.875rem;
+  font-size: var(--fs-sm);
   margin: 16px 0;
   color: var(--medium-gray);
   a {

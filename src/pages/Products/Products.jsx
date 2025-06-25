@@ -29,7 +29,7 @@ const MobileFilterButton = styled.button`
   border-radius: 50%;
   width: 56px;
   height: 56px;
-  font-size: 1.4rem;
+  font-size: var(--fs-xl);
   z-index: 80;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   @media (max-width: 1024px) {
@@ -68,7 +68,7 @@ const LoadMoreBtn = styled.button`
   border-radius: var(--border-radius-pill);
   background: var(--primary-red);
   color: #fff;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.25s;
