@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import ProductCard from '../ProductGrid/ProductCard';
-import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 /* -------------------------------------------------------------------------
    Styled Components
@@ -48,30 +51,15 @@ const FilterButton = styled.button`
   }
 `;
 
-const Grid = styled(motion.div)`
-  display: grid;
-  gap: 24px;
-  grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-
-  /* Enlarge first and every 7th card for visual rhythm */
-  & > :nth-child(7n + 1) {
-    grid-column: span 2;
-  }
-
-  @media (max-width: 768px) {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 16px;
-    padding-bottom: 8px;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    & > * {
-      flex: 0 0 70%;
-      scroll-snap-align: start;
-    }
+const CarouselWrap = styled.div`
+  position: relative;
+  .swiper-button-prev, .swiper-button-next {
+    color: var(--dark-brown);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
 `;
 
@@ -105,11 +93,25 @@ function BestsellerShowcase({ tag = 'bestseller', limit = 8, categories = [] }) 
             </FilterButton>
           ))}
         </FilterRow>
-        <Grid drag="x" dragConstraints={{ left: 0, right: 0 }}>
-          {displayed.map((prod, idx) => (
-            <ProductCard key={prod._id} product={prod} index={idx} />
-          ))}
-        </Grid>
+        <CarouselWrap>
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            loop
+            autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            navigation
+            breakpoints={{
+              0: { slidesPerView: 1.1, spaceBetween: 16 },
+              768: { slidesPerView: 2.2, spaceBetween: 24 },
+              1024: { slidesPerView: 3.2, spaceBetween: 32 },
+            }}
+          >
+            {displayed.map((prod, idx) => (
+              <SwiperSlide key={prod._id}>
+                <ProductCard product={prod} index={idx} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </CarouselWrap>
       </Container>
     </Section>
   );

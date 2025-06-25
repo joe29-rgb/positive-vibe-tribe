@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
 import look1 from '../../assets/collage/look1.jpg';
 import look2 from '../../assets/collage/look2.jpg';
 import look3 from '../../assets/collage/look3.jpg';
@@ -21,10 +25,19 @@ const Heading = styled.h2`
   font-family: 'UnifrakturCook', cursive;
   color: var(--dark-brown);
 `;
-const Grid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 32px;
+const CarouselWrap = styled.div`
+  position: relative;
+  .swiper {
+    padding-bottom: 40px;
+  }
+  .swiper-button-prev, .swiper-button-next {
+    color: var(--dark-brown);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
 `;
 const Card = styled.div`
   background: #fff;
@@ -76,19 +89,33 @@ function FeaturedCollections() {
         <Heading as={motion.h2} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
           Featured Collections
         </Heading>
-        <Grid style={{ y: translateY }}>
-          {[{img:look1,title:'The Kokopelli Capsule',text:'Joyful prints that celebrate abundance and music.'},
-            {img:look2,title:'Wolfpack Essentials',text:'Gear up with pieces symbolising strength and unity.'},
-            {img:look3,title:'Sky Dancer Series',text:'Bold turquoise palettes inspired by prairie sunsets.'}].map((c)=>(
-              <Card key={c.title} whileHover={{ y:-6, boxShadow:'0 12px 28px rgba(0,0,0,0.12)' }}>
-                <Img src={c.img} alt={c.title} />
-                <Body>
-                  <Title>{c.title}</Title>
-                  <Text>{c.text}</Text>
-                </Body>
-              </Card>
-          ))}
-        </Grid>
+        <CarouselWrap style={{ y: translateY }}>
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            loop
+            autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            navigation
+            breakpoints={{
+              0: { slidesPerView: 1.05, spaceBetween: 16 },
+              768: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 32 },
+            }}
+          >
+            {[{img:look1,title:'The Kokopelli Capsule',text:'Joyful prints that celebrate abundance and music.'},
+              {img:look2,title:'Wolfpack Essentials',text:'Gear up with pieces symbolising strength and unity.'},
+              {img:look3,title:'Sky Dancer Series',text:'Bold turquoise palettes inspired by prairie sunsets.'}].map((c)=>(
+                <SwiperSlide key={c.title}>
+                  <Card whileHover={{ y:-6, boxShadow:'0 12px 28px rgba(0,0,0,0.12)' }}>
+                    <Img src={c.img} alt={c.title} />
+                    <Body>
+                      <Title>{c.title}</Title>
+                      <Text>{c.text}</Text>
+                    </Body>
+                  </Card>
+                </SwiperSlide>
+            ))}
+          </Swiper>
+        </CarouselWrap>
       </Container>
     </Section>
   );
