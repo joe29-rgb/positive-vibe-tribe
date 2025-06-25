@@ -9,6 +9,7 @@ import Newsletter from '../../components/Newsletter/Newsletter';
 import ProductShowcase from '../../components/ProductShowcase/ProductShowcase';
 import BestsellerShowcase from '../../components/BestsellerShowcase/BestsellerShowcase';
 import AngleSection from '../../components/AngleSection/AngleSection';
+import UGCStrip from '../../components/UGCStrip/UGCStrip';
 
 function Home() {
     return React.createElement(React.Fragment, null,
@@ -48,6 +49,10 @@ function Home() {
 
         React.createElement(AngleSection, { angleTop: true, angleBottom: true },
             React.createElement(TrustCredentials, null)
+        ),
+
+        React.createElement(AngleSection, { angleTop: true, angleBottom: true },
+            React.createElement(UGCStrip, null)
         ),
 
         React.createElement(AngleSection, { angleTop: true },
