@@ -33,14 +33,39 @@ const Thumb = styled.img`
   flex-shrink: 0;
 `;
 
+const ModalOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+`;
+
+const ModalImg = styled.img`
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+`;
+
 export default function UGCStrip() {
+  const [active, setActive] = React.useState(null);
+
   return (
     <Wrapper>
       <Track>
         {photos.concat(photos).map((src, i) => (
-          <Thumb key={i} src={src} alt="Tribe member" loading="lazy" />
+          <Thumb key={i} src={src} alt="Tribe member" loading="lazy" onClick={() => setActive(src)} />
         ))}
       </Track>
+
+      {active && (
+        <ModalOverlay onClick={() => setActive(null)}>
+          <ModalImg src={active} alt="Tribe member" />
+        </ModalOverlay>
+      )}
     </Wrapper>
   );
 } 

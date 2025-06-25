@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { motionOK } from '../../utils/motion';
 import kokopelliSil from '../../assets/kokopelli.png';
 
 // Reuse customer lookbook photos (same as LoveMosaic)
@@ -100,6 +101,7 @@ export default function KokopelliCollage() {
   const gapRef = useRef();
 
   useEffect(() => {
+    if(!motionOK()) return; // disable pop-out for reduced motion
     const cycle = () => {
       const next = Math.floor(Math.random() * tiles.length);
       setActive(next);

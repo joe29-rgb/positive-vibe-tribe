@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { motionOK } from '../../utils/motion';
 
 // Temporary photo URLs duplicated as needed
 const photoUrls = [
@@ -110,6 +111,7 @@ export default function LoveMosaic() {
   const gapRef = useRef();
 
   useEffect(() => {
+    if(!motionOK()) return; // disable pop-out for reduced motion
     const cycle = () => {
       const next = Math.floor(Math.random() * tiles.length);
       setActive(next);
