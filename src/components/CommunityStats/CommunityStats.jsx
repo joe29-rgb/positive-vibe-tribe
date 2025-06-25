@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion, useAnimation, useInView } from 'framer-motion';
 
 const Section = styled.section`
   background: #fff;
@@ -27,7 +28,7 @@ const Item = styled.div`
   align-items: center;
   padding: 20px;
 `;
-const Number = styled.span`
+const NumberWrap = styled(motion.span)`
   font-size: 2.25rem;
   font-weight: 700;
   color: var(--primary-red);
@@ -43,21 +44,36 @@ function CommunityStats() {
       <Container>
         <Heading>The Tribe in Numbers</Heading>
         <Grid>
-          <Item>
-            <Number>2,500+</Number>
-            <Label>Tribe Members</Label>
-          </Item>
-          <Item>
-            <Number>98%</Number>
-            <Label>Satisfaction Rate</Label>
-          </Item>
-          <Item>
-            <Number>$15k+</Number>
-            <Label>Donated to Indigenous Communities</Label>
-          </Item>
+          <StatItem value={2500} suffix="+" label="Tribe Members" />
+          <StatItem value={98} suffix="%" label="Satisfaction Rate" />
+          <StatItem value={15000} prefix="$" suffix="+" label="Donated to Indigenous Communities" />
         </Grid>
       </Container>
     </Section>
+  );
+}
+
+function StatItem({ value, prefix = '', suffix = '', label }) {
+  const controls = useAnimation();
+  const ref = React.useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start({ val: value, transition: { duration: 1.4, ease: 'easeOut' } });
+    }
+  }, [inView, value, controls]);
+
+  return (
+    <Item ref={ref}>
+      <NumberWrap
+        animate={controls}
+        initial={{ val: 0 }}
+      >
+        {({ val }) => `${prefix}${Math.round(val).toLocaleString()}${suffix}`}
+      </NumberWrap>
+      <Label>{label}</Label>
+    </Item>
   );
 }
 
