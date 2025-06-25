@@ -21,7 +21,9 @@ const Card = styled(motion.div)`
   margin: 0 auto;
   &:hover {
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px) scale(1.02);
   }
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 `;
 
 const CardLink = styled(Link)`

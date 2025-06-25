@@ -31,7 +31,9 @@ const Wrapper = styled(motion.section)`
   border-radius: 24px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   @media (max-width: 768px) {
-    --tile: 28px;
+    --tile: 45px;
+    gap: 5px;
+    width: 100%;
   }
 `;
 
