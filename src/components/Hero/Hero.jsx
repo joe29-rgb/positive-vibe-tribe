@@ -33,7 +33,7 @@ const HeroSubtitle = styled.p`
   color: var(--warm-brown);
   margin-bottom: 40px;
   font-weight: 500;
-  font-family: 'Dancing Script', 'Satisfy', 'Allura', cursive;
+  font-family: var(--font-primary);
   line-height: 1.3;
   max-width: 700px;
   letter-spacing: 0.01em;

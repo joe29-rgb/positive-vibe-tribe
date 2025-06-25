@@ -17,8 +17,8 @@ const photoUrls = [
   'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750796000/IMG_20250624_140246_dzgtlg.jpg',
 ];
 
-// Build ~120 tiles
-const tiles = Array.from({ length: 120 }, (_, i) => photoUrls[i % photoUrls.length]);
+// Build ~200 tiles for higher density (≈ 8 extra rows)
+const tiles = Array.from({ length: 200 }, (_, i) => photoUrls[i % photoUrls.length]);
 
 // Medicine Wheel for cultural backdrop
 const MedicineWheel = styled.div`
@@ -42,7 +42,7 @@ const MedicineWheel = styled.div`
 `;
 
 const Wrapper = styled.div`
-  --tile: 22px;
+  --tile: 18px;
   position: relative;
   width: clamp(220px, 40vw, 320px);
   aspect-ratio: 1 / 2; /* Kokopelli is taller than wide */
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 480px) {
-    --tile: 16px;
+    --tile: 14px;
   }
 `;
 
