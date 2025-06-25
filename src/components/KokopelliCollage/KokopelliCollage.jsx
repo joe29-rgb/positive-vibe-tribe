@@ -50,6 +50,7 @@ const Tile = styled(motion.div)`
   background-size: cover;
   background-position: center;
   border-radius: 6px;
+  ${({ $hidden }) => $hidden && 'visibility:hidden;'}
 `;
 
 const PopTile = styled(motion.div)`
@@ -88,19 +89,24 @@ export default function KokopelliCollage() {
       <LayoutGroup>
         <Mosaic>
           {tiles.map((src, i) => (
-            <Tile key={i} layoutId={`kp-${i}`} style={{ backgroundImage: `url(${src})` }} />
+            <Tile
+              key={i}
+              layoutId={`kp-${i}`}
+              style={{ backgroundImage: `url(${src})` }}
+              $hidden={i === active}
+            />
           ))}
         </Mosaic>
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {tiles[active] && (
             <PopTile
-              key="kp-pop"
+              key={`kp-pop-${active}`}
               layoutId={`kp-${active}`}
               style={{ backgroundImage: `url(${tiles[active]})` }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 0.4 } }}
+              transition={{ opacity: { duration: 0.35 } }}
             />
           )}
         </AnimatePresence>

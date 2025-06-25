@@ -57,6 +57,7 @@ const Tile = styled(motion.div)`
   background-size: cover;
   background-position: center;
   border-radius: 8px;
+  ${({ $hidden }) => $hidden && 'visibility:hidden;'}
 `;
 
 // Overlay tile that pops outside the mask
@@ -129,21 +130,22 @@ export default function LoveMosaic() {
               key={i}
               layoutId={`tile-${i}`}
               style={{ backgroundImage: `url(${src})` }}
+              $hidden={i === active}
             />
           ))}
         </Mosaic>
 
         {/* Pop-out overlay */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {tiles[active] && (
             <PopTile
-              key="pop"
+              key={`pop-${active}`}
               layoutId={`tile-${active}`}
               style={{ backgroundImage: `url(${tiles[active]})` }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 0.4 } }}
+              transition={{ opacity: { duration: 0.35 } }}
             />
           )}
         </AnimatePresence>
