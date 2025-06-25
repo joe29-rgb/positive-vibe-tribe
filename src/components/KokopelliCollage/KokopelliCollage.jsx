@@ -20,6 +20,27 @@ const photoUrls = [
 // Build ~120 tiles
 const tiles = Array.from({ length: 120 }, (_, i) => photoUrls[i % photoUrls.length]);
 
+// Medicine Wheel for cultural backdrop
+const MedicineWheel = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(280px, 50vw, 520px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    #f5e04b 0deg 90deg,
+    #d33a2c 90deg 180deg,
+    #1a1a1a 180deg 270deg,
+    #ffffff 270deg 360deg
+  );
+  opacity: 0.12;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.1));
+  z-index: 0;
+`;
+
 const Wrapper = styled.div`
   --tile: 22px;
   position: relative;
@@ -42,6 +63,8 @@ const Mosaic = styled.div`
   mask: url(${kokopelliSil}) center/contain no-repeat;
   -webkit-mask: url(${kokopelliSil}) center/contain no-repeat;
   position: relative;
+  z-index: 1;
+  background: rgba(200, 16, 46, 0.08); /* faint PVT red fills gaps */
 `;
 
 const Tile = styled(motion.div)`
@@ -94,6 +117,7 @@ export default function KokopelliCollage() {
 
   return (
     <Wrapper>
+      <MedicineWheel />
       <LayoutGroup>
         <Mosaic>
           {tiles.map((src, i) => (
