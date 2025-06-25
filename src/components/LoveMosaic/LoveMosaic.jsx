@@ -65,8 +65,8 @@ const PopTile = styled(motion.div)`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--tile) * 6);
-  height: calc(var(--tile) * 6);
+  width: calc(var(--tile) * 7);
+  height: calc(var(--tile) * 7);
   transform: translate(-50%, -50%) rotateX(-10deg) rotateY(8deg) scale(1.12);
   transform-style: preserve-3d;
   background-size: cover;
@@ -75,8 +75,8 @@ const PopTile = styled(motion.div)`
   box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
   z-index: 3;
   @media (max-width: 600px) {
-    width: calc(var(--tile) * 4.5);
-    height: calc(var(--tile) * 4.5);
+    width: calc(var(--tile) * 5.5);
+    height: calc(var(--tile) * 5.5);
     transform: translate(-50%, -50%) rotateX(-6deg) rotateY(6deg) scale(1.1);
   }
 `;
@@ -103,16 +103,27 @@ const MedicineWheel = styled.div`
 `;
 
 export default function LoveMosaic() {
-  const [active, setActive] = useState(0);
-  const timeoutRef = useRef();
+  const [active, setActive] = useState(null);
+  const popRef = useRef();
+  const gapRef = useRef();
 
   useEffect(() => {
-    const pick = () => {
-      setActive(Math.floor(Math.random() * tiles.length));
-      timeoutRef.current = setTimeout(pick, 5000); // 5-second cadence
+    const cycle = () => {
+      const next = Math.floor(Math.random() * tiles.length);
+      setActive(next);
+
+      // Pop-out shows for 3.5 s, then retracts
+      popRef.current = setTimeout(() => {
+        setActive(null);
+        // 1.5-second gap before next
+        gapRef.current = setTimeout(cycle, 1500);
+      }, 3500);
     };
-    pick();
-    return () => clearTimeout(timeoutRef.current);
+    cycle();
+    return () => {
+      clearTimeout(popRef.current);
+      clearTimeout(gapRef.current);
+    };
   }, []);
 
   return (
@@ -130,14 +141,14 @@ export default function LoveMosaic() {
               key={i}
               layoutId={`tile-${i}`}
               style={{ backgroundImage: `url(${src})` }}
-              $hidden={i === active}
+              $hidden={active !== null && i === active}
             />
           ))}
         </Mosaic>
 
         {/* Pop-out overlay */}
         <AnimatePresence mode="wait">
-          {tiles[active] && (
+          {active !== null && (
             <PopTile
               key={`pop-${active}`}
               layoutId={`tile-${active}`}

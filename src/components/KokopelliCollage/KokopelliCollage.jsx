@@ -57,8 +57,8 @@ const PopTile = styled(motion.div)`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--tile) * 5);
-  height: calc(var(--tile) * 5);
+  width: calc(var(--tile) * 6);
+  height: calc(var(--tile) * 6);
   transform: translate(-50%, -50%) rotateX(-8deg) rotateY(6deg) scale(1.1);
   background-size: cover;
   background-position: center;
@@ -66,22 +66,30 @@ const PopTile = styled(motion.div)`
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.35);
   z-index: 3;
   @media (max-width: 480px) {
-    width: calc(var(--tile) * 3.8);
-    height: calc(var(--tile) * 3.8);
+    width: calc(var(--tile) * 4.8);
+    height: calc(var(--tile) * 4.8);
   }
 `;
 
 export default function KokopelliCollage() {
-  const [active, setActive] = useState(0);
-  const timeoutRef = useRef();
+  const [active, setActive] = useState(null);
+  const popRef = useRef();
+  const gapRef = useRef();
 
   useEffect(() => {
-    const pick = () => {
-      setActive(Math.floor(Math.random() * tiles.length));
-      timeoutRef.current = setTimeout(pick, 5000);
+    const cycle = () => {
+      const next = Math.floor(Math.random() * tiles.length);
+      setActive(next);
+      popRef.current = setTimeout(() => {
+        setActive(null);
+        gapRef.current = setTimeout(cycle, 1500);
+      }, 3500);
     };
-    pick();
-    return () => clearTimeout(timeoutRef.current);
+    cycle();
+    return () => {
+      clearTimeout(popRef.current);
+      clearTimeout(gapRef.current);
+    };
   }, []);
 
   return (
@@ -93,12 +101,12 @@ export default function KokopelliCollage() {
               key={i}
               layoutId={`kp-${i}`}
               style={{ backgroundImage: `url(${src})` }}
-              $hidden={i === active}
+              $hidden={active !== null && i === active}
             />
           ))}
         </Mosaic>
         <AnimatePresence mode="wait">
-          {tiles[active] && (
+          {active !== null && (
             <PopTile
               key={`kp-pop-${active}`}
               layoutId={`kp-${active}`}
