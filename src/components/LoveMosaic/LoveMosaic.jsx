@@ -24,20 +24,21 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   perspective: 1000px;
+  overflow: visible;
 `;
 
 const Mosaic = styled.div`
-  --tile: 70px;
+  --tile: 40px;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--tile));
-  gap: 6px;
-  width: 100%;
-  max-width: 100%;
-  mask: url('/assets/love-mask.svg') center/cover no-repeat;
-  -webkit-mask: url('/assets/love-mask.svg') center/cover no-repeat;
+  gap: 4px;
+  width: 90%;
+  max-width: 650px;
+  mask: url('/assets/love-mask.svg') center/contain no-repeat;
+  -webkit-mask: url('/assets/love-mask.svg') center/contain no-repeat;
   position: relative;
   @media (max-width: 768px) {
-    --tile: 44px;
+    --tile: 28px;
     gap: 4px;
   }
 `;
@@ -52,8 +53,8 @@ const Tile = styled(motion.div)`
     $active &&
     css`
       position: absolute;
-      width: calc(var(--tile) * 4.5);
-      height: calc(var(--tile) * 4.5);
+      width: calc(var(--tile) * 6);
+      height: calc(var(--tile) * 6);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotateX(-10deg) rotateY(8deg) scale(1.12);
@@ -63,8 +64,8 @@ const Tile = styled(motion.div)`
       z-index: 3;
       transition: transform 0.6s, box-shadow 0.6s;
       @media (max-width: 600px) {
-        width: calc(var(--tile) * 3.5);
-        height: calc(var(--tile) * 3.5);
+        width: calc(var(--tile) * 4.5);
+        height: calc(var(--tile) * 4.5);
         transform: translate(-50%, -50%) rotateX(-6deg) rotateY(6deg) scale(1.1);
       }
     `}
