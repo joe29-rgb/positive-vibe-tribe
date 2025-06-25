@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import ProductCard from '../ProductGrid/ProductCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper';
+import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
