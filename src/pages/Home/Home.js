@@ -10,6 +10,7 @@ import ProductShowcase from '../../components/ProductShowcase/ProductShowcase';
 import BestsellerShowcase from '../../components/BestsellerShowcase/BestsellerShowcase';
 import AngleSection from '../../components/AngleSection/AngleSection';
 import UGCStrip from '../../components/UGCStrip/UGCStrip';
+import SectionProgress from '../../components/SectionProgress/SectionProgress';
 
 function Home() {
     return React.createElement(React.Fragment, null,
@@ -25,37 +26,39 @@ function Home() {
             React.createElement('meta', { name: 'twitter:description', content: 'Spread positivity with Indigenous-inspired streetwear crafted with purpose.' }),
             React.createElement('meta', { name: 'twitter:image', content: '/assets/og-share-1200x630.png' })
         ),
+        React.createElement(SectionProgress, { sectionIds: ['featured-collections', 'brand-story', 'product-showcase', 'bestsellers', 'stats', 'trust', 'ugc', 'newsletter'] }),
+
         React.createElement(Hero, null),
 
         React.createElement(AngleSection, { id: 'featured-collections', angleTop: true, angleBottom: true },
             React.createElement(FeaturedCollections, null)
         ),
 
-        React.createElement(AngleSection, { angleBottom: true },
+        React.createElement(AngleSection, { id: 'brand-story', angleBottom: true },
             React.createElement(BrandStory, null)
         ),
 
-        React.createElement(AngleSection, { angleTop: true, angleBottom: true, parallax: true },
+        React.createElement(AngleSection, { id: 'product-showcase', angleTop: true, angleBottom: true, parallax: true },
             React.createElement(ProductShowcase, null)
         ),
 
-        React.createElement(AngleSection, { angleBottom: true },
+        React.createElement(AngleSection, { id: 'bestsellers', angleBottom: true },
             React.createElement(BestsellerShowcase, null)
         ),
 
-        React.createElement(AngleSection, { angleTop: true, angleBottom: true },
+        React.createElement(AngleSection, { id: 'stats', angleTop: true, angleBottom: true },
             React.createElement(CommunityStats, null)
         ),
 
-        React.createElement(AngleSection, { angleTop: true, angleBottom: true },
+        React.createElement(AngleSection, { id: 'trust', angleTop: true, angleBottom: true },
             React.createElement(TrustCredentials, null)
         ),
 
-        React.createElement(AngleSection, { angleTop: true, angleBottom: true },
+        React.createElement(AngleSection, { id: 'ugc', angleTop: true, angleBottom: true },
             React.createElement(UGCStrip, null)
         ),
 
-        React.createElement(AngleSection, { angleTop: true },
+        React.createElement(AngleSection, { id: 'newsletter', angleTop: true },
             React.createElement(Newsletter, null)
         )
     );
