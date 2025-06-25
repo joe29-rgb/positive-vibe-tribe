@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { motionOK } from '../../utils/motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getCdnImage } from '../../utils/cloudinary';
@@ -126,6 +127,28 @@ const AddBtn = styled.button`
   }
 `;
 
+const Chevron = styled(motion.button)`
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-left: 4px solid var(--primary-red);
+    border-bottom: 4px solid var(--primary-red);
+    transform: rotate(-45deg);
+    display: block;
+  }
+`;
+
 function Hero() {
   const [featured, setFeatured] = useState(null);
   const dispatch = useDispatch();
@@ -154,9 +177,12 @@ function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <div style={{ marginBottom: 30 }}>
+        <motion.div style={{ marginBottom: 30 }}
+          animate={motionOK() ? { y: [0, 8, 0] } : { y: 0 }}
+          transition={motionOK() ? { duration: 8, repeat: Infinity, ease: 'easeInOut' } : {}}
+        >
           <KokopelliCollage />
-        </div>
+        </motion.div>
         <HeadlineBlack>Positive</HeadlineBlack>
         <HeadlineScript>Vibe Tribe</HeadlineScript>
         <HeroSubtitle>
@@ -165,8 +191,9 @@ function Hero() {
         <motion.a
           href="/products"
           className="btn btn-gradient"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          style={{ background: 'linear-gradient(135deg, var(--primary-red) 0%, #f5e04b 100%)', padding: '14px 36px', borderRadius:'50px', fontWeight:700, color:'#fff' }}
+          whileHover={{ scale: 1.06, boxShadow: '0 8px 24px rgba(0,0,0,0.18)' }}
+          whileTap={{ scale: 0.96 }}
         >
           Shop the Tribe
         </motion.a>
@@ -189,6 +216,13 @@ function Hero() {
           </Spotlight>
         )}
       </HeroContent>
+      <Chevron
+        aria-label="Scroll for more"
+        initial={{ y: 0, opacity: 0 }}
+        animate={motionOK() ? { y: [0, 8, 0], opacity: 1 } : { opacity: 1 }}
+        transition={motionOK() ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.8 }}
+        onClick={() => document.querySelector('#featured-collections')?.scrollIntoView({ behavior: 'smooth' })}
+      />
     </HeroContainer>
   );
 }

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { motion } from 'framer-motion';
 import { getVariant } from '../../utils/ab';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -37,6 +38,20 @@ const Card = styled(motion.div)`
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     z-index: 2;
   }
+`;
+
+const Badge = styled.span`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--primary-red);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-transform: uppercase;
+  z-index: 2;
 `;
 
 const CardLink = styled(Link)`
@@ -165,6 +180,8 @@ function ProductCard({ product, index = 0 }) {
     }
   };
 
+  const badgeText = product?.tag === 'new' ? 'New' : product?.tag === 'limited' ? 'Limited' : null;
+
   return (
     <CardLink to={`/product/${product._id}`}>
       <Card
@@ -176,8 +193,9 @@ function ProductCard({ product, index = 0 }) {
         custom={index}
       >
         <ImgWrapper ref={imgRef}>
-          <ImgPrimary src={product.image} alt={product.name} loading="lazy" />
-          {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" />}
+          {badgeText && <Badge>{badgeText}</Badge>}
+          <ImgPrimary src={product.image} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.image, 600)} sizes="(max-width:600px) 100vw, 280px" />
+          {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.altImage, 600)} sizes="(max-width:600px) 100vw, 280px" />}
           <Overlay
             variants={overlayVariants}
             initial="hidden"
