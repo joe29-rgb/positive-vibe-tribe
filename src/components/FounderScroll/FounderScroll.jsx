@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, useInView } from 'framer-motion';
 import look3 from '../../assets/collage/look3.jpg';
-import look7 from '../../assets/collage/look7.jpg';
 const founderImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431546/founder_yjlzto.jpg';
 
 const Section = styled.section`
@@ -50,11 +49,6 @@ const chapters = [
     bg: look3,
     title: 'An Airport Epiphany',
     text: '“If others can hate for no reason, I can love for no reason.”  A simple act of kindness in San Antonio revealed the philosophy that fuels Positive Vibe Tribe today.',
-  },
-  {
-    bg: look7,
-    title: 'Hidden Positivity',
-    text: 'In Lethbridge, a tearful stranger discovered a subtle Positive Vibez decal—proof that quiet optimism can shine light in dark places.',
   },
   {
     bg: founderImg,

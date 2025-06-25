@@ -2,17 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import LazyImage from '../LazyImage/LazyImage';
 import look1 from '../../assets/collage/look1.jpg';
-import look3 from '../../assets/collage/look3.jpg';
 import look4 from '../../assets/collage/look4.jpg';
 import look5 from '../../assets/collage/look5.jpg';
 
 const events = [
-  {
-    title: 'Hidden Positivity',
-    subtitle: 'A Decal\'s Lesson',
-    quote: 'Positivity is everywhere—just like a subtle decal, sometimes you have to look a little harder to see it.',
-    img: look3,
-  },
   {
     title: 'First Hoodie Run',
     subtitle: 'Treaty 6, Edmonton',
