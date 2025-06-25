@@ -24,6 +24,19 @@ const Card = styled(motion.div)`
     transform: translateY(-4px) scale(1.02);
   }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 18px;
+    height: 18px;
+    background: conic-gradient(#f5e04b 0deg 90deg, #d33a2c 90deg 180deg, #1a1a1a 180deg 270deg, #ffffff 270deg 360deg);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    z-index: 2;
+  }
 `;
 
 const CardLink = styled(Link)`

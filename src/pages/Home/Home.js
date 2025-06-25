@@ -8,6 +8,7 @@ import TrustCredentials from '../../components/TrustCredentials/TrustCredentials
 import Newsletter from '../../components/Newsletter/Newsletter';
 import ProductShowcase from '../../components/ProductShowcase/ProductShowcase';
 import BestsellerShowcase from '../../components/BestsellerShowcase/BestsellerShowcase';
+import AngleSection from '../../components/AngleSection/AngleSection';
 
 function Home() {
     return React.createElement(React.Fragment, null,
@@ -24,13 +25,34 @@ function Home() {
             React.createElement('meta', { name: 'twitter:image', content: '/assets/og-share-1200x630.png' })
         ),
         React.createElement(Hero, null),
-        React.createElement(FeaturedCollections, null),
-        React.createElement(BrandStory, null),
-        React.createElement(ProductShowcase, null),
-        React.createElement(BestsellerShowcase, null),
-        React.createElement(CommunityStats, null),
-        React.createElement(TrustCredentials, null),
-        React.createElement(Newsletter, null)
+
+        React.createElement(AngleSection, { id: 'featured-collections', angleTop: true, angleBottom: true },
+            React.createElement(FeaturedCollections, null)
+        ),
+
+        React.createElement(AngleSection, { angleBottom: true },
+            React.createElement(BrandStory, null)
+        ),
+
+        React.createElement(AngleSection, { angleTop: true, angleBottom: true, parallax: true },
+            React.createElement(ProductShowcase, null)
+        ),
+
+        React.createElement(AngleSection, { angleBottom: true },
+            React.createElement(BestsellerShowcase, null)
+        ),
+
+        React.createElement(AngleSection, { angleTop: true, angleBottom: true },
+            React.createElement(CommunityStats, null)
+        ),
+
+        React.createElement(AngleSection, { angleTop: true, angleBottom: true },
+            React.createElement(TrustCredentials, null)
+        ),
+
+        React.createElement(AngleSection, { angleTop: true },
+            React.createElement(Newsletter, null)
+        )
     );
 }
 
