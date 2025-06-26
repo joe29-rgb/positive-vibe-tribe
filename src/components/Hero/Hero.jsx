@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { motionOK } from '../../utils/motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
@@ -41,6 +41,16 @@ const HeroBg = styled(motion.div)`
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
+
+  /* slow horizontal cloud drift */
+  @keyframes cloudDrift {
+    from { background-position-x: 0; }
+    to   { background-position-x: -200px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: cloudDrift 60s linear infinite;
+  }
 `;
 
 const HeroContent = styled(motion.div)`
@@ -190,12 +200,17 @@ function Hero() {
     if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
   };
 
-  const bgUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/e_improve/v1750886642/edmonton-skyline_chn5mc.png';
+  const bgUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
+
+  // Parallax on scroll (disabled if reduced motion)
+  const { scrollY } = useViewportScroll();
+  const bgY = useTransform(scrollY, [0, 600], [0, -180]);
 
   return (
     <HeroContainer>
       {/* Background image layer */}
-      <HeroBg style={{ backgroundImage: `url(${bgUrl})` }}
+      <HeroBg
+        style={{ backgroundImage: `url(${bgUrl})`, y: motionOK() ? bgY : 0 }}
         initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
         transition={{ duration: 8, ease: 'easeOut' }}
