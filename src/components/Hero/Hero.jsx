@@ -233,14 +233,17 @@ function Hero() {
           </Spotlight>
         )}
 
-        <Skyline
-          src={skylineUrl}
-          srcSet={buildSrcSet(skylineUrl, 2000)}
-          sizes="100vw"
-          alt="Edmonton skyline silhouette at sunset"
-          style={{ y: skylineY }}
-        />
+        {/* Skyline moved outside HeroContent */}
       </HeroContent>
+
+      <Skyline
+        src={skylineUrl}
+        srcSet={buildSrcSet(skylineUrl, 2000)}
+        sizes="100vw"
+        alt="Edmonton skyline silhouette at sunset"
+        style={{ y: skylineY }}
+      />
+
       <Chevron
         aria-label="Scroll for more"
         initial={{ y: 0, opacity: 0 }}
