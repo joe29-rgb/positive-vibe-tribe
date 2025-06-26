@@ -18,8 +18,8 @@ const photoUrls = [
   'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750796000/IMG_20250624_140246_dzgtlg.jpg',
 ];
 
-// Build ~200 tiles for higher density (≈ 8 extra rows)
-const tiles = Array.from({ length: 200 }, (_, i) => photoUrls[i % photoUrls.length]);
+// Build ~200 tiles with randomised order for higher density and less obvious repetition
+const tiles = Array.from({ length: 200 }, () => photoUrls[Math.floor(Math.random() * photoUrls.length)]);
 
 // Medicine Wheel for cultural backdrop
 const MedicineWheel = styled.div`
@@ -36,9 +36,9 @@ const MedicineWheel = styled.div`
     #1a1a1a 180deg 270deg,
     #ffffff 270deg 360deg
   );
-  opacity: 0.12;
+  opacity: 0.22; /* slightly stronger so the wheel is discernible */
   pointer-events: none;
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
   z-index: 0;
 `;
 
