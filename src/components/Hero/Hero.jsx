@@ -42,7 +42,7 @@ const HeroContent = styled(motion.div)`
 
 const HeroSubtitle = styled.p`
   font-size: var(--fs-2xl);
-  color: var(--warm-brown);
+  color: #F9E2BF;
   margin-bottom: 40px;
   font-weight: 500;
   font-family: var(--font-primary);
@@ -63,6 +63,7 @@ const Glow = styled(motion.div)`
   filter: blur(180px);
   opacity: 0.55;
   pointer-events: none;
+  z-index: 1;
 `;
 
 // Use global button utility classes instead of custom component
@@ -72,7 +73,7 @@ const HeadlineBlack = styled.h1`
   font-size: var(--fs-7xl);
   line-height: 1;
   margin: 0;
-  color: var(--dark-brown);
+  color: #F9E2BF;
 
   @media (max-width: 768px) {
     font-size: var(--fs-4xl);
@@ -82,7 +83,7 @@ const HeadlineScript = styled.h2`
   font-family: 'Dancing Script', 'Satisfy', 'Allura', cursive;
   font-size: var(--fs-5xl);
   margin: 0 0 24px;
-  color: var(--dark-brown);
+  color: #F9E2BF;
 
   @media (max-width: 768px) {
     font-size: var(--fs-2xl);
@@ -176,8 +177,7 @@ function Hero() {
     if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
   };
 
-  const skylineUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
-  const bgUrl = skylineUrl; // Using provided hero artwork URL for the entire background
+  const bgUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
 
   return (
     <HeroContainer>
