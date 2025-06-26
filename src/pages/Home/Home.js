@@ -11,7 +11,7 @@ import BestsellerShowcase from '../../components/BestsellerShowcase/BestsellerSh
 import AngleSection from '../../components/AngleSection/AngleSection';
 import UGCStrip from '../../components/UGCStrip/UGCStrip';
 import SectionProgress from '../../components/SectionProgress/SectionProgress';
-import PatternDivider from '../../components/PatternDivider/PatternDivider';
+import OjibweDivider from '../../components/OjibweDivider/OjibweDivider';
 
 function Home() {
     return React.createElement(React.Fragment, null,
@@ -52,43 +52,43 @@ function Home() {
             React.createElement(FeaturedCollections, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'brand-story', angleBottom: true },
             React.createElement(BrandStory, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'product-showcase', angleTop: true, angleBottom: true, parallax: true, transparent: true, tinted: true },
             React.createElement(ProductShowcase, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'bestsellers', angleBottom: true },
             React.createElement(BestsellerShowcase, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'stats', angleTop: true, angleBottom: true },
             React.createElement(CommunityStats, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'trust', angleTop: true, angleBottom: true },
             React.createElement(TrustCredentials, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'ugc', angleTop: true, angleBottom: true },
             React.createElement(UGCStrip, null)
         ),
 
-        React.createElement(PatternDivider, null),
+        React.createElement(OjibweDivider, null),
 
         React.createElement(AngleSection, { id: 'newsletter', angleTop: true },
             React.createElement(Newsletter, null)

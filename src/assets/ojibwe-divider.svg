@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="64" viewBox="0 0 256 64" preserveAspectRatio="xMidYMid slice">
+  <rect width="256" height="64" fill="var(--night-sky, #4b2d1e)" />
+  <g fill="var(--sunset-orange, #BF5A26)">
+    <polygon points="16,0 24,16 8,16" />
+    <polygon points="48,0 56,16 40,16" />
+    <polygon points="80,0 88,16 72,16" />
+    <polygon points="112,0 120,16 104,16" />
+    <polygon points="144,0 152,16 136,16" />
+    <polygon points="176,0 184,16 168,16" />
+    <polygon points="208,0 216,16 200,16" />
+    <polygon points="240,0 248,16 232,16" />
+  </g>
+  <g fill="var(--copper-tan, #F9E2BF)">
+    <polygon points="32,32 48,32 40,48" />
+    <polygon points="96,32 112,32 104,48" />
+    <polygon points="160,32 176,32 168,48" />
+    <polygon points="224,32 240,32 232,48" />
+  </g>
+</svg> 
