@@ -48,7 +48,7 @@ function Home() {
 
         React.createElement(Hero, null),
 
-        React.createElement(AngleSection, { id: 'featured-collections', angleTop: true, angleBottom: true, transparent: true, tinted: true },
+        React.createElement(AngleSection, { id: 'featured-collections', angleBottom: true, transparent: true, tinted: true, style: { paddingTop: 0 } },
             React.createElement(FeaturedCollections, null)
         ),
 
