@@ -43,7 +43,7 @@ const MedicineWheel = styled.div`
 `;
 
 const Wrapper = styled.div`
-  --tile: 22px;
+  --tile: 30px;
   position: relative;
   width: clamp(220px, 40vw, 320px);
   aspect-ratio: 1 / 2; /* Kokopelli is taller than wide */
@@ -51,14 +51,14 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 480px) {
-    --tile: 16px;
+    --tile: 20px;
   }
 `;
 
 const Mosaic = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--tile));
-  gap: 3px;
+  gap: 1px;
   width: 100%;
   height: 100%;
   mask: url(${kokopelliSil}) center/contain no-repeat;
@@ -81,17 +81,18 @@ const PopTile = styled(motion.div)`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--tile) * 7.5);
-  height: calc(var(--tile) * 7.5);
+  width: calc(var(--tile) * 9);
+  height: calc(var(--tile) * 9);
   transform: translate(-50%, -50%) rotateX(-8deg) rotateY(6deg) scale(1.1);
   background-size: cover;
   background-position: center;
   border-radius: 8px;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.45);
+  filter: brightness(1.15) saturate(120%);
   z-index: 3;
   @media (max-width: 480px) {
-    width: calc(var(--tile) * 6);
-    height: calc(var(--tile) * 6);
+    width: calc(var(--tile) * 7);
+    height: calc(var(--tile) * 7);
   }
 `;
 
