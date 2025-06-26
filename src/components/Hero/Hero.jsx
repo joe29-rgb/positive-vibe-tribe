@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { motionOK } from '../../utils/motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getCdnImage } from '../../utils/cloudinary';
 import KokopelliCollage from '../KokopelliCollage/KokopelliCollage';
-import { buildSrcSet } from '../../utils/imageSrcSet';
 
 // Replaced dancing Kokopelli assets with collage logo
 
 const HeroContainer = styled.section`
   min-height: 100vh;
+  /* fallback gradient behind image */
   background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-beige) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+`;
+
+// Full-bleed background image layer
+const HeroBg = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
 `;
 
 const HeroContent = styled(motion.div)`
@@ -150,23 +160,9 @@ const Chevron = styled(motion.button)`
   }
 `;
 
-const Skyline = styled(motion.img)`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1400px;
-  max-width: 120%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.9;
-`;
-
 function Hero() {
   const [featured, setFeatured] = useState(null);
   const dispatch = useDispatch();
-  const { scrollY } = useViewportScroll();
-  const skylineY = useTransform(scrollY, [0, 800], [0, motionOK() ? -120 : 0]);
 
   // Fetch featured product once
   useEffect(() => {
@@ -181,9 +177,16 @@ function Hero() {
   };
 
   const skylineUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
+  const bgUrl = skylineUrl; // Using provided hero artwork URL for the entire background
 
   return (
     <HeroContainer>
+      {/* Background image layer */}
+      <HeroBg style={{ backgroundImage: `url(${bgUrl})` }}
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 8, ease: 'easeOut' }}
+      />
       <Glow
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.55 }}
@@ -232,17 +235,7 @@ function Hero() {
             <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
           </Spotlight>
         )}
-
-        {/* Skyline moved outside HeroContent */}
       </HeroContent>
-
-      <Skyline
-        src={skylineUrl}
-        srcSet={buildSrcSet(skylineUrl, 2000)}
-        sizes="100vw"
-        alt="Edmonton skyline silhouette at sunset"
-        style={{ y: skylineY }}
-      />
 
       <Chevron
         aria-label="Scroll for more"
