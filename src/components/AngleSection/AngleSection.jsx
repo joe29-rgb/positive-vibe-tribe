@@ -7,7 +7,24 @@ const Base = styled(motion.section)`
   padding: var(--section-padding, 110px 20px);
   position: relative;
   overflow: hidden;
-  background: var(--canvas-beige);
+  /* allow background control via props */
+  background: ${({ transparent }) => (transparent ? 'transparent' : 'var(--canvas-beige)')};
+
+  ${({ tinted }) =>
+    tinted &&
+    `
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--sunset-orange, #BF5A26);
+      opacity: 0.05;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 0;
+    }
+    & > * { position: relative; z-index: 1; }
+  `}
 `;
 
 function buildClip(top, bottom) {
@@ -20,7 +37,7 @@ function buildClip(top, bottom) {
   return 'none';
 }
 
-const AngleSection = ({ angleTop = false, angleBottom = false, parallax = false, factor = 0.2, children, ...rest }) => {
+const AngleSection = ({ angleTop = false, angleBottom = false, parallax = false, factor = 0.2, transparent = false, tinted = false, children, ...rest }) => {
   const clipPath = buildClip(angleTop, angleBottom);
 
   // Set up transforms (hooks must run unconditionally)
@@ -42,6 +59,8 @@ const AngleSection = ({ angleTop = false, angleBottom = false, parallax = false,
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
+      transparent={transparent}
+      tinted={tinted}
       {...rest}
     >
       {children}

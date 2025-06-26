@@ -33,6 +33,10 @@
     --fs-300: 1rem;
     --fs-200: 0.875rem;
     --fs-100: 0.75rem;
+    /* Hero derived palette */
+    --sunset-orange: #BF5A26;
+    --dusky-red: #7C2D14;
+    --copper-tan: #F9E2BF;
 }
 
 * {

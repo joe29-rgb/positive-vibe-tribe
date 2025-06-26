@@ -48,7 +48,7 @@ function Home() {
 
         React.createElement(Hero, null),
 
-        React.createElement(AngleSection, { id: 'featured-collections', angleTop: true, angleBottom: true },
+        React.createElement(AngleSection, { id: 'featured-collections', angleTop: true, angleBottom: true, transparent: true, tinted: true },
             React.createElement(FeaturedCollections, null)
         ),
 
@@ -60,7 +60,7 @@ function Home() {
 
         React.createElement(PatternDivider, null),
 
-        React.createElement(AngleSection, { id: 'product-showcase', angleTop: true, angleBottom: true, parallax: true },
+        React.createElement(AngleSection, { id: 'product-showcase', angleTop: true, angleBottom: true, parallax: true, transparent: true, tinted: true },
             React.createElement(ProductShowcase, null)
         ),
 

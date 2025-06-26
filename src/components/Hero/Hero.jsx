@@ -18,6 +18,19 @@ const HeroContainer = styled.section`
   justify-content: center;
   position: relative;
   overflow: hidden;
+
+  /* Fade to beige at bottom so hero blends with subsequent sections */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 22vh;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--canvas-beige) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
 `;
 
 // Full-bleed background image layer
