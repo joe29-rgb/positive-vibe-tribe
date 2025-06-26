@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import diamondSvg from '../../assets/corner-diamond.svg';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 /* ------------------------------------
@@ -254,6 +254,23 @@ const CatLabel = styled.span`
   font-weight: 600;
 `;
 
+/* Desktop social icons */
+const SocialBar = styled.div`
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  a {
+    color: var(--primary-red);
+    font-size: 1rem;
+    transition: transform .25s;
+    &:hover { transform: scale(1.15); }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 /* ------------------------------------
    React Component
 +------------------------------------ */
@@ -298,6 +315,13 @@ function Header() {
   const itemCount = useSelector((state) => state.cart.itemCount);
 
   const kokopelliImg = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750431541/kokopelli_j7olov.png';
+
+  const socialLinks = [
+    {href:'https://facebook.com/PositiveVibeTribe', icon:<FaFacebookF/>, label:'Facebook'},
+    {href:'https://twitter.com/PositiveVibeTribe', icon:<FaTwitter/>, label:'Twitter'},
+    {href:'https://instagram.com/PositiveVibeTribe', icon:<FaInstagram/>, label:'Instagram'},
+    {href:'https://youtube.com/@PositiveVibeTribe', icon:<FaYoutube/>, label:'YouTube'},
+  ];
 
   return (
     <>
@@ -363,6 +387,12 @@ function Header() {
           </NavItem>
         </Nav>
 
+        <SocialBar>
+          {socialLinks.map(s=> (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
+          ))}
+        </SocialBar>
+
         {/* Hamburger */}
         <Hamburger onClick={toggleMenu} className={open ? 'open' : ''} aria-label="Toggle menu">
           <span />
@@ -417,12 +447,9 @@ function Header() {
           Shop the Tribe
         </motion.a>
         <SocialRow>
-          <SocialIcon href="https://facebook.com/PositiveVibeTribe" target="_blank" aria-label="Facebook">
-            <span style={{fontSize:'1.2rem',fontWeight:700}}>f</span>
-          </SocialIcon>
-          <SocialIcon href="https://instagram.com/PositiveVibeTribe" target="_blank" aria-label="Instagram">
-            <span style={{fontSize:'1.2rem',fontWeight:700}}>ig</span>
-          </SocialIcon>
+          {socialLinks.map(s=> (
+            <SocialIcon key={s.label} href={s.href} target="_blank" aria-label={s.label}>{s.icon}</SocialIcon>
+          ))}
         </SocialRow>
       </MobileMenu>
     </>
