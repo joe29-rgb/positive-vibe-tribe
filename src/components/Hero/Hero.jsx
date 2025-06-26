@@ -190,7 +190,7 @@ function Hero() {
     if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
   };
 
-  const bgUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
+  const bgUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/e_improve/v1750886642/edmonton-skyline_chn5mc.png';
 
   return (
     <HeroContainer>
