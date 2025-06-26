@@ -19,13 +19,21 @@ const HeaderContainer = styled.header`
   align-items: center;
   padding: 1rem 2rem;
   backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255,255,255,0.6);
+  @supports (backdrop-filter: blur(8px)) {
+    background: rgba(250,245,238,0.35); /* warm beige tint */
+  }
   transition: background 0.3s ease, padding 0.3s ease;
 
   &.scrolled {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--sunset-orange);
     padding: 0.5rem 2rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    /* invert nav colours */
+    a, span {
+      color: #fff !important;
+    }
   }
 `;
 
@@ -50,6 +58,9 @@ const Nav = styled.nav`
 const linkBase = css`
   text-decoration: none;
   color: var(--dark-brown);
+  .scrolled & {
+    color: #fff;
+  }
   font-family: 'UnifrakturCook', cursive;
   font-size: var(--fs-xl);
   font-weight: 700;
