@@ -26,7 +26,7 @@ const HeroContainer = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    height: 22vh;
+    height: clamp(80px, 15vh, 140px);
     background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--canvas-beige) 100%);
     pointer-events: none;
     z-index: 1;

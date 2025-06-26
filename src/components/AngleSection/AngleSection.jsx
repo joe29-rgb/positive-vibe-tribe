@@ -24,7 +24,17 @@ const Base = styled(motion.section)`
       z-index: 0;
     }
     & > * { position: relative; z-index: 1; }
+
+    /* Soften tint on small screens */
+    @media (max-width: 600px) {
+       &::before { opacity: 0.035; }
+    }
   `}
+
+  /* Reduce vertical whitespace on mobile */
+  @media (max-width: 600px) {
+    padding: 64px 16px;
+  }
 `;
 
 function buildClip(top, bottom) {
