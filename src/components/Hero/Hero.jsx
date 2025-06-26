@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { motionOK } from '../../utils/motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getCdnImage } from '../../utils/cloudinary';
 import KokopelliCollage from '../KokopelliCollage/KokopelliCollage';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 
 // Replaced dancing Kokopelli assets with collage logo
 
@@ -149,9 +150,23 @@ const Chevron = styled(motion.button)`
   }
 `;
 
+const Skyline = styled(motion.img)`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1400px;
+  max-width: 120%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.9;
+`;
+
 function Hero() {
   const [featured, setFeatured] = useState(null);
   const dispatch = useDispatch();
+  const { scrollY } = useViewportScroll();
+  const skylineY = useTransform(scrollY, [0, 800], [0, motionOK() ? -120 : 0]);
 
   // Fetch featured product once
   useEffect(() => {
@@ -164,6 +179,8 @@ function Hero() {
   const handleAdd = () => {
     if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
   };
+
+  const skylineUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
 
   return (
     <HeroContainer>
@@ -215,6 +232,14 @@ function Hero() {
             <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
           </Spotlight>
         )}
+
+        <Skyline
+          src={skylineUrl}
+          srcSet={buildSrcSet(skylineUrl, 2000)}
+          sizes="100vw"
+          alt="Edmonton skyline silhouette at sunset"
+          style={{ y: skylineY }}
+        />
       </HeroContent>
       <Chevron
         aria-label="Scroll for more"
