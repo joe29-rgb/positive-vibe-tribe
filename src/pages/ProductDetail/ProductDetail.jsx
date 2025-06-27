@@ -312,7 +312,7 @@ function ProductDetail() {
 
       <ProductAccordion product={product} />
 
-      <ProductReviews />
+      <ProductReviews productName={product.name} />
 
       <UGCStrip />
 

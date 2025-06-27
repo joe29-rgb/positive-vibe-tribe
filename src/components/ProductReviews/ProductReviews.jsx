@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const Wrapper = styled.section`
   margin: 80px 0;
@@ -65,14 +66,38 @@ function Stars({ count }) {
   );
 }
 
-function ProductReviews() {
+function ProductReviews({ productName = 'Product' }) {
   const [showAll, setShowAll] = useState(false);
 
   const reviews = showAll ? mockReviews : mockReviews.slice(0, 3);
   const avgRating = mockReviews.reduce((sum, r) => sum + r.rating, 0) / mockReviews.length;
 
+  const reviewLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: productName,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: avgRating.toFixed(1),
+      reviewCount: mockReviews.length,
+    },
+    review: mockReviews.map((r) => ({
+      '@type': 'Review',
+      author: r.name,
+      reviewBody: r.text,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.rating,
+        bestRating: 5,
+      },
+    })),
+  };
+
   return (
     <Wrapper>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(reviewLd)}</script>
+      </Helmet>
       <Heading>Customer Reviews</Heading>
       <SummaryRow>
         <Stars count={Math.round(avgRating)} />
