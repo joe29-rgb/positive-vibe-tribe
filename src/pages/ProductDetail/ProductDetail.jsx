@@ -12,6 +12,9 @@ import { flyToCart } from '../../utils/flyToCart';
 import { addRecentProduct } from '../../utils/recentlyViewed';
 import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
 import ProductHero from '../../components/ProductHero/ProductHero';
+import ProductAccordion from '../../components/ProductAccordion/ProductAccordion';
+import UGCStrip from '../../components/UGCStrip/UGCStrip';
+import ProductUpsellCarousel from '../../components/ProductUpsellCarousel/ProductUpsellCarousel';
 import { buildSrcSet } from '../../utils/imageSrcSet';
 
 const Wrapper = styled.div`
@@ -264,6 +267,12 @@ function ProductDetail() {
         <span style={{fontWeight:600}}>${product.price}</span>
         <AddBtn style={{margin:0}} onClick={handleAdd} disabled={!size}>Add to Cart</AddBtn>
       </StickyBar>
+
+      <ProductAccordion product={product} />
+
+      <UGCStrip />
+
+      <ProductUpsellCarousel currentId={product._id} />
 
       <RecentlyViewed currentId={product._id} />
     </Wrapper>
