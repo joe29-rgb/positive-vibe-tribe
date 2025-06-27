@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const AccordionItem = styled.div`
   border-top: 1px solid #e9e4dd;
@@ -53,8 +54,33 @@ function Item({ title, children }) {
 }
 
 function ProductAccordion({ product }) {
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is the product description?',
+        acceptedAnswer: { '@type': 'Answer', text: product.description },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I care for this item?',
+        acceptedAnswer: { '@type': 'Answer', text: '100% preshrunk cotton. Machine wash cold, tumble dry low. Do not bleach. Iron inside-out.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'What are the shipping & return policies?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Free standard shipping on orders over $100 within Canada & USA. 30-day hassle-free returns on unworn items.' },
+      },
+    ],
+  };
+
   return (
     <div style={{ marginTop: '32px' }}>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
+      </Helmet>
       <Item title="Description">
         {product.description}
       </Item>
