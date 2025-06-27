@@ -16,6 +16,7 @@ import ProductAccordion from '../../components/ProductAccordion/ProductAccordion
 import UGCStrip from '../../components/UGCStrip/UGCStrip';
 import ProductUpsellCarousel from '../../components/ProductUpsellCarousel/ProductUpsellCarousel';
 import { buildSrcSet } from '../../utils/imageSrcSet';
+import ProductReviews from '../../components/ProductReviews/ProductReviews';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -269,6 +270,8 @@ function ProductDetail() {
       </StickyBar>
 
       <ProductAccordion product={product} />
+
+      <ProductReviews />
 
       <UGCStrip />
 
