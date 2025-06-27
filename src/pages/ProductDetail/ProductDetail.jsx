@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Helmet } from 'react-helmet-async';
-import ImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { toast } from 'react-toastify';
@@ -142,6 +140,8 @@ const Price = styled.p`
   margin:0 0 24px;
 `;
 
+const ImageGallery = lazy(() => import('react-image-gallery'));
+
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -248,7 +248,9 @@ function ProductDetail() {
         {/* Gallery column */}
         <GalleryWrapper style={{position:'sticky',top:80}}>
           {galleryItems.length ? (
-            <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} thumbnailPosition="bottom" />
+            <Suspense fallback={<SkeletonBox />}>
+              <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} thumbnailPosition="bottom" />
+            </Suspense>
           ) : (
             <Img
               ref={imgRef}
