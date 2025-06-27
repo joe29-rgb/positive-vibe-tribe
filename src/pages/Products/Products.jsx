@@ -202,6 +202,8 @@ function Products() {
     return () => observer.disconnect();
   }, [filtered.length]);
 
+  const clearFilters=()=>{setSelected({sizes:[],materials:[],category:[],symbolism:[],colors:[]});setSearchTerm('');setPriceRange([0,1000]);};
+
   if (loading) return <div style={{ padding: '2rem' }}>Loading products…</div>;
 
   return (
@@ -221,14 +223,20 @@ function Products() {
           <Helmet>
             <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
           </Helmet>
-          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+          <div style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between',alignItems:'center',gap:12,marginBottom:16}}>
             <Breadcrumbs />
-            <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} style={{padding:'6px 10px'}}>
-              <option value="newest">Newest</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="az">A–Z</option>
-            </select>
+            <div style={{display:'flex',alignItems:'center',gap:12}}>
+              <span style={{fontSize:'0.9rem',color:'var(--medium-gray)'}}>{filtered.length} results</span>
+              {Object.values(selected).some(arr=>arr.length) || searchTerm.trim() ? (
+                <button onClick={clearFilters} style={{background:'none',border:'1px solid var(--primary-red)',color:'var(--primary-red)',padding:'6px 10px',borderRadius:8,cursor:'pointer'}}>Clear filters</button>
+              ):null}
+              <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} style={{padding:'6px 10px'}}>
+                <option value="newest">Newest</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="az">A–Z</option>
+              </select>
+            </div>
           </div>
           <ProductGrid products={displayList} />
           {visibleCount < filtered.length && (
