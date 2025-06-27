@@ -5,12 +5,13 @@ import { FaSearch } from 'react-icons/fa';
 const Sidebar = styled.aside`
   width: 260px;
   padding: 24px;
-  border-right: 1px solid var(--light-gray, #f1f1f1);
   position: sticky;
   top: 80px;
   height: calc(100vh - 80px);
   overflow-y: auto;
-  background: #fff;
+  background: var(--warm-beige);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+  border-right: 1px solid rgba(0,0,0,0.05);
 
   @media (max-width: 1024px) {
     display: none;
@@ -26,6 +27,7 @@ const Title = styled.legend`
   font-size: var(--fs-base);
   font-weight: 600;
   color: var(--dark-brown);
+  text-transform: capitalize;
 `;
 
 const Checkbox = styled.label`

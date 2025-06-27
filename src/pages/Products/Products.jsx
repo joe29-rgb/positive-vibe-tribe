@@ -46,7 +46,7 @@ const Drawer = styled(motion.aside)`
   width: 85%;
   max-width: 320px;
   height: 100vh;
-  background: #fff;
+  background: var(--warm-beige);
   box-shadow: -2px 0 12px rgba(0,0,0,0.08);
   z-index: 90;
   padding: 24px;
