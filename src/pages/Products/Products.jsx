@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import ShopHero from '../../components/ShopHero/ShopHero';
 import ProductGrid from '../../components/ProductGrid/ProductGrid.jsx';
 import FacetSidebar from '../../components/ProductFilters/FacetSidebar.jsx';
 import Fuse from 'fuse.js';
@@ -205,6 +206,7 @@ function Products() {
 
   return (
     <>
+      <ShopHero />
       <Wrapper>
         {/* Desktop sidebar */}
         <FacetSidebar
