@@ -245,7 +245,7 @@ function Hero() {
         >
           Shop the Tribe
         </motion.a>
-        <Reassure>Free shipping on orders over $50</Reassure>
+        <Reassure>Free shipping on orders over $100.00</Reassure>
 
         {/* Featured product spotlight */}
         {featured && (

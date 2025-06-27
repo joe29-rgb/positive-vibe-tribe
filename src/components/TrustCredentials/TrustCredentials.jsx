@@ -40,7 +40,7 @@ const ItemText = styled.p`
 
 const DATA = [
   { icon: '🔒', title: 'Secure Shopping', text: 'SSL encrypted checkout, safe payment processing' },
-  { icon: '🚚', title: 'Free Shipping', text: 'Across Canada on orders over $75' },
+  { icon: '🚚', title: 'Free Shipping', text: 'Across Canada on orders over $100' },
   { icon: '↺', title: 'Easy Returns', text: '30-day happiness guarantee' },
   { icon: '🏆', title: 'Edmonton Local', text: 'Designed & shipped from Treaty 6 territory' },
   { icon: '♻️', title: 'Cultural Respect', text: 'Authentic Indigenous partnerships' },

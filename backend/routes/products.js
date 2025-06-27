@@ -9,7 +9,7 @@ var sampleProducts = [{
         description: 'Cozy fleece hoodie featuring the iconic Kokopelli collage graphic in warm sunset hues.',
         price: 0,
         category: 'Hoodies',
-        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/f_auto/v1750972977/kokopelli-hoodie2_bsykez.png',
+        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750972974/kokopelli-hoodie_rpckb8.png',
         sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
         colors: ['Grey'],
         countInStock: 25,

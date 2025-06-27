@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { flyToCart } from '../../utils/flyToCart';
 import { addRecentProduct } from '../../utils/recentlyViewed';
 import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
+import ProductHero from '../../components/ProductHero/ProductHero';
 import { buildSrcSet } from '../../utils/imageSrcSet';
 
 const Wrapper = styled.div`
@@ -149,7 +150,7 @@ function ProductDetail() {
         })}</script>
       </Helmet>
       <Breadcrumbs productName={product.name} />
-      <h2 style={{ fontFamily: 'UnifrakturCook,cursive', fontSize: 'var(--fs-3xl)' }}>{product.name}</h2>
+      <ProductHero product={product} />
       {galleryItems.length ? (
         <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} />
       ) : (
@@ -163,7 +164,6 @@ function ProductDetail() {
         />
       )}
       <p style={{ marginTop: '24px' }}>{product.description}</p>
-      <p style={{ fontWeight: 600, fontSize: 'var(--fs-lg)', color: 'var(--primary-red)' }}>${product.price}</p>
       <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
 
       <RecentlyViewed currentId={product._id} />
