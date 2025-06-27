@@ -12,7 +12,6 @@ import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
 import ProductHero from '../../components/ProductHero/ProductHero';
 import ProductAccordion from '../../components/ProductAccordion/ProductAccordion';
 import UGCStrip from '../../components/UGCStrip/UGCStrip';
-import ProductUpsellCarousel from '../../components/ProductUpsellCarousel/ProductUpsellCarousel';
 import { buildSrcSet } from '../../utils/imageSrcSet';
 import ProductReviews from '../../components/ProductReviews/ProductReviews';
 
@@ -141,6 +140,8 @@ const Price = styled.p`
 `;
 
 const ImageGallery = lazy(() => import('react-image-gallery'));
+
+const ProductUpsellCarousel = lazy(()=> import('../../components/ProductUpsellCarousel/ProductUpsellCarousel'));
 
 function ProductDetail() {
   const { id } = useParams();
@@ -316,7 +317,9 @@ function ProductDetail() {
 
       <UGCStrip />
 
-      <ProductUpsellCarousel currentId={product._id} />
+      <Suspense fallback={<div style={{height:200}} />}>
+        <ProductUpsellCarousel currentId={product._id} />
+      </Suspense>
 
       <RecentlyViewed currentId={product._id} />
     </Wrapper>
