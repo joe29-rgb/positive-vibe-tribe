@@ -54,11 +54,67 @@ const SkeletonBox = styled.div`
   animation:${shimmer} 1.2s linear infinite;
 `;
 
+const GalleryWrapper = styled.div`
+  margin: 40px 0;
+  .image-gallery-slide img { border-radius:24px; box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+`;
+
+const TrustRow = styled.ul`
+  display:flex;
+  gap:24px;
+  flex-wrap:wrap;
+  list-style:none;
+  padding:24px 0;
+  border-top:1px solid #e9e4dd;
+  border-bottom:1px solid #e9e4dd;
+  margin:40px 0;
+  li { display:flex; align-items:center; gap:8px; font-size:var(--fs-sm); color:var(--medium-gray); }
+`;
+
+const StickyBar = styled.div`
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+  padding:12px 16px;
+  display:none;
+  z-index:90;
+  @media(max-width:640px){ display:flex; justify-content:space-between; align-items:center; }
+`;
+
+const SelectorGroup = styled.div`
+  margin: 24px 0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+`;
+
+const OptionRow = styled.div`
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+`;
+
+const ColorSwatch = styled.button`
+  width:32px; height:32px; border-radius:50%; border:${p=>p.$active?'3px solid var(--primary-red)':'1px solid #ccc'}; cursor:pointer;
+  background:${p=>p.$color};
+`;
+
+const SizeBtn = styled.button`
+  padding:8px 14px; border-radius:8px; border:${p=>p.$active?'2px solid var(--primary-red)':'1px solid #ccc'};
+  background:#fff; cursor:pointer; font-size:var(--fs-sm); font-weight:600;
+`;
+
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
   const imgRef = useRef(null);
+
+  const [color, setColor] = useState(product?.colors?.[0] || 'Default');
+  const [size, setSize] = useState('');
 
   useEffect(() => {
     fetch(`/api/products/${id}`)
@@ -66,6 +122,7 @@ function ProductDetail() {
       .then((data) => {
         setProduct(data);
         addRecentProduct(data);
+        setColor(data.colors?.[0] || 'Default');
       })
       .catch((err) => console.error(err));
   }, [id]);
@@ -105,10 +162,11 @@ function ProductDetail() {
     ],
   };
 
-  const galleryItems = [product.image, product.altImage].filter(Boolean).map((src) => ({ original: src, thumbnail: src }));
+  const galleryItems = [color==='Black' && product.altImage ? product.altImage : product.image].map(src=>({original:src,thumbnail:src}));
 
   const handleAdd = () => {
-    dispatch(addToCart({ product, size: 'default', quantity: 1 }));
+    if(!size) return;
+    dispatch(addToCart({ product, size, quantity: 1 }));
     toast.success(`${product.name} added to cart`);
     if (imgRef.current) {
       flyToCart(imgRef.current);
@@ -151,20 +209,61 @@ function ProductDetail() {
       </Helmet>
       <Breadcrumbs productName={product.name} />
       <ProductHero product={product} />
-      {galleryItems.length ? (
-        <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} />
-      ) : (
-        <Img
-          ref={imgRef}
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          srcSet={buildSrcSet(product.image, 800)}
-          sizes="(max-width: 640px) 100vw, 600px"
-        />
-      )}
+      <GalleryWrapper>
+        {galleryItems.length ? (
+          <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} thumbnailPosition="bottom" />
+        ) : (
+          <Img
+            ref={imgRef}
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            srcSet={buildSrcSet(product.image, 800)}
+            sizes="(max-width: 640px) 100vw, 600px"
+          />
+        )}
+      </GalleryWrapper>
+
+      <TrustRow>
+        <li>🔒 Secure Checkout</li>
+        <li>🚚 Free shipping $100+</li>
+        <li>↺ 30-day returns</li>
+        <li>🌱 Ethically sourced</li>
+      </TrustRow>
+
       <p style={{ marginTop: '24px' }}>{product.description}</p>
-      <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
+
+      <SelectorGroup>
+        {product.colors && product.colors.length>1 && (
+          <div>
+            <strong>Colour:</strong>
+            <OptionRow style={{marginTop:8}}>
+              {product.colors.map(c=> (
+                <ColorSwatch key={c} $color={c.toLowerCase()==='black'?'#000':c.toLowerCase()==='grey'?'#888':c} $active={c===color} onClick={()=>setColor(c)} />
+              ))}
+            </OptionRow>
+          </div>
+        )}
+
+        {product.sizes && product.sizes.length>0 && (
+          <div>
+            <strong>Size:</strong>
+            <OptionRow style={{marginTop:8}}>
+              {product.sizes.map(s=> (
+                <SizeBtn key={s} $active={s===size} onClick={()=>setSize(s)}>{s}</SizeBtn>
+              ))}
+            </OptionRow>
+          </div>
+        )}
+      </SelectorGroup>
+
+      <AddBtn onClick={handleAdd} disabled={!size} style={!size?{opacity:0.5,cursor:'not-allowed'}:{}}>Add to Cart</AddBtn>
+
+      {/* Sticky bar mobile */}
+      <StickyBar>
+        <span style={{fontWeight:600}}>${product.price}</span>
+        <AddBtn style={{margin:0}} onClick={handleAdd} disabled={!size}>Add to Cart</AddBtn>
+      </StickyBar>
 
       <RecentlyViewed currentId={product._id} />
     </Wrapper>
