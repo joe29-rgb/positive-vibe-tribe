@@ -121,6 +121,27 @@ const Grid = styled.div`
   }
 `;
 
+const InfoWrapper = styled.div`
+  position:sticky;
+  top:80px;
+  display:flex;
+  flex-direction:column;
+`;
+
+const Title = styled.h2`
+  font-family:'UnifrakturCook',cursive;
+  font-size:var(--fs-2xl);
+  margin:0 0 12px;
+  color:var(--dark-brown);
+`;
+
+const Price = styled.p`
+  font-size:var(--fs-2xl);
+  font-weight:700;
+  color:var(--primary-red);
+  margin:0 0 24px;
+`;
+
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -241,7 +262,9 @@ function ProductDetail() {
         </GalleryWrapper>
 
         {/* Details column */}
-        <div>
+        <InfoWrapper>
+          <Title>{product.name}</Title>
+          <Price>${product.price}</Price>
           <TrustRow>
             <li>🔒 Secure Checkout</li>
             <li>🚚 Free shipping $100+</li>
@@ -257,7 +280,7 @@ function ProductDetail() {
                 <strong>Colour:</strong>
                 <OptionRow style={{marginTop:8}}>
                   {product.colors.map(c=> (
-                    <ColorSwatch key={c} $color={c.toLowerCase()==='black'?'#000':c.toLowerCase()==='grey'?'#888':c} $active={c===color} onClick={()=>setColor(c)} />
+                    <ColorSwatch key={c} aria-label={c} $color={c.toLowerCase()==='black'?'#000':c.toLowerCase()==='grey'?'#888':c} $active={c===color} onClick={()=>setColor(c)} />
                   ))}
                 </OptionRow>
               </div>
@@ -268,7 +291,7 @@ function ProductDetail() {
                 <strong>Size:</strong>
                 <OptionRow style={{marginTop:8}}>
                   {product.sizes.map(s=> (
-                    <SizeBtn key={s} $active={s===size} onClick={()=>setSize(s)}>{s}</SizeBtn>
+                    <SizeBtn key={s} aria-label={s} $active={s===size} onClick={()=>setSize(s)}>{s}</SizeBtn>
                   ))}
                 </OptionRow>
               </div>
@@ -276,7 +299,7 @@ function ProductDetail() {
           </SelectorGroup>
 
           <AddBtn onClick={handleAdd} disabled={!size} style={!size?{opacity:0.5,cursor:'not-allowed'}:{}}>Add to Cart</AddBtn>
-        </div>
+        </InfoWrapper>
       </Grid>
 
       {/* Sticky bar mobile */}
