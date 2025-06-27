@@ -111,6 +111,16 @@ const SizeBtn = styled.button`
   background:#fff; cursor:pointer; font-size:var(--fs-sm); font-weight:600;
 `;
 
+const Grid = styled.div`
+  display:block;
+  @media(min-width:1024px){
+    display:grid;
+    grid-template-columns:600px 1fr;
+    gap:60px;
+    align-items:start;
+  }
+`;
+
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -213,55 +223,61 @@ function ProductDetail() {
       </Helmet>
       <Breadcrumbs productName={product.name} />
       <ProductHero product={product} />
-      <GalleryWrapper>
-        {galleryItems.length ? (
-          <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} thumbnailPosition="bottom" />
-        ) : (
-          <Img
-            ref={imgRef}
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            srcSet={buildSrcSet(product.image, 800)}
-            sizes="(max-width: 640px) 100vw, 600px"
-          />
-        )}
-      </GalleryWrapper>
+      <Grid>
+        {/* Gallery column */}
+        <GalleryWrapper style={{position:'sticky',top:80}}>
+          {galleryItems.length ? (
+            <ImageGallery items={galleryItems} showPlayButton={false} showFullscreenButton={true} thumbnailPosition="bottom" />
+          ) : (
+            <Img
+              ref={imgRef}
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              srcSet={buildSrcSet(product.image, 800)}
+              sizes="(max-width: 640px) 100vw, 600px"
+            />
+          )}
+        </GalleryWrapper>
 
-      <TrustRow>
-        <li>🔒 Secure Checkout</li>
-        <li>🚚 Free shipping $100+</li>
-        <li>↺ 30-day returns</li>
-        <li>🌱 Ethically sourced</li>
-      </TrustRow>
+        {/* Details column */}
+        <div>
+          <TrustRow>
+            <li>🔒 Secure Checkout</li>
+            <li>🚚 Free shipping $100+</li>
+            <li>↺ 30-day returns</li>
+            <li>🌱 Ethically sourced</li>
+          </TrustRow>
 
-      <p style={{ marginTop: '24px' }}>{product.description}</p>
+          <p style={{ marginTop: '24px' }}>{product.description}</p>
 
-      <SelectorGroup>
-        {product.colors && product.colors.length>1 && (
-          <div>
-            <strong>Colour:</strong>
-            <OptionRow style={{marginTop:8}}>
-              {product.colors.map(c=> (
-                <ColorSwatch key={c} $color={c.toLowerCase()==='black'?'#000':c.toLowerCase()==='grey'?'#888':c} $active={c===color} onClick={()=>setColor(c)} />
-              ))}
-            </OptionRow>
-          </div>
-        )}
+          <SelectorGroup>
+            {product.colors && product.colors.length>1 && (
+              <div>
+                <strong>Colour:</strong>
+                <OptionRow style={{marginTop:8}}>
+                  {product.colors.map(c=> (
+                    <ColorSwatch key={c} $color={c.toLowerCase()==='black'?'#000':c.toLowerCase()==='grey'?'#888':c} $active={c===color} onClick={()=>setColor(c)} />
+                  ))}
+                </OptionRow>
+              </div>
+            )}
 
-        {product.sizes && product.sizes.length>0 && (
-          <div>
-            <strong>Size:</strong>
-            <OptionRow style={{marginTop:8}}>
-              {product.sizes.map(s=> (
-                <SizeBtn key={s} $active={s===size} onClick={()=>setSize(s)}>{s}</SizeBtn>
-              ))}
-            </OptionRow>
-          </div>
-        )}
-      </SelectorGroup>
+            {product.sizes && product.sizes.length>0 && (
+              <div>
+                <strong>Size:</strong>
+                <OptionRow style={{marginTop:8}}>
+                  {product.sizes.map(s=> (
+                    <SizeBtn key={s} $active={s===size} onClick={()=>setSize(s)}>{s}</SizeBtn>
+                  ))}
+                </OptionRow>
+              </div>
+            )}
+          </SelectorGroup>
 
-      <AddBtn onClick={handleAdd} disabled={!size} style={!size?{opacity:0.5,cursor:'not-allowed'}:{}}>Add to Cart</AddBtn>
+          <AddBtn onClick={handleAdd} disabled={!size} style={!size?{opacity:0.5,cursor:'not-allowed'}:{}}>Add to Cart</AddBtn>
+        </div>
+      </Grid>
 
       {/* Sticky bar mobile */}
       <StickyBar>
