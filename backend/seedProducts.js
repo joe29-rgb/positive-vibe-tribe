@@ -5,7 +5,7 @@ const Product = require('./models/Product');
 const products = [{
         name: 'Kokopelli Hoodie – Grey',
         description: 'Cozy fleece hoodie featuring the iconic Kokopelli collage graphic in warm sunset hues.',
-        price: 0,
+        price: 65,
         category: 'Hoodies',
         image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750972974/kokopelli-hoodie_rpckb8.png',
         sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
@@ -19,7 +19,7 @@ const products = [{
     {
         name: 'Kokopelli Hoodie – Black',
         description: 'Black variant of our Kokopelli collage hoodie for a bold streetwear look.',
-        price: 0,
+        price: 65,
         category: 'Hoodies',
         image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/f_auto/v1750972977/kokopelli-hoodie2_bsykez.png',
         sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
@@ -31,7 +31,7 @@ const products = [{
     {
         name: 'Sunset Gradient Tee',
         description: 'Soft tee with Positive Vibe Tribe wordmark over a sunset gradient.',
-        price: 0,
+        price: 30,
         category: 'Tees',
         image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/f_auto/v1750972975/sunset-tee_etsimr.jpg',
         sizes: ['S', 'M', 'L', 'XL', '2XL'],
@@ -42,7 +42,7 @@ const products = [{
     {
         name: 'Zen Waves Tank',
         description: 'Lightweight tank featuring calming wave artwork and Kokopelli icon.',
-        price: 0,
+        price: 28,
         category: 'Tanks',
         image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/f_auto/v1750795961/IMG_20250624_140103_g6rpuj.heic',
         sizes: ['S', 'M', 'L', 'XL'],
@@ -52,7 +52,7 @@ const products = [{
     {
         name: 'Positive Vibes Fitted Cap',
         description: 'Structured fitted cap embroidered with Positive Vibe Tribe glyph.',
-        price: 0,
+        price: 35,
         category: 'Caps',
         image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/f_auto/v1750973272/positive-vibes-cap_s8gzhk.heic',
         sizes: ['S/M', 'L/XL'],
