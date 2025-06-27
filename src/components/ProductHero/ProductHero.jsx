@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { motionOK } from '../../utils/motion';
+import { Helmet } from 'react-helmet-async';
 
 const Section = styled.section`
   position: relative;
@@ -66,6 +67,9 @@ function ProductHero({ product, benefit = 'Ethically crafted · Limited drop' })
 
   return (
     <Section>
+      <Helmet>
+        <link rel="preload" as="image" href={product.image} />
+      </Helmet>
       <Container style={{ y: translateY }} as={motion.div}>
         <ImgWrap whileHover={{ rotateX: prefersMotion ? -4 : 0, rotateY: prefersMotion ? 4 : 0 }} transition={{ type:'spring', stiffness:120 }}>
           <img src={product.image} alt={product.name} />
