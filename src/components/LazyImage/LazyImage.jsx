@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { buildSrcSet } from '../../utils/imageSrcSet';
 
 const shimmer = keyframes`
   0% {
@@ -32,14 +33,20 @@ const Img = styled.img`
   opacity: ${(props) => (props.$loading ? 0 : 1)};
 `;
 
-function LazyImage({ src, alt = '', ...rest }) {
+function LazyImage({ src, alt = '', width = 800, sizes = '(max-width: 640px) 100vw, 800px', ...rest }) {
   const [loaded, setLoaded] = useState(false);
+
+  // Generate srcSet when possible (e.g., Cloudinary URLs)
+  const srcSet = buildSrcSet(src, width);
+
   return (
     <Img
       src={src}
       alt={alt}
       loading="lazy"
       decoding="async"
+      srcSet={srcSet || undefined}
+      sizes={srcSet ? sizes : undefined}
       $loading={!loaded}
       onLoad={() => setLoaded(true)}
       {...rest}
