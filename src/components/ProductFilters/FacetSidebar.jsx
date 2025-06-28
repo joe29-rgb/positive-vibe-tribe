@@ -149,21 +149,21 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
       {priceRange && onPriceChange && (
         <Section>
           <Title>Price Range</Title>
-          <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns:'1fr 24px 1fr', gap:4, marginBottom: 8 }}>
             <input
               type="number"
               min="0"
               value={priceRange[0]}
               onChange={(e) => onPriceChange([Number(e.target.value), priceRange[1]])}
-              style={{ flex: 1, padding: '6px 8px' }}
+              style={{ width:'100%', padding:'6px 8px', borderRadius:6, border:'1px solid #ccc' }}
             />
-            <span>-</span>
+            <span style={{display:'flex',alignItems:'center',justifyContent:'center'}}>-</span>
             <input
               type="number"
               min="0"
               value={priceRange[1]}
               onChange={(e) => onPriceChange([priceRange[0], Number(e.target.value)])}
-              style={{ flex: 1, padding: '6px 8px' }}
+              style={{ width:'100%', padding:'6px 8px', borderRadius:6, border:'1px solid #ccc' }}
             />
           </div>
           {/* Simple range slider */}
@@ -175,6 +175,7 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
               step="5"
               value={priceRange[0]}
               onChange={(e)=> onPriceChange([Number(e.target.value), priceRange[1]]) }
+              style={{ width:'100%', accentColor:'var(--primary-red)' }}
             />
             <input
               type="range"
@@ -183,6 +184,7 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
               step="5"
               value={priceRange[1]}
               onChange={(e)=> onPriceChange([priceRange[0], Number(e.target.value)]) }
+              style={{ width:'100%', accentColor:'var(--primary-red)', marginTop:4 }}
             />
           </div>
         </Section>
