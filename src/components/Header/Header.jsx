@@ -217,7 +217,7 @@ const MegaMenu = styled(motion.div)`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 100%;
+  top: calc(100% + 8px);
   background: #fff;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   padding: 32px 48px;

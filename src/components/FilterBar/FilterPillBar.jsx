@@ -22,6 +22,11 @@ const Bar = styled.nav`
     box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
   }
 
+  @media(min-width: 1024px){
+    margin-left: 260px; /* width of fixed sidebar */
+    width: calc(100% - 260px);
+  }
+
   transform: translateY(${p=>p.$offscreen?'100%':'0%'});
   display: ${p=>p.$hidden?'none':'flex'};
   transition: transform 0.25s ease, display 0.2s linear;
