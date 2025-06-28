@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import FilterPillBar from '../../components/FilterBar/FilterPillBar.jsx';
 import ShopHero from '../../components/ShopHero/ShopHero';
 import ProductGrid from '../../components/ProductGrid/ProductGrid.jsx';
 import FacetSidebar from '../../components/ProductFilters/FacetSidebar.jsx';
@@ -103,6 +104,7 @@ function Products() {
   const [saleOnly,setSaleOnly]=useState(false);
   const [minRating,setMinRating]=useState(0);
   const [visibleCount, setVisibleCount] = useState(12);
+  const sortRef = useRef(null);
 
   const sentinelRef = useRef(null);
 
@@ -189,6 +191,15 @@ function Products() {
 
   const toggleDrawer = () => setShowDrawer((p) => !p);
 
+  const removeFilter = (key,val)=>{
+    if(key==='price'){ setPriceRange([0,1000]); return; }
+    if(key==='sale'){ setSaleOnly(false); return; }
+    if(key==='rating'){ setMinRating(0); return; }
+    toggleFilter(key,val);
+  };
+
+  const openSort = ()=>{ if(sortRef.current){ sortRef.current.focus(); } };
+
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -242,6 +253,15 @@ function Products() {
   return (
     <>
       <ShopHero />
+      <FilterPillBar
+        selected={selected}
+        priceRange={priceRange}
+        saleOnly={saleOnly}
+        minRating={minRating}
+        onRemove={removeFilter}
+        onSortClick={openSort}
+        onFilterClick={toggleDrawer}
+      />
       <PatternBg />
       <Wrapper>
         {/* Desktop sidebar */}
@@ -271,7 +291,7 @@ function Products() {
               {Object.values(selected).some(arr=>arr.length) || searchTerm.trim() || saleOnly || minRating>0 ? (
                 <button onClick={resetFilters} style={{background:'none',border:'1px solid var(--primary-red)',color:'var(--primary-red)',padding:'6px 10px',borderRadius:8,cursor:'pointer'}}>Clear filters</button>
               ):null}
-              <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} style={{padding:'6px 10px'}}>
+              <select ref={sortRef} value={sortBy} onChange={(e)=>setSortBy(e.target.value)} style={{padding:'6px 10px'}}>
                 <option value="newest">Newest</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
