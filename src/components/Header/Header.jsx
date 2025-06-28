@@ -315,6 +315,7 @@ const MainRow = styled.div`
 function Header() {
   const [open, setOpen] = React.useState(false);
   const [megaOpen, setMegaOpen] = React.useState(false);
+  const megaRef = React.useRef(null);
 
   // Shrink on scroll
   const headerRef = React.useRef(null);
@@ -359,6 +360,27 @@ function Header() {
       })
       .catch(()=>{});
   },[]);
+
+  // Reposition mega-menu to fit viewport
+  React.useEffect(()=>{
+    if(!megaOpen || !megaRef.current) return;
+    const menu=megaRef.current;
+    const rect=menu.getBoundingClientRect();
+    const padding=16;
+    if(rect.right>window.innerWidth-padding){
+      menu.style.left='auto';
+      menu.style.transform='none';
+      menu.style.right=`${padding}px`;
+    }else if(rect.left<padding){
+      menu.style.right='auto';
+      menu.style.left=`${padding}px`;
+      menu.style.transform='none';
+    }else{
+      menu.style.left='50%';
+      menu.style.transform='translateX(-50%)';
+      menu.style.right='auto';
+    }
+  },[megaOpen]);
 
   // Redux cart selector
   const itemCount = useSelector((state) => state.cart.itemCount);
@@ -425,6 +447,7 @@ function Header() {
               >
                 <NavLink href="/products">Shop</NavLink>
                 <MegaMenu
+                  ref={megaRef}
                   aria-label="Shop categories"
                   initial={{ opacity: 0, y: 20, pointerEvents: 'none' }}
                   animate={{ opacity: megaOpen ? 1 : 0, y: megaOpen ? 0 : 20, pointerEvents: megaOpen ? 'auto' : 'none' }}
