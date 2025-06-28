@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import skyline from '../../assets/edmonton-skyline.png';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 
 const Section = styled.section`
   position: relative;
@@ -10,6 +12,10 @@ const Section = styled.section`
     clip-path:none;
     padding: 80px 16px;
   }
+`;
+
+const Bg = styled(motion.div)`
+  position:absolute; inset:0; background:url(${skyline}) center/cover no-repeat; opacity:0.08; pointer-events:none;
 `;
 
 const Container = styled.div`
@@ -25,11 +31,26 @@ const Title = styled.h1`
   margin: 0;
 `;
 
-function ShopHero({ title = 'Shop' }){
+const Subtitle = styled.p`
+  font-size: var(--fs-lg);
+  color: var(--dark-brown);
+  margin-top:16px;
+`;
+
+const Chevron = styled(motion.div)`
+  width:34px; height:34px; border-left:4px solid var(--primary-red); border-bottom:4px solid var(--primary-red); transform:rotate(-45deg); margin:40px auto 0; cursor:pointer;
+`;
+
+function ShopHero({ title = 'Shop', subtitle='Explore our latest drops & classics' }){
+  const { scrollY } = useViewportScroll();
+  const y = useTransform(scrollY, [0,300],[0,50]);
   return (
     <Section>
+      <Bg style={{y}} />
       <Container>
         <Title>{title}</Title>
+        <Subtitle>{subtitle}</Subtitle>
+        <Chevron whileHover={{scale:1.1}} onClick={()=>window.scrollTo({top:600,behavior:'smooth'})} />
       </Container>
     </Section>
   );
