@@ -44,7 +44,7 @@ const Badge = styled.span`
   position: absolute;
   top: 10px;
   right: 10px;
-  background: var(--primary-red);
+  background: ${(p)=>p.$type==='new'?'var(--sunset-orange)':'var(--dusky-red)'};
   color: #fff;
   padding: 4px 8px;
   font-size: var(--fs-xs);
@@ -62,7 +62,7 @@ const CardLink = styled(Link)`
 const ImgWrapper = styled.div`
   position: relative;
   width: 100%;
-  padding-top: 120%; /* 12:10 ratio */
+  padding-top: 100%; /* 1:1 square */
   overflow: hidden;
 `;
 
@@ -195,7 +195,7 @@ function ProductCard({ product, index = 0 }) {
         custom={index}
       >
         <ImgWrapper ref={imgRef}>
-          {badgeText && <Badge>{badgeText}</Badge>}
+          {badgeText && <Badge $type={product.tag}>{badgeText}</Badge>}
           <ImgPrimary src={product.image} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.image, 600)} sizes="(max-width:600px) 100vw, 280px" />
           {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.altImage, 600)} sizes="(max-width:600px) 100vw, 280px" />}
           <Overlay
