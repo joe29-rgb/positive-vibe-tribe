@@ -5,8 +5,9 @@ import { FaSearch } from 'react-icons/fa';
 const Sidebar = styled.aside`
   width: 260px;
   padding: 24px;
-  position: sticky;
+  position: fixed;
   top: 80px;
+  left: 0;
   height: calc(100vh - 80px);
   overflow-y: auto;
   background: var(--warm-beige);

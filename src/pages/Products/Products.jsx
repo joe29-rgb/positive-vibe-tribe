@@ -17,6 +17,10 @@ const Wrapper = styled.div`
 const Content = styled.div`
   flex: 1;
   padding: 40px 20px;
+  margin-left: 260px;
+  @media(max-width:1024px){
+    margin-left:0;
+  }
 `;
 
 const MobileFilterButton = styled.button`
