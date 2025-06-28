@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProductCard from './ProductCard.jsx';
 import { keyframes } from 'styled-components';
+import { FixedSizeGrid as WindowGrid } from 'react-window';
 
 const GridContainer = styled.div`
   max-width: 1400px;
@@ -96,6 +97,26 @@ function ProductGrid({ products: extProducts }) {
             <SkeletonCard key={idx} />
           ))}
         </CardGrid>
+      </GridContainer>
+    );
+  }
+
+  // Virtualisation when many products
+  if(filtered.length>40){
+    const { innerWidth:vw, innerHeight:vh } = window;
+    const cardW=320; const columnCount=Math.max(1,Math.floor( (vw-60)/cardW));
+    const rowCount=Math.ceil(filtered.length/columnCount);
+    const cardH=460;
+    const GridItem=({ columnIndex,rowIndex,style })=>{
+      const idx=rowIndex*columnCount+columnIndex; if(idx>=filtered.length) return null;
+      const product=filtered[idx];
+      return <div style={{...style,padding:20}}><ProductCard product={product}/></div>;
+    };
+    return (
+      <GridContainer style={{height:'80vh'}}>
+        <WindowGrid columnCount={columnCount} columnWidth={cardW} height={vh*0.8} rowCount={rowCount} rowHeight={cardH} width={vw-40}>
+          {GridItem}
+        </WindowGrid>
       </GridContainer>
     );
   }
