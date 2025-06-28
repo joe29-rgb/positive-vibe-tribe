@@ -5,6 +5,7 @@ import diamondSvg from '../../assets/corner-diamond.svg';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import AnnouncementBar from '../AnnouncementBar/AnnouncementBar';
 
 /* ------------------------------------
    Styled Components
@@ -336,6 +337,7 @@ function Header() {
 
   return (
     <>
+      <AnnouncementBar />
       <HeaderContainer ref={headerRef} role="navigation" aria-label="Primary">
         {/* Logo */}
         <Logo href="/">
