@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { motion } from 'framer-motion';
-import { getVariant } from '../../utils/ab';
 import { buildSrcSet } from '../../utils/imageSrcSet';
 import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
@@ -20,9 +19,10 @@ const Card = styled(motion.div)`
   cursor: pointer;
   max-width: 280px;
   margin: 0 auto;
+  height: 100%;
   &:hover {
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
-    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px) scale(1.03);
   }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 
@@ -163,16 +163,18 @@ const quickAddTap = {
 function ProductCard({ product, index = 0 }) {
   const dispatch = useDispatch();
   const imgRef = useRef(null);
+  const [chosenSize, setChosenSize] = useState('');
 
   if (!product) return null;
 
   const handleAdd = (e) => {
     e.stopPropagation();
-    dispatch(addToCart({ product, size: 'default', quantity: 1 }));
+    if (!chosenSize && product.sizes?.length) { return; }
+    dispatch(addToCart({ product, size: chosenSize || 'default', quantity: 1 }));
     const msg = `${product.name} added to cart`;
     toast.success(msg);
     if (window.gtag) {
-      window.gtag('event', 'quick_add', { product_id: product._id, variant: getVariant() });
+      window.gtag('event', 'quick_add', { product_id: product._id, size: chosenSize || 'default' });
     }
     // Trigger fly-to-cart animation
     if (imgRef.current) {
@@ -203,7 +205,14 @@ function ProductCard({ product, index = 0 }) {
             transition={{ duration: 0.25 }}
           >
             <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
-            <QuickAdd aria-label={`Add ${product.name} to cart`} onClick={handleAdd} whileTap={quickAddTap}>Quick Add</QuickAdd>
+            {product.sizes && product.sizes.length > 0 && (
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
+                {product.sizes.slice(0, 5).map(s => (
+                  <button key={s} onClick={(e) => { e.stopPropagation(); setChosenSize(s); }} style={{ padding: '4px 8px', borderRadius: 6, border: chosenSize === s ? '2px solid var(--primary-red)' : '1px solid #fff', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}>{s}</button>
+                ))}
+              </div>
+            )}
+            <QuickAdd aria-label={`Add ${product.name} to cart`} onClick={handleAdd} whileTap={quickAddTap} disabled={product.sizes?.length > 0 && !chosenSize} style={product.sizes?.length > 0 && !chosenSize ? { opacity: 0.6, cursor: 'not-allowed' } : {}}>Add</QuickAdd>
           </Overlay>
         </ImgWrapper>
         <Body>

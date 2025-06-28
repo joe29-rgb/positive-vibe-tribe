@@ -78,6 +78,14 @@ const LoadMoreBtn = styled.button`
   }
 `;
 
+const PatternBg = styled.div`
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0 2px, transparent 2px 40px);
+  pointer-events: none;
+  z-index: -2;
+`;
+
 function Products() {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -209,6 +217,7 @@ function Products() {
   return (
     <>
       <ShopHero />
+      <PatternBg />
       <Wrapper>
         {/* Desktop sidebar */}
         <FacetSidebar

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 
@@ -63,10 +63,20 @@ const SrOnly = styled.span`
 `;
 
 function MultiFilter({ title, options, selected, toggle }) {
+  const [open,setOpen]=useState(true);
+
+  useEffect(()=>{
+    // Close by default on mobile
+    if(window.innerWidth<768){setOpen(false);}
+  },[]);
+
   return (
     <Section>
-      <Title>{title}</Title>
-      {options.map((opt) => (
+      <button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',display:'flex',justifyContent:'space-between',width:'100%',alignItems:'center',padding:0,marginBottom:12,cursor:'pointer'}}>
+        <Title style={{margin:0}}>{title}</Title>
+        <span style={{transform:open?'rotate(45deg)':'rotate(-45deg)',transition:'transform .2s'}}>{open?'-':'+'}</span>
+      </button>
+      {open && options.map((opt) => (
         <Checkbox key={opt}>
           <input
             id={`${title}-${opt}`.replace(/\s+/g, '-')}
