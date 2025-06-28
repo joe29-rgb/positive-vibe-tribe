@@ -222,9 +222,11 @@ const MegaMenu = styled(motion.div)`
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   padding: 32px 48px;
   border-radius: 12px;
+  width: clamp(320px, 60vw, 720px);
+  max-width: calc(100vw - 32px);
   display: grid;
-  grid-template-columns: repeat(3, 200px);
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+  gap: 24px;
   z-index: 90;
 
   @media (max-width: 1024px) {
