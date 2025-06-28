@@ -302,14 +302,25 @@ function Header() {
     pulse: { scale: [1, 1.08, 1], transition: { repeat: Infinity, duration: 2, ease: 'easeInOut' } },
   };
 
-  const categories = [
-    { name: 'Tops', slug: 'tops', image: '/images/cats/tops.jpg' },
-    { name: 'Hoodies', slug: 'hoodies', image: '/images/cats/hoodies.jpg' },
-    { name: 'Accessories', slug: 'accessories', image: '/images/cats/accessories.jpg' },
-    { name: 'Bottoms', slug: 'bottoms', image: '/images/cats/bottoms.jpg' },
-    { name: 'Outerwear', slug: 'outerwear', image: '/images/cats/outerwear.jpg' },
-    { name: 'All Products', slug: 'all', image: '/images/cats/all.jpg' },
+  const defaultCats=[
+    { name:'Hoodies',slug:'Hoodies' },
+    { name:'Tees',slug:'Tees' },
+    { name:'Caps',slug:'Caps' },
+    { name:'Tanks',slug:'Tanks' },
   ];
+
+  const [categories,setCategories]=React.useState(defaultCats.map(c=>({...c,image:''})));
+
+  React.useEffect(()=>{
+    fetch('/api/products')
+      .then(r=>r.json())
+      .then(data=>{
+        const catMap={};
+        data.forEach(p=>{ if(!catMap[p.category]) catMap[p.category]=p.image; });
+        setCategories(prev=> prev.map(c=>({...c,image:catMap[c.slug]||c.image})));
+      })
+      .catch(()=>{});
+  },[]);
 
   // Redux cart selector
   const itemCount = useSelector((state) => state.cart.itemCount);
@@ -369,7 +380,7 @@ function Header() {
             >
               {categories.map((cat) => (
                 <CatCard key={cat.slug} to={`/products?category=${cat.slug}`}>
-                  <CatImg src={cat.image} alt={cat.name} loading="lazy" />
+                  <CatImg src={cat.image||'https://via.placeholder.com/160'} alt={cat.name} loading="lazy" />
                   <CatLabel>{cat.name}</CatLabel>
                 </CatCard>
               ))}
