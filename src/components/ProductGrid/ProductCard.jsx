@@ -44,7 +44,12 @@ const Badge = styled.span`
   position: absolute;
   top: 10px;
   right: 10px;
-  background: ${(p)=>p.$type==='new'?'var(--sunset-orange)':'var(--dusky-red)'};
+  background: ${({$type})=>{
+    if($type==='new') return 'var(--sunset-orange)';
+    if($type==='limited') return 'var(--dusky-red)';
+    if($type==='sale') return '#119822';
+    return 'var(--primary-red)';
+  }};
   color: #fff;
   padding: 4px 8px;
   font-size: var(--fs-xs);
@@ -102,6 +107,20 @@ const Price = styled.p`
   font-weight: 600;
   margin: 0;
   color: var(--primary-red);
+`;
+
+const StrikePrice = styled.span`
+  font-size: var(--fs-xs);
+  margin-left: 6px;
+  text-decoration: line-through;
+  color: #555;
+`;
+
+const Stars = styled.div`
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+  span{color:#ffb400;font-size:0.8rem;}
 `;
 
 const Overlay = styled(motion.div)`
@@ -182,7 +201,8 @@ function ProductCard({ product, index = 0 }) {
     }
   };
 
-  const badgeText = product?.tag === 'new' ? 'New' : product?.tag === 'limited' ? 'Limited' : null;
+  const isSale = product.salePrice && product.salePrice < product.price;
+  const badgeText = product?.tag === 'new' ? 'New' : product?.tag === 'limited' ? 'Limited' : isSale ? 'Sale' : null;
 
   return (
     <CardLink to={`/product/${product._id}`}>
@@ -195,7 +215,7 @@ function ProductCard({ product, index = 0 }) {
         custom={index}
       >
         <ImgWrapper ref={imgRef}>
-          {badgeText && <Badge $type={product.tag}>{badgeText}</Badge>}
+          {badgeText && <Badge $type={isSale ? 'sale' : product.tag}>{badgeText}</Badge>}
           <ImgPrimary src={product.image} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.image, 600)} sizes="(max-width:600px) 100vw, 280px" />
           {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.altImage, 600)} sizes="(max-width:600px) 100vw, 280px" />}
           <Overlay
@@ -204,7 +224,10 @@ function ProductCard({ product, index = 0 }) {
             whileHover="visible"
             transition={{ duration: 0.25 }}
           >
-            <Price style={{ color: '#fff', fontSize: '1.1rem' }}>${product.price.toFixed(2)}</Price>
+            <Price style={{ color: '#fff', fontSize: '1.1rem' }}>
+              ${isSale ? product.salePrice.toFixed(2) : product.price.toFixed(2)}
+              {isSale && <StrikePrice>${product.price.toFixed(2)}</StrikePrice>}
+            </Price>
             {product.sizes && product.sizes.length > 0 && (
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
                 {product.sizes.slice(0, 5).map(s => (
@@ -217,7 +240,17 @@ function ProductCard({ product, index = 0 }) {
         </ImgWrapper>
         <Body>
           <Title>{product.name}</Title>
-          <Price>${product.price.toFixed(2)}</Price>
+          {product.rating && (
+            <Stars aria-label={`Rated ${product.rating} out of 5`}>
+              {Array.from({length:5}).map((_,i)=>{
+                const Star= i < Math.round(product.rating) ? '★':'☆';
+                return <span key={i}>{Star}</span>;})}
+            </Stars>
+          )}
+          <Price>
+            ${isSale ? product.salePrice.toFixed(2) : product.price.toFixed(2)}
+            {isSale && <StrikePrice>${product.price.toFixed(2)}</StrikePrice>}
+          </Price>
         </Body>
       </Card>
     </CardLink>

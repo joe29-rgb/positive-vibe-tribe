@@ -100,6 +100,8 @@ function Products() {
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [showDrawer, setShowDrawer] = useState(false);
+  const [saleOnly,setSaleOnly]=useState(false);
+  const [minRating,setMinRating]=useState(0);
   const [visibleCount, setVisibleCount] = useState(12);
 
   const sentinelRef = useRef(null);
@@ -138,6 +140,12 @@ function Products() {
     if (colors.length) list = list.filter((p) => p.colors && p.colors.some((c) => colors.includes(c)));
     list = list.filter((p) => p.price >= minP && p.price <= maxP);
 
+    // sale filter
+    if(saleOnly){ list = list.filter(p=> p.salePrice && p.salePrice < p.price); }
+
+    // rating filter (assumes rating field 0-5)
+    if(minRating>0){ list = list.filter(p=> (p.rating||0) >= minRating ); }
+
     // sort list
     let sorted=list;
     if(sortBy==='price-asc') sorted=[...list].sort((a,b)=>a.price-b.price);
@@ -146,7 +154,7 @@ function Products() {
     else if(sortBy==='newest') sorted=[...list].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
 
     setFiltered(sorted);
-  }, [products, selected, searchTerm, fuse, priceRange, sortBy]);
+  }, [products, selected, searchTerm, fuse, priceRange, sortBy, saleOnly, minRating]);
 
   // derive facet options
   const facets = useMemo(() => {
@@ -202,6 +210,19 @@ function Products() {
 
   const displayList = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
 
+  // counts per facet option within current filtered set
+  const facetCounts = useMemo(()=>{
+    const countObj = { sizes:{}, materials:{}, category:{}, symbolism:{}, colors:{} };
+    filtered.forEach(p=>{
+      p.sizes?.forEach(s=>{countObj.sizes[s]=(countObj.sizes[s]||0)+1;});
+      if(p.material) countObj.materials[p.material]=(countObj.materials[p.material]||0)+1;
+      if(p.category) countObj.category[p.category]=(countObj.category[p.category]||0)+1;
+      p.symbolism?.forEach(sym=>{countObj.symbolism[sym]=(countObj.symbolism[sym]||0)+1;});
+      p.colors?.forEach(c=>{countObj.colors[c]=(countObj.colors[c]||0)+1;});
+    });
+    return countObj;
+  },[filtered]);
+
   // infinite scroll observer
   useEffect(() => {
     if (!sentinelRef.current) return;
@@ -214,7 +235,7 @@ function Products() {
     return () => observer.disconnect();
   }, [filtered.length]);
 
-  const clearFilters=()=>{setSelected({sizes:[],materials:[],category:[],symbolism:[],colors:[]});setSearchTerm('');setPriceRange([0,1000]);};
+  const resetFilters=()=>{setSelected({sizes:[],materials:[],category:[],symbolism:[],colors:[]});setSearchTerm('');setPriceRange([0,1000]);setSaleOnly(false);setMinRating(0);};
 
   if (loading) return <div style={{ padding: '2rem' }}>Loading products…</div>;
 
@@ -230,7 +251,14 @@ function Products() {
           onToggle={toggleFilter}
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
+          priceRange={priceRange}
+          onPriceChange={setPriceRange}
+          saleOnly={saleOnly}
+          onSaleToggle={()=>setSaleOnly(s=>!s)}
+          minRating={minRating}
+          onRatingChange={setMinRating}
           suggestions={suggestions}
+          counts={facetCounts}
         />
         <Content>
           <Helmet>
@@ -240,8 +268,8 @@ function Products() {
             <Breadcrumbs />
             <div style={{display:'flex',alignItems:'center',gap:12}}>
               <span style={{fontSize:'0.9rem',color:'var(--medium-gray)'}}>{filtered.length} results</span>
-              {Object.values(selected).some(arr=>arr.length) || searchTerm.trim() ? (
-                <button onClick={clearFilters} style={{background:'none',border:'1px solid var(--primary-red)',color:'var(--primary-red)',padding:'6px 10px',borderRadius:8,cursor:'pointer'}}>Clear filters</button>
+              {Object.values(selected).some(arr=>arr.length) || searchTerm.trim() || saleOnly || minRating>0 ? (
+                <button onClick={resetFilters} style={{background:'none',border:'1px solid var(--primary-red)',color:'var(--primary-red)',padding:'6px 10px',borderRadius:8,cursor:'pointer'}}>Clear filters</button>
               ):null}
               <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} style={{padding:'6px 10px'}}>
                 <option value="newest">Newest</option>
@@ -282,29 +310,15 @@ function Products() {
               onToggle={toggleFilter}
               searchTerm={searchTerm}
               onSearchChange={setSearchTerm}
+              priceRange={priceRange}
+              onPriceChange={setPriceRange}
+              saleOnly={saleOnly}
+              onSaleToggle={()=>setSaleOnly(s=>!s)}
+              minRating={minRating}
+              onRatingChange={setMinRating}
+              counts={facetCounts}
               autoFocusSearch={true}
             />
-            {/* Price range simple inputs */}
-            <div style={{ marginTop: 24 }}>
-              <h4 style={{ marginBottom: 8 }}>Price Range</h4>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <input
-                  type="number"
-                  min="0"
-                  value={priceRange[0]}
-                  onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-                  style={{ flex: 1, padding: '6px 8px' }}
-                />
-                <span>-</span>
-                <input
-                  type="number"
-                  min="0"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                  style={{ flex: 1, padding: '6px 8px' }}
-                />
-              </div>
-            </div>
             <button
               onClick={toggleDrawer}
               style={{ marginTop: 20, width: '100%', padding: '12px', background: 'var(--primary-red)', color: '#fff', border: 'none', borderRadius: 8 }}

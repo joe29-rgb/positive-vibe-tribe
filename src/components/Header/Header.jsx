@@ -273,6 +273,40 @@ const SocialBar = styled.div`
   }
 `;
 
+/* ---------- Row Layout ---------- */
+const Inner = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+`;
+
+const UtilityRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  /* Hide when header shrinks */
+  .scrolled & {
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+`;
+
+const MainRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+`;
+
 /* ------------------------------------
    React Component
 +------------------------------------ */
@@ -340,79 +374,83 @@ function Header() {
     <>
       <AnnouncementBar />
       <HeaderContainer ref={headerRef} role="navigation" aria-label="Primary">
-        {/* Logo */}
-        <Logo href="/">
-          {(() => {
-            const SmallIcon = motion.img;
-            const tinyDance = {
-              animate: {
-                y: [0, -4, 0],
-                rotate: [-4, 4, -4],
-                transition: { duration: 3, ease: 'easeInOut', repeat: Infinity },
-              },
-            };
-            return (
-              <>
-                <SmallIcon
-                  src={kokopelliImg}
-                  alt=""
-                  className="red"
-                  style={{ width: 32, height: 32 }}
-                  variants={tinyDance}
-                  animate="animate"
-                />
-                <span style={{fontFamily:'UnifrakturCook,cursive',fontSize:'1.4rem',color:'var(--dark-brown)'}}>Positive Vibe Tribe</span>
-              </>
-            );
-          })()}
-        </Logo>
-
-        <SearchBar />
-
-        {/* Desktop Navigation */}
-        <Nav>
-          <NavLink href="/">Home</NavLink>
-          <NavItem
-            onMouseEnter={() => setMegaOpen(true)}
-            onMouseLeave={() => setMegaOpen(false)}
-          >
-            <NavLink href="/products">Shop</NavLink>
-            <MegaMenu
-              aria-label="Shop categories"
-              initial={{ opacity: 0, y: 20, pointerEvents: 'none' }}
-              animate={{ opacity: megaOpen ? 1 : 0, y: megaOpen ? 0 : 20, pointerEvents: megaOpen ? 'auto' : 'none' }}
-              transition={{ duration: 0.25 }}
-            >
-              {categories.map((cat) => (
-                <CatCard key={cat.slug} to={`/products?category=${cat.slug}`}>
-                  <CatImg src={cat.image||'https://via.placeholder.com/160'} alt={cat.name} loading="lazy" />
-                  <CatLabel>{cat.name}</CatLabel>
-                </CatCard>
+        <Inner>
+          {/* Utility Row */}
+          <UtilityRow>
+            <SearchBar />
+            <SocialBar>
+              {socialLinks.map(s=> (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
               ))}
-            </MegaMenu>
-          </NavItem>
-          <NavLink href="/about">About</NavLink>
-          <NavItem
-            onMouseEnter={() => setMegaOpen(true)}
-            onMouseLeave={() => setMegaOpen(false)}
-          >
-            <NavLink id="cart-icon" href="/cart" style={{position:'relative'}}>
-              <FaShoppingCart size={20} />
-              {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
-            </NavLink>
-          </NavItem>
-        </Nav>
+            </SocialBar>
+          </UtilityRow>
 
-        <SocialBar>
-          {socialLinks.map(s=> (
-            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
-          ))}
-        </SocialBar>
+          {/* Main Row */}
+          <MainRow>
+            {/* Logo */}
+            <Logo href="/">
+              {(() => {
+                const SmallIcon = motion.img;
+                const tinyDance = {
+                  animate: {
+                    y: [0, -4, 0],
+                    rotate: [-4, 4, -4],
+                    transition: { duration: 3, ease: 'easeInOut', repeat: Infinity },
+                  },
+                };
+                return (
+                  <>
+                    <SmallIcon
+                      src={kokopelliImg}
+                      alt=""
+                      className="red"
+                      style={{ width: 32, height: 32 }}
+                      variants={tinyDance}
+                      animate="animate"
+                    />
+                    <span style={{fontFamily:'UnifrakturCook,cursive',fontSize:'1.4rem',color:'var(--dark-brown)'}}>Positive Vibe Tribe</span>
+                  </>
+                );
+              })()}
+            </Logo>
 
-        {/* Hamburger */}
-        <Hamburger onClick={toggleMenu} className={open ? 'open' : ''} aria-label="Toggle menu">
-          <span />
-        </Hamburger>
+            {/* Desktop Navigation */}
+            <Nav>
+              <NavLink href="/">Home</NavLink>
+              <NavItem
+                onMouseEnter={() => setMegaOpen(true)}
+                onMouseLeave={() => setMegaOpen(false)}
+              >
+                <NavLink href="/products">Shop</NavLink>
+                <MegaMenu
+                  aria-label="Shop categories"
+                  initial={{ opacity: 0, y: 20, pointerEvents: 'none' }}
+                  animate={{ opacity: megaOpen ? 1 : 0, y: megaOpen ? 0 : 20, pointerEvents: megaOpen ? 'auto' : 'none' }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {categories.map((cat) => (
+                    <CatCard key={cat.slug} to={`/products?category=${cat.slug}`}>
+                      <CatImg src={cat.image||'https://via.placeholder.com/160'} alt={cat.name} loading="lazy" />
+                      <CatLabel>{cat.name}</CatLabel>
+                    </CatCard>
+                  ))}
+                </MegaMenu>
+              </NavItem>
+              <NavLink href="/about">About</NavLink>
+              <NavItem>
+                <NavLink id="cart-icon" href="/cart" style={{position:'relative'}}>
+                  <FaShoppingCart size={20} />
+                  {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
+                </NavLink>
+              </NavItem>
+            </Nav>
+
+            {/* Hamburger */}
+            <Hamburger onClick={toggleMenu} className={open ? 'open' : ''} aria-label="Toggle menu">
+              <span />
+            </Hamburger>
+          </MainRow>
+        </Inner>
       </HeaderContainer>
 
       {/* Mobile Fullscreen Menu */}

@@ -63,7 +63,7 @@ const SrOnly = styled.span`
   white-space: nowrap;
 `;
 
-function MultiFilter({ title, options, selected, toggle }) {
+function MultiFilter({ title, options, selected, toggle, counts }) {
   const [open,setOpen]=useState(true);
 
   useEffect(()=>{
@@ -77,30 +77,36 @@ function MultiFilter({ title, options, selected, toggle }) {
         <Title style={{margin:0}}>{title}</Title>
         <span style={{transform:open?'rotate(45deg)':'rotate(-45deg)',transition:'transform .2s'}}>{open?'-':'+'}</span>
       </button>
-      {open && options.map((opt) => (
-        <Checkbox key={opt}>
-          <input
-            id={`${title}-${opt}`.replace(/\s+/g, '-')}
-            type="checkbox"
-            aria-label={`${title} ${opt}`}
-            checked={selected.includes(opt)}
-            onChange={() => toggle(opt)}
-          />
-          {title.toLowerCase() === 'colors' ? (
-            <>
-              <ColorSwatch color={opt} aria-hidden="true" />
-              <SrOnly>{opt}</SrOnly>
-            </>
-          ) : (
-            opt
-          )}
-        </Checkbox>
-      ))}
+      {open && options.map((opt) => {
+        const count=counts?.[opt] || 0;
+        return (
+          <Checkbox key={opt} style={{justifyContent:'space-between'}}>
+            <div style={{display:'flex',alignItems:'center',gap:8}}>
+              <input
+                id={`${title}-${opt}`.replace(/\s+/g, '-')}
+                type="checkbox"
+                aria-label={`${title} ${opt}`}
+                checked={selected.includes(opt)}
+                onChange={() => toggle(opt)}
+              />
+              {title.toLowerCase() === 'colors' ? (
+                <>
+                  <ColorSwatch color={opt} aria-hidden="true" />
+                  <SrOnly>{opt}</SrOnly>
+                </>
+              ) : (
+                opt
+              )}
+            </div>
+            <span style={{fontSize:'0.75rem',color:'#555'}}>{count}</span>
+          </Checkbox>
+        );
+      })}
     </Section>
   );
 }
 
-function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, suggestions, autoFocusSearch=false }) {
+function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, priceRange, onPriceChange, saleOnly, onSaleToggle, minRating, onRatingChange, suggestions, counts={}, autoFocusSearch=false }) {
   const searchRef = useRef(null);
 
   useEffect(()=>{
@@ -138,12 +144,80 @@ function FacetSidebar({ facets, selected, onToggle, searchTerm, onSearchChange, 
           </ul>
         )}
       </Section>
+
+      {/* Price range inputs */}
+      {priceRange && onPriceChange && (
+        <Section>
+          <Title>Price Range</Title>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+            <input
+              type="number"
+              min="0"
+              value={priceRange[0]}
+              onChange={(e) => onPriceChange([Number(e.target.value), priceRange[1]])}
+              style={{ flex: 1, padding: '6px 8px' }}
+            />
+            <span>-</span>
+            <input
+              type="number"
+              min="0"
+              value={priceRange[1]}
+              onChange={(e) => onPriceChange([priceRange[0], Number(e.target.value)])}
+              style={{ flex: 1, padding: '6px 8px' }}
+            />
+          </div>
+          {/* Simple range slider */}
+          <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              step="5"
+              value={priceRange[0]}
+              onChange={(e)=> onPriceChange([Number(e.target.value), priceRange[1]]) }
+            />
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              step="5"
+              value={priceRange[1]}
+              onChange={(e)=> onPriceChange([priceRange[0], Number(e.target.value)]) }
+            />
+          </div>
+        </Section>
+      )}
+
+      {/* Deals */}
+      {typeof saleOnly==='boolean' && onSaleToggle && (
+        <Section>
+          <Title>Deals</Title>
+          <Checkbox>
+            <input type="checkbox" id="on-sale" checked={saleOnly} onChange={onSaleToggle} />
+            <span>On Sale</span>
+          </Checkbox>
+        </Section>
+      )}
+
+      {/* Rating */}
+      {onRatingChange && (
+        <Section>
+          <Title>Minimum Rating</Title>
+          <div style={{display:'flex',gap:8,alignItems:'center'}}>
+            {[0,3,4,5].map(r=> (
+              <button key={r} type="button" onClick={()=>onRatingChange(r)} style={{background:minRating===r?'var(--primary-red)':'transparent',color:minRating===r?'#fff':'var(--dark-brown)',border:'1px solid var(--primary-red)',borderRadius:6,padding:'4px 8px',cursor:'pointer',fontSize:'0.8rem'}}>{r===0?'Any':`${r}+`}</button>
+            ))}
+          </div>
+        </Section>
+      )}
+
       {Object.entries(facets).map(([key, list]) => (
         <MultiFilter
           key={key}
           title={key.charAt(0).toUpperCase() + key.slice(1)}
           options={list}
           selected={selected[key] || []}
+          counts={counts[key] || {}}
           toggle={(opt) => onToggle(key, opt)}
         />
       ))}

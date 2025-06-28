@@ -198,7 +198,27 @@ function ProductDetail() {
     ],
   };
 
-  const galleryItems = [color==='Black' && product.altImage ? product.altImage : product.image].map(src=>({original:src,thumbnail:src}));
+  // Build gallery items: support media array with {type:'image'|'video', src, thumb}
+  const mediaItems = product.media && product.media.length ? product.media : [
+    {type:'image',src: color==='Black' && product.altImage ? product.altImage : product.image}
+  ];
+
+  const galleryItems = mediaItems.map(m=>{
+    if(m.type==='video'){
+      return {
+        thumbnail: m.thumb || m.src + '#t=1',
+        renderItem: ()=>(
+          <div className="video-wrapper" style={{position:'relative',paddingTop:'56.25%'}}>
+            <video controls style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',borderRadius:24,boxShadow:'0 8px 24px rgba(0,0,0,0.08)'}} src={m.src}>
+              <track kind="captions" label="Captions" src="" srcLang="en" default />
+            </video>
+          </div>
+        )
+      };
+    }
+    // default image
+    return {original:m.src,thumbnail:m.thumb||m.src};
+  });
 
   const handleAdd = () => {
     if(!size) return;
