@@ -57,7 +57,7 @@ const SkeletonCard = styled.div`
   animation: ${shimmer} 1.2s linear infinite;
 `;
 
-function ProductGrid({ products: extProducts }) {
+function ProductGrid({ products: extProducts, onQuickView }) {
   const [products, setProducts] = useState(extProducts || []);
   const [filtered, setFiltered] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
@@ -110,7 +110,7 @@ function ProductGrid({ products: extProducts }) {
     const GridItem=({ columnIndex,rowIndex,style })=>{
       const idx=rowIndex*columnCount+columnIndex; if(idx>=filtered.length) return null;
       const product=filtered[idx];
-      return <div style={{...style,padding:20}}><ProductCard product={product}/></div>;
+      return <div style={{...style,padding:20}}><ProductCard product={product} onQuickView={onQuickView}/></div>;
     };
     return (
       <GridContainer style={{height:'80vh'}}>
@@ -136,7 +136,7 @@ function ProductGrid({ products: extProducts }) {
       <AnimatePresence>
         <CardGrid layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ staggerChildren: 0.2 }}>
           {filtered.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard key={product._id} product={product} onQuickView={onQuickView} />
           ))}
         </CardGrid>
       </AnimatePresence>

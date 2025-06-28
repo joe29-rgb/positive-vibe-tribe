@@ -186,7 +186,7 @@ const quickAddTap = {
   transition: { type: 'spring', stiffness: 400, damping: 17 },
 };
 
-function ProductCard({ product, index = 0 }) {
+function ProductCard({ product, index = 0, onQuickView }) {
   const dispatch = useDispatch();
   const imgRef = useRef(null);
   const [chosenSize, setChosenSize] = useState('');
@@ -238,7 +238,7 @@ function ProductCard({ product, index = 0 }) {
         <ImgWrapper ref={imgRef}>
           <QuickIcons>
             <button onClick={toggleWish} aria-label={wish? 'Remove from wishlist':'Add to wishlist'}>{wish? <FaHeart color="#c8102e"/>:<FaRegHeart color="#c8102e"/>}</button>
-            <button onClick={(e)=>{e.preventDefault();e.stopPropagation(); window.location.href=`/product/${product._id}`;}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
+            <button onClick={(e)=>{e.preventDefault();e.stopPropagation(); if(onQuickView){onQuickView(product);} else {window.location.href=`/product/${product._id}`;}}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
           </QuickIcons>
           {badgeText && <Badge $type={isSale ? 'sale' : product.tag}>{badgeText}</Badge>}
           <ImgPrimary src={product.image} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.image, 600)} sizes="(max-width:600px) 100vw, 280px" />

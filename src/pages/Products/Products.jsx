@@ -8,6 +8,7 @@ import FacetSidebar from '../../components/ProductFilters/FacetSidebar.jsx';
 import Fuse from 'fuse.js';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import QuickViewModal from '../../components/QuickView/QuickViewModal.jsx';
 
 const Wrapper = styled.div`
   max-width: 1400px;
@@ -105,6 +106,7 @@ function Products() {
   const [minRating,setMinRating]=useState(0);
   const [visibleCount, setVisibleCount] = useState(12);
   const sortRef = useRef(null);
+  const [quickProduct,setQuickProduct]=useState(null);
 
   const sentinelRef = useRef(null);
 
@@ -199,6 +201,9 @@ function Products() {
   };
 
   const openSort = ()=>{ if(sortRef.current){ sortRef.current.focus(); } };
+
+  const openQuick=(prod)=>{ setQuickProduct(prod); };
+  const closeQuick=()=> setQuickProduct(null);
 
   const breadcrumbLd = {
     '@context': 'https://schema.org',
@@ -300,7 +305,7 @@ function Products() {
               </select>
             </div>
           </div>
-          <ProductGrid products={displayList} />
+          <ProductGrid products={displayList} onQuickView={openQuick} />
           {visibleCount < filtered.length && (
             <LoadMoreBtn onClick={() => setVisibleCount(c => c + 12)}>Load More</LoadMoreBtn>
           )}
@@ -349,6 +354,8 @@ function Products() {
           </Drawer>
         </>
       )}
+
+      {quickProduct && <QuickViewModal product={quickProduct} onClose={closeQuick} />}
     </>
   );
 }
