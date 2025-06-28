@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import AnnouncementBar from '../AnnouncementBar/AnnouncementBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 /* ------------------------------------
    Styled Components
@@ -365,6 +366,8 @@ function Header() {
             );
           })()}
         </Logo>
+
+        <SearchBar />
 
         {/* Desktop Navigation */}
         <Nav>
