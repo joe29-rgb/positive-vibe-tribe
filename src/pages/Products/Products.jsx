@@ -267,6 +267,10 @@ function Products() {
         <>
           <Backdrop initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={toggleDrawer} />
           <Drawer
+            drag="x"
+            dragDirectionLock
+            dragConstraints={{ left: 0, right: 300 }}
+            onDragEnd={(e, info)=>{ if(info.offset.x>120){ toggleDrawer(); } }}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
