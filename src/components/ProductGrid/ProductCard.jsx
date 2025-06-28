@@ -7,6 +7,7 @@ import { buildSrcSet } from '../../utils/imageSrcSet';
 import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { FaHeart, FaRegHeart, FaEye } from 'react-icons/fa';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -139,6 +140,12 @@ const Overlay = styled(motion.div)`
   }
 `;
 
+const QuickIcons = styled.div`
+  position:absolute; top:8px; right:8px; display:flex; gap:6px; z-index:3;
+  button{background:rgba(255,255,255,0.9); border:none; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s; }
+  button:hover{background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.1);} 
+`;
+
 const QuickAdd = styled(motion.button)`
   background: var(--primary-red);
   color: #fff;
@@ -184,6 +191,12 @@ function ProductCard({ product, index = 0 }) {
   const imgRef = useRef(null);
   const [chosenSize, setChosenSize] = useState('');
 
+  // wishlist state
+  const [wish,setWish]=useState(()=>{
+    const ls=JSON.parse(typeof window!== 'undefined' ? localStorage.getItem('wishlist')||'[]':'[]');
+    return ls.includes(product?._id);
+  });
+
   if (!product) return null;
 
   const handleAdd = (e) => {
@@ -204,6 +217,14 @@ function ProductCard({ product, index = 0 }) {
   const isSale = product.salePrice && product.salePrice < product.price;
   const badgeText = product?.tag === 'new' ? 'New' : product?.tag === 'limited' ? 'Limited' : isSale ? 'Sale' : null;
 
+  const toggleWish=(e)=>{e.stopPropagation();
+    setWish(w=>!w);
+    const ls=JSON.parse(localStorage.getItem('wishlist')||'[]');
+    const newLs= wish? ls.filter(id=>id!==product._id):[...ls,product._id];
+    localStorage.setItem('wishlist',JSON.stringify(newLs));
+    toast.info(wish? 'Removed from wishlist':'Added to wishlist');
+  };
+
   return (
     <CardLink to={`/product/${product._id}`}>
       <Card
@@ -215,6 +236,10 @@ function ProductCard({ product, index = 0 }) {
         custom={index}
       >
         <ImgWrapper ref={imgRef}>
+          <QuickIcons>
+            <button onClick={toggleWish} aria-label={wish? 'Remove from wishlist':'Add to wishlist'}>{wish? <FaHeart color="#c8102e"/>:<FaRegHeart color="#c8102e"/>}</button>
+            <button onClick={(e)=>{e.preventDefault();e.stopPropagation(); window.location.href=`/product/${product._id}`;}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
+          </QuickIcons>
           {badgeText && <Badge $type={isSale ? 'sale' : product.tag}>{badgeText}</Badge>}
           <ImgPrimary src={product.image} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.image, 600)} sizes="(max-width:600px) 100vw, 280px" />
           {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.altImage, 600)} sizes="(max-width:600px) 100vw, 280px" />}

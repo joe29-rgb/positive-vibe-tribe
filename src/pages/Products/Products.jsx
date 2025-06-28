@@ -258,6 +258,7 @@ function Products() {
         priceRange={priceRange}
         saleOnly={saleOnly}
         minRating={minRating}
+        isHidden={showDrawer}
         onRemove={removeFilter}
         onSortClick={openSort}
         onFilterClick={toggleDrawer}

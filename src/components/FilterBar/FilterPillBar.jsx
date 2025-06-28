@@ -21,6 +21,10 @@ const Bar = styled.nav`
     bottom: 0;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
   }
+
+  transform: translateY(${p=>p.$offscreen?'100%':'0%'});
+  display: ${p=>p.$hidden?'none':'flex'};
+  transition: transform 0.25s ease, display 0.2s linear;
 `;
 
 const Pill = styled.button`
@@ -37,7 +41,7 @@ const Pill = styled.button`
   svg { font-size: 0.7rem; }
 `;
 
-function FilterPillBar({ selected, priceRange, saleOnly, minRating, onRemove, onSortClick, onFilterClick }){
+function FilterPillBar({ selected, priceRange, saleOnly, minRating, onRemove, onSortClick, onFilterClick, isHidden=false }){
   // Build pills list
   const pills = [];
   Object.entries(selected).forEach(([key, arr])=>{
@@ -49,8 +53,23 @@ function FilterPillBar({ selected, priceRange, saleOnly, minRating, onRemove, on
   if(saleOnly){ pills.push({label:'On Sale', id:'sale', remove:()=>onRemove('sale')}); }
   if(minRating>0){ pills.push({label:`${minRating}★+`, id:'rating', remove:()=>onRemove('rating')}); }
 
+  const [offscreen,setOffscreen]=React.useState(false);
+  React.useEffect(()=>{
+    let lastY=window.scrollY;
+    const handler=()=>{
+      const y=window.scrollY;
+      if(Math.abs(y-lastY)<12) return;
+      const down = y>lastY;
+      lastY=y;
+      // Only animate on mobile
+      if(window.innerWidth<768){ setOffscreen(down); }
+    };
+    window.addEventListener('scroll',handler);
+    return()=>window.removeEventListener('scroll',handler);
+  },[]);
+
   return (
-    <Bar aria-label="Active filters">
+    <Bar aria-label="Active filters" $offscreen={offscreen} $hidden={isHidden}>
       <Pill onClick={onFilterClick} aria-label="Open filters"><FaFilter/>Filter</Pill>
       <Pill onClick={onSortClick} aria-label="Change sort"><FaSort/>Sort</Pill>
       {pills.map(p=> (
