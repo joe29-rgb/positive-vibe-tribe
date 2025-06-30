@@ -14,6 +14,7 @@ import ProductAccordion from '../../components/ProductAccordion/ProductAccordion
 import UGCStrip from '../../components/UGCStrip/UGCStrip';
 import { buildSrcSet } from '../../utils/imageSrcSet';
 import ProductReviews from '../../components/ProductReviews/ProductReviews';
+import SpinViewer from '../../components/SpinViewer/SpinViewer.jsx';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -199,9 +200,13 @@ function ProductDetail() {
   };
 
   // Build gallery items: support media array with {type:'image'|'video', src, thumb}
-  const mediaItems = product.media && product.media.length ? product.media : [
+  const mediaItems = product.media && product.media.length ? [...product.media] : [
     {type:'image',src: color==='Black' && product.altImage ? product.altImage : product.image}
   ];
+
+  if(product.spinFrames && product.spinFrames.length){
+    mediaItems.push({type:'spin',frames:product.spinFrames,thumb:product.spinFrames[0]});
+  }
 
   const galleryItems = mediaItems.map(m=>{
     if(m.type==='video'){
@@ -214,6 +219,12 @@ function ProductDetail() {
             </video>
           </div>
         )
+      };
+    }
+    if(m.type==='spin'){
+      return {
+        thumbnail:m.thumb,
+        renderItem:()=> <SpinViewer frames={m.frames} alt={product.name} />
       };
     }
     // default image

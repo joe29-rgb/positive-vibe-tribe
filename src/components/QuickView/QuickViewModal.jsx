@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { toast } from 'react-toastify';
 import { buildSrcSet } from '../../utils/imageSrcSet';
+import SpinViewer from '../SpinViewer/SpinViewer.jsx';
 
 const Backdrop = styled(motion.div)`
   position: fixed;
@@ -78,7 +79,11 @@ function QuickViewModal({ product, onClose }){
           <Backdrop initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={onClose} />
           <Panel initial={{scale:0.8,opacity:0}} animate={{scale:1,opacity:1}} exit={{scale:0.8,opacity:0}} transition={{type:'spring',stiffness:300,damping:25}}>
             <CloseBtn aria-label="Close" onClick={onClose}><FaTimes/></CloseBtn>
-            <Img src={product.image} alt={product.name} srcSet={buildSrcSet(product.image,600)} />
+            {product.spinFrames && product.spinFrames.length ? (
+              <SpinViewer frames={product.spinFrames} alt={product.name} />
+            ) : (
+              <Img src={product.image} alt={product.name} srcSet={buildSrcSet(product.image,600)} />
+            )}
             <div style={{display:'flex',flexDirection:'column'}}>
               <h2 style={{margin:'0 0 8px',fontSize:'1.5rem'}}>{product.name}</h2>
               <p style={{fontWeight:700,color:'var(--primary-red)',fontSize:'1.25rem'}}>${product.price}</p>
