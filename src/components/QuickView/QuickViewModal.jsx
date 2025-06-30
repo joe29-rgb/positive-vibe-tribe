@@ -87,6 +87,7 @@ function QuickViewModal({ product, onClose }){
             <div style={{display:'flex',flexDirection:'column'}}>
               <h2 style={{margin:'0 0 8px',fontSize:'1.5rem'}}>{product.name}</h2>
               <p style={{fontWeight:700,color:'var(--primary-red)',fontSize:'1.25rem'}}>${product.price}</p>
+              {product.countInStock<=5 && <p style={{color:'#ff7a00',fontSize:'0.85rem',marginTop:4}}>Only {product.countInStock} left</p>}
               {product.sizes?.length>0 && (
                 <div style={{margin:'16px 0'}}>
                   <strong>Size:</strong>

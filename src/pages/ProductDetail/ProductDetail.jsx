@@ -299,6 +299,7 @@ function ProductDetail() {
         <InfoWrapper>
           <Title>{product.name}</Title>
           <Price>${product.price}</Price>
+          {product.countInStock<=5 && <p style={{color:'#ff7a00',marginTop:4}}>Only {product.countInStock} left in stock</p>}
           <TrustRow>
             <li>🔒 Secure Checkout</li>
             <li>🚚 Free shipping $100+</li>
@@ -338,7 +339,7 @@ function ProductDetail() {
 
       {/* Sticky bar mobile */}
       <StickyBar>
-        <span style={{fontWeight:600}}>${product.price}</span>
+        <span style={{fontWeight:600}}>${product.price}</span>{product.countInStock<=5 && <span style={{color:'#ff7a00',fontSize:'0.8rem',marginLeft:8}}>Only {product.countInStock} left</span>}
         <AddBtn style={{margin:0}} onClick={handleAdd} disabled={!size}>Add to Cart</AddBtn>
       </StickyBar>
 

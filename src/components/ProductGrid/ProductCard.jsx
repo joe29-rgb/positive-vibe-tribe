@@ -49,6 +49,7 @@ const Badge = styled.span`
     if($type==='new') return 'var(--sunset-orange)';
     if($type==='limited') return 'var(--dusky-red)';
     if($type==='sale') return '#119822';
+    if($type==='low') return '#ff7a00';
     return 'var(--primary-red)';
   }};
   color: #fff;
@@ -215,7 +216,8 @@ function ProductCard({ product, index = 0, onQuickView }) {
   };
 
   const isSale = product.salePrice && product.salePrice < product.price;
-  const badgeText = product?.tag === 'new' ? 'New' : product?.tag === 'limited' ? 'Limited' : isSale ? 'Sale' : null;
+  const lowStock = product.countInStock !== undefined && product.countInStock <= 5;
+  const badgeText = product?.tag === 'new' ? 'New' : product?.tag === 'limited' ? 'Limited' : isSale ? 'Sale' : lowStock ? 'Low' : null;
 
   const toggleWish=(e)=>{e.stopPropagation();
     setWish(w=>!w);
@@ -276,6 +278,9 @@ function ProductCard({ product, index = 0, onQuickView }) {
             ${isSale ? product.salePrice.toFixed(2) : product.price.toFixed(2)}
             {isSale && <StrikePrice>${product.price.toFixed(2)}</StrikePrice>}
           </Price>
+          {lowStock && (
+            <p style={{fontSize:'0.75rem',color:'#ff7a00',margin:'4px 0 0'}}>{`Only ${product.countInStock} left`}</p>
+          )}
         </Body>
       </Card>
     </CardLink>
