@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
+import ExpressCheckoutBadges from '../../components/ExpressCheckoutBadges/ExpressCheckoutBadges';
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -65,6 +66,7 @@ function Cart() {
       </ul>
 
       <h3>Total: ${total.toFixed(2)}</h3>
+      <ExpressCheckoutBadges />
 
       <Link to="/checkout" style={{ display: 'inline-block', marginTop: '1rem' }}>
         Proceed to Checkout
