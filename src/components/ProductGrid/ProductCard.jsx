@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { motion } from 'framer-motion';
-import { buildSrcSet } from '../../utils/imageSrcSet';
+import LazyImage from '../LazyImage/LazyImage.jsx';
 import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -73,7 +73,7 @@ const ImgWrapper = styled.div`
   overflow: hidden;
 `;
 
-const ImgBase = styled.img`
+const ImgBase = styled(LazyImage)`
   position: absolute;
   inset: 0;
   width: 100%;
@@ -243,8 +243,10 @@ function ProductCard({ product, index = 0, onQuickView }) {
             <button onClick={(e)=>{e.preventDefault();e.stopPropagation(); if(onQuickView){onQuickView(product);} else {window.location.href=`/product/${product._id}`;}}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
           </QuickIcons>
           {badgeText && <Badge $type={isSale ? 'sale' : product.tag}>{badgeText}</Badge>}
-          <ImgPrimary src={product.image} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.image, 600)} sizes="(max-width:600px) 100vw, 280px" />
-          {product.altImage && <ImgSecondary src={product.altImage} alt={product.name} loading="lazy" srcSet={buildSrcSet(product.altImage, 600)} sizes="(max-width:600px) 100vw, 280px" />}
+          <ImgPrimary src={product.image} alt={product.name} />
+          {product.altImage && (
+            <ImgSecondary src={product.altImage} alt={product.name} />
+          )}
           <Overlay
             variants={overlayVariants}
             initial="hidden"
