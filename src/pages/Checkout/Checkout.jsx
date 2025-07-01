@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import ExpressCheckoutBadges from '../../components/ExpressCheckoutBadges/ExpressCheckoutBadges';
+import TrustCredentials from '../../components/TrustCredentials/TrustCredentials';
 
 function Checkout() {
   const [form, setForm] = useState({
@@ -48,6 +49,7 @@ function Checkout() {
     <div style={{ padding: '2rem' }}>
       <h2>Checkout</h2>
       <ExpressCheckoutBadges />
+      <TrustCredentials />
       <form onSubmit={handleSubmit} noValidate style={{ maxWidth: 500 }}>
         {/* Name */}
         <div style={{ marginBottom: '1rem' }}>
