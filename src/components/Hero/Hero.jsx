@@ -4,7 +4,7 @@ import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { motionOK } from '../../utils/motion';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
-import { getCdnImage } from '../../utils/cloudinary';
+import LazyImage from '../LazyImage/LazyImage.jsx';
 import KokopelliCollage from '../KokopelliCollage/KokopelliCollage';
 
 // Replaced dancing Kokopelli assets with collage logo
@@ -134,7 +134,7 @@ const Spotlight = styled.div`
   text-align: center;
 `;
 
-const SpotImg = styled.img`
+const SpotImgStyled = styled(LazyImage)`
   width: 100%;
   border-radius: 12px;
   margin-bottom: 16px;
@@ -250,14 +250,7 @@ function Hero() {
         {/* Featured product spotlight */}
         {featured && (
           <Spotlight>
-            <SpotImg
-              src={getCdnImage(featured.image, 600)}
-              srcSet={getCdnImage(featured.image, 400) + ' 400w, ' + getCdnImage(featured.image, 800) + ' 800w'}
-              sizes="(max-width: 600px) 100vw, 400px"
-              alt={featured.name}
-              loading="lazy"
-              decoding="async"
-            />
+            <SpotImgStyled src={featured.image} alt={featured.name} widths={[320,480]} sizes="(max-width:640px) 80vw, 320px" />
             <h3 style={{ margin: '0 0 4px' }}>{featured.name}</h3>
             <SpotPrice>${featured.price.toFixed(2)}</SpotPrice>
             <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
