@@ -8,19 +8,21 @@ import Analytics from './components/Analytics/Analytics.jsx';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MobileNav from './components/MobileNav/MobileNav.jsx';
-import Home from './pages/Home/Home';
-import Products from './pages/Products/Products.jsx';
-import ProductDetail from './pages/ProductDetail/ProductDetail.jsx';
-import Cart from './pages/Cart/Cart.jsx';
-import Checkout from './pages/Checkout/Checkout.jsx';
-import CheckoutSuccess from './pages/Checkout/Success.jsx';
-import CheckoutCancel from './pages/Checkout/Cancel.jsx';
-import Wishlist from './pages/Wishlist.jsx';
-import About from './pages/About/About';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import useScrollReveal from './utils/useScrollReveal';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('./pages/Home/Home'));
+const Products = lazy(() => import('./pages/Products/Products.jsx'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail/ProductDetail.jsx'));
+const Cart = lazy(() => import('./pages/Cart/Cart.jsx'));
+const Checkout = lazy(() => import('./pages/Checkout/Checkout.jsx'));
+const CheckoutSuccess = lazy(() => import('./pages/Checkout/Success.jsx'));
+const CheckoutCancel = lazy(() => import('./pages/Checkout/Cancel.jsx'));
+const Wishlist = lazy(() => import('./pages/Wishlist.jsx'));
+const About = lazy(() => import('./pages/About/About'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -78,7 +80,9 @@ function App() {
           <a href="#main" className="skip-link">Skip to main content</a>
           <div id="sr-announcer" aria-live="polite" style={{position:'absolute',left:'-9999px',height:'1px',width:'1px',overflow:'hidden'}} />
           <Header />
-          <AnimatedRoutes />
+          <React.Suspense fallback={<div style={{padding:'80px',textAlign:'center'}}>Loading…</div>}>
+            <AnimatedRoutes />
+          </React.Suspense>
           <MobileNav />
           <Footer />
           <ToastContainer role="status" position="top-right" autoClose={3000} hideProgressBar theme="colored" />
