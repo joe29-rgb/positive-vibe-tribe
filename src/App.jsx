@@ -13,6 +13,8 @@ import Products from './pages/Products/Products.jsx';
 import ProductDetail from './pages/ProductDetail/ProductDetail.jsx';
 import Cart from './pages/Cart/Cart.jsx';
 import Checkout from './pages/Checkout/Checkout.jsx';
+import CheckoutSuccess from './pages/Checkout/Success.jsx';
+import CheckoutCancel from './pages/Checkout/Cancel.jsx';
 import Wishlist from './pages/Wishlist.jsx';
 import About from './pages/About/About';
 import { ToastContainer } from 'react-toastify';
@@ -39,6 +41,8 @@ function AnimatedRoutes() {
         <Route path="/about" element={<motion.div {...pageVariants}><About /></motion.div>} />
         <Route path="/cart" element={<motion.div {...pageVariants}><Cart /></motion.div>} />
         <Route path="/checkout" element={<motion.div {...pageVariants}><Checkout /></motion.div>} />
+        <Route path="/checkout/success" element={<motion.div {...pageVariants}><CheckoutSuccess /></motion.div>} />
+        <Route path="/checkout/cancel" element={<motion.div {...pageVariants}><CheckoutCancel /></motion.div>} />
         <Route path="/wishlist" element={<motion.div {...pageVariants}><Wishlist /></motion.div>} />
       </Routes>
     </AnimatePresence>

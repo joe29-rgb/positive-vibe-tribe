@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import ExpressCheckoutBadges from '../../components/ExpressCheckoutBadges/ExpressCheckoutBadges';
 import TrustCredentials from '../../components/TrustCredentials/TrustCredentials';
 
@@ -13,6 +14,8 @@ function Checkout() {
   });
 
   const [errors, setErrors] = useState({});
+
+  const cartItems = useSelector((state) => state.cart.items);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,8 +41,32 @@ function Checkout() {
       toast.error('Please correct the highlighted fields');
     } else {
       setErrors({});
-      toast.success('Payment details coming soon');
-      // TODO: integrate Stripe Elements
+      // Create Stripe Checkout Session via backend
+      fetch('/api/payments/create-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: cartItems.map((ci) => ({
+            name: ci.product.name,
+            price: ci.product.salePrice || ci.product.price,
+            quantity: ci.quantity,
+          })),
+          successUrl: window.location.origin + '/checkout/success',
+          cancelUrl: window.location.origin + '/checkout/cancel',
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            throw new Error(data.message || 'Stripe session failed');
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error(err.message);
+        });
     }
   };
 
