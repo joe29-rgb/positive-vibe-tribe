@@ -33,7 +33,7 @@ const Title = styled.h1`
 
 const Subtitle = styled.p`
   font-size: var(--fs-lg);
-  color: var(--dark-brown);
+  color: var(--dark-gray);
   margin-top:16px;
 `;
 

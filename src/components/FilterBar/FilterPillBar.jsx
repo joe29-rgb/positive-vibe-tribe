@@ -75,8 +75,8 @@ function FilterPillBar({ selected, priceRange, saleOnly, minRating, onRemove, on
 
   return (
     <Bar aria-label="Active filters" $offscreen={offscreen} $hidden={isHidden}>
-      <Pill onClick={onFilterClick} aria-label="Open filters"><FaFilter/>Filter</Pill>
-      <Pill onClick={onSortClick} aria-label="Change sort"><FaSort/>Sort</Pill>
+      <Pill className="icon-btn" onClick={onFilterClick} aria-label="Open filters"><FaFilter/>Filter</Pill>
+      <Pill className="icon-btn" onClick={onSortClick} aria-label="Change sort"><FaSort/>Sort</Pill>
       {pills.map(p=> (
         <Pill key={p.id} onClick={p.remove} aria-label={`Remove filter ${p.label}`}><span>{p.label}</span><FaTimes/></Pill>
       ))}

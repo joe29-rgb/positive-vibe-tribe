@@ -65,7 +65,7 @@ const HeroContent = styled(motion.div)`
 
 const HeroSubtitle = styled.p`
   font-size: var(--fs-2xl);
-  color: #F9E2BF;
+  color: var(--dark-brown);
   margin-bottom: 40px;
   font-weight: 500;
   font-family: var(--font-primary);

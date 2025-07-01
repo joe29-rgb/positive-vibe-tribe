@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,6 +62,22 @@ const AddBtn = styled.button`
 function QuickViewModal({ product, onClose }){
   const dispatch = useDispatch();
   const [size, setSize] = useState('');
+  const panelRef = useRef(null);
+
+  useEffect(()=>{
+    const handleKey=(e)=>{
+      if(e.key==='Escape'){ onClose(); }
+      if(e.key==='Tab' && panelRef.current){
+        const focusables = panelRef.current.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+        const first = focusables[0];
+        const last = focusables[focusables.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown',handleKey);
+    return()=> document.removeEventListener('keydown',handleKey);
+  },[]);
 
   if(!product) return null;
 
@@ -77,8 +93,8 @@ function QuickViewModal({ product, onClose }){
       {product && (
         <>
           <Backdrop initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={onClose} />
-          <Panel initial={{scale:0.8,opacity:0}} animate={{scale:1,opacity:1}} exit={{scale:0.8,opacity:0}} transition={{type:'spring',stiffness:300,damping:25}}>
-            <CloseBtn aria-label="Close" onClick={onClose}><FaTimes/></CloseBtn>
+          <Panel ref={panelRef} role="dialog" aria-modal="true" initial={{scale:0.8,opacity:0}} animate={{scale:1,opacity:1}} exit={{scale:0.8,opacity:0}} transition={{type:'spring',stiffness:300,damping:25}}>
+            <CloseBtn className="icon-btn" aria-label="Close" onClick={onClose}><FaTimes/></CloseBtn>
             {product.spinFrames && product.spinFrames.length ? (
               <SpinViewer frames={product.spinFrames} alt={product.name} />
             ) : (

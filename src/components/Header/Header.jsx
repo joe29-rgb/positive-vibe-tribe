@@ -471,7 +471,7 @@ function Header() {
             </Nav>
 
             {/* Hamburger */}
-            <Hamburger onClick={toggleMenu} className={open ? 'open' : ''} aria-label="Toggle menu">
+            <Hamburger onClick={toggleMenu} className={`${open ? 'open' : ''} icon-btn`} aria-label="Toggle menu">
               <span />
             </Hamburger>
           </MainRow>

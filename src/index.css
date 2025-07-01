@@ -227,6 +227,14 @@ h2.visible::after,
 }
 
 
+/* Focus ring for icon-only buttons */
+
+.icon-btn:focus-visible {
+    outline: 3px solid var(--primary-red);
+    outline-offset: 2px;
+}
+
+
 /* Accessibility: respect reduced motion */
 
 @media (prefers-reduced-motion: reduce) {

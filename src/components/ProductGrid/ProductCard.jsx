@@ -243,8 +243,8 @@ function ProductCard({ product, index = 0, onQuickView }) {
       >
         <ImgWrapper ref={imgRef}>
           <QuickIcons>
-            <button onClick={toggleWish} aria-label={wish? 'Remove from wishlist':'Add to wishlist'}>{wish? <FaHeart color="#c8102e"/>:<FaRegHeart color="#c8102e"/>}</button>
-            <button onClick={(e)=>{e.preventDefault();e.stopPropagation(); if(onQuickView){onQuickView(product);} else {window.location.href=`/product/${product._id}`;}}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
+            <button className="icon-btn" onClick={toggleWish} aria-label={wish? 'Remove from wishlist':'Add to wishlist'}>{wish? <FaHeart color="#c8102e"/>:<FaRegHeart color="#c8102e"/>}</button>
+            <button className="icon-btn" onClick={(e)=>{e.preventDefault();e.stopPropagation(); if(onQuickView){onQuickView(product);} else {window.location.href=`/product/${product._id}`;}}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
           </QuickIcons>
           {badgeText && <Badge $type={isSale ? 'sale' : product.tag}>{badgeText}</Badge>}
           <ImgPrimary src={product.image} alt={product.name} />

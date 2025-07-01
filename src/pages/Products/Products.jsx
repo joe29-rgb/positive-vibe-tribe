@@ -193,6 +193,13 @@ function Products() {
 
   const toggleDrawer = () => setShowDrawer((p) => !p);
 
+  // Esc key to close drawer
+  useEffect(()=>{
+    const esc=(e)=>{ if(e.key==='Escape') setShowDrawer(false); };
+    document.addEventListener('keydown',esc);
+    return()=>document.removeEventListener('keydown',esc);
+  },[]);
+
   const removeFilter = (key,val)=>{
     if(key==='price'){ setPriceRange([0,1000]); return; }
     if(key==='sale'){ setSaleOnly(false); return; }
@@ -314,7 +321,7 @@ function Products() {
       </Wrapper>
 
       {/* Mobile filter toggle */}
-      <MobileFilterButton onClick={toggleDrawer} aria-label="Filters">≡</MobileFilterButton>
+      <MobileFilterButton className="icon-btn" onClick={toggleDrawer} aria-label="Filters">≡</MobileFilterButton>
 
       {/* Drawer + backdrop */}
       {showDrawer && (
