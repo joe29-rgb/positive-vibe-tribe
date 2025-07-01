@@ -7,6 +7,7 @@ import { FaShoppingCart, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from '
 import { useSelector } from 'react-redux';
 import AnnouncementBar from '../AnnouncementBar/AnnouncementBar';
 import SearchBar from '../SearchBar/SearchBar';
+import menuCategories from '../../data/menuCategories.js';
 
 /* ------------------------------------
    Styled Components
@@ -341,14 +342,7 @@ function Header() {
     pulse: { scale: [1, 1.08, 1], transition: { repeat: Infinity, duration: 2, ease: 'easeInOut' } },
   };
 
-  const defaultCats=[
-    { name:'Hoodies',slug:'Hoodies' },
-    { name:'Tees',slug:'Tees' },
-    { name:'Caps',slug:'Caps' },
-    { name:'Tanks',slug:'Tanks' },
-  ];
-
-  const [categories,setCategories]=React.useState(defaultCats.map(c=>({...c,image:''})));
+  const [categories,setCategories]=React.useState(menuCategories);
 
   React.useEffect(()=>{
     fetch('/api/products')
