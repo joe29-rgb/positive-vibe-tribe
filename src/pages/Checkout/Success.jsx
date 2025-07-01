@@ -10,7 +10,7 @@ function Success() {
   return (
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h2>Thank you for your purchase! 🎉</h2>
-      <p>We've emailed you a receipt and will notify you when your items are on the way.</p>
+      <p>We&apos;ve emailed you a receipt and will notify you when your items are on the way.</p>
       <Link to="/products" className="btn btn-gradient" style={{ marginTop: '1.5rem', display: 'inline-block' }}>
         Continue Shopping
       </Link>
