@@ -25,25 +25,34 @@ const Content = styled.div`
   }
 `;
 
-const MobileFilterButton = styled.button`
-  display: none;
+const MobileFilterBar = styled.div`
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: var(--primary-red);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  font-size: var(--fs-xl);
-  z-index: 80;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  @media (max-width: 1024px) {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #e6e0d6;
+  display: none;
+  z-index: 90;
+  @media (max-width: 640px) {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
+`;
+
+const BarBtn = styled.button`
+  flex: 1;
+  padding: 14px 0;
+  border: none;
+  background: var(--warm-beige);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--dark-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  &:active { background: #e8e2d9; }
+  &:first-child { border-right: 1px solid #e6e0d6; }
 `;
 
 const Drawer = styled(motion.aside)`
@@ -320,8 +329,11 @@ function Products() {
         </Content>
       </Wrapper>
 
-      {/* Mobile filter toggle */}
-      <MobileFilterButton className="icon-btn" onClick={toggleDrawer} aria-label="Filters">≡</MobileFilterButton>
+      {/* Mobile sticky bar */}
+      <MobileFilterBar>
+        <BarBtn onClick={toggleDrawer} aria-label="Open filters">Filters ({filtered.length})</BarBtn>
+        <BarBtn onClick={()=>{ openSort(); }} aria-label="Sort options">Sort ▾</BarBtn>
+      </MobileFilterBar>
 
       {/* Drawer + backdrop */}
       {showDrawer && (
