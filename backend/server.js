@@ -4,6 +4,7 @@ var dotenv = require('dotenv');
 var cors = require('cors');
 var path = require('path');
 var compression = require('compression');
+var helmet = require('helmet');
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -14,6 +15,9 @@ var app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(helmet({
+    crossOriginEmbedderPolicy: false,
+}));
 app.use(compression());
 
 // Import Routes
@@ -33,7 +37,15 @@ app.use('/api/search', searchRoutes);
 // Serve React build static files
 var buildPath = path.join(__dirname, '..', 'build');
 if (process.env.NODE_ENV === 'production' && require('fs').existsSync(buildPath)) {
-    app.use(express.static(buildPath));
+    app.use(express.static(buildPath, {
+        maxAge: '365d',
+        setHeaders: function(res, filePath) {
+            // Don't cache HTML so updates deploy immediately
+            if (filePath.endsWith('.html')) {
+                res.setHeader('Cache-Control', 'no-cache');
+            }
+        }
+    }));
 
     // React Router fallback
     app.get('*', function(req, res) {
