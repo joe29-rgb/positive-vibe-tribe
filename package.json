@@ -46,7 +46,9 @@
         "server": "node backend/server.js",
         "dev:server": "nodemon backend/server.js",
         "dev": "concurrently \"npm run dev:server\" \"npm start\"",
-        "lhci:ci": "lhci autorun"
+        "lhci:ci": "lhci autorun",
+        "cy:open": "cypress open",
+        "cy:run": "cypress run"
     },
     "eslintConfig": {
         "extends": [
@@ -84,6 +86,7 @@
         "nodemon": "^3.1.0",
         "prettier": "^3.5.3",
         "@lhci/cli": "^0.13.0",
+        "cypress": "^13.3.0",
         "workbox-build": "^6.6.0"
     },
     "proxy": "http://localhost:5000"
