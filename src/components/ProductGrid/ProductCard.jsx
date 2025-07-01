@@ -8,6 +8,7 @@ import { flyToCart } from '../../utils/flyToCart';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaHeart, FaRegHeart, FaEye } from 'react-icons/fa';
+import { announce } from '../../utils/announce';
 
 const Card = styled(motion.div)`
   background: #fff;
@@ -206,6 +207,7 @@ function ProductCard({ product, index = 0, onQuickView }) {
     dispatch(addToCart({ product, size: chosenSize || 'default', quantity: 1 }));
     const msg = `${product.name} added to cart`;
     toast.success(msg);
+    announce(msg);
     if (window.gtag) {
       window.gtag('event', 'quick_add', { product_id: product._id, size: chosenSize || 'default' });
     }
@@ -224,7 +226,9 @@ function ProductCard({ product, index = 0, onQuickView }) {
     const ls=JSON.parse(localStorage.getItem('wishlist')||'[]');
     const newLs= wish? ls.filter(id=>id!==product._id):[...ls,product._id];
     localStorage.setItem('wishlist',JSON.stringify(newLs));
-    toast.info(wish? 'Removed from wishlist':'Added to wishlist');
+    const wishMsg = wish? 'Removed from wishlist':'Added to wishlist';
+    toast.info(wishMsg);
+    announce(wishMsg);
   };
 
   return (
