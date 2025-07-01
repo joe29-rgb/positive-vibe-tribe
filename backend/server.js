@@ -17,6 +17,19 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet({
     crossOriginEmbedderPolicy: false,
+    contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+            /* eslint-disable quotes */
+            'img-src': ["'self'", 'data:', 'https://res.cloudinary.com'],
+            'media-src': ["'self'", 'https://res.cloudinary.com'],
+            'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+            'font-src': ["'self'", 'data:', 'https://fonts.gstatic.com'],
+            // Keep script-src-attr restrictive; no inline handlers
+            'script-src-attr': ["'none'"],
+            /* eslint-enable quotes */
+        },
+    },
 }));
 app.use(compression());
 
