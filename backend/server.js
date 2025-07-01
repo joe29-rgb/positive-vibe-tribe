@@ -21,12 +21,14 @@ var productRoutes = require('./routes/products');
 var orderRoutes = require('./routes/orders');
 var paymentRoutes = require('./routes/payments');
 var uploadRoutes = require('./routes/uploads');
+var searchRoutes = require('./routes/search');
 
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/uploads', uploadRoutes);
+app.use('/api/search', searchRoutes);
 
 // Serve React build static files
 var buildPath = path.join(__dirname, '..', 'build');

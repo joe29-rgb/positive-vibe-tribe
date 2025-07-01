@@ -14,6 +14,7 @@ import ProductAccordion from '../../components/ProductAccordion/ProductAccordion
 import UGCStrip from '../../components/UGCStrip/UGCStrip';
 import { buildSrcSet } from '../../utils/imageSrcSet';
 import ProductReviews from '../../components/ProductReviews/ProductReviews';
+import ProductRecommendations from '../../components/ProductRecommendations/ProductRecommendations.jsx';
 import SpinViewer from '../../components/SpinViewer/SpinViewer.jsx';
 
 const Wrapper = styled.div`
@@ -352,6 +353,8 @@ function ProductDetail() {
       <Suspense fallback={<div style={{height:200}} />}>
         <ProductUpsellCarousel currentId={product._id} />
       </Suspense>
+
+      <ProductRecommendations currentId={product._id} category={product.category} />
 
       <RecentlyViewed currentId={product._id} />
     </Wrapper>
