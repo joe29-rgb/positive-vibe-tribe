@@ -94,7 +94,7 @@ const NavItem = styled.div`
   position: relative;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   ${linkBase};
 `;
 
@@ -412,7 +412,7 @@ function Header() {
           {/* Main Row */}
           <MainRow>
             {/* Logo */}
-            <Logo href="/">
+            <Logo as={Link} to="/">
               {(() => {
                 const SmallIcon = motion.img;
                 const tinyDance = {
@@ -440,12 +440,12 @@ function Header() {
 
             {/* Desktop Navigation */}
             <Nav>
-              <NavLink href="/">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
               <NavItem
                 onMouseEnter={() => setMegaOpen(true)}
                 onMouseLeave={() => setMegaOpen(false)}
               >
-                <NavLink href="/products">Shop</NavLink>
+                <NavLink to="/products">Shop</NavLink>
                 <MegaMenu
                   ref={megaRef}
                   aria-label="Shop categories"
@@ -461,9 +461,9 @@ function Header() {
                   ))}
                 </MegaMenu>
               </NavItem>
-              <NavLink href="/about">About</NavLink>
+              <NavLink to="/about">About</NavLink>
               <NavItem>
-                <NavLink id="cart-icon" href="/cart" style={{position:'relative'}}>
+                <NavLink id="cart-icon" to="/cart" style={{position:'relative'}}>
                   <FaShoppingCart size={20} />
                   {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
                 </NavLink>
@@ -510,14 +510,14 @@ function Header() {
           animate={open ? ['animate', 'pulse'] : 'initial'}
           variants={diamondVariants}
         />
-        <NavLink href="/">Home</NavLink>
-        <NavLink href="/products">Shop</NavLink>
-        <NavLink href="/about">About</NavLink>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/products">Shop</NavLink>
+        <NavLink to="/about">About</NavLink>
         <NavItem
           onMouseEnter={() => setMegaOpen(true)}
           onMouseLeave={() => setMegaOpen(false)}
         >
-          <NavLink id="cart-icon-mobile" href="/cart" style={{position:'relative'}}>
+          <NavLink id="cart-icon-mobile" to="/cart" style={{position:'relative'}}>
             <FaShoppingCart size={20} />
             {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
           </NavLink>
