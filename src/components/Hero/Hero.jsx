@@ -35,7 +35,7 @@ const HeroContainer = styled.section`
 `;
 
 // Preload hero bg url (cloudinary source)
-const HERO_BG_URL = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750972974/hero-bg.jpg';
+const HERO_BG_URL = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
 
 // Full-bleed background image layer
 const HeroBg = styled(motion.div)`
