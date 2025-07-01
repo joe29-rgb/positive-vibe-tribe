@@ -83,7 +83,11 @@ const ImgBase = styled(LazyImage)`
   transition: opacity 0.4s ease;
 `;
 
-const ImgPrimary = styled(ImgBase)``;
+const ImgPrimary = styled(ImgBase)`
+  ${Card}:hover & {
+    opacity: 1;
+  }
+`;
 
 const ImgSecondary = styled(ImgBase)`
   opacity: 0;
@@ -247,9 +251,9 @@ function ProductCard({ product, index = 0, onQuickView }) {
             <button className="icon-btn" onClick={(e)=>{e.preventDefault();e.stopPropagation(); if(onQuickView){onQuickView(product);} else {window.location.href=`/product/${product._id}`;}}} aria-label="Quick view"><FaEye color="#c8102e"/></button>
           </QuickIcons>
           {badgeText && <Badge $type={isSale ? 'sale' : product.tag}>{badgeText}</Badge>}
-          <ImgPrimary src={product.image} alt={product.name} />
+          <ImgPrimary src={product.image} alt={product.name} widths={[320,480,600]} sizes="(max-width:600px) 100vw, 280px" ratio="1/1" />
           {product.altImage && (
-            <ImgSecondary src={product.altImage} alt={product.name} />
+            <ImgSecondary src={product.altImage} alt={product.name} widths={[320,480,600]} sizes="(max-width:600px) 100vw, 280px" ratio="1/1" />
           )}
           <Overlay
             variants={overlayVariants}

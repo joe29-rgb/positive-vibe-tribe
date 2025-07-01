@@ -31,9 +31,10 @@ const Img = styled.img`
     `}
   transition: opacity 0.5s ease;
   opacity: ${(props) => (props.$loading ? 0 : 1)};
+  aspect-ratio: ${(props)=>props.$ratio || 'auto'};
 `;
 
-function LazyImage({ src, alt = '', sizes = '(max-width: 640px) 100vw, 800px', widths=[320,480,640,768,960,1200], ...rest }) {
+function LazyImage({ src, alt = '', sizes = '(max-width: 640px) 100vw, 800px', widths=[320,480,640,768,960,1200], ratio, ...rest }) {
   const [loaded, setLoaded] = useState(false);
 
   const sets = buildSrcSets(src, widths);
@@ -50,6 +51,7 @@ function LazyImage({ src, alt = '', sizes = '(max-width: 640px) 100vw, 800px', w
         srcSet={sets.jpg || undefined}
         sizes={sets.jpg ? sizes : undefined}
         $loading={!loaded}
+        $ratio={ratio}
         onLoad={() => setLoaded(true)}
         {...rest}
       />

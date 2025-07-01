@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import skyline from '../../assets/edmonton-skyline.png';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const Section = styled.section`
   position: relative;
@@ -46,6 +47,7 @@ function ShopHero({ title = 'Shop', subtitle='Explore our latest drops & classic
   const y = useTransform(scrollY, [0,300],[0,50]);
   return (
     <Section>
+      <Helmet><link rel="preload" as="image" href={skyline} /></Helmet>
       <Bg style={{y}} />
       <Container>
         <Title>{title}</Title>

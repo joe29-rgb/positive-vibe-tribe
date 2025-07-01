@@ -28,6 +28,7 @@ const Img = styled.img`
   width: 100%;
   max-width: 600px;
   height: auto;
+  aspect-ratio: 3 / 4;
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 `;

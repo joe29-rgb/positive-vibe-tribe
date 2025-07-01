@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import LazyImage from '../LazyImage/LazyImage.jsx';
 import KokopelliCollage from '../KokopelliCollage/KokopelliCollage';
+import { Helmet } from 'react-helmet-async';
 
 // Replaced dancing Kokopelli assets with collage logo
 
@@ -37,8 +38,7 @@ const HeroContainer = styled.section`
 const HeroBg = styled(motion.div)`
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  background: url(${HERO_BG_URL}) center/cover no-repeat;
   background-repeat: no-repeat;
   z-index: 0;
 
@@ -184,6 +184,9 @@ const Chevron = styled(motion.button)`
   }
 `;
 
+// Preload hero bg url (cloudinary source)
+const HERO_BG_URL = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750972974/hero-bg.jpg';
+
 function Hero() {
   const [featured, setFeatured] = useState(null);
   const dispatch = useDispatch();
@@ -200,72 +203,71 @@ function Hero() {
     if (featured) dispatch(addToCart({ product: featured, size: 'default', quantity: 1 }));
   };
 
-  const bgUrl = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
-
   // Parallax on scroll (disabled if reduced motion)
   const { scrollY } = useViewportScroll();
   const bgY = useTransform(scrollY, [0, 600], [0, -180]);
 
   return (
-    <HeroContainer>
-      {/* Background image layer */}
-      <HeroBg
-        style={{ backgroundImage: `url(${bgUrl})`, y: motionOK() ? bgY : 0 }}
-        initial={{ scale: 1.05 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 8, ease: 'easeOut' }}
-      />
-      <Glow
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.55 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-      />
-      <HeroContent
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
-        <motion.div style={{ marginBottom: 30 }}
-          animate={motionOK() ? { y: [0, 8, 0] } : { y: 0 }}
-          transition={motionOK() ? { duration: 8, repeat: Infinity, ease: 'easeInOut' } : {}}
+    <>
+      <Helmet><link rel="preload" as="image" href={HERO_BG_URL} /></Helmet>
+      <HeroContainer>
+        <HeroBg
+          style={{
+            backgroundPositionY: bgY instanceof Object ? bgY : 0,
+          }}
+        />
+        <Glow
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.55 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+        />
+        <HeroContent
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <KokopelliCollage />
-        </motion.div>
-        <HeadlineBlack>Positive</HeadlineBlack>
-        <HeadlineScript>Vibe Tribe</HeadlineScript>
-        <HeroSubtitle>
-          If there&apos;s people out there that can hate for no reason, then we can love for no reason
-        </HeroSubtitle>
-        <motion.a
-          href="/products"
-          className="btn btn-gradient"
-          style={{ background: 'linear-gradient(135deg, var(--primary-red) 0%, #f5e04b 100%)', padding: '14px 36px', borderRadius:'50px', fontWeight:700, color:'#fff' }}
-          whileHover={{ scale: 1.06, boxShadow: '0 8px 24px rgba(0,0,0,0.18)' }}
-          whileTap={{ scale: 0.96 }}
-        >
-          Shop the Tribe
-        </motion.a>
-        <Reassure>Free shipping on orders over $100.00</Reassure>
+          <motion.div style={{ marginBottom: 30 }}
+            animate={motionOK() ? { y: [0, 8, 0] } : { y: 0 }}
+            transition={motionOK() ? { duration: 8, repeat: Infinity, ease: 'easeInOut' } : {}}
+          >
+            <KokopelliCollage />
+          </motion.div>
+          <HeadlineBlack>Positive</HeadlineBlack>
+          <HeadlineScript>Vibe Tribe</HeadlineScript>
+          <HeroSubtitle>
+            If there&apos;s people out there that can hate for no reason, then we can love for no reason
+          </HeroSubtitle>
+          <motion.a
+            href="/products"
+            className="btn btn-gradient"
+            style={{ background: 'linear-gradient(135deg, var(--primary-red) 0%, #f5e04b 100%)', padding: '14px 36px', borderRadius:'50px', fontWeight:700, color:'#fff' }}
+            whileHover={{ scale: 1.06, boxShadow: '0 8px 24px rgba(0,0,0,0.18)' }}
+            whileTap={{ scale: 0.96 }}
+          >
+            Shop the Tribe
+          </motion.a>
+          <Reassure>Free shipping on orders over $100.00</Reassure>
 
-        {/* Featured product spotlight */}
-        {featured && (
-          <Spotlight>
-            <SpotImgStyled src={featured.image} alt={featured.name} widths={[320,480]} sizes="(max-width:640px) 80vw, 320px" />
-            <h3 style={{ margin: '0 0 4px' }}>{featured.name}</h3>
-            <SpotPrice>${featured.price.toFixed(2)}</SpotPrice>
-            <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
-          </Spotlight>
-        )}
-      </HeroContent>
+          {/* Featured product spotlight */}
+          {featured && (
+            <Spotlight>
+              <SpotImgStyled src={featured.image} alt={featured.name} widths={[320,480]} sizes="(max-width:640px) 80vw, 320px" />
+              <h3 style={{ margin: '0 0 4px' }}>{featured.name}</h3>
+              <SpotPrice>${featured.price.toFixed(2)}</SpotPrice>
+              <AddBtn onClick={handleAdd}>Add to Cart</AddBtn>
+            </Spotlight>
+          )}
+        </HeroContent>
 
-      <Chevron
-        aria-label="Scroll for more"
-        initial={{ y: 0, opacity: 0 }}
-        animate={motionOK() ? { y: [0, 8, 0], opacity: 1 } : { opacity: 1 }}
-        transition={motionOK() ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.8 }}
-        onClick={() => document.querySelector('#featured-collections')?.scrollIntoView({ behavior: 'smooth' })}
-      />
-    </HeroContainer>
+        <Chevron
+          aria-label="Scroll for more"
+          initial={{ y: 0, opacity: 0 }}
+          animate={motionOK() ? { y: [0, 8, 0], opacity: 1 } : { opacity: 1 }}
+          transition={motionOK() ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.8 }}
+          onClick={() => document.querySelector('#featured-collections')?.scrollIntoView({ behavior: 'smooth' })}
+        />
+      </HeroContainer>
+    </>
   );
 }
 

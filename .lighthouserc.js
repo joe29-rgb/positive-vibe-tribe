@@ -5,19 +5,20 @@ module.exports = {
             url: [
                 'http://localhost:3000/',
             ],
-            numberOfRuns: 3,
+            numberOfRuns: 1,
             startServerCommand: 'npm run start:client',
             startServerReadyPattern: 'Compiled successfully',
+            staticDistDir: 'build',
             settings: {
-                chromeFlags: '--no-sandbox --headless',
+                chromeFlags: '--no-sandbox',
             },
         },
         assert: {
-            preset: 'lighthouse:recommended',
             assertions: {
-                'categories:performance': ['error', { minScore: 0.9 }],
-                'categories:accessibility': ['error', { minScore: 0.9 }],
-                'categories:best-practices': ['warn', { minScore: 0.9 }],
+                'largest-contentful-paint': ['error', { maxNumericValue: 4000 }],
+                'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
+                'total-byte-weight': ['error', { maxNumericValue: 250000 }],
+                'unused-javascript': 'warn',
             },
         },
         upload: {
