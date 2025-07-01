@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Fuse from 'fuse.js';
+import LazyImage from '../LazyImage/LazyImage.jsx';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -43,7 +44,9 @@ function SearchBar(){
   const [results,setResults]=useState([]);
   const fuseRef=useRef(null);
   const wrapperRef=useRef(null);
+  const timerRef=useRef(null);
 
+  // Build local Fuse index for offline fallback
   useEffect(()=>{
     fetch('/api/products')
       .then(r=>r.json())
@@ -52,11 +55,22 @@ function SearchBar(){
       });
   },[]);
 
+  // Debounced server-side search with fallback
   useEffect(()=>{
-    if(term.trim() && fuseRef.current){
-      const hits=fuseRef.current.search(term).slice(0,6).map(r=>r.item);
-      setResults(hits);
-    }else setResults([]);
+    if(!term.trim()) { setResults([]); return; }
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(()=>{
+      fetch(`/api/search?q=${encodeURIComponent(term)}`)
+        .then(r=> r.ok ? r.json() : Promise.reject())
+        .then(data=> setResults(data.slice(0,6)))
+        .catch(()=>{
+          if(fuseRef.current){
+            const hits=fuseRef.current.search(term).slice(0,6).map(r=>r.item);
+            setResults(hits);
+          } else setResults([]);
+        });
+    },300);
+    return ()=> clearTimeout(timerRef.current);
   },[term]);
 
   // click outside to close
@@ -74,7 +88,7 @@ function SearchBar(){
           {results.map(p=> (
             <li key={p._id}>
               <Item to={`/product/${p._id}`} onClick={()=>setTerm('')}>
-                <img src={p.image} alt="" loading="lazy" />
+                <LazyImage src={p.image} alt="" widths={[96,128]} sizes="96px" style={{width:48,height:48,borderRadius:8}} />
                 <span>{p.name}</span>
                 <span style={{marginLeft:'auto',fontWeight:600}}>${p.price}</span>
               </Item>
