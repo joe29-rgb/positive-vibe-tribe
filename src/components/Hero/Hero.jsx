@@ -34,6 +34,9 @@ const HeroContainer = styled.section`
   }
 `;
 
+// Preload hero bg url (cloudinary source)
+const HERO_BG_URL = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750972974/hero-bg.jpg';
+
 // Full-bleed background image layer
 const HeroBg = styled(motion.div)`
   position: absolute;
@@ -41,13 +44,11 @@ const HeroBg = styled(motion.div)`
   background: url(${HERO_BG_URL}) center/cover no-repeat;
   background-repeat: no-repeat;
   z-index: 0;
-
   /* slow horizontal cloud drift */
   @keyframes cloudDrift {
     from { background-position-x: 0; }
     to   { background-position-x: -200px; }
   }
-
   @media (prefers-reduced-motion: no-preference) {
     animation: cloudDrift 60s linear infinite;
   }
@@ -183,9 +184,6 @@ const Chevron = styled(motion.button)`
     display: block;
   }
 `;
-
-// Preload hero bg url (cloudinary source)
-const HERO_BG_URL = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750972974/hero-bg.jpg';
 
 function Hero() {
   const [featured, setFeatured] = useState(null);
