@@ -107,7 +107,7 @@ function Products() {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState('newest');
 
-  const [selected, setSelected] = useState({ sizes: [], materials: [], category: [], symbolism: [], colors: [] });
+  const [selected, setSelected] = useState({ sizes: [], materials: [], category: [], symbolism: [], colors: [], significance: [], artStyle: [], impactLevel: [] });
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [showDrawer, setShowDrawer] = useState(false);
@@ -144,13 +144,16 @@ function Products() {
     }
 
     // Filter
-    const { sizes, materials, category, symbolism, colors } = selected;
+    const { sizes, materials, category, symbolism, colors, significance, artStyle, impactLevel } = selected;
     const [minP, maxP] = priceRange;
     if (sizes.length) list = list.filter((p) => p.sizes?.some((s) => sizes.includes(s)));
     if (materials.length) list = list.filter((p) => materials.includes(p.material));
     if (category.length) list = list.filter((p) => category.includes(p.category));
     if (symbolism.length) list = list.filter((p) => p.symbolism && symbolism.some((sym) => p.symbolism.includes(sym)));
     if (colors.length) list = list.filter((p) => p.colors && p.colors.some((c) => colors.includes(c)));
+    if (significance.length) list = list.filter((p) => p.culturalSignificance && p.culturalSignificance.some((s)=> significance.includes(s)));
+    if (artStyle.length) list = list.filter((p)=> artStyle.includes(p.artStyle));
+    if (impactLevel.length) list = list.filter((p)=> impactLevel.includes(p.impactLevel));
     list = list.filter((p) => p.price >= minP && p.price <= maxP);
 
     // sale filter
@@ -176,12 +179,18 @@ function Products() {
     const catSet = new Set();
     const symSet = new Set();
     const colorSet = new Set();
+    const significanceSet = new Set();
+    const artSet = new Set();
+    const impactSet = new Set();
     products.forEach((p) => {
       p.sizes?.forEach((s) => sizeSet.add(s));
       if (p.material) materialSet.add(p.material);
       if (p.category) catSet.add(p.category);
       p.symbolism?.forEach((s) => symSet.add(s));
       p.colors?.forEach((c) => colorSet.add(c));
+      p.culturalSignificance?.forEach((s)=> significanceSet.add(s));
+      if(p.artStyle) artSet.add(p.artStyle);
+      if(p.impactLevel) impactSet.add(p.impactLevel);
     });
     return {
       sizes: Array.from(sizeSet),
@@ -189,6 +198,9 @@ function Products() {
       category: Array.from(catSet),
       symbolism: Array.from(symSet),
       colors: Array.from(colorSet),
+      significance: Array.from(significanceSet),
+      artStyle: Array.from(artSet),
+      impactLevel: Array.from(impactSet),
     };
   }, [products]);
 
@@ -244,13 +256,16 @@ function Products() {
 
   // counts per facet option within current filtered set
   const facetCounts = useMemo(()=>{
-    const countObj = { sizes:{}, materials:{}, category:{}, symbolism:{}, colors:{} };
+    const countObj = { sizes:{}, materials:{}, category:{}, symbolism:{}, colors:{}, significance:{}, artStyle:{}, impactLevel:{} };
     filtered.forEach(p=>{
       p.sizes?.forEach(s=>{countObj.sizes[s]=(countObj.sizes[s]||0)+1;});
       if(p.material) countObj.materials[p.material]=(countObj.materials[p.material]||0)+1;
       if(p.category) countObj.category[p.category]=(countObj.category[p.category]||0)+1;
       p.symbolism?.forEach(sym=>{countObj.symbolism[sym]=(countObj.symbolism[sym]||0)+1;});
       p.colors?.forEach(c=>{countObj.colors[c]=(countObj.colors[c]||0)+1;});
+      p.culturalSignificance?.forEach(s=>{countObj.significance[s]=(countObj.significance[s]||0)+1;});
+      if(p.artStyle) countObj.artStyle[p.artStyle]=(countObj.artStyle[p.artStyle]||0)+1;
+      if(p.impactLevel) countObj.impactLevel[p.impactLevel]=(countObj.impactLevel[p.impactLevel]||0)+1;
     });
     return countObj;
   },[filtered]);
@@ -267,7 +282,7 @@ function Products() {
     return () => observer.disconnect();
   }, [filtered.length]);
 
-  const resetFilters=()=>{setSelected({sizes:[],materials:[],category:[],symbolism:[],colors:[]});setSearchTerm('');setPriceRange([0,1000]);setSaleOnly(false);setMinRating(0);};
+  const resetFilters=()=>{setSelected({sizes:[],materials:[],category:[],symbolism:[],colors:[],significance:[],artStyle:[],impactLevel:[]});setSearchTerm('');setPriceRange([0,1000]);setSaleOnly(false);setMinRating(0);};
 
   if (loading) return <div style={{ padding: '2rem' }}>Loading products…</div>;
 

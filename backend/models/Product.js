@@ -13,6 +13,9 @@ var productSchema = new mongoose.Schema({
     material: { type: String },
     altImage: { type: String },
     symbolism: [String],
+    culturalSignificance: [String],
+    artStyle: { type: String },
+    impactLevel: { type: String },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);
