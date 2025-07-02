@@ -7,7 +7,6 @@ import { FaShoppingCart, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from '
 import { useSelector } from 'react-redux';
 import AnnouncementBar from '../AnnouncementBar/AnnouncementBar';
 import SearchBar from '../SearchBar/SearchBar';
-import menuCategories from '../../data/menuCategories.js';
 
 /* ------------------------------------
    Styled Components
@@ -241,9 +240,12 @@ const CatCard = styled(Link)`
   flex-direction: column;
   align-items: center;
   color: var(--dark-brown);
-  &:hover img {
-    transform: scale(1.05);
-  }
+  position:relative;
+  &:hover img { transform: scale(1.08); }
+`;
+
+const CountBadge = styled.span`
+  position:absolute; top:8px; right:8px; background:var(--primary-red); color:#fff; font-size:0.7rem; padding:2px 6px; border-radius:8px;
 `;
 
 const CatImg = styled.img`
@@ -343,15 +345,22 @@ function Header() {
     pulse: { scale: [1, 1.08, 1], transition: { repeat: Infinity, duration: 2, ease: 'easeInOut' } },
   };
 
-  const [categories,setCategories]=React.useState(menuCategories);
+  const [categories,setCategories]=React.useState([]);
 
   React.useEffect(()=>{
     fetch('/api/products')
       .then(r=>r.json())
       .then(data=>{
-        const catMap={};
-        data.forEach(p=>{ if(!catMap[p.category]) catMap[p.category]=p.image; });
-        setCategories(prev=> prev.map(c=>({...c,image:catMap[c.slug]||c.image})));
+        const map={};
+        data.forEach(p=>{
+          const cat=p.category||'Misc';
+          if(!map[cat]){
+            map[cat]={name:cat,slug:encodeURIComponent(cat),image:p.image,count:1};
+          }else{
+            map[cat].count+=1;
+          }
+        });
+        setCategories(Object.values(map).slice(0,8));
       })
       .catch(()=>{});
   },[]);
@@ -450,7 +459,10 @@ function Header() {
                 >
                   {categories.map((cat) => (
                     <CatCard key={cat.slug} to={`/products?category=${cat.slug}`}>
-                      <CatImg src={cat.image||'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750601000/placeholder_160.png'} alt={cat.name} loading="lazy" />
+                      <motion.div whileHover={{scale:1.05}} style={{borderRadius:12,overflow:'hidden'}}>
+                        <CatImg src={cat.image||'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750601000/placeholder_160.png'} alt={cat.name} loading="lazy" />
+                      </motion.div>
+                      {cat.count && <CountBadge>{cat.count}</CountBadge>}
                       <CatLabel>{cat.name}</CatLabel>
                     </CatCard>
                   ))}
