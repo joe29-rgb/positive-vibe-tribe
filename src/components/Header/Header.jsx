@@ -249,8 +249,9 @@ const CatCard = styled(Link)`
 const CatImg = styled.img`
   width: 160px;
   height: 160px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 12px;
+  background:#f6f4f1;
   transition: transform 0.3s ease;
 `;
 

@@ -6,16 +6,16 @@ export default [{
     {
         name: 'Seven Teachings',
         slug: 'Seven Teachings',
-        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750512345/seven_teachings_collage.jpg',
+        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750600000/seven-teachings.jpg',
     },
     {
         name: 'Love Mosaic',
         slug: 'Love Mosaic',
-        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750512355/love_mosaic.jpg',
+        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750600001/love-mosaic.jpg',
     },
     {
         name: 'Traditional Patterns',
         slug: 'Traditional Patterns',
-        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750512365/patterns_tile.jpg',
+        image: 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750600002/traditional-patterns.jpg',
     },
 ];
