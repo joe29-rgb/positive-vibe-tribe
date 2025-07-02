@@ -450,7 +450,7 @@ function Header() {
                 >
                   {categories.map((cat) => (
                     <CatCard key={cat.slug} to={`/products?category=${cat.slug}`}>
-                      <CatImg src={cat.image||'https://via.placeholder.com/160'} alt={cat.name} loading="lazy" />
+                      <CatImg src={cat.image||'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750601000/placeholder_160.png'} alt={cat.name} loading="lazy" />
                       <CatLabel>{cat.name}</CatLabel>
                     </CatCard>
                   ))}

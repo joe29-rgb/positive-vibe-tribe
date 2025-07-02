@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import skyline from '../../assets/edmonton-skyline.png';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+
+const skyline = 'https://res.cloudinary.com/dhm8ttqnk/image/upload/v1750886642/edmonton-skyline_chn5mc.png';
 
 const Section = styled.section`
   position: relative;
