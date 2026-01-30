@@ -1,0 +1,11 @@
+node_modules/
+.git/
+.env.local
+.env.bak
+backend/.env.local
+backend/.env.bak
+cypress/
+*.log
+.DS_Store
+*.txt
+render.yaml

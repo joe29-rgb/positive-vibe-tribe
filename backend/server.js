@@ -75,7 +75,7 @@ app.use(function(err, req, res, next) {
 
 // Mongo Connection & Server Init
 var PORT = process.env.PORT || 5000;
-var MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/positive-vibe-tribe';
+var MONGO_URI = process.env.MONGO_URI;
 
 function startServer() {
     app.listen(PORT, function() {
@@ -83,16 +83,21 @@ function startServer() {
     });
 }
 
-mongoose
-    .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(function() {
-        console.log('MongoDB connected');
-        startServer();
-    })
-    .catch(function(error) {
-        console.error('Mongo connection error:', error);
-        console.log('Proceeding without database. Sample data will be served.');
-        startServer();
-    });
+if (MONGO_URI) {
+    mongoose
+        .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(function() {
+            console.log('MongoDB connected');
+            startServer();
+        })
+        .catch(function(error) {
+            console.error('Mongo connection error:', error);
+            console.log('Proceeding without database. Sample data will be served.');
+            startServer();
+        });
+} else {
+    console.log('No MONGO_URI provided. Running without database - sample data will be served.');
+    startServer();
+}
 
 module.exports = app;
