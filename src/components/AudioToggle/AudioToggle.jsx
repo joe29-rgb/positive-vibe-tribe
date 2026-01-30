@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -26,26 +26,7 @@ function AudioToggle() {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(flute);
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0;
-    }
-    const stored = localStorage.getItem('pvtaudio');
-    if (stored === 'on') {
-      toggle(true);
-    }
-    // Cleanup on unmount
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
-  const toggle = (forcePlay) => {
+  const toggle = useCallback((forcePlay) => {
     const newPlay = forcePlay !== undefined ? forcePlay : !playing;
     setPlaying(newPlay);
     if (newPlay) {
@@ -70,7 +51,25 @@ function AudioToggle() {
       }, 200);
       localStorage.setItem('pvtaudio', 'off');
     }
-  };
+  }, [playing]);
+
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(flute);
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0;
+    }
+    const stored = localStorage.getItem('pvtaudio');
+    if (stored === 'on') {
+      toggle(true);
+    }
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [toggle]);
 
   return (
     <Button

@@ -77,7 +77,7 @@ function QuickViewModal({ product, onClose }){
     };
     document.addEventListener('keydown',handleKey);
     return()=> document.removeEventListener('keydown',handleKey);
-  },[]);
+  },[onClose]);
 
   if(!product) return null;
 
